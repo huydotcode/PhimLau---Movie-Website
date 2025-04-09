@@ -1,0 +1,356 @@
+[
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "258764",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt35839843"
+    },
+    "created": {
+      "time": "2025-04-01T13:02:40.000Z"
+    },
+    "modified": {
+      "time": "2025-04-08T23:50:57.000Z"
+    },
+    "_id": "67eb818055569884445932b8",
+    "name": "Bảo Hiểm Ly Hôn",
+    "slug": "bao-hiem-ly-hon",
+    "origin_name": "The Divorce Insurance",
+    "content": "<p>Khi chuyên gia tính toán thiên tài Ki-jun từ Plus General Insurance, một trung tâm được kính trọng dành cho những bộ óc thông minh nhất, bắt đầu xây dựng một hợp đồng bảo hiểm ly hôn, một nhóm đặc nhiệm được thành lập bao gồm một người bảo lãnh, một chuyên gia định lượng, một giám định viên rủi ro, một giám định viên tổn thất và một cựu đại lý bảo hiểm hàng đầu. Khi họ định lượng ly hôn để xác định mức phí bảo hiểm công bằng, bộ phim hài lãng mạn về văn phòng này theo chân hành trình của họ về những mối quan hệ mới và tình yêu.</p>",
+    "type": "series",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/bao-hiem-ly-hon-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/bao-hiem-ly-hon-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=Ys7GwwX-Yjk",
+    "time": "? phút/tập",
+    "episode_current": "Tập 4",
+    "episode_total": "12 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 1087,
+    "actor": [
+      "이동욱",
+      "이광수",
+      "이주빈",
+      "이다희",
+      "김원해",
+      "엑시",
+      "조재윤",
+      "Lee Seo-yi"
+    ],
+    "director": ["lee won suk"],
+    "category": [
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "261868",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt33165027"
+    },
+    "created": {
+      "time": "2025-04-08T21:28:34.000Z"
+    },
+    "modified": {
+      "time": "2025-04-08T22:09:19.000Z"
+    },
+    "_id": "67f5329264452ad8a87f4cb3",
+    "name": "Phù Thủy Quan Sát",
+    "slug": "phu-thuy-quan-sat",
+    "origin_name": "Witch Watch",
+    "content": "Một thiếu niên siêng năng sống cùng người bạn thời thơ ấu gan dạ, một phù thủy tập sự, để bảo vệ cô khỏi lời tiên tri khủng khiếp. Nhưng liệu họ có thể sống sót ở trường trung học?",
+    "type": "hoathinh",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/phu-thuy-quan-sat-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/phu-thuy-quan-sat-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=2jTpus79jNQ",
+    "time": "24 phút/tập",
+    "episode_current": "Tập 1",
+    "episode_total": "26 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 18,
+    "actor": [
+      "川口莉奈",
+      "鈴木崚汰",
+      "天﨑滉平",
+      "石川界人",
+      "楠木ともり",
+      "小松未可子",
+      "高橋李依",
+      "小原好美",
+      "松岡禎丞",
+      "沢城みゆき"
+    ],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      },
+      {
+        "id": "620a2282e0fc277084dfd435",
+        "name": "Viễn Tưởng",
+        "slug": "vien-tuong"
+      },
+      {
+        "id": "620a229be0fc277084dfd4dd",
+        "name": "Khoa Học",
+        "slug": "khoa-hoc"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2307e0fc277084dfd726",
+        "name": "Nhật Bản",
+        "slug": "nhat-ban"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "207347",
+      "season": 1,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt32639706"
+    },
+    "created": {
+      "time": "2024-10-05T22:53:33.000Z"
+    },
+    "modified": {
+      "time": "2025-04-08T22:00:40.000Z"
+    },
+    "_id": "670160fde4d84532dec421d1",
+    "name": "Blue Box",
+    "slug": "blue-box",
+    "origin_name": "Blue Box",
+    "content": "<p>Tay vợt cầu lông Taiki luôn ngưỡng mộ ngôi sao bóng rổ Chinatsu từ xa. Nhưng vào một ngày mùa xuân nọ, một bước ngoặt bất ngờ đưa họ đến gần nhau.</p><p>&nbsp;</p>",
+    "type": "hoathinh",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/blue-box-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/blue-box-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=tcK9Eghsfq8",
+    "time": "24 phút/tập",
+    "episode_current": "Hoàn tất (25/25)",
+    "episode_total": "25",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 195,
+    "actor": [
+      "千葉翔也",
+      "上田麗奈",
+      "鬼頭明里",
+      "小林千晃",
+      "内田雄馬",
+      "坂田将吾",
+      "永瀬アンナ",
+      "結川あさき"
+    ],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2307e0fc277084dfd726",
+        "name": "Nhật Bản",
+        "slug": "nhat-ban"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "215709",
+      "season": 1,
+      "vote_average": 10,
+      "vote_count": 4
+    },
+    "imdb": {
+      "id": "tt22693974"
+    },
+    "created": {
+      "time": "2023-03-05T22:38:42.000Z"
+    },
+    "modified": {
+      "time": "2025-04-07T09:51:44.000Z"
+    },
+    "_id": "6404b7820fc1635bd467951c",
+    "name": "Cầm Tù",
+    "slug": "cam-tu",
+    "origin_name": "Esaret",
+    "content": "<p>Orhun là một doanh nhân thành đạt, lớn lên trong một gia đình giàu có nhưng không có tình yêu thương cùng với chị gái song sinh Nihan, em gái Nurşah và người mẹ xa cách lạnh lùng Afife của họ. Nihan rời đi để làm công việc tình nguyện với tư cách là một bác sĩ ở Eritrea, nhưng gần đây cô ấy không thể liên lạc được và gia đình cô ấy đang lo lắng cho cô ấy. Trong khi tìm kiếm em gái của mình, anh tình cờ gặp Hira, một cô gái nghèo đang sống cuộc đời của một tù nhân dưới bàn tay của những kẻ buôn người. Khi họ phát hiện ra rằng Nihan đã bị đầu độc và giết chết bởi một băng đảng địa phương, Orhun suy sụp. Khi phát hiện ra rằng Hira thực sự là người đã đầu độc em gái mình, Orhun ấp ủ một kế hoạch trả thù độc ác: anh ta sẽ đưa Hira về nhà với mình và khiến mọi thứ trở nên tồi tệ hơn với cô ấy. Trong khi đó, Afife, mẹ của họ, đã ngăn cản cha của Orhun kể từ khi anh ta thời thơ ấu bí mật. Orhun quyết định kết hôn với Hira để trả thù. Afife ghét những người có địa vị thấp hơn và cô ấy bị ám ảnh bởi “dòng máu thuần khiết”. Liệu cuộc hôn nhân này có giam cầm Afife, hay cặp đôi sẽ tìm thấy sự chuộc lỗi sau khi trả hết nợ?</p>",
+    "type": "series",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/cam-tu-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/cam-tu-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=1e9F4Prqnus",
+    "time": "60 phút/tập",
+    "episode_current": "Tập 478",
+    "episode_total": "?",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2022,
+    "view": 40851,
+    "actor": ["Mahassine Merabet", "Cenk Torun", "Hilal Anay"],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a220de0fc277084dfd16d",
+        "name": "Tình Cảm",
+        "slug": "tinh-cam"
+      },
+      {
+        "id": "620a2238e0fc277084dfd291",
+        "name": "Tâm Lý",
+        "slug": "tam-ly"
+      }
+    ],
+    "country": [
+      {
+        "id": "620f7fa791fa4af90ab6ad1f",
+        "name": "Thổ Nhĩ Kỳ",
+        "slug": "tho-nhi-ky"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "271309",
+      "season": 1,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt33398245"
+    },
+    "created": {
+      "time": "2025-02-22T13:51:52.000Z"
+    },
+    "modified": {
+      "time": "2025-04-06T19:02:37.000Z"
+    },
+    "_id": "67b974088d0900af370146dd",
+    "name": "Trái Tim Chôn Vùi",
+    "slug": "trai-tim-chon-vui",
+    "origin_name": "Buried Hearts",
+    "content": "<p>Một hacker lão luyện đã đánh cắp một quỹ đen khổng lồ trị giá 2 nghìn tỷ won để thoát khỏi nguy hiểm, gây ra một trò chơi lừa đảo và quyền lực có mức cược cao. Động cơ thực sự đằng sau quỹ đen lộ diện, khiến mọi người trở nên dễ bị tổn thương trong khi mục tiêu cuối cùng của \"Daesan Man\" là tiêu diệt hoàn toàn Tập đoàn Daesan.</p>",
+    "type": "series",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/trai-tim-chon-vui-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/trai-tim-chon-vui-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "72 phút/tập",
+    "episode_current": "Tập 14",
+    "episode_total": "16",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 4960,
+    "actor": [
+      "박형식",
+      "허준호",
+      "Hong Hwa-yeon",
+      "Gong Ji-ho",
+      "Kwon Soo-hyun",
+      "윤상현",
+      "우현",
+      "차우민",
+      "이해영"
+    ],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a2249e0fc277084dfd2e5",
+        "name": "Hình Sự",
+        "slug": "hinh-su"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      },
+      {
+        "id": "620f84d291fa4af90ab6b3f4",
+        "name": "Bí ẩn",
+        "slug": "bi-an"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  }
+]

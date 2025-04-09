@@ -85,7 +85,7 @@ const Banner = () => {
   useEffect(() => {
     (async () => {
       // Read json from src/json/movies_top.json
-      const response = await fetch("/src/json/movies_top_rated.json");
+      const response = await fetch("/json/movies_top_rated.json");
       const data = await response.json();
 
       if (data && data.length > 0) {

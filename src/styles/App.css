@@ -3,6 +3,7 @@
 
 @theme {
   --color-primary: #fb2c06; /* Primary color: Red */
+  --color-background: #0f0f0f; /* Background color: Dark */
 }
 
 body {
@@ -15,4 +16,13 @@ button {
 
 button:hover {
   opacity: 0.8;
+}
+
+/* Ẩn thanh scroll bar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

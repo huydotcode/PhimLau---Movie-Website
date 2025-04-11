@@ -1,8 +1,6 @@
 import React from "react";
 
-const Button = props => {
-  const { children, className = "", onClick, href } = props;
-
+const Button = ({ children, className = "", onClick, href }) => {
   if (href) {
     return (
       <a className={className} href={href}>

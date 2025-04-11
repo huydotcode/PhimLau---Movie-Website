@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Autoplay, EffectFade, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Button from "./ui/Button";
+import { useNavigate } from "react-router";
 
-const Banner = () => {
-  /*
+/*
   {
     "tmdb": {
       "type": "movie",
@@ -77,14 +77,15 @@ const Banner = () => {
     "sub_docquyen": false
   },
   */
+const Banner = () => {
   const swiperRef = useRef();
+  const navigate = useNavigate();
 
   const [bannerMovies, setBannerMovies] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     (async () => {
-      // Read json from src/json/movies_top.json
       const response = await fetch("/json/movies_top_rated.json");
       const data = await response.json();
 
@@ -94,13 +95,13 @@ const Banner = () => {
     })();
   }, []);
 
-  useEffect(() => {
-    console.log("bannerMovies", bannerMovies);
-  }, [bannerMovies]);
+  const handleClickMovie = movie => {
+    navigate(`/watch-movie/${movie.slug}`);
+  };
 
   return (
     <>
-      <div className="relative w-full h-[90vh] overflow-hidden">
+      <div className="@container relative w-full h-[90vh] overflow-hidden">
         <Swiper
           onSwiper={swiper => (swiperRef.current = swiper)}
           slidesPerView={1}
@@ -109,13 +110,13 @@ const Banner = () => {
           modules={[Autoplay]}
           autoplay={{ delay: 5000, disableOnInteraction: false }}
           onSlideChange={swiper => {
-            setActiveIndex(swiper.realIndex);
+            setActiveIndex(swiper.activeIndex);
           }}
-          className="w-full h-full"
+          className="w-full h-full cursor-pointer"
         >
-          {bannerMovies.map(movie => (
-            <SwiperSlide key={movie._id}>
-              <div className="relative flex h-full">
+          {bannerMovies.map((movie, index) => (
+            <SwiperSlide key={movie._id} virtualIndex={index}>
+              <div className="@container relative flex h-full">
                 {/* Hình background */}
                 <div
                   className="absolute inset-0 bg-cover bg-top brightness-[.5]"
@@ -125,9 +126,9 @@ const Banner = () => {
                 />
 
                 {/* Thông tin phim bên trái */}
-                <div className="relative z-10 flex flex-col justify-center pl-10 text-white w-1/2 gap-2 mt-[20vh]">
+                <div className="relative z-10 flex flex-col justify-center pl-10 text-white w-1/2 gap-2 mt-[20vh] @max-3xl:w-3/4 @max-3xl:mt-[5vh]">
                   <h1 className="text-5xl font-bold mb-4">{movie?.name}</h1>
-                  <div className="flex gap-2 mb-3">
+                  <div className="flex gap-2 mb-3 @max-xl:hidden">
                     <span className="bg-white text-black px-2 py-1 text-sm rounded opacity-70">
                       IMDB: {movie?.tmdb.vote_average.toFixed(1)}
                     </span>
@@ -139,14 +140,22 @@ const Banner = () => {
                     </span>
                   </div>
                   <div
-                    className="text-sm max-w-md text-justify line-clamp-10"
+                    className="text-sm max-w-md text-justify line-clamp-10 @max-3xl:line-clamp-5 @max-xl:max-w-3/4"
                     dangerouslySetInnerHTML={{ __html: movie?.content }}
                   />
-                  <div className="mt-5">
-                    <Button className="bg-primary text-white px-6 py-2 rounded-3xl h-12 font-semibold uppercase">
+                  <div className="mt-5 flex gap-4 items-center">
+                    <Button
+                      className="bg-primary text-white px-6 py-2 rounded-3xl h-12 font-semibold uppercase"
+                      onClick={() => handleClickMovie(movie)}
+                    >
                       Xem ngay
                     </Button>
-                    <Button className="ml-4 border text-xs border-white px-4 py-2 rounded-full h-10">
+                    <Button
+                      className="border text-xs border-white px-4 py-2 rounded-full h-10"
+                      onClick={() => {
+                        navigate(`/movie/${movie.slug}`);
+                      }}
+                    >
                       Chi tiết
                     </Button>
                   </div>
@@ -157,7 +166,7 @@ const Banner = () => {
         </Swiper>
 
         {/* Slider thumbnail bên dưới phải */}
-        <div className="absolute bottom-5 right-5 w-2/5">
+        <div className="absolute bottom-5 right-5 w-2/5 @max-3xl:w-2/4 @max-xl:w-4/5">
           <Swiper slidesPerView={6} spaceBetween={10}>
             {bannerMovies.map((movie, index) => (
               <SwiperSlide
@@ -170,7 +179,7 @@ const Banner = () => {
                 }}
                 className={`rounded-xl border-white border-2 overflow-hidden cursor-pointer hover:opacity-90 ${activeIndex === index ? "opacity-100" : "opacity-50"}`}
               >
-                <img src={movie.thumb_url} className={"  object-cover"} />
+                <img src={movie.thumb_url} className={"object-cover"} />
               </SwiperSlide>
             ))}
           </Swiper>

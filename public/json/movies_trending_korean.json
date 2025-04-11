@@ -1,0 +1,1421 @@
+[
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "221851",
+      "season": 1,
+      "vote_average": 8.604,
+      "vote_count": 275
+    },
+    "imdb": {
+      "id": "tt26628595"
+    },
+    "created": {
+      "time": "2023-12-07T19:04:12.000Z"
+    },
+    "modified": {
+      "time": "2024-02-28T16:46:08.000Z"
+    },
+    "_id": "6571b4bc2f36c295ed0954bf",
+    "name": "Cô Đi Mà Lấy Chồng Tôi",
+    "slug": "co-di-ma-lay-chong-toi",
+    "origin_name": "Marry My Husband",
+    "content": "<p>Khi Ji-won, một bệnh nhân ung thư 37 tuổi, bước vào gặp chồng và cũng là bạn thân của cô, cô nhận ra cả cuộc đời mình chỉ là một lời nói dối. Tệ hơn nữa, cô lại chết một cách bi thảm dưới tay chồng mình. Liệu mọi chuyện có khác đi nếu cô ấy đưa ra những lựa chọn khác? May mắn thay cho Ji-won, cô có cơ hội viết lại số phận của mình khi được tái sinh thành bản thân lúc trẻ. Lần này, cô thề sẽ sống một cuộc sống hạnh phúc. Nhưng trước hết là sự trả thù. Kế hoạch của cô ấy? Để gả người bạn thân cũ của mình cho người chồng dối trá, lừa dối của mình.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/co-di-ma-lay-chong-toi-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/co-di-ma-lay-chong-toi-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=pyq3fEf-cHg",
+    "time": "80 phút/tập",
+    "episode_current": "Hoàn tất (16/16)",
+    "episode_total": "16",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 21459,
+    "actor": [
+      "Park Min-young",
+      "Na In-woo",
+      "Lee Yi-kyung",
+      "Song Ha-yoon",
+      "Lee Gi-kwang",
+      "Gong Min-jeung",
+      "Kwon BoA"
+    ],
+    "director": ["Park Won-gook"],
+    "category": [
+      {
+        "id": "620a2282e0fc277084dfd435",
+        "name": "Viễn Tưởng",
+        "slug": "vien-tuong"
+      },
+      {
+        "id": "620a229be0fc277084dfd4dd",
+        "name": "Khoa Học",
+        "slug": "khoa-hoc"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "215720",
+      "season": 1,
+      "vote_average": 7.951,
+      "vote_count": 112
+    },
+    "imdb": {
+      "id": "tt27668559"
+    },
+    "created": {
+      "time": "2024-03-09T22:53:46.000Z"
+    },
+    "modified": {
+      "time": "2024-05-06T10:00:36.000Z"
+    },
+    "_id": "65ec860ae5f40e2ffed64116",
+    "name": "Nữ Hoàng Nước Mắt",
+    "slug": "nu-hoang-nuoc-mat",
+    "origin_name": "Queen of Tears",
+    "content": "<p>Nữ hoàng cửa hàng bách hóa và hoàng tử siêu thị xoay xở với khủng hoảng hôn nhân, rồi tình yêu bắt đầu nảy nở trở lại theo cách kỳ diệu.</p><p>&nbsp;</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/nu-hoang-nuoc-mat-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/nu-hoang-nuoc-mat-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=Gg2D8zrzlOA",
+    "time": "45 phút/tập",
+    "episode_current": "Hoàn Tất (16/16)",
+    "episode_total": "16",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 15079,
+    "actor": [
+      "Kim Soo-hyun",
+      "Kim Ji-won",
+      "Park Sung-hoon",
+      "Kwak Dong-yeon",
+      "Na Young-hee",
+      "Kim Jung-nan",
+      "Kim Joo-ryoung",
+      "Lee Ju-bin",
+      "Yoon Bo-mi",
+      "Kim Kap-soo"
+    ],
+    "director": ["Jang Young-woo", "Kim Hee-won"],
+    "category": [
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "282780",
+      "season": 1,
+      "vote_average": 8.7,
+      "vote_count": 3
+    },
+    "imdb": {
+      "id": ""
+    },
+    "created": {
+      "time": "2025-02-17T22:03:17.000Z"
+    },
+    "modified": {
+      "time": "2025-04-07T22:19:45.000Z"
+    },
+    "_id": "67b34fb5e1dae7332399f098",
+    "name": "Good Day",
+    "slug": "good-day",
+    "origin_name": "Good Day",
+    "content": "<p>Một chương trình dự án âm nhạc nơi G-Dragon hoàn thành bài hát của năm cùng với những người đến từ nhiều lĩnh vực khác nhau.</p>",
+    "type": "tvshows",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/good-day-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/good-day-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=gPI4Trwfh2M",
+    "time": "90 phút/tập",
+    "episode_current": "Tập 7",
+    "episode_total": "8",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 14590,
+    "actor": ["지드래곤", "정형돈", "코드 쿤스트", "데프콘", "조세호"],
+    "director": ["김태호"],
+    "category": [
+      {
+        "id": "620a220de0fc277084dfd16d",
+        "name": "Tình Cảm",
+        "slug": "tinh-cam"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "126485",
+      "season": 1,
+      "vote_average": 8.4,
+      "vote_count": 146
+    },
+    "imdb": {
+      "id": "tt24640580"
+    },
+    "created": {
+      "time": "2023-08-13T14:48:22.000Z"
+    },
+    "modified": {
+      "time": "2023-09-20T20:29:18.000Z"
+    },
+    "_id": "64d88ac6900f1649a91d0e33",
+    "name": "Đội Thiếu Niên Siêu Đẳng",
+    "slug": "doi-thieu-nien-sieu-dang",
+    "origin_name": "Moving",
+    "content": "Nội dung của phim Moving xoay quanh câu chuyện về Kim Bong Seok, Jang Hee Soo và Lee Gang Hoon học cùng trường trung học. Họ trông giống như những học sinh bình thường, nhưng họ có những khả năng đặc biệt mà họ thừa hưởng từ cha mẹ. Kim Bong Seok có khả năng bay. Jang Hee Soo có khả năng thể thao tuyệt vời và anh ấy có thể nhanh chóng hồi phục sau chấn thương, chẳng hạn như bị bắn hoặc bị đâm. Lee Gang Hoon có sức mạnh và tốc độ phi thường. Ba học sinh này cố gắng che giấu khả năng đặc biệt của mình với người khác, trong khi cha mẹ của họ đấu tranh để bảo vệ họ khỏi bị người khác lợi dụng.",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/doi-thieu-nien-sieu-dang-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/doi-thieu-nien-sieu-dang-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=SZFRw7MSPog",
+    "time": "30 phút/tập",
+    "episode_current": "Hoàn Tất (20/20)",
+    "episode_total": "20",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2023,
+    "view": 11966,
+    "actor": [
+      "Lee Jung-ha",
+      "Go Youn-jung",
+      "Kim Do-hoon",
+      "Ryu Seung-ryong",
+      "Han Hyo-joo",
+      "Kim Hee-won",
+      "Moon Sung-keun",
+      "Cha Tae-hyun",
+      "Zo In-sung",
+      "Ryoo Seung-bum"
+    ],
+    "director": ["Park In-je", "Park Yoon-seo"],
+    "category": [
+      {
+        "id": "620a21b2e0fc277084dfd0c5",
+        "name": "Hành Động",
+        "slug": "hanh-dong"
+      },
+      {
+        "id": "620a2282e0fc277084dfd435",
+        "name": "Viễn Tưởng",
+        "slug": "vien-tuong"
+      },
+      {
+        "id": "620a2293e0fc277084dfd489",
+        "name": "Phiêu Lưu",
+        "slug": "phieu-luu"
+      },
+      {
+        "id": "620a229be0fc277084dfd4dd",
+        "name": "Khoa Học",
+        "slug": "khoa-hoc"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      },
+      {
+        "id": "620f84d291fa4af90ab6b3f4",
+        "name": "Bí ẩn",
+        "slug": "bi-an"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "210704",
+      "season": 1,
+      "vote_average": 7.855,
+      "vote_count": 31
+    },
+    "imdb": {
+      "id": "tt20600022"
+    },
+    "created": {
+      "time": "2023-08-31T07:42:11.000Z"
+    },
+    "modified": {
+      "time": "2023-10-25T22:01:39.000Z"
+    },
+    "_id": "64efe1e3f9e5c681860e51b6",
+    "name": "Tội Ác Kinh Hoàng",
+    "slug": "toi-ac-kinh-hoang-2023",
+    "origin_name": "The Worst of Evil",
+    "content": "<p>Lấy bối cảnh những năm 1980, The Worst Evil theo chân các điều tra viên cảnh sát chìm thâm nhập vào một tổ chức tội phạm lớn chịu trách nhiệm buôn bán ma túy trái phép giữa Hàn Quốc, Trung Quốc và Nhật Bản.</p>",
+    "type": "series",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/toi-ac-kinh-hoang-2023-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/toi-ac-kinh-hoang-2023-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=eyGBwBXCezo",
+    "time": "42 phút/tập",
+    "episode_current": "Hoàn Tất (12/12)",
+    "episode_total": "12",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2023,
+    "view": 11481,
+    "actor": [
+      "Ji Chang-wook",
+      "Wi Ha-jun",
+      "Lim Se-mi",
+      "Im Sung-jae",
+      "BIBI",
+      "Geum Gwang-san",
+      "Zelo"
+    ],
+    "director": ["Han Dong-wook", "Park Geun-buem"],
+    "category": [
+      {
+        "id": "620a21b2e0fc277084dfd0c5",
+        "name": "Hành Động",
+        "slug": "hanh-dong"
+      },
+      {
+        "id": "620a2249e0fc277084dfd2e5",
+        "name": "Hình Sự",
+        "slug": "hinh-su"
+      },
+      {
+        "id": "620a2293e0fc277084dfd489",
+        "name": "Phiêu Lưu",
+        "slug": "phieu-luu"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "230524",
+      "season": 1,
+      "vote_average": 7.596,
+      "vote_count": 26
+    },
+    "imdb": {
+      "id": "tt29657033"
+    },
+    "created": {
+      "time": "2023-10-28T23:14:00.000Z"
+    },
+    "modified": {
+      "time": "2023-12-04T12:21:50.000Z"
+    },
+    "_id": "653d334860ad693b7cb1998b",
+    "name": "Cuộc Hôn Nhân Hoàn Hảo",
+    "slug": "cuoc-hon-nhan-hoan-hao",
+    "origin_name": "Perfect Marriage Revenge",
+    "content": "<p>Bộ phim truyền hình nổi tiếng của Hàn Quốc, kể về cuộc sống của Han Yi Joo, một họa sĩ nghệ thuật. Cô đã được nhận nuôi bởi Han Jin Woong và Lee Jung Hye, người làm chủ của tập đoàn tài chính Hanwool. Tuy nhiên, Han Yi Joo không bao giờ được yêu thương bởi cha mẹ nuôi hoặc em gái Han Yoo Ra. Cô luôn bị cô lập khỏi gia đình. Hiện tại, Han Yi Joo đã kết hôn với Jung Se Hyeok. Tuy nhiên, cô phát hiện ra rằng chồng mình, Jung Se Hyeok, yêu em gái của cô, Han Yoo Ra, chứ không phải cô. Trong cùng ngày đó, Han Yi Joo gặp tai nạn xe hơi và qua đời. Nhưng khi Han Yi Joo tỉnh dậy, cô thấy mình đã quay trở lại thời điểm cô đính hôn với Jung Se Hyeok. Để thay đổi số phận và trả thù gia đình mình, cô quyết định chấm dứt mối quan hệ hôn nhân với Jung Se Hyeok. Sau đó, cô tiếp cận Seo Do Guk, người mà em gái Han Yoo Ra muốn kết hôn. Seo Do Guk là cháu trai của người sáng lập Taeja Group, một chàng trai thông minh và điển trai. Han Yi Joo muốn ký kết một hợp đồng hôn nhân giả với Seo Do Guk và anh ta đồng ý, nhưng điều anh muốn là hợp đồng hôn nhân đó trở thành một cuộc hôn nhân thực sự. Cuộc hôn nhân này đầy những bí mật, âm mưu, và trái tim đau khổ, nơi mà Han Yi Joo phải đối mặt với nhiều thách thức khó khăn để trả thù và thay đổi số mệnh. Cuộc Hôn Nhân Hoàn Hảo - Perfect Marriage Revenge 2023 VietSub hứa hẹn sẽ mang đến cho khán giả những bất ngờ và cung bậc cảm xúc trong câu chuyện về tình yêu, trả thù, và cuộc hành trình để thay đổi số phận.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/cuoc-hon-nhan-hoan-hao-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/cuoc-hon-nhan-hoan-hao-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=46bYitkYbvI",
+    "time": "70 phút/tập",
+    "episode_current": "Hoàn Tất (12/12)",
+    "episode_total": "12",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2023,
+    "view": 10529,
+    "actor": [
+      "Jung Yoo-min",
+      "Sung Hoon",
+      "Jin Ji-hee",
+      "Kang Shin-hyo",
+      "Oh Seung-yun",
+      "Lee Min-young",
+      "Jeon No-min",
+      "Kim Eung-soo",
+      "Ban Hyo-jung",
+      "Jin Hee-kyung"
+    ],
+    "director": ["Oh Sang-won"],
+    "category": [
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "220074",
+      "season": 1,
+      "vote_average": 8.083,
+      "vote_count": 12
+    },
+    "imdb": {
+      "id": "tt30413181"
+    },
+    "created": {
+      "time": "2024-01-27T14:24:33.000Z"
+    },
+    "modified": {
+      "time": "2024-03-24T00:40:34.000Z"
+    },
+    "_id": "65b4afb17074f826ccf3e5e3",
+    "name": "Tài Phiệt và Cảnh Sát",
+    "slug": "tai-phiet-va-canh-sat",
+    "origin_name": "Flex X Cop",
+    "content": "<p>Bộ phim xoay quanh anh chàng Jin Yi Soo, một người được coi là tầng lớp thìa vàng của xã hội Hàn Quốc hiện nay. Cuộc sống của anh vốn đang bình yên nhưng bỗng dưng vướng vào một vụ án, từ đó đã thay đổi con người anh ta và đưa đẩy sang một lối rẽ khác. Yi Soo đã tham gia một đội điều tra tợi sở cảnh sát và chuyên săn bắt cướp. anh ta sử dụng các mối quan hệ và sự giàu có để làm lợi thế cho mình và tuân theo sự chỉ huy của một vị thám tử tận tâm tên là Lee Kang Hyun.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/tai-phiet-va-canh-sat-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/tai-phiet-va-canh-sat-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "45 phút/tập",
+    "episode_current": "Hoàn Tất (16/16)",
+    "episode_total": "16",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 9602,
+    "actor": [
+      "Ahn Bo-hyun",
+      "Park Ji-hyun",
+      "Kang Sang-jun",
+      "Kim Shin-bi",
+      "Lee Na-eun",
+      "Kwak Si-yang"
+    ],
+    "director": ["Kim Jae-hong"],
+    "category": [
+      {
+        "id": "620a2249e0fc277084dfd2e5",
+        "name": "Hình Sự",
+        "slug": "hinh-su"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      },
+      {
+        "id": "620f84d291fa4af90ab6b3f4",
+        "name": "Bí ẩn",
+        "slug": "bi-an"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "235577",
+      "season": 1,
+      "vote_average": 8.8,
+      "vote_count": 88
+    },
+    "imdb": {
+      "id": "tt33255143"
+    },
+    "created": {
+      "time": "2024-09-21T23:00:12.000Z"
+    },
+    "modified": {
+      "time": "2024-12-17T15:29:10.000Z"
+    },
+    "_id": "66eeed8cffa72a3c023b89d2",
+    "name": "Thẩm Phán Từ Địa Ngục",
+    "slug": "tham-phan-tu-dia-nguc",
+    "origin_name": "The Judge from Hell",
+    "content": "<p>Một thẩm phán tàn nhẫn và độc ác chỉ biết sử dụng quyền lực cho riêng mình, gặp một thám tử ấm áp và vui vẻ, người luôn đặt nạn nhân lên hàng đầu.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/tham-phan-tu-dia-nguc-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/tham-phan-tu-dia-nguc-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "60 phút/tập",
+    "episode_current": "Hoàn Tất (14/14)",
+    "episode_total": "14",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 9062,
+    "actor": [""],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a2238e0fc277084dfd291",
+        "name": "Tâm Lý",
+        "slug": "tam-ly"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "200707",
+      "season": 7,
+      "vote_average": 6.8,
+      "vote_count": 19
+    },
+    "imdb": {
+      "id": "tt29198828"
+    },
+    "created": {
+      "time": "2023-08-31T07:40:07.000Z"
+    },
+    "modified": {
+      "time": "2023-11-18T11:01:05.000Z"
+    },
+    "_id": "64efe167ee400b53d2dc50c7",
+    "name": "Cuộc Chiến Sinh Tồn - 7 Escape",
+    "slug": "7-escape",
+    "origin_name": "The Escape of the Seven: War for Survival",
+    "content": "<p>Một ông trùm nền tảng di động vô danh, một CEO công ty sản xuất phim truyền hình, một cựu xã hội đen, một thần tượng muốn trở thành thần tượng, một bác sĩ OBGYN, một CEO giải trí và một giáo viên mỹ thuật trong trường có điểm gì chung? 7 cá nhân này đều có liên quan đến vụ án thiếu nữ nóng bỏng. Khi họ cố gắng thoát khỏi số phận và theo đuổi sự thật, họ thấy mình bị cuốn vào những bí mật, dối trá và ham muốn trong câu chuyện quả báo này.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/7-escape-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/7-escape-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=P_ybS5e7J14",
+    "time": "70 phút/tập",
+    "episode_current": "Hoàn Tất (17/17)",
+    "episode_total": "17",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2023,
+    "view": 8781,
+    "actor": [
+      "Uhm Ki-joon",
+      "Hwang Jung-eum",
+      "Lee Joon",
+      "Lee Yu-bi",
+      "Shin Eun-kyung",
+      "Yoon Jong-hoon",
+      "Jo Yoon-hee",
+      "Jo Jae-yun",
+      "Lee Duck-hwa"
+    ],
+    "director": ["Joo Dong-min"],
+    "category": [
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "227192",
+      "season": 1,
+      "vote_average": 7.2,
+      "vote_count": 23
+    },
+    "imdb": {
+      "id": "tt29311421"
+    },
+    "created": {
+      "time": "2024-02-29T16:03:59.000Z"
+    },
+    "modified": {
+      "time": "2024-03-21T15:14:43.000Z"
+    },
+    "_id": "65e0487ff5295c8cd10e69ae",
+    "name": "Trò Chơi Kim Tự Tháp",
+    "slug": "tro-choi-kim-tu-thap",
+    "origin_name": "Pyramid Game",
+    "content": "<p>Trò chơi tàn khốc của những kẻ tấn công, nạn nhân và những người ngoài cuộc trong lớp học khi học sinh cạnh tranh để đứng đầu kim tự tháp.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/tro-choi-kim-tu-thap-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/tro-choi-kim-tu-thap-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "55 phút/tập",
+    "episode_current": "Hoàn Tất (10/10)",
+    "episode_total": "10",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 8209,
+    "actor": [
+      "Bona",
+      "Jang Da-a",
+      "Ryu Da-in",
+      "Kang Na-eon",
+      "Jeong Ha-dam",
+      "Shin Seul-ki",
+      "Ha Yul-Ri",
+      "Hwang Hyun-jung",
+      "Lee Ju-yeon",
+      "Oh Se-eun"
+    ],
+    "director": ["Park So-yeon"],
+    "category": [
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "218539",
+      "season": 1,
+      "vote_average": 8.476,
+      "vote_count": 333
+    },
+    "imdb": {
+      "id": "tt29569035"
+    },
+    "created": {
+      "time": "2023-11-24T21:59:12.000Z"
+    },
+    "modified": {
+      "time": "2024-01-20T22:12:38.000Z"
+    },
+    "_id": "6560ba40aa7d07ce5c9e582f",
+    "name": "Chàng Quỷ Của Tôi",
+    "slug": "chang-quy-cua-toi",
+    "origin_name": "My Demon",
+    "content": "<p>Một ác quỷ bỗng mất hết sức mạnh sau khi vướng vào một nữ thừa kế lạnh lùng. Nhưng có thể cô nắm giữ chìa khóa giúp anh tìm lại năng lực đã mất... và mở cửa trái tim anh.</p><p>&nbsp;</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/chang-quy-cua-toi-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/chang-quy-cua-toi-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=D-bAfFqvxZg",
+    "time": "60 phút/tập",
+    "episode_current": "Hoàn Tất (16/16)",
+    "episode_total": "16",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2023,
+    "view": 7754,
+    "actor": [
+      "Kim You-jung",
+      "Song Kang",
+      "Lee Sang-yi",
+      "Kim Hae-sook",
+      "Jo Hye-joo",
+      "Kim Tae-hun",
+      "Jo Yeon-hee",
+      "Lee Yoon-ji",
+      "Seo Jeong-yeon",
+      "Heo Jeong-do"
+    ],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      },
+      {
+        "id": "620a2282e0fc277084dfd435",
+        "name": "Viễn Tưởng",
+        "slug": "vien-tuong"
+      },
+      {
+        "id": "620a229be0fc277084dfd4dd",
+        "name": "Khoa Học",
+        "slug": "khoa-hoc"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "230923",
+      "season": 1,
+      "vote_average": 8.6,
+      "vote_count": 7
+    },
+    "imdb": {
+      "id": "tt31324295"
+    },
+    "created": {
+      "time": "2024-04-08T23:11:07.000Z"
+    },
+    "modified": {
+      "time": "2024-05-28T22:15:36.000Z"
+    },
+    "_id": "6614171bb1f3abc7dd0ff974",
+    "name": "Cõng Anh Mà Chạy",
+    "slug": "cong-anh-ma-chay",
+    "origin_name": "Lovely Runner",
+    "content": "<p>Hành trình fangirl Im Sol quay ngược về quá khứ để thay đổi số mệnh bi thảm ở hiện tại của nam thần tượng mà cô yêu thích Ryu Sun Jae.</p><p>&nbsp;</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/cong-anh-ma-chay-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/cong-anh-ma-chay-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=mZ7-J7dQmyQ",
+    "time": "60 phút/tập",
+    "episode_current": "Hoàn Tất (16/16)",
+    "episode_total": "16",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 7397,
+    "actor": [
+      "Byeon Woo-seok",
+      "Kim Hye-yoon",
+      "Song Geon-hee",
+      "Lee Seung-hyub",
+      "Jung Young-ju",
+      "Song Ji-ho",
+      "Seo Hye-won",
+      "Kim Won-hae"
+    ],
+    "director": ["Kim Tae-yeob"],
+    "category": [
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      },
+      {
+        "id": "620a2282e0fc277084dfd435",
+        "name": "Viễn Tưởng",
+        "slug": "vien-tuong"
+      },
+      {
+        "id": "620a229be0fc277084dfd4dd",
+        "name": "Khoa Học",
+        "slug": "khoa-hoc"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "215072",
+      "season": 1,
+      "vote_average": 8.283,
+      "vote_count": 45
+    },
+    "imdb": {
+      "id": "tt26450613"
+    },
+    "created": {
+      "time": "2023-12-30T14:51:24.000Z"
+    },
+    "modified": {
+      "time": "2024-02-07T19:45:54.000Z"
+    },
+    "_id": "658fcbfc31d8a2b99e7a19fc",
+    "name": "Cửa Hàng Sát Thủ",
+    "slug": "cua-hang-sat-thu",
+    "origin_name": "A Shop for Killers",
+    "content": "Khi Jung Ji-An (Kim Hye Jun) còn nhỏ, mẹ cô bị cha cô s.á.t h.ạ.i sau đó t.ự s.á.t. Chú của ấy là Jung Jin Man (Lee Dong Wook) đã nuôi dậy cô bé kể từ đó.  Cô bé không hề biết rằng chú mình đã bí mật điều hành một trung tâm mua sắm bí ẩn.  Jung Ji An sau khi đăng ký vào một trường đại học thì đã rời khỏi nhà của chú và bắt đầu sống một mình.  Một ngày nọ, Jung Ji An nghe tin chú của cô đột ngột qua đời. Cô trở về nhà của chú mình và biết được bí mật mà chú cô ấy đã chôn giấu bấy lâu nay.  Bị bao quanh bởi những mối nguy hiểm do công việc của chú, liệu cô ấy có lựa chọn tiếp tục làm hay không?",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/cua-hang-sat-thu-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/cua-hang-sat-thu-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "undefined phút/tập",
+    "episode_current": "Hoàn Tất (8/8)",
+    "episode_total": "8",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 6555,
+    "actor": [
+      "Lee Dong-wook",
+      "Kim Hye-jun",
+      "Seo Hyun-woo",
+      "Jo Han-sun",
+      "Park Ji-bin",
+      "Kim Hae-na"
+    ],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a21b2e0fc277084dfd0c5",
+        "name": "Hành Động",
+        "slug": "hanh-dong"
+      },
+      {
+        "id": "620a2249e0fc277084dfd2e5",
+        "name": "Hình Sự",
+        "slug": "hinh-su"
+      },
+      {
+        "id": "620a2293e0fc277084dfd489",
+        "name": "Phiêu Lưu",
+        "slug": "phieu-luu"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      },
+      {
+        "id": "620f84d291fa4af90ab6b3f4",
+        "name": "Bí ẩn",
+        "slug": "bi-an"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "218631",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 2
+    },
+    "imdb": {
+      "id": "tt31390557"
+    },
+    "created": {
+      "time": "2024-11-06T18:24:49.000Z"
+    },
+    "modified": {
+      "time": "2024-11-27T22:01:09.000Z"
+    },
+    "_id": "672b520187a7be4c2dd4111b",
+    "name": "Góc Khuất Gangnam",
+    "slug": "goc-khuat-gangnam",
+    "origin_name": "Gangnam B-Side",
+    "content": "<p>Một thám tử bị ruồng bỏ bị kéo trở lại trò chơi sau khi bạn của con gái anh ta mất tích. Là người mới nhất trong một loạt phụ nữ mất tích ở khu vực Gangnam của Seoul, thám tử sẽ quay trở lại thế giới tệ nạn, ma túy và tham nhũng để khám phá ra điều gì đó đe dọa lật đổ một số tầng lớp tinh hoa giàu có nhất của thành phố.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/goc-khuat-gangnam-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/goc-khuat-gangnam-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "60 phút/tập",
+    "episode_current": "Hoàn Tất (8/8)",
+    "episode_total": "8",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 5724,
+    "actor": [
+      "Jo Woo Jin",
+      "Ji Chang Wook",
+      "Ha Yoon Kyung",
+      "BIBI",
+      "Hyun Bong Sik",
+      "Oh Ye Ju",
+      "Jeong Jae Kwang",
+      "Eum Moon Suk"
+    ],
+    "director": ["Park Noo Ri"],
+    "category": [
+      {
+        "id": "620a21b2e0fc277084dfd0c5",
+        "name": "Hành Động",
+        "slug": "hanh-dong"
+      },
+      {
+        "id": "620a2238e0fc277084dfd291",
+        "name": "Tâm Lý",
+        "slug": "tam-ly"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "movie",
+      "id": "838209",
+      "season": null,
+      "vote_average": 7.376,
+      "vote_count": 113
+    },
+    "imdb": {
+      "id": "tt27802490"
+    },
+    "created": {
+      "time": "2024-02-28T14:01:25.000Z"
+    },
+    "modified": {
+      "time": "2024-04-23T09:09:12.000Z"
+    },
+    "_id": "65deda45f5295c8cd1038bed",
+    "name": "Exhuma: Quật mộ trùng ma",
+    "slug": "exhuma-quat-mo-trung-ma",
+    "origin_name": "Exhuma",
+    "content": "<p>Sau khi hứng chịu hàng loạt sự kiện huyền bí, một gia đình giàu có sống ở LA triệu tập bộ đôi pháp sư trẻ đang lên Hwa-rim và Bong-gil để cứu đứa con mới sinh của gia đình. Khi họ đến nơi, Hwa-rim cảm nhận được bóng tối của tổ tiên họ đã bám theo gia đình, cái gọi là 'Tiếng gọi của Grave'. Để khai quật ngôi mộ và giải thoát tổ tiên, Hwa-rim tìm kiếm sự giúp đỡ từ nhà phong thủy hàng đầu Sang-duk và người làm nghề mai táng Young-geun. Trước sự thất vọng của họ, bốn người tìm thấy ngôi mộ ở một địa điểm râm mát ở một ngôi làng hẻo lánh ở Hàn Quốc. Không nhận thức được hậu quả, việc khai quật được thực hiện, nhưng điều này lại giải phóng một thế lực độc ác ẩn giấu bên dưới…</p>",
+    "type": "single",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/exhuma-quat-mo-trung-ma-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/exhuma-quat-mo-trung-ma-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": true,
+    "trailer_url": "https://www.youtube.com/watch?v=RUDG0LOwxII",
+    "time": "134 Phút",
+    "episode_current": "Full",
+    "episode_total": "1",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 5641,
+    "actor": [
+      "Choi Min-sik",
+      "Kim Go-eun",
+      "Yoo Hae-jin",
+      "Lee Do-hyun",
+      "Kim Jae-chul",
+      "Kim Min-jun",
+      "Rikiya Koyama",
+      "Kim Byung-oh",
+      "Kim Sun-young",
+      "Jeon Jin-gi"
+    ],
+    "director": ["Jang Jae-hyun"],
+    "category": [
+      {
+        "id": "620a22ace0fc277084dfd531",
+        "name": "Kinh Dị",
+        "slug": "kinh-di"
+      },
+      {
+        "id": "620f84d291fa4af90ab6b3f4",
+        "name": "Bí ẩn",
+        "slug": "bi-an"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "128119",
+      "season": 3,
+      "vote_average": 8.667,
+      "vote_count": 6
+    },
+    "imdb": {
+      "id": "tt28893202"
+    },
+    "created": {
+      "time": "2024-01-10T14:09:40.000Z"
+    },
+    "modified": {
+      "time": "2024-05-11T00:30:51.000Z"
+    },
+    "_id": "659e42b47074f826ccc483c9",
+    "name": "Transit Love (Phần 3)",
+    "slug": "transit-love-phan-3",
+    "origin_name": "EXchange",
+    "content": "<p>Nội dung: Bốn cặp người yêu cũ sống chung dướt một mái nhà trong ba tuần để tìm một tình yêu mới hoặc quay lại với nhau. Biết người yêu cũ của nhau đang ở trong nhà chung, nhưng họ phải che giấu không để lộ người yêu cũ của mình. Đồng thời khi giữ bí mật này, họ cũng thử tìm hiểu những người khác và xây dựng các mối quan hệ mới. Thông qua hệ thống EX-REVIEW và EX-CHAT, mọi người có cơ hội tìm hiểu về bạn cặp mới của mình thông qua người yêu cũ của người đó. Những mối quan hệ mới nào sẽ bắt đầu? Hay những cặp đôi cũ sẽ lại nhen nhóm tình cảm?</p>",
+    "type": "tvshows",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/transit-love-phan-3-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/transit-love-phan-3-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "114 phút/tập",
+    "episode_current": "Hoàn Tất (20/20)",
+    "episode_total": "20",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2023,
+    "view": 5482,
+    "actor": [""],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a220de0fc277084dfd16d",
+        "name": "Tình Cảm",
+        "slug": "tinh-cam"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "219651",
+      "season": 1,
+      "vote_average": 8.536,
+      "vote_count": 42
+    },
+    "imdb": {
+      "id": "tt26653824"
+    },
+    "created": {
+      "time": "2023-11-30T20:36:41.000Z"
+    },
+    "modified": {
+      "time": "2024-01-21T23:20:04.000Z"
+    },
+    "_id": "65688fe9aa7d07ce5cad1633",
+    "name": "Chào Mừng Đến Samdal-ri",
+    "slug": "chao-mung-den-samdal-ri",
+    "origin_name": "Welcome to Samdal-ri",
+    "content": "<p>Sau khi rớt xuống từ trên đỉnh cao, nữ nhiếp ảnh gia nọ quay về quê hương và tình cờ gặp lại người bạn thơ ấu. Thế rồi mối tình còn dang dở cứ thế mà nhen nhóm.</p><p>&nbsp;</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/chao-mung-den-samdal-ri-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/chao-mung-den-samdal-ri-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=aY8QmExZrlY",
+    "time": "50 phút/tập",
+    "episode_current": "Hoàn tất (16/16)",
+    "episode_total": "16",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2023,
+    "view": 5329,
+    "actor": [
+      "Ji Chang-wook",
+      "Shin Hye-sun",
+      "Yu Oh-seong",
+      "Kim Mi-kyeong",
+      "Seo Hyeon-cheol",
+      "Shin Dong-mi",
+      "Kang Mi-na"
+    ],
+    "director": ["Cha Yeong-hun"],
+    "category": [
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "223212",
+      "season": 1,
+      "vote_average": 7.95,
+      "vote_count": 20
+    },
+    "imdb": {
+      "id": "tt26693681"
+    },
+    "created": {
+      "time": "2024-02-28T21:55:56.000Z"
+    },
+    "modified": {
+      "time": "2024-04-04T11:36:11.000Z"
+    },
+    "_id": "65df497ce5f40e2ffe73b1ec",
+    "name": "Cuộc Chiến Thừa Kế",
+    "slug": "cuoc-chien-thua-ke",
+    "origin_name": "The Impossible Heir",
+    "content": "<p>Khi đứa con ngoài giá thú của một chủ tập đoàn Hàn Quốc hợp tác với người bạn thời thơ ấu đầy tham vọng của mình, bộ đôi này sẽ không ngừng nỗ lực để giành lấy vị trí đứng đầu chuỗi thức ăn xã hội. Sinh ra trong một gia đình đơn thân nghèo khó, chẳng có gì ngoài vẻ ngoài điển trai và sự quyến rũ, Kang In Ha luôn khao khát thành công. Quyết tâm làm nên điều gì đó cho riêng mình, bất kể giá nào, In Ha phát hiện ra rằng cha mình là chủ tịch của Tập đoàn Kang Oh cực kỳ thành công và bỏ lại cuộc sống nghèo khó phía sau. Bị những người còn lại trong gia đình mới xa lánh, In Ha hợp tác với người bạn có năng khiếu trí tuệ Han Tae Oh, ấp ủ kế hoạch từ khi còn trẻ để tiếp quản công ty và giành lấy vị trí đứng đầu xã hội của họ. Nhận ra thành công từ rất sớm, cặp đôi bắt đầu đi lên đều đặn cho đến khi một người phụ nữ đầy tham vọng không kém với quá khứ rắc rối tương tự đe dọa làm hỏng kế hoạch của họ mãi mãi.</p><p><br>&nbsp;</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/cuoc-chien-thua-ke-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/cuoc-chien-thua-ke-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=DnGwXa3BrXo",
+    "time": "45 phút/tập",
+    "episode_current": "Hoàn Tất (12/12)",
+    "episode_total": "12",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 5163,
+    "actor": [
+      "Lee Jae-wook",
+      "Lee Jun-young",
+      "Hong Su-zu",
+      "Lee Ji-hoon",
+      "Lee Hwang-eui",
+      "Han Sang-jin"
+    ],
+    "director": [""],
+    "category": [
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "271309",
+      "season": 1,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt33398245"
+    },
+    "created": {
+      "time": "2025-02-22T13:51:52.000Z"
+    },
+    "modified": {
+      "time": "2025-04-06T19:02:37.000Z"
+    },
+    "_id": "67b974088d0900af370146dd",
+    "name": "Trái Tim Chôn Vùi",
+    "slug": "trai-tim-chon-vui",
+    "origin_name": "Buried Hearts",
+    "content": "<p>Một hacker lão luyện đã đánh cắp một quỹ đen khổng lồ trị giá 2 nghìn tỷ won để thoát khỏi nguy hiểm, gây ra một trò chơi lừa đảo và quyền lực có mức cược cao. Động cơ thực sự đằng sau quỹ đen lộ diện, khiến mọi người trở nên dễ bị tổn thương trong khi mục tiêu cuối cùng của \"Daesan Man\" là tiêu diệt hoàn toàn Tập đoàn Daesan.</p>",
+    "type": "series",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/trai-tim-chon-vui-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/trai-tim-chon-vui-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "72 phút/tập",
+    "episode_current": "Tập 14",
+    "episode_total": "16",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 4960,
+    "actor": [
+      "박형식",
+      "허준호",
+      "Hong Hwa-yeon",
+      "Gong Ji-ho",
+      "Kwon Soo-hyun",
+      "윤상현",
+      "우현",
+      "차우민",
+      "이해영"
+    ],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a2249e0fc277084dfd2e5",
+        "name": "Hình Sự",
+        "slug": "hinh-su"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      },
+      {
+        "id": "620f84d291fa4af90ab6b3f4",
+        "name": "Bí ẩn",
+        "slug": "bi-an"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "230198",
+      "season": 1,
+      "vote_average": 7,
+      "vote_count": 6
+    },
+    "imdb": {
+      "id": "tt30301176"
+    },
+    "created": {
+      "time": "2024-02-27T00:17:12.000Z"
+    },
+    "modified": {
+      "time": "2024-04-05T11:04:15.000Z"
+    },
+    "_id": "65dcc798e5f40e2ffe66b250",
+    "name": "Hôn Lễ Bất Khả Thi",
+    "slug": "hon-le-bat-kha-thi",
+    "origin_name": "Wedding Impossible",
+    "content": "<p>Nhiệm vụ lãng mạn giữa một nữ diễn viên kém cỏi lên kế hoạch cho một cuộc hôn nhân giả VS anh rể tương lai đầy tham vọng phản đối</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/hon-le-bat-kha-thi-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/hon-le-bat-kha-thi-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "70 phút/tập",
+    "episode_current": "Hoàn Tất (12/12)",
+    "episode_total": "12",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 4757,
+    "actor": [
+      "Jun Jong-seo",
+      "Moon Sang-min",
+      "Kim Do-wan",
+      "Bae Yoon-kyung",
+      "Kwon Hae-hyo",
+      "Kim Kwang-kyu",
+      "Park Jae-wan",
+      "Kim Ye-won",
+      "Kang Na-eon"
+    ],
+    "director": ["Kwon Young-il"],
+    "category": [
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  }
+]

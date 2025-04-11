@@ -1,0 +1,661 @@
+[
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "135814",
+      "season": null,
+      "vote_average": 6.8,
+      "vote_count": 101
+    },
+    "imdb": {
+      "id": "tt15525658"
+    },
+    "created": {
+      "time": "2023-01-01T18:45:16.000Z"
+    },
+    "modified": {
+      "time": "2025-04-09T11:24:09.000Z"
+    },
+    "_id": "63b1724c45cb3f4e0bfdd010",
+    "name": "Nhìn trộm",
+    "origin_name": "Lady Voyeur",
+    "content": "<p>Một tin tặc tài ba, thích nhìn trộm bị kéo vào cuộc điều tra nguy hiểm sau khi người hàng xóm của cô – một cô gái bán hoa – rời nhà đi chơi cuối tuần.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/nhin-trom-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/nhin-trom-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "40 phút/tập",
+    "episode_current": "Hoàn Tất (10/10)",
+    "episode_total": "10 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "slug": "nhin-trom",
+    "year": 2023,
+    "view": 260,
+    "actor": [
+      "Débora Nascimento",
+      "Emanuelle Araújo",
+      "Nikolas Antunes",
+      "Ângelo Rodrigues",
+      "Débora Duarte",
+      "Tânia Alves"
+    ],
+    "director": [""],
+    "category": [
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      },
+      {
+        "id": "620f84d291fa4af90ab6b3f4",
+        "name": "Bí ẩn",
+        "slug": "bi-an"
+      }
+    ],
+    "country": [
+      {
+        "id": "62159c501f1609c9d934830a",
+        "name": "Brazil",
+        "slug": "brazil"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "156902",
+      "season": null,
+      "vote_average": 6.884,
+      "vote_count": 411
+    },
+    "imdb": {
+      "id": "tt15438246"
+    },
+    "created": {
+      "time": "2023-01-01T18:44:41.000Z"
+    },
+    "modified": {
+      "time": "2025-04-09T11:23:49.000Z"
+    },
+    "_id": "63b1722945cb3f4e0bfdccd8",
+    "name": "Kaleidoscope",
+    "origin_name": "Kaleidoscope",
+    "content": "<p>Một tay trộm bậc thầy và đồng bọn nỗ lực thực hiện vụ trộm hoành tráng và công phu trị giá 7 tỷ USD. Nhưng sự phản bội, lòng tham và các mối đe dọa khác phá hoại kế hoạch của họ.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/kaleidoscope-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/kaleidoscope-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "50 phút/tập",
+    "episode_current": "Hoàn Tất (9/9)",
+    "episode_total": "9 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "slug": "kaleidoscope",
+    "year": 2023,
+    "view": 218,
+    "actor": [
+      "Giancarlo Esposito",
+      "Rufus Sewell",
+      "Paz Vega",
+      "Rosaline Elbay",
+      "Jai Courtney",
+      "Tati Gabrielle",
+      "Peter Mark Kendall"
+    ],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a21b2e0fc277084dfd0c5",
+        "name": "Hành Động",
+        "slug": "hanh-dong"
+      },
+      {
+        "id": "620a2293e0fc277084dfd489",
+        "name": "Phiêu Lưu",
+        "slug": "phieu-luu"
+      },
+      {
+        "id": "620f84d291fa4af90ab6b3f4",
+        "name": "Bí ẩn",
+        "slug": "bi-an"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a231fe0fc277084dfd7ce",
+        "name": "Âu Mỹ",
+        "slug": "au-my"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "216005",
+      "season": null,
+      "vote_average": 6.971,
+      "vote_count": 52
+    },
+    "imdb": {
+      "id": "tt23732458"
+    },
+    "created": {
+      "time": "2023-01-04T17:02:21.000Z"
+    },
+    "modified": {
+      "time": "2025-04-09T11:24:51.000Z"
+    },
+    "_id": "63b54eadee616770bad8be46",
+    "name": "MADOFF: Quái vật phố Wall",
+    "origin_name": "MADOFF: The Monster of Wall Street",
+    "content": "<p>Loạt phim tài liệu này dõi theo hành trình thăng trầm của nhà tài chính Bernie Madoff, người dàn dựng một trong những mô hình Ponzi lớn nhất lịch sử Phố Wall.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/madoff-quai-vat-pho-wall-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/madoff-quai-vat-pho-wall-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "54 phút/tập",
+    "episode_current": "Hoàn Tất (4/4)",
+    "episode_total": "4 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "slug": "madoff-quai-vat-pho-wall",
+    "year": 2023,
+    "view": 172,
+    "actor": [""],
+    "director": [""],
+    "category": [
+      {
+        "id": "620e0e64d9648f114cde7728",
+        "name": "Tài Liệu",
+        "slug": "tai-lieu"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a231fe0fc277084dfd7ce",
+        "name": "Âu Mỹ",
+        "slug": "au-my"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "117581",
+      "season": null,
+      "vote_average": 8.076,
+      "vote_count": 1602
+    },
+    "imdb": {
+      "id": "tt10813940"
+    },
+    "created": {
+      "time": "2023-01-05T17:07:59.000Z"
+    },
+    "modified": {
+      "time": "2025-04-09T11:25:48.000Z"
+    },
+    "_id": "63b6a17f26368c50d49dd6a6",
+    "name": "Ginny & Georgia (Phần 2)",
+    "origin_name": "Ginny & Georgia (Season 2)",
+    "content": "<p>Các mối quan hệ và thách thức mới đang chờ đợi Georgia và Ginny khi họ xoay xở với cuộc sống ở Wellsbury. Rồi những bí mật từ quá khứ đe dọa tất cả.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/ginny-georgia-phan-2-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/ginny-georgia-phan-2-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "58 phút/tập",
+    "episode_current": "Hoàn Tất (10/10)",
+    "episode_total": "10 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "slug": "ginny-georgia-phan-2",
+    "year": 2023,
+    "view": 140,
+    "actor": [
+      "Brianne Howey",
+      "Antonia Gentry",
+      "Diesel La Torraca",
+      "Jennifer Robertson",
+      "Felix Mallard",
+      "Sara Waisglass",
+      "Scott Porter",
+      "Raymond Ablack",
+      "Aaron Ashmore",
+      "Nathan Mitchell"
+    ],
+    "director": [""],
+    "category": [
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a231fe0fc277084dfd7ce",
+        "name": "Âu Mỹ",
+        "slug": "au-my"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "206510",
+      "season": null,
+      "vote_average": 6.93,
+      "vote_count": 100
+    },
+    "imdb": {
+      "id": "tt16969944"
+    },
+    "created": {
+      "time": "2023-01-05T17:06:52.000Z"
+    },
+    "modified": {
+      "time": "2025-04-09T11:25:26.000Z"
+    },
+    "_id": "63b6a13c26368c50d49dcb6e",
+    "name": "Cao bồi Copenhagen",
+    "origin_name": "Copenhagen Cowboy",
+    "content": "<p>Sau khi cả đời bị bán làm bùa may mắn cho nhiều người, một phụ nữ có các khả năng siêu nhiên bí ẩn tìm cách trả thù những kẻ đã đối xử tệ bạc với cô.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/cao-boi-copenhagen-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/cao-boi-copenhagen-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "56 phút/tập",
+    "episode_current": "Hoàn Tất (6/6)",
+    "episode_total": "6 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "slug": "cao-boi-copenhagen",
+    "year": 2023,
+    "view": 135,
+    "actor": [
+      "Angela Bundalovic",
+      "Andreas Lykke Jørgensen",
+      "Jason Hendil-Forssell",
+      "Li Ii Zhang",
+      "Lola Güldenløve Corfixen",
+      "Valentina Dejanović",
+      "Maria Erwolter",
+      "​​Thomas Algren",
+      "Zlatko Burić",
+      "Dragana Milutinovic",
+      "Ramadan Huseini"
+    ],
+    "director": [""],
+    "category": [
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "6216751d70b58bba6858b885",
+        "name": "Đan Mạch",
+        "slug": "dan-mach"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "movie",
+      "id": "1070442",
+      "season": null,
+      "vote_average": 6.6,
+      "vote_count": 28
+    },
+    "imdb": {
+      "id": "tt25830866"
+    },
+    "created": {
+      "time": "2023-03-09T05:32:40.000Z"
+    },
+    "modified": {
+      "time": "2025-04-09T11:22:38.000Z"
+    },
+    "_id": "64090d08d9a1b6ff33a7193a",
+    "name": "Chỉ Nhân Hồi Hồn",
+    "slug": "chi-nhan-hoi-hon",
+    "origin_name": "Get in the Dark (Zhi Ren Hui Hun)",
+    "content": "Một phóng viên nghe thấy ba câu chuyện kinh dị khi điều tra một vụ án về linh hồn búp bê giấy 20 năm trước. Khi đó cô Qiao đã chết một cách vô ích, và người quản gia của cô đã trả tiền cho một thợ thủ công bằng giấy để làm một con búp bê bằng giấy để chôn cùng cô. Linh hồn của cô Qiao được hồi sinh để trả thù khi đôi mắt của con búp bê bị rút ra, và hàng loạt sự kiện khủng khiếp bắt đầu xảy ra. ",
+    "type": "single",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/chi-nhan-hoi-hon-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/chi-nhan-hoi-hon-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "1 giờ 36 phút",
+    "episode_current": "Full",
+    "episode_total": "1",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2023,
+    "view": 115,
+    "actor": ["Dong Han", "Zihan Chen", "Danny Kwok-Kwan Chan"],
+    "director": ["Cheng Si Yu"],
+    "category": [
+      {
+        "id": "620a22ace0fc277084dfd531",
+        "name": "Kinh Dị",
+        "slug": "kinh-di"
+      }
+    ],
+    "country": [
+      {
+        "id": "62093063196e9f4ab6b448b8",
+        "name": "Trung Quốc",
+        "slug": "trung-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "112160",
+      "season": null,
+      "vote_average": 8.4,
+      "vote_count": 443
+    },
+    "imdb": {
+      "id": "tt13357124"
+    },
+    "created": {
+      "time": "2023-01-01T20:24:56.000Z"
+    },
+    "modified": {
+      "time": "2025-04-09T11:24:34.000Z"
+    },
+    "_id": "63b189a845cb3f4e0bffb512",
+    "name": "Ông chồng yakuza nội trợ (Phần 2)",
+    "origin_name": "The Way of the Househusband (Season 2)",
+    "content": "<p>Cựu yakuza mà ai cũng yêu mến đã trở lại! Anh ấy cắt phiếu thưởng, lên kế hoạch cho những bữa ăn tiết kiệm tiền và rất nghiêm túc thực hiện vai trò người chồng nội trợ của mình.</p>",
+    "type": "hoathinh",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/ong-chong-yakuza-noi-tro-phan-2-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/ong-chong-yakuza-noi-tro-phan-2-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "17 phút/tập",
+    "episode_current": "Hoàn Tất (5/5)",
+    "episode_total": "5 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "slug": "ong-chong-yakuza-noi-tro-phan-2",
+    "year": 2023,
+    "view": 88,
+    "actor": [
+      "Tsuda Kenjiro",
+      "Ito Shizuka",
+      "Okitsu Kazuyuki",
+      "MAO",
+      "Fukushima Jun",
+      "Saito Kimiko",
+      "Hosoya Yoshimasa",
+      "Nogawa Masashi",
+      "Yanagita Junichi",
+      "Hochu Otsuka",
+      "Tanaka Atsuko"
+    ],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2307e0fc277084dfd726",
+        "name": "Nhật Bản",
+        "slug": "nhat-ban"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "155545",
+      "season": null,
+      "vote_average": 7.38,
+      "vote_count": 25
+    },
+    "imdb": {
+      "id": "tt12379170"
+    },
+    "created": {
+      "time": "2022-12-30T16:03:25.000Z"
+    },
+    "modified": {
+      "time": "2025-04-09T11:23:35.000Z"
+    },
+    "_id": "63aea95d6414a08fbe4c486a",
+    "name": "Bí mật của mùa hè (Phần 2)",
+    "origin_name": "Secrets of Summer (Season 2)",
+    "content": "<p>Steffi, Luz cùng gia đình và bạn bè chiến đấu vì tương lai của Cielo Grande sau khi Natasha và anh trai Oliver dùng quyền lực để tiếp quản khu nghỉ dưỡng.</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/bi-mat-cua-mua-he-phan-2-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/bi-mat-cua-mua-he-phan-2-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "34 phút/tập",
+    "episode_current": "Hoàn Tất (8/8)",
+    "episode_total": "8 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "slug": "bi-mat-cua-mua-he-phan-2",
+    "year": 2023,
+    "view": 86,
+    "actor": [
+      "Pilar Pascual",
+      "Abril Di Yorio",
+      "Víctor Varona",
+      "Guido Messina",
+      "Giulia Guerrini",
+      "Pasquale Di Nuzzo",
+      "Luan Brum",
+      "Fernando Monzo",
+      "Juan Monzo",
+      "Mirta Márquez",
+      "Mariel Percossi",
+      "Carlos Contreras",
+      "Francisco Bass",
+      "Thais Rippel",
+      "Agustín Pardella",
+      "Byron Barbieri",
+      "Martín Tecchi",
+      "Débora Nishimoto"
+    ],
+    "director": ["Mauro Scandolari"],
+    "category": [
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2398e0fc277084dfda1a",
+        "name": "Quốc Gia Khác",
+        "slug": "quoc-gia-khac"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "204519",
+      "season": null,
+      "vote_average": 6.732,
+      "vote_count": 28
+    },
+    "imdb": {
+      "id": "tt21929398"
+    },
+    "created": {
+      "time": "2023-01-05T08:27:02.000Z"
+    },
+    "modified": {
+      "time": "2025-04-09T13:36:54.000Z"
+    },
+    "_id": "63b6276626368c50d47e044a",
+    "name": "Anh Chàng Băng Giá Và Cô Đồng Nghiệp Lạnh Lùng",
+    "origin_name": "The Ice Guy and His Cool Female Colleague",
+    "content": "<p>Himuro là một nhân viên văn phòng thuộc chủng tộc siêu nhiên với sức mạnh kỳ lạ. Bất cứ khi nào anh ấy tập trung cao độ, anh ấy vô thức đẩy những người đồng nghiệp tội nghiệp của mình vào một màn trình diễn gần gũi của Bắc Cực. Mặc dù vậy, Himuro là một người ấm áp và tốt bụng. Himuro có thiện cảm với đồng nghiệp Fuyutsuki, một người phụ nữ điềm tĩnh, có sở trường đưa ra những giải pháp đơn giản cho những vấn đề khác thường của anh. Được thúc đẩy bởi sự tôn thờ và ham muốn to lớn, Himuro sẵn sàng làm bất cứ điều gì cần thiết để chiếm được trái tim cô.</p>",
+    "type": "hoathinh",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/the-ice-guy-and-his-cool-female-colleague-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/the-ice-guy-and-his-cool-female-colleague-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "24 phút/tập",
+    "episode_current": "Hoàn tất (12/12)",
+    "episode_total": "12",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "slug": "the-ice-guy-and-his-cool-female-colleague",
+    "year": 2023,
+    "view": 50,
+    "actor": [""],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a220de0fc277084dfd16d",
+        "name": "Tình Cảm",
+        "slug": "tinh-cam"
+      },
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      },
+      {
+        "id": "620a2282e0fc277084dfd435",
+        "name": "Viễn Tưởng",
+        "slug": "vien-tuong"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2307e0fc277084dfd726",
+        "name": "Nhật Bản",
+        "slug": "nhat-ban"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "102927",
+      "season": null,
+      "vote_average": 5.214,
+      "vote_count": 14
+    },
+    "imdb": {
+      "id": "tt19893526"
+    },
+    "created": {
+      "time": "2023-01-04T09:03:26.000Z"
+    },
+    "modified": {
+      "time": "2025-04-09T11:25:07.000Z"
+    },
+    "_id": "63b4de6eee616770babe9bee",
+    "name": "The Last Summoner (JPN Dub)",
+    "origin_name": "最后的召唤师",
+    "content": "<p>Đây là một thế giới giả tưởng của Summoner. Người có thể triệu hồi linh hồn của mọi đồ vật được gọi là Người triệu hồi. Từ xa xưa, truyền thuyết về các Summoner đã ăn sâu vào một góc của lịch sử. Trong kỷ nguyên mới, có năm Summoners thức tỉnh để chiến đấu chống lại sức mạnh bí ẩn. Năm người bạn sát cánh chiến đấu để khám phá sự thật trong thế giới Summoner.</p>",
+    "type": "hoathinh",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/the-last-summoner-jpn-dub-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/the-last-summoner-jpn-dub-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "24 phút/tập",
+    "episode_current": "Tập 1",
+    "episode_total": "1",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "slug": "the-last-summoner-jpn-dub",
+    "year": 2023,
+    "view": 41,
+    "actor": [""],
+    "director": [""],
+    "category": [
+      {
+        "id": "620a21b2e0fc277084dfd0c5",
+        "name": "Hành Động",
+        "slug": "hanh-dong"
+      },
+      {
+        "id": "620a2293e0fc277084dfd489",
+        "name": "Phiêu Lưu",
+        "slug": "phieu-luu"
+      }
+    ],
+    "country": [
+      {
+        "id": "62093063196e9f4ab6b448b8",
+        "name": "Trung Quốc",
+        "slug": "trung-quoc"
+      }
+    ]
+  }
+]

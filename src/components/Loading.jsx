@@ -6,13 +6,13 @@ const Loading = ({ isLoading }) => {
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          className="inset-0 flex items-center justify-center z-[9999] h-full"
+          className="inset-0 flex items-center justify-center z-[9999] h-full w-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <motion.img
-            src="/logo.svg"
+            src="/logo.png"
             alt="Loading"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: [0.8, 1.05, 1], opacity: 1 }}

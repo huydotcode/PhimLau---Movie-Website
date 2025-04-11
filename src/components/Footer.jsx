@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="col-span-2">
           <img src="/logo.svg" alt="Logo" />
           <p className="text-sm text-gray-400 whitespace-break-spaces">
-            PhimLâu - Xem phim dài lâu và miễn phí. Chúng tôi cung cấp cho bạn
+            PhimNew - Xem phim mới nhât và miễn phí. Chúng tôi cung cấp cho bạn
             những bộ phim mới nhất, chất lượng cao và hoàn toàn miễn phí.
           </p>
 
@@ -86,7 +86,7 @@ const Footer = () => {
 
       {/* Dòng cuối */}
       <div className="text-center text-sm text-gray-500 mt-10 border-t border-gray-700 pt-6">
-        &copy; {new Date().getFullYear()} PhimLau. All rights reserved.
+        &copy; {new Date().getFullYear()} PhimNew. All rights reserved.
       </div>
     </footer>
   );

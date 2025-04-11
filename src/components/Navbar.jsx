@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import logo from "../assets/logo.svg";
 import { navlink } from "../constants/navlink";
 import useClickOutSide from "../hooks/useClickOutSide";
 import { useDebounce } from "../hooks/useDebounce";
@@ -17,7 +16,7 @@ const Navbar = () => {
     <div className="@container flex justify-between items-center h-[60px] px-4 text-white">
       <div className="w-[140px] flex items-center">
         <a className="w-full h-full text-primary" href="/">
-          <img className="object-center" src={logo} alt="Phim Lâu" />
+          <img className="object-center" src="/logo.png" alt="Phim New" />
         </a>
       </div>
 

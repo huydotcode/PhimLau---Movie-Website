@@ -1,0 +1,1392 @@
+[
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "215709",
+      "season": 1,
+      "vote_average": 10,
+      "vote_count": 4
+    },
+    "imdb": {
+      "id": "tt22693974"
+    },
+    "created": {
+      "time": "2023-03-05T22:38:42.000Z"
+    },
+    "modified": {
+      "time": "2025-04-07T09:51:44.000Z"
+    },
+    "_id": "6404b7820fc1635bd467951c",
+    "name": "Cầm Tù",
+    "slug": "cam-tu",
+    "origin_name": "Esaret",
+    "content": "<p>Orhun là một doanh nhân thành đạt, lớn lên trong một gia đình giàu có nhưng không có tình yêu thương cùng với chị gái song sinh Nihan, em gái Nurşah và người mẹ xa cách lạnh lùng Afife của họ. Nihan rời đi để làm công việc tình nguyện với tư cách là một bác sĩ ở Eritrea, nhưng gần đây cô ấy không thể liên lạc được và gia đình cô ấy đang lo lắng cho cô ấy. Trong khi tìm kiếm em gái của mình, anh tình cờ gặp Hira, một cô gái nghèo đang sống cuộc đời của một tù nhân dưới bàn tay của những kẻ buôn người. Khi họ phát hiện ra rằng Nihan đã bị đầu độc và giết chết bởi một băng đảng địa phương, Orhun suy sụp. Khi phát hiện ra rằng Hira thực sự là người đã đầu độc em gái mình, Orhun ấp ủ một kế hoạch trả thù độc ác: anh ta sẽ đưa Hira về nhà với mình và khiến mọi thứ trở nên tồi tệ hơn với cô ấy. Trong khi đó, Afife, mẹ của họ, đã ngăn cản cha của Orhun kể từ khi anh ta thời thơ ấu bí mật. Orhun quyết định kết hôn với Hira để trả thù. Afife ghét những người có địa vị thấp hơn và cô ấy bị ám ảnh bởi “dòng máu thuần khiết”. Liệu cuộc hôn nhân này có giam cầm Afife, hay cặp đôi sẽ tìm thấy sự chuộc lỗi sau khi trả hết nợ?</p>",
+    "type": "series",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/cam-tu-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/cam-tu-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=1e9F4Prqnus",
+    "time": "60 phút/tập",
+    "episode_current": "Tập 478",
+    "episode_total": "?",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2022,
+    "view": 40851,
+    "actor": [
+      "Mahassine Merabet",
+      "Cenk Torun",
+      "Hilal Anay"
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620a220de0fc277084dfd16d",
+        "name": "Tình Cảm",
+        "slug": "tinh-cam"
+      },
+      {
+        "id": "620a2238e0fc277084dfd291",
+        "name": "Tâm Lý",
+        "slug": "tam-ly"
+      }
+    ],
+    "country": [
+      {
+        "id": "620f7fa791fa4af90ab6ad1f",
+        "name": "Thổ Nhĩ Kỳ",
+        "slug": "tho-nhi-ky"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "271309",
+      "season": 1,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt33398245"
+    },
+    "created": {
+      "time": "2025-02-22T13:51:52.000Z"
+    },
+    "modified": {
+      "time": "2025-04-06T19:02:37.000Z"
+    },
+    "_id": "67b974088d0900af370146dd",
+    "name": "Trái Tim Chôn Vùi",
+    "slug": "trai-tim-chon-vui",
+    "origin_name": "Buried Hearts",
+    "content": "<p>Một hacker lão luyện đã đánh cắp một quỹ đen khổng lồ trị giá 2 nghìn tỷ won để thoát khỏi nguy hiểm, gây ra một trò chơi lừa đảo và quyền lực có mức cược cao. Động cơ thực sự đằng sau quỹ đen lộ diện, khiến mọi người trở nên dễ bị tổn thương trong khi mục tiêu cuối cùng của \"Daesan Man\" là tiêu diệt hoàn toàn Tập đoàn Daesan.</p>",
+    "type": "series",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/trai-tim-chon-vui-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/trai-tim-chon-vui-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "72 phút/tập",
+    "episode_current": "Tập 14",
+    "episode_total": "16",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 4960,
+    "actor": [
+      "박형식",
+      "허준호",
+      "Hong Hwa-yeon",
+      "Gong Ji-ho",
+      "Kwon Soo-hyun",
+      "윤상현",
+      "우현",
+      "차우민",
+      "이해영"
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620a2249e0fc277084dfd2e5",
+        "name": "Hình Sự",
+        "slug": "hinh-su"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      },
+      {
+        "id": "620f84d291fa4af90ab6b3f4",
+        "name": "Bí ẩn",
+        "slug": "bi-an"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "247376",
+      "season": 1,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt31957480"
+    },
+    "created": {
+      "time": "2025-01-05T14:54:55.000Z"
+    },
+    "modified": {
+      "time": "2025-03-30T21:42:29.000Z"
+    },
+    "_id": "677a3acfaa88764e615dda0c",
+    "name": "Thăng Cấp Một Mình (Phần 2) - Vùng Lên Từ Bóng Tối",
+    "slug": "solo-leveling-phan-2-vung-len-tu-bong-toi-tbc",
+    "origin_name": "THE LEVELING OF SOLO LEVELING",
+    "content": "A two-part documentary that aims to explore the many incarnations of Solo Leveling, from its creation to the worldwide premiere events for the anime adaptation.",
+    "type": "hoathinh",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/solo-leveling-phan-2-vung-len-tu-bong-toi-tbc-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/solo-leveling-phan-2-vung-len-tu-bong-toi-tbc-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=pQD5dHkhCdM",
+    "time": "23 phút/tập",
+    "episode_current": "Tập 13",
+    "episode_total": "12 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 2011,
+    "actor": [
+      ""
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620e0e64d9648f114cde7728",
+        "name": "Tài Liệu",
+        "slug": "tai-lieu"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a231fe0fc277084dfd7ce",
+        "name": "Âu Mỹ",
+        "slug": "au-my"
+      },
+      {
+        "id": "620a2378e0fc277084dfd972",
+        "name": "Pháp",
+        "slug": "phap"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "263043",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt32484477"
+    },
+    "created": {
+      "time": "2025-03-01T12:14:56.000Z"
+    },
+    "modified": {
+      "time": "2025-03-20T17:55:44.000Z"
+    },
+    "_id": "67c297d0b8bead89a0a6ed0c",
+    "name": "Tự Cẩm",
+    "slug": "tu-cam",
+    "origin_name": "Si Jin",
+    "content": "Sau cái chết bi thảm dưới tay người nàng yêu – Yu Jin, Jiang Si được tái sinh và quyết tâm viết lại số phận của mình. Nàng hủy bỏ hôn ước, mở một tiệm nước hoa và dấn thân vào một cuộc điều tra đầy nguy hiểm, trong khi liên tục chạm mặt Yu Jin – giờ đây đã trở thành một vị tướng trẻ. Khi cùng nhau bảo vệ gia tộc và thay đổi vận mệnh, Jiang Si dần nhận ra trái tim mình một lần nữa hướng về Yu Jin. Cùng nhau, họ đối mặt với những thử thách cam go, chiến đấu vì hòa bình và một tương lai hạnh phúc tại Đại Chu.",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/tu-cam-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/tu-cam-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "45 phút/tập",
+    "episode_current": "Hoàn Tất (40/40)",
+    "episode_total": "40",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 1497,
+    "actor": [
+      "Cảnh Điềm",
+      "Trương Vãn Ý",
+      "Trương Thỉ",
+      "Quách Đào",
+      "Từ Hảo",
+      "Bạch Băng Khả",
+      "Hoàng Dịch",
+      "Mã Tô",
+      "Ngô Miện"
+    ],
+    "director": [
+      "Vương Vi"
+    ],
+    "category": [
+      {
+        "id": "620a222fe0fc277084dfd23d",
+        "name": "Cổ Trang",
+        "slug": "co-trang"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "62093063196e9f4ab6b448b8",
+        "name": "Trung Quốc",
+        "slug": "trung-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "258764",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt35839843"
+    },
+    "created": {
+      "time": "2025-04-01T13:02:40.000Z"
+    },
+    "modified": {
+      "time": "2025-04-08T23:50:57.000Z"
+    },
+    "_id": "67eb818055569884445932b8",
+    "name": "Bảo Hiểm Ly Hôn",
+    "slug": "bao-hiem-ly-hon",
+    "origin_name": "The Divorce Insurance",
+    "content": "<p>Khi chuyên gia tính toán thiên tài Ki-jun từ Plus General Insurance, một trung tâm được kính trọng dành cho những bộ óc thông minh nhất, bắt đầu xây dựng một hợp đồng bảo hiểm ly hôn, một nhóm đặc nhiệm được thành lập bao gồm một người bảo lãnh, một chuyên gia định lượng, một giám định viên rủi ro, một giám định viên tổn thất và một cựu đại lý bảo hiểm hàng đầu. Khi họ định lượng ly hôn để xác định mức phí bảo hiểm công bằng, bộ phim hài lãng mạn về văn phòng này theo chân hành trình của họ về những mối quan hệ mới và tình yêu.</p>",
+    "type": "series",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/bao-hiem-ly-hon-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/bao-hiem-ly-hon-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=Ys7GwwX-Yjk",
+    "time": "? phút/tập",
+    "episode_current": "Tập 4",
+    "episode_total": "12 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 1087,
+    "actor": [
+      "이동욱",
+      "이광수",
+      "이주빈",
+      "이다희",
+      "김원해",
+      "엑시",
+      "조재윤",
+      "Lee Seo-yi"
+    ],
+    "director": [
+      "lee won suk"
+    ],
+    "category": [
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "233686",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt29921070"
+    },
+    "created": {
+      "time": "2025-04-04T17:27:01.000Z"
+    },
+    "modified": {
+      "time": "2025-04-05T11:29:55.000Z"
+    },
+    "_id": "67efb3f5dc9200152fe72678",
+    "name": "Nghiệp duyên",
+    "slug": "nghiep-duyen",
+    "origin_name": "Karma",
+    "content": "<p>Vụ tai nạn định mệnh gắn kết sáu cuộc đời trong câu chuyện kịch tính về nghiệp quả và tội ác này, nơi mỗi người phải đối mặt với sự thật đen tối và mối liên hệ của chính mình.</p><p>&nbsp;</p>",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/악연-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/악연-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=E_e9cpN994s",
+    "time": "47 phút/tập",
+    "episode_current": "Hoàn tất (6/6)",
+    "episode_total": "6 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 446,
+    "actor": [
+      "박해수",
+      "신민아",
+      "이희준",
+      "김성균",
+      "이광수",
+      "공승연"
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620a2249e0fc277084dfd2e5",
+        "name": "Hình Sự",
+        "slug": "hinh-su"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "271890",
+      "season": 1,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": ""
+    },
+    "created": {
+      "time": "2025-03-03T14:10:42.000Z"
+    },
+    "modified": {
+      "time": "2025-03-31T22:51:45.000Z"
+    },
+    "_id": "67c555f24b854ea9afb433b3",
+    "name": "Hãy Chăm Sóc Anh Em Đại Bàng",
+    "slug": "hay-cham-soc-anh-em-dai-bang",
+    "origin_name": "For Eagle Brothers",
+    "content": "<p>Sau cái chết đột ngột của chồng chỉ mười ngày sau khi kết hôn, chị dâu cả phải trở thành trụ cột gia đình, xử lý mối quan hệ phức tạp với năm người anh chồng đặc biệt của mình.</p>",
+    "type": "series",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/hay-cham-soc-anh-em-dai-bang-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/hay-cham-soc-anh-em-dai-bang-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "60 phút/tập",
+    "episode_current": "Tập 18",
+    "episode_total": "50",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 405,
+    "actor": [
+      "Ahn Jae-wook",
+      "Uhm Ji-won",
+      "Lee Pil-mo",
+      "Choi Dae-chul",
+      "Kim Dong-wan",
+      "Yoon Park",
+      "Yoo In-young",
+      "Park Jun-geum",
+      "Kim Jun-bae",
+      "Choi Byung-mo"
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      },
+      {
+        "id": "620e4c0b6ba8271c5eef05a8",
+        "name": "Gia Đình",
+        "slug": "gia-dinh"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2300e0fc277084dfd6d2",
+        "name": "Hàn Quốc",
+        "slug": "han-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "movie",
+      "id": "1222004",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": null
+    },
+    "created": {
+      "time": "2024-01-17T15:13:46.000Z"
+    },
+    "modified": {
+      "time": "2025-03-17T11:18:35.000Z"
+    },
+    "_id": "65a78c3a7074f826cce089dc",
+    "name": "Kỳ Ngộ Thiên Duyên",
+    "slug": "ky-ngo-thien-duyen",
+    "origin_name": "TALE OF PHANTOM: A LOVE STORY",
+    "content": "Phim kể về hai bộ tộc con người và linh hồn cùng tồn tại trong một thế giới. Thế nhưng họ lại có mâu thuẫn và hận thù từ ngàn đời nay, họ đối xử tàn nhẫn, ko nhân nhượng cho nhau. Trên đường về sau nhiều năm học tập, học giả Trần Tài Ninh đã gặp linh nữ Thanh Nữ. Qua thời gian gặp gỡ và tiếp xúc, tình cảm giữa họ bắt đầu nảy nở, họ tin tưởng nhau, dũng cảm bước đi, chiến đấu chống lại toàn bộ linh tộc, không sợ hãi trước cái chết, tất cả đã dàn dựng nên một câu chuyện cảm động về tình yêu xuyên sắc tộc",
+    "type": "single",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/ky-ngo-thien-duyen-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/ky-ngo-thien-duyen-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "69 Phút",
+    "episode_current": "Full",
+    "episode_total": "1",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2023,
+    "view": 254,
+    "actor": [
+      "shàngxuán",
+      "Yang Qing Zhu"
+    ],
+    "director": [
+      "Kong Ling Fei"
+    ],
+    "category": [
+      {
+        "id": "620a21b2e0fc277084dfd0c5",
+        "name": "Hành Động",
+        "slug": "hanh-dong"
+      },
+      {
+        "id": "620a220de0fc277084dfd16d",
+        "name": "Tình Cảm",
+        "slug": "tinh-cam"
+      },
+      {
+        "id": "620a2282e0fc277084dfd435",
+        "name": "Viễn Tưởng",
+        "slug": "vien-tuong"
+      }
+    ],
+    "country": [
+      {
+        "id": "62093063196e9f4ab6b448b8",
+        "name": "Trung Quốc",
+        "slug": "trung-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "207347",
+      "season": 1,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt32639706"
+    },
+    "created": {
+      "time": "2024-10-05T22:53:33.000Z"
+    },
+    "modified": {
+      "time": "2025-04-08T22:00:40.000Z"
+    },
+    "_id": "670160fde4d84532dec421d1",
+    "name": "Blue Box",
+    "slug": "blue-box",
+    "origin_name": "Blue Box",
+    "content": "<p>Tay vợt cầu lông Taiki luôn ngưỡng mộ ngôi sao bóng rổ Chinatsu từ xa. Nhưng vào một ngày mùa xuân nọ, một bước ngoặt bất ngờ đưa họ đến gần nhau.</p><p>&nbsp;</p>",
+    "type": "hoathinh",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/blue-box-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/blue-box-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=tcK9Eghsfq8",
+    "time": "24 phút/tập",
+    "episode_current": "Hoàn tất (25/25)",
+    "episode_total": "25",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 195,
+    "actor": [
+      "千葉翔也",
+      "上田麗奈",
+      "鬼頭明里",
+      "小林千晃",
+      "内田雄馬",
+      "坂田将吾",
+      "永瀬アンナ",
+      "結川あさき"
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2307e0fc277084dfd726",
+        "name": "Nhật Bản",
+        "slug": "nhat-ban"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "287343",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": ""
+    },
+    "created": {
+      "time": "2025-03-28T14:03:13.000Z"
+    },
+    "modified": {
+      "time": "2025-03-28T14:03:26.000Z"
+    },
+    "_id": "67e649b125a8947f9ba9529f",
+    "name": "Dũng Khí Nho Nhỏ",
+    "slug": "dung-khi-nho-nho",
+    "origin_name": "Be Myself",
+    "content": "<p>​<strong>\"Dũng Khí Nho Nhỏ\"</strong> (tên tiếng Anh: <i>Little Courage</i>) là một chương trình thực tế mới có sự tham gia của nữ diễn viên Trung Quốc <strong>Triệu Lộ Tư</strong>.</p>",
+    "type": "tvshows",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/dung-khi-nho-nho-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/dung-khi-nho-nho-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": true,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "80 phút/tập",
+    "episode_current": "Tập 1",
+    "episode_total": "6 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 115,
+    "actor": [
+      "赵露思",
+      "Fu Bohan"
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620a220de0fc277084dfd16d",
+        "name": "Tình Cảm",
+        "slug": "tinh-cam"
+      }
+    ],
+    "country": [
+      {
+        "id": "62093063196e9f4ab6b448b8",
+        "name": "Trung Quốc",
+        "slug": "trung-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "274671",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt34119820"
+    },
+    "created": {
+      "time": "2025-04-03T11:46:10.000Z"
+    },
+    "modified": {
+      "time": "2025-04-03T23:17:16.000Z"
+    },
+    "_id": "67ee1292d56c750d77f174de",
+    "name": "Vị vua mạnh nhất làm gì ở kiếp thứ hai?",
+    "slug": "vi-vua-manh-nhat-lam-gi-o-kiep-thu-hai",
+    "origin_name": "The Beginning After the End",
+    "content": "<p>Grey, vị vua mạnh nhất trong lịch sử, là nhân vật chính của câu chuyện. Bất chấp danh tiếng, tài sản và quyền lực vô song, không ai ủng hộ anh ta... và anh ta không tin tưởng bất cứ ai. Một ngày nọ, Gray bất ngờ qua đời và tái sinh ở một thế giới phép thuật với cái tên Arthur, một đứa bé bất lực. Arthur bắt đầu khám phá những niềm vui trong cuộc sống mới này mà anh không hề biết đến ở cuộc sống cũ, được bao bọc bởi một gia đình và bạn bè yêu thương. Nhưng gia đình anh bị bọn cướp tấn công khi đang đi du lịch...</p>",
+    "type": "hoathinh",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/vi-vua-manh-nhat-lam-gi-o-kiep-thu-hai-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/vi-vua-manh-nhat-lam-gi-o-kiep-thu-hai-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=KC2eLA_N8Ho",
+    "time": "24 phút/tập",
+    "episode_current": "Tập 1",
+    "episode_total": "4 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 80,
+    "actor": [
+      "藤原夏海",
+      "古川慎",
+      "市ノ瀬加那",
+      "小見川千明"
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620a21b2e0fc277084dfd0c5",
+        "name": "Hành Động",
+        "slug": "hanh-dong"
+      },
+      {
+        "id": "620a2293e0fc277084dfd489",
+        "name": "Phiêu Lưu",
+        "slug": "phieu-luu"
+      }
+    ],
+    "country": [
+      {
+        "id": "62093063196e9f4ab6b448b8",
+        "name": "Trung Quốc",
+        "slug": "trung-quoc"
+      },
+      {
+        "id": "620a2307e0fc277084dfd726",
+        "name": "Nhật Bản",
+        "slug": "nhat-ban"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "203123",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt28365137"
+    },
+    "created": {
+      "time": "2023-08-15T14:45:16.000Z"
+    },
+    "modified": {
+      "time": "2025-03-26T11:34:08.000Z"
+    },
+    "_id": "64db2d0c900f1649a91ec529",
+    "name": "Hội chứng yêu",
+    "slug": "hoi-chung-yeu",
+    "origin_name": "Down for Love",
+    "content": "Là hành trình kiếm tìm tình yêu đầy ấm áp, chương trình thực tế yêu đời này theo chân một số người mắc hội chứng Down khi họ xoay xở với những thăng trầm của việc hẹn hò.",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/hoi-chung-yeu-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/hoi-chung-yeu-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "46phút/tập",
+    "episode_current": "Hoàn Tất (5/5)",
+    "episode_total": "5 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2023,
+    "view": 79,
+    "actor": [
+      ""
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620e0e64d9648f114cde7728",
+        "name": "Tài Liệu",
+        "slug": "tai-lieu"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2398e0fc277084dfda1a",
+        "name": "Quốc Gia Khác",
+        "slug": "quoc-gia-khac"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "231727",
+      "season": 1,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt20917940"
+    },
+    "created": {
+      "time": "2025-03-20T18:51:19.000Z"
+    },
+    "modified": {
+      "time": "2025-03-20T20:05:07.000Z"
+    },
+    "_id": "67dc0137d92907d024369e0d",
+    "name": "Vua sói",
+    "slug": "vua-soi",
+    "origin_name": "Wolf King",
+    "content": "Ở loạt phim phiêu lưu giả tưởng hoành tráng này, một thường dân đến tuổi trưởng thành biết được mình là người cuối cùng của dòng dõi Người sói lâu đời – và sẽ kế thừa ngai vàng.",
+    "type": "hoathinh",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/vua-soi-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/vua-soi-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=QqDDuVe9dw8",
+    "time": "24 phút/tập",
+    "episode_current": "Hoàn tất (8/8)",
+    "episode_total": "8",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 76,
+    "actor": [
+      "Louis Landau",
+      "Nina Barker-Francis",
+      "Ceallach Spellman",
+      "Georgia Lock",
+      "Chris Lew Kum Hoi"
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620a21b2e0fc277084dfd0c5",
+        "name": "Hành Động",
+        "slug": "hanh-dong"
+      },
+      {
+        "id": "620a2282e0fc277084dfd435",
+        "name": "Viễn Tưởng",
+        "slug": "vien-tuong"
+      },
+      {
+        "id": "620a2293e0fc277084dfd489",
+        "name": "Phiêu Lưu",
+        "slug": "phieu-luu"
+      },
+      {
+        "id": "620a229be0fc277084dfd4dd",
+        "name": "Khoa Học",
+        "slug": "khoa-hoc"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2370e0fc277084dfd91e",
+        "name": "Anh",
+        "slug": "anh"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "movie",
+      "id": "1317434",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": ""
+    },
+    "created": {
+      "time": "2025-03-23T10:41:54.000Z"
+    },
+    "modified": {
+      "time": "2025-03-23T10:44:41.000Z"
+    },
+    "_id": "67df830266e1c0708eea981d",
+    "name": "Đông Ca Xông Pha Đông Bắc",
+    "slug": "dong-ca-xong-pha-dong-bac",
+    "origin_name": "Once Upon a Time in Asia",
+    "content": "Bộ phim kể về trùm Đông Bắc Tạ Văn Đông phát triển ngành bất động sản ở Đông Nam Á gây ra mâu thuẫn không ngừng với tập đoàn Lợi Ích. Sau khi người thân liên tiếp bị bức hại, Tạ Văn Đông trở về Đông Bắc, đưa mẹ mai danh ẩn tích để an hưởng tuổi già. Tại địa phương, ông bị bọn côn đồ áp bức, kẻ thù từ Đông Nam Á cũng tìm đến. Vì mẹ và cô gái Đông Bắc thích mình là Vương Tử Hàm, Tạ Văn Đông một lần nữa bước lên con đường trả thù ở Đông Nam Á.",
+    "type": "single",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/dong-ca-xong-pha-dong-bac-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/dong-ca-xong-pha-dong-bac-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "69 Phút",
+    "episode_current": "Full",
+    "episode_total": "1",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 63,
+    "actor": [
+      "Wu Jianguo",
+      "Kan Xin",
+      "李奎",
+      "李子雄",
+      "郭强",
+      "邓洛淋",
+      "朱永棠"
+    ],
+    "director": [
+      "木示"
+    ],
+    "category": [
+      {
+        "id": "620a21b2e0fc277084dfd0c5",
+        "name": "Hành Động",
+        "slug": "hanh-dong"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "62093063196e9f4ab6b448b8",
+        "name": "Trung Quốc",
+        "slug": "trung-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "225399",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt15198870"
+    },
+    "created": {
+      "time": "2025-03-05T11:25:53.000Z"
+    },
+    "modified": {
+      "time": "2025-03-05T16:50:09.000Z"
+    },
+    "_id": "67c7d25150066a53649f7885",
+    "name": "Con báo",
+    "slug": "con-bao",
+    "origin_name": "The Leopard",
+    "content": "Giữa bối cảnh thống nhất nước Ý những năm 1860, một hoàng tử người Sicily vật lộn trước sự xung đột giữa đặc quyền lâu đời của gia tộc và những thay đổi mang tính cách mạng.",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/con-bao-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/con-bao-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "60 phút/tập",
+    "episode_current": "Hoàn tất (6/6)",
+    "episode_total": "6",
+    "quality": "FHD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 61,
+    "actor": [
+      ""
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2370e0fc277084dfd91e",
+        "name": "Anh",
+        "slug": "anh"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "283484",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt30876484"
+    },
+    "created": {
+      "time": "2025-03-05T11:24:37.000Z"
+    },
+    "modified": {
+      "time": "2025-03-05T18:21:19.000Z"
+    },
+    "_id": "67c7d205da990915f77524a6",
+    "name": "Chỉ một cái nhìn",
+    "slug": "chi-mot-cai-nhin",
+    "origin_name": "Just One Look",
+    "content": "Khi một bức ảnh đáng ngại bất ngờ xuất hiện, Greta phải đối mặt với sự thật bị chôn vùi – và ký ức mơ hồ – để cứu chồng cô khỏi những bí mật đen tối của anh.",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/chi-mot-cai-nhin-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/chi-mot-cai-nhin-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "49 phút/tập",
+    "episode_current": "Hoàn tất (6/6)",
+    "episode_total": "6",
+    "quality": "FHD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 41,
+    "actor": [
+      ""
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "621262d11f1609c9d934677f",
+        "name": "Ba lan",
+        "slug": "ba-lan"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "119359",
+      "season": 1,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": null
+    },
+    "created": {
+      "time": "2025-02-23T09:10:48.000Z"
+    },
+    "modified": {
+      "time": "2025-03-03T14:09:06.000Z"
+    },
+    "_id": "67ba83a8aa88764e616b13b0",
+    "name": "Cực Phẩm Tân Nương",
+    "slug": "cuc-pham-tan-nuong",
+    "origin_name": "My Amazing Bride",
+    "content": "Đường Đậu Đậu, một cô nương đã quá tuổi mà chưa chịu lấy chồng. Nàng rất có niềm tin rằng mình sẽ gặp được đức lang quân thông minh, tài trí, yêu chiều nàng. Nào ngờ, Đường gia gặp chuyện tan nhà nát cửa, phải nhờ trang chủ của Khổng Gia Trang ra tay tương cứu. Trang chủ phu nhân Giả Tương Bình gặp gỡ Đậu Đậu đề xuất hôn sự cho con trai lớn là Thẩm Bách Nam. Bách Nam từ nhỏ đã được người người phong tặng là thần đồng, tài hoa vẹn toàn. Trong đêm động phòng hoa chúc, bỗng nhiên thần đồng biến thành kẻ ngây ngốc khờ khạo, Đậu Đậu nổi giận đùng đùng, bỏ về lại Đường gia. Về nhà, nàng chứng kiến cha già bệnh nặng, mẹ già đã thu nhận hết lễ vật, không còn cách nào khác, Đậu Đậu đành quay trở lại nhà chồng, cùng Giả Tương Bình thỏa thuận hiệp ước 1 năm. Trong khi đó, Thẩm Bách Nam đối với Đậu Đậu si mê, một lòng một dạ, gây ra nhiều tình huống oái ăm, tình cảm cũng dần nảy sinh. Đậu Đậu nhận ra bệnh tình khờ khạo của Bách Nam có ẩn tình, quyết định âm thầm điều tra chân tướng sự việc.",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/cuc-pham-tan-nuong-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/cuc-pham-tan-nuong-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "",
+    "time": "45 phút/tập",
+    "episode_current": "Hoàn Tất(40/40)",
+    "episode_total": "40 Tập",
+    "quality": "HD",
+    "lang": "Thuyết Minh",
+    "notify": "",
+    "showtimes": "",
+    "year": 2015,
+    "view": 32,
+    "actor": [
+      "李沁",
+      "金世佳",
+      "徐垚",
+      "Gao Yang",
+      "Ying Haoming",
+      "熊乃瑾",
+      "包文婧",
+      "Zhang Yijie",
+      "Zhang Ye Shi"
+    ],
+    "director": [
+      "梁勝權"
+    ],
+    "category": [
+      {
+        "id": "620a222fe0fc277084dfd23d",
+        "name": "Cổ Trang",
+        "slug": "co-trang"
+      },
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      }
+    ],
+    "country": [
+      {
+        "id": "62093063196e9f4ab6b448b8",
+        "name": "Trung Quốc",
+        "slug": "trung-quoc"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "261868",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt33165027"
+    },
+    "created": {
+      "time": "2025-04-08T21:28:34.000Z"
+    },
+    "modified": {
+      "time": "2025-04-08T22:09:19.000Z"
+    },
+    "_id": "67f5329264452ad8a87f4cb3",
+    "name": "Phù Thủy Quan Sát",
+    "slug": "phu-thuy-quan-sat",
+    "origin_name": "Witch Watch",
+    "content": "Một thiếu niên siêng năng sống cùng người bạn thời thơ ấu gan dạ, một phù thủy tập sự, để bảo vệ cô khỏi lời tiên tri khủng khiếp. Nhưng liệu họ có thể sống sót ở trường trung học?",
+    "type": "hoathinh",
+    "status": "ongoing",
+    "thumb_url": "https://img.ophim.live/uploads/movies/phu-thuy-quan-sat-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/phu-thuy-quan-sat-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=2jTpus79jNQ",
+    "time": "24 phút/tập",
+    "episode_current": "Tập 1",
+    "episode_total": "26 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 18,
+    "actor": [
+      "川口莉奈",
+      "鈴木崚汰",
+      "天﨑滉平",
+      "石川界人",
+      "楠木ともり",
+      "小松未可子",
+      "高橋李依",
+      "小原好美",
+      "松岡禎丞",
+      "沢城みゆき"
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620a221de0fc277084dfd1c1",
+        "name": "Hài Hước",
+        "slug": "hai-huoc"
+      },
+      {
+        "id": "620a2282e0fc277084dfd435",
+        "name": "Viễn Tưởng",
+        "slug": "vien-tuong"
+      },
+      {
+        "id": "620a229be0fc277084dfd4dd",
+        "name": "Khoa Học",
+        "slug": "khoa-hoc"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2307e0fc277084dfd726",
+        "name": "Nhật Bản",
+        "slug": "nhat-ban"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "movie",
+      "id": "1102857",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    "imdb": {
+      "id": "tt29608585"
+    },
+    "created": {
+      "time": "2025-02-27T14:09:05.000Z"
+    },
+    "modified": {
+      "time": "2025-02-27T14:09:11.000Z"
+    },
+    "_id": "67c00f91262a77f96a6553e8",
+    "name": "Quỷ Môn Quan Phong Ấn",
+    "slug": "quy-mon-quan-phong-an",
+    "origin_name": "Them, Behind the Door",
+    "content": "<p>Chen Wei và con gái chạy trốn khỏi người chồng vũ phu, tìm đến tòa nhà Butterfly Mansion nơi được biết đến với danh tiếng rùng rợn là điểm nóng của các vụ tự tử. Bỏ qua những lời cảnh báo về sự nguy hiểm của tòa nhà, họ quyết định ở lại do hoàn cảnh tài chính eo hẹp. Tuy nhiên những sự kiện kỳ lạ bắt đầu xảy ra, đặc biệt là liên quan đến căn phòng số 613 bị phong ấn. Khi tháng cô hồn đến gần các hiện tượng siêu nhiên ngày càng gia tăng, đẩy Chen Wei vào tình huống nguy hiểm hơn cả những gì cô từng trải qua.&nbsp;</p>",
+    "type": "single",
+    "status": "trailer",
+    "thumb_url": "https://img.ophim.live/uploads/movies/quy-mon-quan-phong-an-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/quy-mon-quan-phong-an-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": true,
+    "trailer_url": "https://www.youtube.com/watch?v=MsLa2FEbaIg",
+    "time": "111 Phút",
+    "episode_current": "Trailer",
+    "episode_total": "1",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2024,
+    "view": 17,
+    "actor": [
+      "Ivy Yin",
+      "Tào Hữu Ninh",
+      "Bai Ling"
+    ],
+    "director": [
+      "Joe Chien"
+    ],
+    "category": [
+      {
+        "id": "620a22ace0fc277084dfd531",
+        "name": "Kinh Dị",
+        "slug": "kinh-di"
+      },
+      {
+        "id": "620f3d2b91fa4af90ab697fe",
+        "name": "Chính kịch",
+        "slug": "chinh-kich"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a2335e0fc277084dfd822",
+        "name": "Đài Loan",
+        "slug": "dai-loan"
+      }
+    ]
+  },
+  {
+    "tmdb": {
+      "type": "tv",
+      "id": "285310",
+      "season": null,
+      "vote_average": 10,
+      "vote_count": 2
+    },
+    "imdb": {
+      "id": "tt36005664"
+    },
+    "created": {
+      "time": "2025-03-31T10:09:52.000Z"
+    },
+    "modified": {
+      "time": "2025-03-31T10:09:52.000Z"
+    },
+    "_id": "67ea0780dcb71e2a11b77add",
+    "name": "Ngôi Sao Đầu Bảng",
+    "slug": "ngoi-sao-dau-bang",
+    "origin_name": "Number One on the Call Sheet",
+    "content": "Một số ngôi sao Hollywood lớn nhất tiết lộ về hành trình đến các vai chính đổi đời của họ. Trong phỏng vấn, họ tiết lộ về những thăng trầm trong sự nghiệp, thời điểm đột phá, lộ trình thành công, và triển vọng to lớn của thế hệ sau.",
+    "type": "series",
+    "status": "completed",
+    "thumb_url": "https://img.ophim.live/uploads/movies/ngoi-sao-dau-bang-thumb.jpg",
+    "poster_url": "https://img.ophim.live/uploads/movies/ngoi-sao-dau-bang-poster.jpg",
+    "is_copyright": false,
+    "sub_docquyen": false,
+    "chieurap": false,
+    "trailer_url": "https://www.youtube.com/watch?v=XAyTlC9rHCE",
+    "time": "93 phút/tập",
+    "episode_current": "Hoàn Tất (2/2)",
+    "episode_total": "2 Tập",
+    "quality": "HD",
+    "lang": "Vietsub",
+    "notify": "",
+    "showtimes": "",
+    "year": 2025,
+    "view": 0,
+    "actor": [
+      ""
+    ],
+    "director": [
+      ""
+    ],
+    "category": [
+      {
+        "id": "620e0e64d9648f114cde7728",
+        "name": "Tài Liệu",
+        "slug": "tai-lieu"
+      }
+    ],
+    "country": [
+      {
+        "id": "620a231fe0fc277084dfd7ce",
+        "name": "Âu Mỹ",
+        "slug": "au-my"
+      }
+    ]
+  }
+]

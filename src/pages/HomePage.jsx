@@ -7,7 +7,7 @@ import CategoryCard from "../components/CategoryCard";
 
 const HomePage = () => {
   return (
-    <div className="w-full mt-[100px] pb-[500px]">
+    <div className="w-full mt-[100px] pb-[100px]">
       <TopMovieSection />
       <TopCategorySection />
       <NewSingleMovieSection />
@@ -262,7 +262,7 @@ const KoreanMovieSection = () => {
 
           const res = await fetch("/json/movies_trending_korean.json");
           const data = await res.json();
-          setKoreanMovies(data);
+          setKoreanMovies(data.slice(0, 10));
         } catch (err) {
           console.log(err);
           toast.error("Có lỗi xảy ra khi lấy danh sách phim!");

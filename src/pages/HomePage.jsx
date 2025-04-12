@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { toast } from "sonner";
+import ListMovieContainer from "../components/ListMovieContainer";
 import Loading from "../components/Loading";
-import MovieCard from "../components/MovieCard";
 import CategoryCard from "../components/CategoryCard";
 
 const HomePage = () => {
@@ -52,14 +52,12 @@ const TopMovieSection = () => {
   }, [inView]);
 
   return (
-    <div ref={ref} className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Hiện đang thịnh hành</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
-        {!isLoading &&
-          topMovies.map(movie => <MovieCard key={movie._id} movie={movie} />)}
-      </div>
-      {isLoading && <Loading isLoading />}
-    </div>
+    <ListMovieContainer
+      title={"Hiện đang thịnh hành"}
+      wrapperRef={ref}
+      movies={topMovies}
+      isLoading={isLoading}
+    />
   );
 };
 
@@ -142,14 +140,12 @@ const NewSingleMovieSection = () => {
   }, [inView]);
 
   return (
-    <div ref={ref} className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Phim lẻ mới ra</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
-        {!isLoading &&
-          newMovies.map(movie => <MovieCard key={movie._id} movie={movie} />)}
-      </div>
-      {isLoading && <Loading isLoading />}
-    </div>
+    <ListMovieContainer
+      title={"Phim lẻ mới ra"}
+      wrapperRef={ref}
+      movies={newMovies}
+      isLoading={isLoading}
+    />
   );
 };
 
@@ -186,14 +182,12 @@ const NewSeriesMovieSection = () => {
   }, [inView]);
 
   return (
-    <div ref={ref} className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Phim bộ mới ra</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
-        {!isLoading &&
-          newMovies.map(movie => <MovieCard key={movie._id} movie={movie} />)}
-      </div>
-      {isLoading && <Loading isLoading />}
-    </div>
+    <ListMovieContainer
+      title={"Phim bộ mới ra"}
+      wrapperRef={ref}
+      movies={newMovies}
+      isLoading={isLoading}
+    />
   );
 };
 
@@ -230,16 +224,12 @@ const TrendingMovieSection = () => {
   }, [inView]);
 
   return (
-    <div ref={ref} className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Phim được trending</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
-        {!isLoading &&
-          trendingMovies.map(movie => (
-            <MovieCard key={movie._id} movie={movie} />
-          ))}
-      </div>
-      {isLoading && <Loading isLoading />}
-    </div>
+    <ListMovieContainer
+      title={"Phim đang trending"}
+      wrapperRef={ref}
+      movies={trendingMovies}
+      isLoading={isLoading}
+    />
   );
 };
 
@@ -276,16 +266,12 @@ const KoreanMovieSection = () => {
   }, [inView]);
 
   return (
-    <div ref={ref} className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Phim Hàn Quốc</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
-        {!isLoading &&
-          koreanMovies.map(movie => (
-            <MovieCard key={movie._id} movie={movie} />
-          ))}
-      </div>
-      {isLoading && <Loading isLoading />}
-    </div>
+    <ListMovieContainer
+      title={"Phim Hàn Quốc"}
+      wrapperRef={ref}
+      movies={koreanMovies}
+      isLoading={isLoading}
+    />
   );
 };
 
@@ -322,16 +308,12 @@ const AmericanMovieSection = () => {
   }, [inView]);
 
   return (
-    <div ref={ref} className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Phim Mỹ</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
-        {!isLoading &&
-          americanMovies.map(movie => (
-            <MovieCard key={movie._id} movie={movie} />
-          ))}
-      </div>
-      {isLoading && <Loading isLoading />}
-    </div>
+    <ListMovieContainer
+      title={"Phim Mỹ"}
+      wrapperRef={ref}
+      movies={americanMovies}
+      isLoading={isLoading}
+    />
   );
 };
 

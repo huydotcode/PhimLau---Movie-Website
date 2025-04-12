@@ -15,6 +15,11 @@ import SearchPage from "./pages/SearchPage";
 import WatchMoviePage from "./pages/WatchMoviePage";
 import CategoryPage from "./pages/CategoryPage";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
+import SingleMoviePage from "./pages/SingleMoviePage";
+import SerieMoviePage from "./pages/SerieMoviePage";
+import CountryPage from "./pages/CountryPage";
+import FilterMoviePager from "./pages/FilterMoviePager";
 
 function App() {
   return (
@@ -23,14 +28,21 @@ function App() {
 
       <Header />
       <Banner />
+      <ScrollToTop />
 
       <div className="relative @container bg-gradient-to-b from-[#1a1a1abb] to-black min-h-screen text-white z-10">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/watch-movie/:slug" element={<WatchMoviePage />} />
-          <Route path="/category/:slug" element={<CategoryPage />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/movie/:slug" element={<MovieInfomationPage />} />
+
+          <Route path="/phim-le" element={<SingleMoviePage />} />
+          <Route path="/phim-bo" element={<SerieMoviePage />} />
+          <Route path="/the-loai" element={<CategoryPage />} />
+          <Route path="/quoc-gia" element={<CountryPage />} />
+          <Route path="/tim-kiem" element={<SearchPage />} />
+          <Route path="/duyet-phim" element={<FilterMoviePager />} />
+
+          <Route path="/xem-phim/:slug" element={<WatchMoviePage />} />
+          <Route path="/phim/:slug" element={<MovieInfomationPage />} />
         </Routes>
 
         <Footer />

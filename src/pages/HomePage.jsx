@@ -94,9 +94,9 @@ const TopCategorySection = () => {
   }, [inView]);
 
   return (
-    <div ref={ref} className="container mx-auto p-4">
+    <div ref={ref} className="relative mx-auto p-4 min-h-[400px]">
       <h2 className="text-2xl font-bold mb-4">Thể loại phim thịnh hành</h2>
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-10">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-10">
         {!isLoading &&
           topCategories.map(category => (
             <CategoryCard key={category.id} category={category} />

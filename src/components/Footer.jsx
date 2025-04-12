@@ -3,8 +3,8 @@ import { FaFacebook, FaYoutube, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="@container text-white py-10 mt-10 border-t border-gray-700 bg-gray-900">
-      <div className="container grid grid-cols-5 @max-md:grid-cols-2 @max-4xl:grid-cols-2 gap-10 px-4 mx-auto">
+    <footer className="@container text-white py-10 border-t border-gray-700 bg-gray-900">
+      <div className="grid grid-cols-5 @max-md:grid-cols-2 @max-4xl:grid-cols-2 gap-10 px-4 mx-auto max-w-[1400px]">
         {/* Logo + Slogan */}
         <div className="col-span-2">
           <img className="w-3/4" src="/logo.svg" alt="Logo" />

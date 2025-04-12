@@ -4,6 +4,10 @@ export const navlink = [
     link: "/",
   },
   {
+    name: "Duyệt phim",
+    link: "/duyet-phim",
+  },
+  {
     name: "Phim lẻ",
     link: "/phim-le",
   },
@@ -18,9 +22,5 @@ export const navlink = [
   {
     name: "Quốc gia",
     link: "/quoc-gia",
-  },
-  {
-    name: "Duyệt phim",
-    link: "/duyet-phim",
   },
 ];

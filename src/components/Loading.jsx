@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 
-const Loading = ({ isLoading }) => {
+const Loading = ({ imageWidth = 32, isLoading }) => {
   return (
     <AnimatePresence>
       {isLoading && (
@@ -22,7 +22,7 @@ const Loading = ({ isLoading }) => {
               repeat: Infinity,
               repeatType: "mirror",
             }}
-            className="w-32 h-auto"
+            className={`w-${imageWidth} h-auto`}
           />
         </motion.div>
       )}

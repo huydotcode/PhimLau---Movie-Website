@@ -28,7 +28,7 @@ const CategoryCard = ({ category }) => {
   };
 
   const handleClick = () => {
-    navigate(`/category/${category.slug}`);
+    navigate(`/the-loai/${category.slug}`);
   };
 
   return (

@@ -96,7 +96,7 @@ const Banner = () => {
   }, []);
 
   const handleClickMovie = movie => {
-    navigate(`/watch-movie/${movie.slug}`);
+    navigate(`/xem-phim/${movie.slug}`);
   };
 
   return (
@@ -153,7 +153,7 @@ const Banner = () => {
                     <Button
                       className="border text-xs border-white px-4 py-2 rounded-full h-10"
                       onClick={() => {
-                        navigate(`/movie/${movie.slug}`);
+                        navigate(`/phim/${movie.slug}`);
                       }}
                     >
                       Chi tiết

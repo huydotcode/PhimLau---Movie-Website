@@ -8,7 +8,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
   const handleClickMovie = () => {
-    navigate(`/movie/${movie.slug}`);
+    navigate(`/phim/${movie.slug}`);
   };
 
   return (

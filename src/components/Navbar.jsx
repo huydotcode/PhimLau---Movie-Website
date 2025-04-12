@@ -13,14 +13,14 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <div className="@container flex justify-between items-center h-[60px] px-4 text-white">
+    <div className="@container flex justify-between items-center h-[60px] px-10 text-white">
       <div className="w-[140px] flex items-center">
         <a className="w-full h-full text-primary" href="/">
           <img className="object-center" src="/logo.png" alt="Phim New" />
         </a>
       </div>
 
-      <div className="absolute top-5 left-1/2 -translate-x-1/2 flex justify-center items-center @max-3xl:hidden">
+      <div className="absolute top-5 left-1/2 -translate-x-1/2 flex justify-center items-center @max-5xl:hidden">
         <ul className="flex items-center gap-4">
           {navlink.map((item, index) => (
             <li
@@ -139,7 +139,7 @@ const NavbarSearch = () => {
                 className="px-3 py-2 hover:opacity-85 cursor-pointer flex items-center gap-2"
                 onClick={e => {
                   e.stopPropagation();
-                  navigate(`/movie/${movie.slug}`);
+                  navigate(`/phim/${movie.slug}`);
                   setOpenSearch(false);
                 }}
               >
@@ -198,29 +198,29 @@ const NavbarMobile = () => {
   });
 
   return (
-    <div ref={wrapperRef} className="flex items-center h-full @min-3xl:hidden">
+    <div ref={wrapperRef} className="flex items-center h-full @min-5xl:hidden">
       <Button
         onClick={() => {
           setOpenNavMobile(prev => !prev);
         }}
       >
-        <Icons.Menu className="w-8 h-8 hidden @max-3xl:flex items-center gap-4" />
+        <Icons.Menu className="w-8 h-8 hidden @max-5xl:flex items-center gap-4" />
       </Button>
 
       <AnimatePresence>
         {openNavMobile && (
           <motion.div
-            className="fixed top-[60px] left-0 bg-black text-white w-[400px] h-screen flex items-center justify-center z-50 @max-3xl:justify-start"
+            className="fixed top-[60px] left-0 bg-black text-white w-[400px] h-screen flex items-center justify-center z-50 @max-5xl:justify-start"
             initial={{ opacity: 0, x: "-100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "-100%" }}
             transition={{ duration: 0.3 }}
           >
-            <ul className="flex items-center gap-4 flex-col h-full py-10 @max-3xl:items-start @max-3xl:gap-8 @max-3xl:w-full">
+            <ul className="flex items-center gap-4 flex-col h-full py-10 @max-5xl:items-start @max-5xl:gap-8 @max-5xl:w-full">
               {navlink.map((item, index) => (
                 <li
                   key={index}
-                  className={`ml-4 text-xl font-bold hover:text-primary transition-all duration-200 hover:scale-105 @max-3xl:pl-10 @max-3xl:w-full @max-3xl:hover:scale-100  ${
+                  className={`ml-4 text-xl font-bold hover:text-primary transition-all duration-200 hover:scale-105 @max-5xl:pl-10 @max-5xl:w-full @max-5xl:hover:scale-100  ${
                     item.link === location.pathname ? "text-primary" : ""
                   }`}
                 >

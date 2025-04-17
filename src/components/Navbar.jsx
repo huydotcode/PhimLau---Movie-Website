@@ -54,7 +54,10 @@ const Navbar = () => {
 
 const NavbarSearch = () => {
   const [openSearch, setOpenSearch] = useState(false);
-  const [searchResults, setSearchResults] = useState([1, 231, 312]);
+  // const [searchResults, setSearchResults] = useState([1, 231, 312]);
+
+  const [searchResults, setSearchResults] = useState([]); //Sang test
+
   const wrapperRef = useRef(null);
   const [query, setQuery] = useState("");
   const debouncedQuery = useDebounce(query, 500); // Sử dụng hook debounce
@@ -84,9 +87,15 @@ const NavbarSearch = () => {
       setIsLoading(true); // Bắt đầu loading
 
       try {
-        const res = await fetch(`/json/movies_top_rated.json`);
+        const res = await fetch(`/json/movies_lastest.json`);
         const data = await res.json();
-        setSearchResults(data); // Cập nhật state
+        // setSearchResults(data); // Cập nhật state
+
+        //Sang cập nhật ở đây
+        const filtered = data.filter(movie =>
+          movie.name.toLowerCase().includes(debouncedQuery.toLowerCase())
+        );
+        setSearchResults(filtered);
       } catch (err) {
         console.log(err);
         toast.error("Có lỗi xảy ra khi tìm kiếm phim!");
@@ -97,6 +106,10 @@ const NavbarSearch = () => {
       }
     })();
   }, [debouncedQuery]);
+
+
+
+
 
   return (
     <div
@@ -116,6 +129,14 @@ const NavbarSearch = () => {
             autoFocus
             value={query}
             onChange={e => setQuery(e.target.value)}
+
+            // Sang thêm
+            onKeyDown={e => {
+              if (e.key === "Enter") {
+                navigate(`/tim-kiem?q=${query}`);
+                setOpenSearch(false);
+              }
+            }}
           />
         )}
       </AnimatePresence>
@@ -129,13 +150,15 @@ const NavbarSearch = () => {
         <Icons.Search className="w-5 h-5" />
       </Button>
 
+      {/* Danh sách phim hiển thị ở đây */}
       {openSearch && (
         <div className="absolute top-full mt-1 rounded-xl left-0 w-64 text-white bg-black shadow-lg max-h-80 overflow-y-auto no-scrollbar">
           {searchResults.length > 0 &&
             !isLoading &&
             searchResults.map(movie => (
               <div
-                key={movie}
+                // key={movie}
+                key={movie.slug} // test
                 className="px-3 py-2 hover:opacity-85 cursor-pointer flex items-center gap-2"
                 onClick={e => {
                   e.stopPropagation();
@@ -170,7 +193,7 @@ const NavbarSearch = () => {
             <div className="px-3 py-2 text-sm text-white text-center hover:text-primary cursor-pointer font-bold">
               <Button
                 onClick={() => {
-                  navigate(`/search?q=${query}`);
+                  navigate(`/tim-kiem?q=${query}`);
                   setOpenSearch(false);
                 }}
               >
@@ -220,9 +243,8 @@ const NavbarMobile = () => {
               {navlink.map((item, index) => (
                 <li
                   key={index}
-                  className={`ml-4 text-xl font-bold hover:text-primary transition-all duration-200 hover:scale-105 @max-5xl:pl-10 @max-5xl:w-full @max-5xl:hover:scale-100  ${
-                    item.link === location.pathname ? "text-primary" : ""
-                  }`}
+                  className={`ml-4 text-xl font-bold hover:text-primary transition-all duration-200 hover:scale-105 @max-5xl:pl-10 @max-5xl:w-full @max-5xl:hover:scale-100  ${item.link === location.pathname ? "text-primary" : ""
+                    }`}
                 >
                   <a href={item.link}>{item.name}</a>
                 </li>

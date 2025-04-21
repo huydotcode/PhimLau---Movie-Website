@@ -2,7 +2,7 @@
 
 Chào mừng bạn đến với **PhimNew** - nền tảng xem phim trực tuyến miễn phí với giao diện hiện đại, tốc độ tải nhanh và trải nghiệm người dùng mượt mà.
 
-🌐 **Truy cập ngay**: [https://phimmoi.vercel.app](https://phimmoi.vercel.app)
+🌐 **Truy cập ngay**: [https://phimnew.vercel.app](https://phimnew.vercel.app)
 
 ---
 

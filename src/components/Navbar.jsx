@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { navlink } from "../constants/navlink";
 import useClickOutSide from "../hooks/useClickOutSide";
@@ -15,9 +15,9 @@ const Navbar = () => {
   return (
     <div className="@container flex justify-between items-center h-[60px] px-4 text-white mx-auto">
       <div className="w-[140px] flex items-center">
-        <a className="w-full h-full text-primary" href="/">
+        <Link className="w-full h-full text-primary" to="/">
           <img className="object-center" src="/logo.png" alt="Phim New" />
-        </a>
+        </Link>
       </div>
 
       <div className="absolute top-5 left-1/2 -translate-x-1/2 flex justify-center items-center @max-5xl:hidden">
@@ -27,7 +27,7 @@ const Navbar = () => {
               key={index}
               className={`ml-4 text-sm font-bold hover:text-primary transition-all duration-200 hover:scale-105 ${item.link === location.pathname ? "text-primary" : ""}`}
             >
-              <a href={item.link}>{item.name}</a>
+              <Link to={item.link}>{item.name}</Link>
             </li>
           ))}
         </ul>
@@ -93,7 +93,7 @@ const NavbarSearch = () => {
 
         //Sang cập nhật ở đây
         const filtered = data.filter(movie =>
-          movie.name.toLowerCase().includes(debouncedQuery.toLowerCase())
+          movie.name.toLowerCase().includes(debouncedQuery.toLowerCase()),
         );
         setSearchResults(filtered);
       } catch (err) {
@@ -106,10 +106,6 @@ const NavbarSearch = () => {
       }
     })();
   }, [debouncedQuery]);
-
-
-
-
 
   return (
     <div
@@ -129,7 +125,6 @@ const NavbarSearch = () => {
             autoFocus
             value={query}
             onChange={e => setQuery(e.target.value)}
-
             // Sang thêm
             onKeyDown={e => {
               if (e.key === "Enter") {
@@ -243,10 +238,11 @@ const NavbarMobile = () => {
               {navlink.map((item, index) => (
                 <li
                   key={index}
-                  className={`ml-4 text-xl font-bold hover:text-primary transition-all duration-200 hover:scale-105 @max-5xl:pl-10 @max-5xl:w-full @max-5xl:hover:scale-100  ${item.link === location.pathname ? "text-primary" : ""
-                    }`}
+                  className={`ml-4 text-xl font-bold hover:text-primary transition-all duration-200 hover:scale-105 @max-5xl:pl-10 @max-5xl:w-full @max-5xl:hover:scale-100  ${
+                    item.link === location.pathname ? "text-primary" : ""
+                  }`}
                 >
-                  <a href={item.link}>{item.name}</a>
+                  <Link to={item.link}>{item.name}</Link>
                 </li>
               ))}
             </ul>

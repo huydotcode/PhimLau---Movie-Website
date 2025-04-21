@@ -9,7 +9,7 @@ const ListMovieContainer = ({
   isLoading = true,
 }) => {
   return (
-    <div ref={wrapperRef} className="relative mx-auto p-4 min-h-[400px]">
+    <div ref={wrapperRef} className="relative mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">{title}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
         {!isLoading &&

@@ -185,7 +185,7 @@ const MovieInfomationPage = () => {
           </div>
 
           <div className="flex-1 bg-gradient-to-t from-foreground to-foreground via-transparent rounded-xl p-6 flex flex-col gap-10">
-            <div className="flex items-center flex-wrap gap-4">
+            <div className="flex items-center justify-center lg:justify-start flex-wrap gap-4">
               <Button
                 className="bg-primary px-8 py-4 rounded-full font-semibold uppercase flex items-center gap-2 text-lg hover:opacity-40"
                 onClick={() => {
@@ -195,7 +195,7 @@ const MovieInfomationPage = () => {
                 <Icons.Play /> Xem ngay
               </Button>
 
-              <div className="flex-1 flex items-center gap-2">
+              <div className="flex-1 flex items-center justify-start gap-2">
                 <Button className="bg-transparent px-4 py-2 rounded-full flex items-center gap-2 flex-col text-sm hover:text-primary">
                   <Icons.Play /> Xem sau
                 </Button>
@@ -214,7 +214,7 @@ const MovieInfomationPage = () => {
               <div className="flex flex-col">
                 <h2 className="text-xl font-semibold">Danh sách tập phim</h2>
 
-                <div className="mt-2 grid grid-cols-4 md:grid-cols-5 gap-2 max-h-[50vh] overflow-y-scroll scrollbar-white pr-1 rounded-xl">
+                <div className="mt-2 grid grid-cols-2 md:grid-cols-5 gap-2 max-h-[50vh] overflow-y-scroll scrollbar-white pr-1 rounded-xl">
                   {episodes?.server_data.map((episode, index) => (
                     <Button
                       key={index}

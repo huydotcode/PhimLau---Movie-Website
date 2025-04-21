@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router";
 import Container from "../components/Container";
 import Button from "../components/ui/Button";
 import Icons from "../components/Icons";
-import CommentSection from "../components/CommentSection";
 import { TopMovieSection } from "./HomePage";
 
 /*

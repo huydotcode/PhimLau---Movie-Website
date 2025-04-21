@@ -15,7 +15,11 @@ const ListMovieContainer = ({
         {!isLoading &&
           movies.map(movie => <MovieCard key={movie._id} movie={movie} />)}
       </div>
-      {isLoading && <Loading isLoading />}
+      {isLoading && (
+        <div className="h-[200px]">
+          <Loading isLoading imageWidth={100} />
+        </div>
+      )}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import Container from "../components/Container";
 import Button from "../components/ui/Button";
 import Icons from "../components/Icons";
 import { TopMovieSection } from "./HomePage";
+import CommentSection from "../components/CommentSection";
 
 /*
 {

@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Loading from "./Loading";
 import { publicRoutes } from "../routes";
+import Header from "./Header";
+import ScrollToTop from "./ScrollToTop";
+import Footer from "./Footer";
 
 const PageTransitionLoader = () => {
   const location = useLocation();
@@ -15,10 +18,12 @@ const PageTransitionLoader = () => {
   }, [location.pathname]);
 
   return (
-    <>
+    <div className="relative">
+      {/* Animate loader phủ lên */}
       <AnimatePresence>
         {loading && (
           <motion.div
+            key="loader"
             className="w-screen h-screen fixed top-0 left-0 z-[100] flex items-center justify-center bg-black select-none"
             initial={{ opacity: 0.5 }}
             animate={{ opacity: 1 }}
@@ -30,33 +35,29 @@ const PageTransitionLoader = () => {
         )}
       </AnimatePresence>
 
+      {/* Nội dung app luôn luôn render */}
       <motion.div
+        key={location.pathname}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
-        key="page-transition"
         id="page-transition"
-        className="relative @container bg-gradient-to-b from-[#1a1a1abb] to-black min-h-screen text-white z-10 w-full"
+        className="relative bg-gradient-to-b from-[#1a1a1abb] to-black min-h-screen text-white z-10 w-full"
       >
-        <Routes>
+        <Header />
+        <ScrollToTop />
+
+        <Routes location={location} key={location.pathname}>
           {publicRoutes.map((route, index) => {
             const Page = route.element;
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                element={
-                  <>
-                    <Page />
-                  </>
-                }
-              />
-            );
+            return <Route key={index} path={route.path} element={<Page />} />;
           })}
         </Routes>
+
+        <Footer />
       </motion.div>
-    </>
+    </div>
   );
 };
 

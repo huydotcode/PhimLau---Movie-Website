@@ -17,11 +17,7 @@ function App() {
     <BrowserRouter>
       <Toaster richColors position="bottom-left" />
 
-      <Header />
-      <ScrollToTop />
       <PageTransitionLoader />
-
-      <Footer />
     </BrowserRouter>
   );
 }

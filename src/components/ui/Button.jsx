@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const Button = ({
   type = "button",
@@ -9,12 +10,12 @@ const Button = ({
 }) => {
   if (href.length > 0) {
     return (
-      <a
+      <Link
         className={`flex items-center justify-center gap-2 cursor-pointer hover:opacity-80 transition-all duration-200 ${className}`}
-        href={href}
+        to={href}
       >
         {children}
-      </a>
+      </Link>
     );
   }
 

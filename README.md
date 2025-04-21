@@ -1,12 +1,38 @@
-# React + Vite
+# 🎬 PhimNew - Website Xem Phim Trực Tuyến
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Chào mừng bạn đến với **PhimNew** - nền tảng xem phim trực tuyến miễn phí với giao diện hiện đại, tốc độ tải nhanh và trải nghiệm người dùng mượt mà.
 
-Currently, two official plugins are available:
+🌐 **Truy cập ngay**: [https://phimmoi.vercel.app](https://phimmoi.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Tính Năng
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔍 Tìm kiếm phim theo tên, thể loại, năm phát hành
+- 🎞 Danh sách phim mới cập nhật liên tục
+- 🧠 Gợi ý phim theo lịch sử xem
+- 📱 Giao diện responsive phù hợp với cả PC và điện thoại
+
+---
+
+## 🛠️ Công Nghệ Sử Dụng
+
+- **Frontend**: ReactJS, TailwindCSS
+- **API**: Tự phát triển hoặc tích hợp từ bên thứ ba
+- **Deploy**: Vercel
+
+---
+
+## ⚙️ Cài Đặt Dự Án (Dành cho Developer)
+
+```bash
+# Clone project
+git clone https://github.com/huydotcode/phimnew
+cd phimnew
+
+# Cài đặt dependencies
+npm install
+
+# Chạy project (frontend)
+npm run dev
+```

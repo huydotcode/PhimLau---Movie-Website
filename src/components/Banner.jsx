@@ -101,7 +101,7 @@ const Banner = () => {
 
   return (
     <>
-      <div className="@container relative w-full h-[90vh] overflow-hidden">
+      <div className="@container relative w-screen h-[90vh] overflow-hidden">
         <Swiper
           onSwiper={swiper => (swiperRef.current = swiper)}
           slidesPerView={1}

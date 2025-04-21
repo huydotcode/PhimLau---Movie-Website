@@ -20,7 +20,7 @@ const HomePage = () => {
 };
 
 // Phim thịnh hành
-const TopMovieSection = () => {
+export const TopMovieSection = () => {
   const [topMovies, setTopMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { ref, inView } = useInView({

@@ -4,6 +4,8 @@
 @theme {
   --color-primary: #fb2c06; /* Primary color: Red */
   --color-background: #0f0f0f; /* Background color: Dark */
+  --color-secondary: #464646; /* Secondary color: Darker */
+  --color-foreground: #141414; /* Foreground color: Darker */
 }
 
 body {
@@ -25,4 +27,19 @@ button:hover {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Áp dụng cho toàn bộ trang */
+::-webkit-scrollbar {
+  width: 6px; /* Chiều rộng thanh cuộn dọc */
+  height: 6px; /* Chiều cao thanh cuộn ngang */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3); /* Màu của phần kéo */
+  border-radius: 4px; /* Bo tròn góc */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Màu nền track (phần rãnh) */
 }

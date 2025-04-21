@@ -13,7 +13,7 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <div className="@container flex justify-between items-center h-[60px] px-10 text-white mx-auto max-w-[1400px]">
+    <div className="@container flex justify-between items-center h-[60px] px-4 text-white mx-auto">
       <div className="w-[140px] flex items-center">
         <a className="w-full h-full text-primary" href="/">
           <img className="object-center" src="/logo.png" alt="Phim New" />

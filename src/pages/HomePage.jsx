@@ -49,7 +49,7 @@ export const TopMovieSection = () => {
           setTopMovies(data);
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách phim!");
+          toast("Có lỗi xảy ra khi lấy danh sách phim!");
         } finally {
           setIsLoading(false);
         }
@@ -89,7 +89,7 @@ const TopCategorySection = () => {
           setTopCategories(data.slice(0, 6));
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách thể loại!");
+          toast("Có lỗi xảy ra khi lấy danh sách thể loại!");
         } finally {
           setIsLoading(false);
         }
@@ -98,7 +98,7 @@ const TopCategorySection = () => {
   }, [inView]);
 
   return (
-    <div ref={ref} className="relative mx-auto p-4 min-h-[400px]">
+    <div ref={ref} className="relative mx-auto py-4 min-h-[400px]">
       <h2 className="text-2xl font-bold mb-4">Thể loại phim thịnh hành</h2>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-10">
         {!isLoading &&
@@ -133,7 +133,7 @@ const NewSingleMovieSection = () => {
           setNewMovies(data);
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách phim!");
+          toast("Có lỗi xảy ra khi lấy danh sách phim!");
         } finally {
           setIsLoading(false);
         }
@@ -173,7 +173,7 @@ const NewSeriesMovieSection = () => {
           setNewMovies(data);
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách phim!");
+          toast("Có lỗi xảy ra khi lấy danh sách phim!");
         } finally {
           setIsLoading(false);
         }
@@ -213,7 +213,7 @@ const TrendingMovieSection = () => {
           setTrendingMovies(data);
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách phim!");
+          toast("Có lỗi xảy ra khi lấy danh sách phim!");
         } finally {
           setIsLoading(false);
         }
@@ -253,7 +253,7 @@ const KoreanMovieSection = () => {
           setKoreanMovies(data.slice(0, 10));
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách phim!");
+          toast("Có lỗi xảy ra khi lấy danh sách phim!");
         } finally {
           setIsLoading(false);
         }
@@ -293,7 +293,7 @@ const AmericanMovieSection = () => {
           setAmericanMovies(data);
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách phim!");
+          toast("Có lỗi xảy ra khi lấy danh sách phim!");
         } finally {
           setIsLoading(false);
         }

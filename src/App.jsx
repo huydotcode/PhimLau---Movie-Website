@@ -7,15 +7,12 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "./styles/App.css";
 
-import Footer from "./components/Footer";
-import Header from "./components/Header";
 import PageTransitionLoader from "./components/PageTransitionLoader";
-import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
-      <Toaster richColors position="bottom-left" />
+      <Toaster richColors position="bottom-right" theme="dark" />
 
       <PageTransitionLoader />
     </BrowserRouter>

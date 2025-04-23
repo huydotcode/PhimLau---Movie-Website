@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import Container from "../components/Container";
-import Button from "../components/ui/Button";
-import Icons from "../components/Icons";
-import { TopMovieSection } from "./HomePage";
 import CommentSection from "../components/CommentSection";
+import Container from "../components/Container";
+import Icons from "../components/Icons";
+import Button from "../components/ui/Button";
+import { useScrollToTop } from "../hooks/useScrollToTop";
+import { TopMovieSection } from "./HomePage";
 
 /*
 {
@@ -115,6 +116,7 @@ const MovieInfomationPage = () => {
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
   const [episodes, setEpisodes] = useState([]);
+  useScrollToTop();
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -137,11 +139,6 @@ const MovieInfomationPage = () => {
 
     fetchMovie();
   }, [slug]);
-
-  // Scroll to top first time smothly
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
 
   useEffect(() => {
     console.log(movie);
@@ -187,7 +184,7 @@ const MovieInfomationPage = () => {
           <div className="flex-1 bg-gradient-to-t from-foreground to-foreground via-transparent rounded-xl p-6 flex flex-col gap-10">
             <div className="flex items-center justify-center lg:justify-start flex-wrap gap-4">
               <Button
-                className="bg-primary px-8 py-4 rounded-full font-semibold uppercase flex items-center gap-2 text-lg hover:opacity-40"
+                className="bg-primary px-8 py-3 rounded-full font-semibold uppercase flex items-center gap-2 text-md hover:opacity-40"
                 onClick={() => {
                   naviagte(`/xem-phim/${movie.slug}`);
                 }}
@@ -233,7 +230,9 @@ const MovieInfomationPage = () => {
         </div>
       </Container>
 
-      <TopMovieSection />
+      <div className="px-4">
+        <TopMovieSection />
+      </div>
 
       {loading && (
         <div className="flex justify-center items-center h-screen">

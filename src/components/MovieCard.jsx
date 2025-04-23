@@ -89,8 +89,8 @@ const MovieCard = ({ movie }) => {
         placeholder={<Loading />}
         loading="lazy"
       />
-      <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-2">
-        <h3 className="text-white text-base font-semibold truncate">
+      <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/60 to-black/40 p-2">
+        <h3 className="text-white text-base font-semibold truncate whitespace-break-spaces text-center">
           {movie.name}
         </h3>
       </div>

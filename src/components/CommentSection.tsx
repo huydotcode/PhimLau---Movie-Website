@@ -112,12 +112,14 @@ export const CommentForm = ({ setComments }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (comment.trim() === "") {
-      toast.error("Vui lòng nhập bình luận của bạn!");
+    console.log("comment", comment);
+
+    if (comment.trim().length === 0) {
+      toast("Vui lòng nhập bình luận của bạn!");
       return;
     }
     if (rating === 0) {
-      toast.error("Vui lòng chọn đánh giá cho bình luận của bạn!");
+      toast("Vui lòng chọn đánh giá của bạn!");
       return;
     }
 
@@ -135,7 +137,7 @@ export const CommentForm = ({ setComments }) => {
 
     setComments(prev => [newComment, ...prev]);
 
-    toast.success("Bình luận của bạn đã được gửi thành công!");
+    toast("Bình luận của bạn đã được gửi thành công!");
   };
 
   return (

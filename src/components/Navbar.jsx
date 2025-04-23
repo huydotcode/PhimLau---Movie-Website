@@ -98,7 +98,7 @@ const NavbarSearch = () => {
         setSearchResults(filtered);
       } catch (err) {
         console.log(err);
-        toast.error("Có lỗi xảy ra khi tìm kiếm phim!");
+        toast("Có lỗi xảy ra khi tìm kiếm phim!");
       } finally {
         setTimeout(() => {
           setIsLoading(false); // Kết thúc loading sau 1 giây
@@ -161,15 +161,14 @@ const NavbarSearch = () => {
                   setOpenSearch(false);
                 }}
               >
-                <div>
-                  <img
-                    src={movie.thumb_url}
-                    alt={movie.name}
-                    className="w-10 h-14 rounded-md object-cover"
-                  />
-                </div>
+                <div
+                  className="w-14 h-14 rounded-md bg-cover bg-no-repeat bg-center"
+                  style={{
+                    backgroundImage: `url(${movie.poster_url})`,
+                  }}
+                ></div>
 
-                <div>
+                <div className="w-full flex flex-col gap-1">
                   <div className="font-semibold text-sm">{movie.name}</div>
                   <div className="text-sm text-gray-500">
                     {movie.origin_name}

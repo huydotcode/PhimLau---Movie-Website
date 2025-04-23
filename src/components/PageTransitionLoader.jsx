@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Loading from "./Loading";
 import { publicRoutes } from "../routes";
-import Header from "./Header";
-import ScrollToTop from "./ScrollToTop";
 import Footer from "./Footer";
+import Header from "./Header";
+import Loading from "./Loading";
+import ScrollToTop from "./ScrollToTop";
 
 const PageTransitionLoader = () => {
   const location = useLocation();
@@ -18,7 +18,7 @@ const PageTransitionLoader = () => {
   }, [location.pathname]);
 
   return (
-    <div className="relative">
+    <div className="relative bg-linear-to-b from-[#383838bb] to-black">
       {/* Animate loader phủ lên */}
       <AnimatePresence>
         {loading && (
@@ -43,15 +43,26 @@ const PageTransitionLoader = () => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
         id="page-transition"
-        className="relative bg-gradient-to-b from-[#1a1a1abb] to-black min-h-screen text-white z-10 w-full"
+        className="relative bg-gradient-to-b from-[#0a0a0abb] to-black min-h-screen text-white z-10 w-full"
       >
         <Header />
         <ScrollToTop />
 
         <Routes location={location} key={location.pathname}>
           {publicRoutes.map((route, index) => {
+            const Layout = route.layout;
             const Page = route.element;
-            return <Route key={index} path={route.path} element={<Page />} />;
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <Layout>
+                    <Page />
+                  </Layout>
+                }
+              />
+            );
           })}
         </Routes>
 

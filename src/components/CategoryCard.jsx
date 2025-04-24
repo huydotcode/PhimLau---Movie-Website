@@ -10,7 +10,7 @@ const CategoryCard = ({ category }) => {
       case "hành động":
         return "from-red-600 to-red-900";
       case "hài hước":
-        return "from-black to-gray-800";
+        return "from-orange-400 to-orange-600";
       case "hình sự":
         return "from-yellow-400 to-yellow-600";
       case "tình cảm":

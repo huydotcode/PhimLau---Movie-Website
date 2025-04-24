@@ -81,20 +81,48 @@ const MovieCard = ({ movie }) => {
   };
 
   return (
-    <CardContainer onClick={handleClickMovie}>
-      <LazyLoadImage
-        className="absolute inset-0 w-full h-full object-bottom object-cover"
-        src={movie.thumb_url}
-        alt={movie.name}
-        placeholder={<Loading />}
-        loading="lazy"
-      />
-      <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/60 to-black/40 p-2">
-        <h3 className="text-white text-base font-semibold truncate whitespace-break-spaces text-center">
-          {movie.name}
-        </h3>
-      </div>
-    </CardContainer>
+    <div className="relative bg-transparent">
+      <CardContainer onClick={handleClickMovie}>
+        <LazyLoadImage
+          className="absolute inset-0 w-full h-full object-bottom object-cover"
+          src={movie.thumb_url}
+          alt={movie.name}
+        />
+      </CardContainer>
+
+      <motion.div
+        className="absolute top-1 right-1 flex items-end justify-center text-white text-sm font-semibold flex-col gap-1 select-none bg-transparent"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        {movie?.tmdb?.vote_average && (
+          <span className="bg-[rgba(0,0,0,0.8)] px-2 py-1 rounded-md flex items-center gap-1 text-primary">
+            {movie.tmdb.vote_average.toFixed(1)}
+          </span>
+        )}
+
+        {movie?.episode_total > 0 && (
+          <span className="bg-[rgba(0,0,0,0.4)] px-2 py-1 rounded-md">
+            {movie.episode_total} Tập
+          </span>
+        )}
+
+        {movie?.type == "single" && (
+          <span className="bg-[rgba(0,0,0,0.4)] px-2 py-1 rounded-md">
+            Phim lẻ
+          </span>
+        )}
+
+        <span className="bg-[rgba(0,0,0,0.4)] px-2 py-1 rounded-md">
+          {movie.year}
+        </span>
+      </motion.div>
+
+      <h3 className="p-2 text-white text-base font-semibold truncate whitespace-break-spaces text-center">
+        {movie.name}
+      </h3>
+    </div>
   );
 };
 

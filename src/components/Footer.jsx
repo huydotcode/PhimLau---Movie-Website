@@ -8,7 +8,13 @@ const Footer = () => {
       <div className="grid grid-cols-5 @max-md:grid-cols-2 @max-4xl:grid-cols-2 gap-10 px-4 mx-auto max-w-[1400px]">
         {/* Logo + Slogan */}
         <div className="col-span-2">
-          <img className="w-3/4" src="/logo.svg" alt="Logo" />
+          <div
+            className="w-full h-40 bg-cover bg-center mb-4"
+            style={{
+              backgroundImage: "url('/logo.svg')",
+            }}
+          />
+          {/* <img src="/logo.svg" alt="Logo" /> */}
           <p className="text-sm text-gray-400 whitespace-break-spaces">
             PhimNew - Xem phim mới nhât và miễn phí. Chúng tôi cung cấp cho bạn
             những bộ phim mới nhất, chất lượng cao và hoàn toàn miễn phí.

@@ -170,8 +170,12 @@ const MovieInfomationPage = () => {
                 />
 
                 <div className="flex lg:hidden flex-col justify-center items-center mt-4">
-                  <p className="text-2xl font-bold">{movie.origin_name}</p>
-                  <p className="text-gray-500 text-sm">{movie.name}</p>
+                  <p className="text-2xl font-bold text-center">
+                    {movie.origin_name}
+                  </p>
+                  <p className="text-gray-500 text-sm text-center">
+                    {movie.name}
+                  </p>
                 </div>
               </div>
 
@@ -181,7 +185,7 @@ const MovieInfomationPage = () => {
             </div>
           </div>
 
-          <div className="flex-1 bg-gradient-to-t from-foreground to-foreground via-transparent rounded-xl p-6 flex flex-col gap-10">
+          <div className="flex-1 bg-gradient-to-t from-foreground to-foreground via-transparent rounded-xl p-4 flex flex-col gap-10">
             <div className="flex items-center justify-center lg:justify-start flex-wrap gap-4">
               <Button
                 className="bg-primary px-8 py-3 rounded-full font-semibold uppercase flex items-center gap-2 text-md hover:opacity-40"
@@ -255,7 +259,7 @@ const MovieInfomationPage = () => {
 const InfomationSection = ({ movie }) => {
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-xl font-bold">
+      <p className="text-xl font-bold text-center hidden lg:block">
         {movie.origin_name} - {movie.name}
       </p>
 

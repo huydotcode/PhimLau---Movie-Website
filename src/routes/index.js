@@ -10,6 +10,7 @@ import SerieMoviePage from "../pages/SerieMoviePage";
 import SingleMoviePage from "../pages/SingleMoviePage";
 import WatchMoviePage from "../pages/WatchMoviePage";
 
+
 export const publicRoutes = [
   { path: "/", element: HomePage, layout: LayoutWithBanner },
   { path: "/phim-le", element: SingleMoviePage, layout: LayoutWithoutBanner },
@@ -32,4 +33,14 @@ export const publicRoutes = [
     element: MovieInfomationPage,
     layout: LayoutWithBanner,
   },
+  {
+    path: "/quoc-gia/:slug",
+    element: CountryPage,
+    layout: LayoutWithoutBanner,
+  },
+  {
+    path: "/the-loai/:slug",
+    element: CategoryPage,
+    layout: LayoutWithoutBanner,
+  }
 ];

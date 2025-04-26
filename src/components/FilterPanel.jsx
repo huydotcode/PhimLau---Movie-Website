@@ -118,7 +118,7 @@
 //                             <button
 //                                 key={sort}
 //                                 className={`px-4 ${filters.sort === sort ? "text-yellow-500" : "text-white"}`}
-//                                 onClick={() => handleFilterChange("sort", sort)}
+//                                  onClick={() => handleFilterChange("sort", sort)}
 //                             >
 //                                 {sort}
 //                             </button>
@@ -149,7 +149,13 @@
 
 import React from "react";
 
-const FilterPanel = ({ filters, setFilters, handleFilter, setShowFilters }) => {
+const FilterPanel = ({
+  filters,
+  setFilters,
+  handleFilter,
+  setShowFilters,
+  hasTypeFilter = true,
+}) => {
   const handleFilterChange = (key, value) => {
     if (key === "sort") {
       setFilters(prev => ({
@@ -304,28 +310,30 @@ const FilterPanel = ({ filters, setFilters, handleFilter, setShowFilters }) => {
         </div>
 
         {/* Loại phim */}
-        <div className="flex items-start mb-3">
-          <h3 className="text-white font-semibold mb-1 min-w-[120px]">
-            Loại phim:
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {["Phim lẻ", "Phim bộ"].map(type => (
+        {hasTypeFilter && (
+          <div className="flex items-start mb-3">
+            <h3 className="text-white font-semibold mb-1 min-w-[120px]">
+              Loại phim:
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {["Phim lẻ", "Phim bộ"].map(type => (
+                <button
+                  key={type}
+                  className={`px-4 ${filters.type.includes(type) ? "text-yellow-500" : "text-white"}`}
+                  onClick={() => handleFilterChange("type", type)}
+                >
+                  {type}
+                </button>
+              ))}
               <button
-                key={type}
-                className={`px-4 ${filters.type.includes(type) ? "text-yellow-500" : "text-white"}`}
-                onClick={() => handleFilterChange("type", type)}
+                className="bg-gray-500 rounded-full px-4 text-secondary"
+                onClick={() => handleClearFilter("type")}
               >
-                {type}
+                Xóa
               </button>
-            ))}
-            <button
-              className="bg-gray-500 rounded-full px-4 text-secondary"
-              onClick={() => handleClearFilter("type")}
-            >
-              Xóa
-            </button>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Sắp xếp */}
         <div className="flex items-start mb-3">

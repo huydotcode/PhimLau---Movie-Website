@@ -6,8 +6,8 @@ import { navlink } from "../constants/navlink";
 import useClickOutSide from "../hooks/useClickOutSide";
 import { useDebounce } from "../hooks/useDebounce";
 import Icons from "./Icons";
-import Button from "./ui/Button";
 import Loading from "./Loading";
+import Button from "./ui/Button";
 
 const Navbar = () => {
   const location = useLocation();

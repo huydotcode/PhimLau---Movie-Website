@@ -9,7 +9,6 @@ import "./styles/App.css";
 
 import { ConfigProvider } from "antd";
 import PageTransitionLoader from "./components/PageTransitionLoader";
-import { AuthProvider } from "./context/AuthProvider";
 
 function App() {
   return (
@@ -29,13 +28,11 @@ function App() {
         },
       }}
     >
-      <AuthProvider>
-        <BrowserRouter>
-          <Toaster richColors position="bottom-right" theme="dark" />
+      <BrowserRouter>
+        <Toaster richColors position="bottom-right" theme="dark" />
 
-          <PageTransitionLoader />
-        </BrowserRouter>
-      </AuthProvider>
+        <PageTransitionLoader />
+      </BrowserRouter>
     </ConfigProvider>
   );
 }

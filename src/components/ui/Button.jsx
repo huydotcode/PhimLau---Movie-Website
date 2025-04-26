@@ -1,16 +1,30 @@
 import React from "react";
+import { Link } from "react-router";
 
-const Button = ({ children, className = "", onClick, href }) => {
-  if (href) {
+const Button = ({
+  type = "button",
+  children,
+  className = "",
+  onClick = () => {},
+  href = "",
+}) => {
+  if (href.length > 0) {
     return (
-      <a className={className} href={href}>
+      <Link
+        className={`flex items-center justify-center gap-2 cursor-pointer hover:opacity-80 transition-all duration-200 ${className}`}
+        to={href}
+      >
         {children}
-      </a>
+      </Link>
     );
   }
 
   return (
-    <button className={className} onClick={onClick}>
+    <button
+      className={`flex items-center justify-center gap-2 cursor-pointer hover:opacity-80 transition-all duration-200 ${className}`}
+      onClick={onClick}
+      type={type}
+    >
       {children}
     </button>
   );

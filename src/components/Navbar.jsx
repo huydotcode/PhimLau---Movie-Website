@@ -1,13 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { navlink } from "../constants/navlink";
 import useClickOutSide from "../hooks/useClickOutSide";
 import { useDebounce } from "../hooks/useDebounce";
 import Icons from "./Icons";
-import Button from "./ui/Button";
 import Loading from "./Loading";
+import Button from "./ui/Button";
 
 const Navbar = () => {
   const location = useLocation();
@@ -54,11 +54,11 @@ const Navbar = () => {
 
 
   return (
-    <div className="@container flex justify-between items-center h-[60px] px-10 text-white mx-auto max-w-[1400px]">
+    <div className="@container flex justify-between items-center h-[60px] px-4 text-white mx-auto">
       <div className="w-[140px] flex items-center">
-        <a className="w-full h-full text-primary" href="/">
+        <Link className="w-full h-full text-primary" to="/">
           <img className="object-center" src="/logo.png" alt="Phim New" />
-        </a>
+        </Link>
       </div>
 
       <div className="absolute top-5 left-1/2 -translate-x-1/2 flex justify-center items-center @max-5xl:hidden">
@@ -217,12 +217,12 @@ const NavbarSearch = () => {
 
         //Sang cập nhật ở đây
         const filtered = data.filter(movie =>
-          movie.name.toLowerCase().includes(debouncedQuery.toLowerCase())
+          movie.name.toLowerCase().includes(debouncedQuery.toLowerCase()),
         );
         setSearchResults(filtered);
       } catch (err) {
         console.log(err);
-        toast.error("Có lỗi xảy ra khi tìm kiếm phim!");
+        toast("Có lỗi xảy ra khi tìm kiếm phim!");
       } finally {
         setTimeout(() => {
           setIsLoading(false); // Kết thúc loading sau 1 giây
@@ -253,7 +253,6 @@ const NavbarSearch = () => {
             autoFocus
             value={query}
             onChange={e => setQuery(e.target.value)}
-
             // Sang thêm
             onKeyDown={e => {
               if (e.key === "Enter") {
@@ -290,15 +289,14 @@ const NavbarSearch = () => {
                   setOpenSearch(false);
                 }}
               >
-                <div>
-                  <img
-                    src={movie.thumb_url}
-                    alt={movie.name}
-                    className="w-10 h-14 rounded-md object-cover"
-                  />
-                </div>
+                <div
+                  className="w-14 h-14 rounded-md bg-cover bg-no-repeat bg-center"
+                  style={{
+                    backgroundImage: `url(${movie.poster_url})`,
+                  }}
+                ></div>
 
-                <div>
+                <div className="w-full flex flex-col gap-1">
                   <div className="font-semibold text-sm">{movie.name}</div>
                   <div className="text-sm text-gray-500">
                     {movie.origin_name}
@@ -370,7 +368,7 @@ const NavbarMobile = () => {
                   className={`ml-4 text-xl font-bold hover:text-primary transition-all duration-200 hover:scale-105 @max-5xl:pl-10 @max-5xl:w-full @max-5xl:hover:scale-100  ${item.link === location.pathname ? "text-primary" : ""
                     }`}
                 >
-                  <a href={item.link}>{item.name}</a>
+                  <Link to={item.link}>{item.name}</Link>
                 </li>
               ))}
             </ul>

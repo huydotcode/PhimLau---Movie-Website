@@ -1,26 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { toast } from "sonner";
+import CategoryCard from "../components/CategoryCard";
 import ListMovieContainer from "../components/ListMovieContainer";
 import Loading from "../components/Loading";
-import CategoryCard from "../components/CategoryCard";
+import Banner from "../components/Banner";
+import Container from "../components/Container";
 
 const HomePage = () => {
   return (
-    <div className="w-full mt-[100px] pb-[100px]">
-      <TopMovieSection />
-      <TopCategorySection />
-      <NewSingleMovieSection />
-      <NewSeriesMovieSection />
-      <TrendingMovieSection />
-      <KoreanMovieSection />
-      <AmericanMovieSection />
-    </div>
+    <>
+      <Banner />
+
+      <Container>
+        <div className="w-full mt-[100px] pb-[100px]">
+          <TopMovieSection />
+          <TopCategorySection />
+          <NewSingleMovieSection />
+          <NewSeriesMovieSection />
+          <TrendingMovieSection />
+          <KoreanMovieSection />
+          <AmericanMovieSection />
+        </div>
+      </Container>
+    </>
   );
 };
 
 // Phim thịnh hành
-const TopMovieSection = () => {
+export const TopMovieSection = () => {
   const [topMovies, setTopMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { ref, inView } = useInView({
@@ -41,11 +49,9 @@ const TopMovieSection = () => {
           setTopMovies(data);
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách phim!");
+          toast("Có lỗi xảy ra khi lấy danh sách phim!");
         } finally {
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 1000);
+          setIsLoading(false);
         }
       })();
     }
@@ -83,18 +89,16 @@ const TopCategorySection = () => {
           setTopCategories(data.slice(0, 6));
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách thể loại!");
+          toast("Có lỗi xảy ra khi lấy danh sách thể loại!");
         } finally {
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 1000);
+          setIsLoading(false);
         }
       })();
     }
   }, [inView]);
 
   return (
-    <div ref={ref} className="relative mx-auto p-4 min-h-[400px]">
+    <div ref={ref} className="relative mx-auto py-4 min-h-[400px]">
       <h2 className="text-2xl font-bold mb-4">Thể loại phim thịnh hành</h2>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-10">
         {!isLoading &&
@@ -129,11 +133,9 @@ const NewSingleMovieSection = () => {
           setNewMovies(data);
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách phim!");
+          toast("Có lỗi xảy ra khi lấy danh sách phim!");
         } finally {
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 1000);
+          setIsLoading(false);
         }
       })();
     }
@@ -171,11 +173,9 @@ const NewSeriesMovieSection = () => {
           setNewMovies(data);
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách phim!");
+          toast("Có lỗi xảy ra khi lấy danh sách phim!");
         } finally {
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 1000);
+          setIsLoading(false);
         }
       })();
     }
@@ -213,11 +213,9 @@ const TrendingMovieSection = () => {
           setTrendingMovies(data);
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách phim!");
+          toast("Có lỗi xảy ra khi lấy danh sách phim!");
         } finally {
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 1000);
+          setIsLoading(false);
         }
       })();
     }
@@ -255,11 +253,9 @@ const KoreanMovieSection = () => {
           setKoreanMovies(data.slice(0, 10));
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách phim!");
+          toast("Có lỗi xảy ra khi lấy danh sách phim!");
         } finally {
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 1000);
+          setIsLoading(false);
         }
       })();
     }
@@ -297,11 +293,9 @@ const AmericanMovieSection = () => {
           setAmericanMovies(data);
         } catch (err) {
           console.log(err);
-          toast.error("Có lỗi xảy ra khi lấy danh sách phim!");
+          toast("Có lỗi xảy ra khi lấy danh sách phim!");
         } finally {
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 1000);
+          setIsLoading(false);
         }
       })();
     }

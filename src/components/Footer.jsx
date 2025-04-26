@@ -1,5 +1,6 @@
 // components/Footer.jsx
 import { FaFacebook, FaYoutube, FaInstagram } from "react-icons/fa";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
@@ -7,7 +8,13 @@ const Footer = () => {
       <div className="grid grid-cols-5 @max-md:grid-cols-2 @max-4xl:grid-cols-2 gap-10 px-4 mx-auto max-w-[1400px]">
         {/* Logo + Slogan */}
         <div className="col-span-2">
-          <img className="w-3/4" src="/logo.svg" alt="Logo" />
+          <div
+            className="w-full h-40 bg-cover bg-center mb-4"
+            style={{
+              backgroundImage: "url('/logo.svg')",
+            }}
+          />
+          {/* <img src="/logo.svg" alt="Logo" /> */}
           <p className="text-sm text-gray-400 whitespace-break-spaces">
             PhimNew - Xem phim mới nhât và miễn phí. Chúng tôi cung cấp cho bạn
             những bộ phim mới nhất, chất lượng cao và hoàn toàn miễn phí.
@@ -23,24 +30,24 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-3">Danh mục</h3>
           <ul className="text-sm text-gray-400 space-y-2">
             <li>
-              <a href="#" className="hover:text-white">
+              <Link to="#" className="hover:text-white">
                 Phim thịnh hành
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <Link to="#" className="hover:text-white">
                 Phim lẻ
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <Link to="#" className="hover:text-white">
                 Phim bộ
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <Link to="#" className="hover:text-white">
                 Thể loại
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -50,19 +57,19 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-3">Chính sách</h3>
           <ul className="text-sm text-gray-400 space-y-2">
             <li>
-              <a href="#" className="hover:text-white">
+              <Link to="#" className="hover:text-white">
                 Chính sách bảo mật
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <Link to="#" className="hover:text-white">
                 Điều khoản sử dụng
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <Link to="#" className="hover:text-white">
                 Liên hệ
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -71,15 +78,15 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-3">Theo dõi chúng tôi</h3>
           <div className="flex space-x-4">
-            <a href="#" className="hover:text-primary">
+            <Link to="#" className="hover:text-primary">
               <FaFacebook size={24} />
-            </a>
-            <a href="#" className="hover:text-primary">
+            </Link>
+            <Link to="#" className="hover:text-primary">
               <FaYoutube size={24} />
-            </a>
-            <a href="#" className="hover:text-primary">
+            </Link>
+            <Link to="#" className="hover:text-primary">
               <FaInstagram size={24} />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

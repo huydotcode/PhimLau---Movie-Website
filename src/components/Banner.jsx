@@ -101,7 +101,7 @@ const Banner = () => {
 
   return (
     <>
-      <div className="@container relative w-full h-[90vh] overflow-hidden">
+      <div className="@container relative w-screen h-[90vh] overflow-hidden">
         <Swiper
           onSwiper={swiper => (swiperRef.current = swiper)}
           slidesPerView={1}
@@ -124,6 +124,12 @@ const Banner = () => {
                     backgroundImage: `url(${movie.poster_url})`,
                   }}
                 />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: "url('/dotted.png')",
+                  }}
+                ></div>
 
                 {/* Thông tin phim bên trái */}
                 <div className="relative z-10 flex flex-col justify-center pl-10 text-white w-1/2 gap-2 mt-[20vh] @max-3xl:w-3/4 @max-3xl:mt-[5vh]">

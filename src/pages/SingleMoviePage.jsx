@@ -2,20 +2,27 @@ import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import MovieCard from "../components/MovieCard";
 import FilterPanel from "../components/FilterPanel";
+import { useScrollToTop } from "../hooks/useScrollToTop";
+import { Pagination } from "antd";
+import "../styles/pagination.css";
+
+const PAGE_SIZE = 20; // Số lượng kết quả tối đa để hiển thị
 
 const SingleMoviePage = () => {
   const [movies, setMovies] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
     country: [], // Lưu nhiều quốc gia
     category: [],
     year: [],
     lang: [],
-    type: ["phim lẻ"], // Mặc định loại phim là "phim lẻ"
     sort: "Mới nhất", // Mặc định sắp xếp là "Mới nhất"
   });
   const [showFilters, setShowFilters] = useState(false);
+  useScrollToTop();
 
   useEffect(() => {
     (async () => {
@@ -25,13 +32,11 @@ const SingleMoviePage = () => {
         const data = await res.json();
 
         // Lọc các bộ phim lẻ
-        const singleMovies = data.filter(
-          movie => movie.episode_current === "Full" && movie.episode_total === "1"
-        );
+        const singleMovies = data.filter(movie => movie.type === "single");
 
         // Sắp xếp mặc định theo "Mới nhất"
         const sortedMovies = singleMovies.sort(
-          (a, b) => new Date(b.created.time) - new Date(a.created.time)
+          (a, b) => new Date(b.created.time) - new Date(a.created.time),
         );
 
         setMovies(sortedMovies); // Lưu dữ liệu đã sắp xếp
@@ -47,15 +52,18 @@ const SingleMoviePage = () => {
   const handleFilter = () => {
     let results = movies.filter(movie => {
       const matchCountry =
-        filters.country.length === 0 ||
+        filters.country.length === 0 || // Lọc nhiều quốc gia
         filters.country.some(country =>
-          movie.country?.some(c => c.name === country)
+          movie.country?.some(c => c.name === country),
         );
+
       const matchCategory =
         filters.category.length === 0 ||
         filters.category.some(category =>
-          movie.category?.some(cat => cat.name === category)
+          movie.category?.some(cat => cat.name === category),
         );
+      // const matchYear =
+      //   filters.year.length === 0 || filters.year.includes(movie.year?.toString());
       const matchYear =
         filters.year.length === 0 ||
         filters.year.some(year => {
@@ -66,27 +74,31 @@ const SingleMoviePage = () => {
         });
       const matchLang =
         filters.lang.length === 0 || filters.lang.includes(movie.lang);
-      const matchType =
-        filters.type.length === 0 ||
-        (filters.type.includes("phim lẻ") &&
-          movie.episode_current === "Full" &&
-          movie.episode_total === "1") ||
-        (filters.type.includes("phim bộ") &&
-          !(movie.episode_current === "Full" && movie.episode_total === "1"));
 
-      return matchCountry && matchCategory && matchYear && matchLang && matchType;
+      return matchCountry && matchCategory && matchYear && matchLang;
     });
 
     // Sắp xếp kết quả
     if (filters.sort === "IMDB") {
-      results = results.sort((a, b) => b.tmdb.vote_average - a.tmdb.vote_average);
+      results = results.sort(
+        (a, b) => b.tmdb.vote_average - a.tmdb.vote_average,
+      );
     } else if (filters.sort === "Lượt xem") {
       results = results.sort((a, b) => b.view - a.view);
     } else if (filters.sort === "Mới nhất") {
-      results = results.sort((a, b) => new Date(b.created.time) - new Date(a.created.time));
+      results = results.sort(
+        (a, b) => new Date(b.created.time) - new Date(a.created.time),
+      );
     }
 
     setFilteredResults(results);
+    setCurrentPage(1);
+  };
+
+  const totalMovies = filteredResults.length;
+
+  const handlePageChange = page => {
+    setCurrentPage(page);
   };
 
   return (
@@ -114,16 +126,31 @@ const SingleMoviePage = () => {
           setFilters={setFilters}
           handleFilter={handleFilter}
           setShowFilters={setShowFilters}
+          hasTypeFilter={false} // Không hiển thị bộ lọc loại phim
         />
       )}
 
       {/* Danh sách phim */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {!isLoading &&
-          filteredResults.map(movie => (
-            <MovieCard key={movie.slug} movie={movie} />
-          ))}
+          filteredResults
+            .slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
+            .map(movie => <MovieCard key={movie.slug} movie={movie} />)}
       </div>
+
+      {!isLoading && filteredResults.length > 0 && (
+        <div className="mt-8 flex justify-center">
+          <Pagination
+            className="dark-pagination"
+            current={currentPage}
+            pageSize={PAGE_SIZE}
+            total={totalMovies}
+            onChange={handlePageChange}
+            showSizeChanger={false}
+            showTotal={total => `Tổng số ${total} phim`}
+          />
+        </div>
+      )}
     </div>
   );
 };

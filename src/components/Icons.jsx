@@ -1,13 +1,31 @@
-import { FaSearch, FaUser } from "react-icons/fa";
-import { IoNotifications } from "react-icons/io5";
+import {
+  FaCommentDots,
+  FaHeart,
+  FaPlay,
+  FaRegStar,
+  FaSearch,
+  FaStar,
+  FaUser,
+} from "react-icons/fa";
 import { IoIosArrowUp, IoIosMenu } from "react-icons/io";
+import { IoNotifications, IoSend } from "react-icons/io5";
+import { BiSolidLike } from "react-icons/bi";
 
 const Icons = {
-  Search: ({ className }) => <FaSearch className={className} />,
-  User: ({ className }) => <FaUser className={className} />,
-  Notification: ({ className }) => <IoNotifications className={className} />,
-  Menu: ({ className }) => <IoIosMenu className={className} />,
-  ArrowUp: ({ className }) => <IoIosArrowUp className={className} />,
+  Play: ({ className = "" }) => <FaPlay className={className} />,
+  Search: ({ className = "" }) => <FaSearch className={className} />,
+  User: ({ className = "" }) => <FaUser className={className} />,
+  Notification: ({ className = "" }) => (
+    <IoNotifications className={className} />
+  ),
+  Menu: ({ className = "" }) => <IoIosMenu className={className} />,
+  ArrowUp: ({ className = "" }) => <IoIosArrowUp className={className} />,
+  Comment: ({ className = "" }) => <FaCommentDots className={className} />,
+  Like: ({ className = "" }) => <BiSolidLike className={className} />,
+  Star: ({ className = "" }) => <FaStar className={className} />,
+  RegStar: ({ className = "" }) => <FaRegStar className={className} />,
+  Heart: ({ className = "" }) => <FaHeart className={className} />,
+  Send: ({ className = "" }) => <IoSend className={className} />,
 };
 
 export default Icons;

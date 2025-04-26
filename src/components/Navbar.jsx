@@ -9,35 +9,35 @@ import Icons from "./Icons";
 import Loading from "./Loading";
 import Button from "./ui/Button";
 
+// Lọc theo thể loại
+const categories = [
+  { name: "Chính kịch", slug: "chinh-kich" },
+  { name: "Hành động", slug: "hanh-dong" },
+  { name: "Hài hước", slug: "hai-huoc" },
+  { name: "Phiêu lưu", slug: "phieu-luu" },
+  { name: "Hình sự", slug: "hinh-su" },
+  { name: "Tình cảm", slug: "tinh-cam" },
+  { name: "Viễn tưởng", slug: "vien-tuong" },
+  { name: "Bí ẩn", slug: "bi-an" },
+  { name: "Khoa học", slug: "khoa-hoc" },
+  { name: "Kinh dị", slug: "kinh-di" },
+];
+
+// Lọc theo quốc gia
+const countries = [
+  { name: "Việt Nam", slug: "viet-nam" },
+  { name: "Hàn Quốc", slug: "han-quoc" },
+  { name: "Nhật Bản", slug: "nhat-ban" },
+  { name: "Âu Mỹ", slug: "au-my" },
+  { name: "Trung Quốc", slug: "trung-quoc" },
+  { name: "Anh", slug: "anh" },
+  { name: "Pháp", slug: "phap" },
+  { name: "Thái Lan", slug: "thai-lan" },
+  { name: "Ấn Độ", slug: "an-do" },
+];
+
 const Navbar = () => {
   const location = useLocation();
-
-  // Lọc theo thể loại
-  const categories = [
-    { name: "Chính kịch", slug: "chinh-kich" },
-    { name: "Hành động", slug: "hanh-dong" },
-    { name: "Hài hước", slug: "hai-huoc" },
-    { name: "Phiêu lưu", slug: "phieu-luu" },
-    { name: "Hình sự", slug: "hinh-su" },
-    { name: "Tình cảm", slug: "tinh-cam" },
-    { name: "Viễn tưởng", slug: "vien-tuong" },
-    { name: "Bí ẩn", slug: "bi-an" },
-    { name: "Khoa học", slug: "khoa-hoc" },
-    { name: "Kinh dị", slug: "kinh-di" },
-  ];
-
-  // Lọc theo quốc gia
-  const countries = [
-    { name: "Việt Nam", slug: "viet-nam" },
-    { name: "Hàn Quốc", slug: "han-quoc" },
-    { name: "Nhật Bản", slug: "nhat-ban" },
-    { name: "Âu Mỹ", slug: "au-my" },
-    { name: "Trung Quốc", slug: "trung-quoc" },
-    { name: "Anh", slug: "anh" },
-    { name: "Pháp", slug: "phap" },
-    { name: "Thái Lan", slug: "thai-lan" },
-    { name: "Ấn Độ", slug: "an-do" },
-  ];
 
   return (
     <div className="@container flex justify-between items-center h-[60px] px-4 text-white mx-auto">
@@ -48,7 +48,7 @@ const Navbar = () => {
       </div>
 
       <div className="absolute top-5 left-1/2 -translate-x-1/2 flex justify-center items-center @max-5xl:hidden">
-        <ul className="flex items-center gap-4">
+        <ul className="relative flex items-center gap-4">
           {navlink.map((item, index) => {
             if (["Thể loại", "Quốc gia"].includes(item.name)) {
               return (
@@ -63,7 +63,7 @@ const Navbar = () => {
             return (
               <li
                 key={index}
-                className={`ml-4 text-sm font-bold hover:text-primary transition-all duration-200 hover:scale-105 ${
+                className={`ml-4 w-full text-sm font-bold hover:text-primary transition-all duration-200 text-nowrap ${
                   item.link === location.pathname ? "text-primary" : ""
                 }`}
               >
@@ -269,23 +269,38 @@ const NavbarMobile = () => {
       <AnimatePresence>
         {openNavMobile && (
           <motion.div
-            className="fixed top-[60px] left-0 bg-black text-white w-[400px] h-screen flex items-center justify-center z-50 @max-5xl:justify-start"
+            className="fixed top-[60px] left-0 bg-black text-white min-w-[400px] h-screen flex items-center justify-center z-50 @max-5xl:justify-start"
             initial={{ opacity: 0, x: "-100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "-100%" }}
             transition={{ duration: 0.3 }}
           >
-            <ul className="flex items-center gap-4 flex-col h-full py-10 @max-5xl:items-start @max-5xl:gap-8 @max-5xl:w-full">
-              {navlink.map((item, index) => (
-                <li
-                  key={index}
-                  className={`ml-4 text-xl font-bold hover:text-primary transition-all duration-200 hover:scale-105 @max-5xl:pl-10 @max-5xl:w-full @max-5xl:hover:scale-100  ${
-                    item.link === location.pathname ? "text-primary" : ""
-                  }`}
-                >
-                  <Link to={item.link}>{item.name}</Link>
-                </li>
-              ))}
+            <ul className="flex items-center gap-4 flex-col h-full py-10 @max-5xl:items-start @max-5xl:w-full @max-5xl:gap-0">
+              {navlink.map((item, index) => {
+                if (["Thể loại", "Quốc gia"].includes(item.name)) {
+                  return (
+                    <NavItemDropDown
+                      key={index}
+                      item={item}
+                      subItems={
+                        item.name == "Thể loại" ? categories : countries
+                      }
+                      isMobile
+                    />
+                  );
+                }
+
+                return (
+                  <li
+                    key={index}
+                    className={`ml-4 text-xl w-full font-bold hover:text-primary transition-all duration-200 @max-5xl:py-4 @max-5xl:pl-10 @max-5xl:hover:scale-100 cursor-pointer ${
+                      item.link === location.pathname ? "text-primary" : ""
+                    }`}
+                  >
+                    <Link to={item.link}>{item.name}</Link>
+                  </li>
+                );
+              })}
             </ul>
           </motion.div>
         )}
@@ -294,10 +309,11 @@ const NavbarMobile = () => {
   );
 };
 
-const NavItemDropDown = ({ item, subItems }) => {
+const NavItemDropDown = ({ item, subItems, isMobile = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const wrapperRef = useRef(null);
+  const location = useLocation();
 
   const handleCategorySelect = slug => {
     setIsOpen(false);
@@ -311,11 +327,15 @@ const NavItemDropDown = ({ item, subItems }) => {
 
   return (
     <li
-      className="relative ml-4 text-sm font-bold transition-all duration-200 hover:scale-105"
+      className={`w-full relative ml-4 text-sm font-bold transition-all duration-200 @max-5xl:py-4 cursor-pointer text-nowrap ${
+        isMobile && "text-xl"
+      }`}
       ref={wrapperRef}
     >
       <button
-        className="cursor-pointer focus:outline-none hover:text-primary"
+        className={`cursor-pointer focus:outline-none hover:text-primary ${location.pathname.includes(item.link) ? "text-primary" : ""} ${
+          isMobile ? "w-full text-left pl-10" : ""
+        }`}
         onClick={() => setIsOpen(prev => !prev)}
       >
         {item.name}
@@ -323,7 +343,11 @@ const NavItemDropDown = ({ item, subItems }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="absolute top-full left-0 mt-2 bg-foreground rounded-md shadow-lg z-50 w-[180px] py-1 px-2 overflow-hidden"
+            className={`absolute ${
+              isMobile
+                ? "relative ml-4 w-3/4 left-0 top-0 mt-2 bg-black rounded-none shadow-none"
+                : "top-full left-0 mt-2 bg-foreground rounded-md shadow-lg w-[180px]"
+            } flex flex-col py-1 overflow-hidden z-50`}
             initial={{ height: 0 }}
             animate={{
               height: "auto",
@@ -331,16 +355,24 @@ const NavItemDropDown = ({ item, subItems }) => {
             exit={{ height: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {subItems.map(subItem => (
-              <Link
-                key={subItem.slug}
-                to={`${item.link}/${subItem.slug}`}
-                className="block px-4 py-2 hover:text-primary"
-                onClick={() => handleCategorySelect(subItem.slug)}
-              >
-                {subItem.name}
-              </Link>
-            ))}
+            {subItems.map(subItem => {
+              return (
+                <Link
+                  key={subItem.slug}
+                  to={`${item.link}/${subItem.slug}`}
+                  className={`py-2 hover:text-primary ${
+                    isMobile ? "pl-10" : "px-4"
+                  } ${
+                    location.pathname.includes(
+                      `${item.link}/${subItem.slug}`,
+                    ) && "text-primary"
+                  }`}
+                  onClick={() => handleCategorySelect(subItem.slug)}
+                >
+                  {subItem.name}
+                </Link>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>

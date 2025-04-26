@@ -11,9 +11,6 @@ import Button from "./ui/Button";
 
 const Navbar = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false); // State cho menu "Thể loại"
-  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false); // State cho menu "Quốc gia"
 
   // Lọc theo thể loại
   const categories = [
@@ -29,11 +26,6 @@ const Navbar = () => {
     { name: "Kinh dị", slug: "kinh-di" },
   ];
 
-  const handleCategorySelect = (slug) => {
-    navigate(`/the-loai/${slug}`);
-    setIsCategoryDropdownOpen(false);
-  };
-
   // Lọc theo quốc gia
   const countries = [
     { name: "Việt Nam", slug: "viet-nam" },
@@ -47,12 +39,6 @@ const Navbar = () => {
     { name: "Ấn Độ", slug: "an-do" },
   ];
 
-  const handleCountrySelect = (slug) => {
-    navigate(`/quoc-gia/${slug}`);
-    setIsCountryDropdownOpen(false);
-  };
-
-
   return (
     <div className="@container flex justify-between items-center h-[60px] px-4 text-white mx-auto">
       <div className="w-[140px] flex items-center">
@@ -64,91 +50,22 @@ const Navbar = () => {
       <div className="absolute top-5 left-1/2 -translate-x-1/2 flex justify-center items-center @max-5xl:hidden">
         <ul className="flex items-center gap-4">
           {navlink.map((item, index) => {
-            if (item.name === "Thể loại") {
+            if (["Thể loại", "Quốc gia"].includes(item.name)) {
               return (
-                <li
+                <NavItemDropDown
                   key={index}
-                  className="relative ml-4 text-sm font-bold hover:text-primary transition-all duration-200 hover:scale-105"
-                >
-                  <button
-                    className="cursor-pointer focus:outline-none"
-                    onClick={() => {
-                      setIsCategoryDropdownOpen((prev) => !prev);
-                      setIsCountryDropdownOpen(false); // Đóng menu "Quốc gia" nếu đang mở
-                    }}
-                  >
-                    Thể loại
-                  </button>
-                  <AnimatePresence>
-                    {isCategoryDropdownOpen && (
-                      <motion.div
-                        className="absolute top-full left-0 mt-2 bg-white text-black rounded shadow-lg z-50 w-[180px]"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        {categories.map((category) => (
-                          <Link
-                            key={category.slug}
-                            to={`/the-loai/${category.slug}`}
-                            className="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                            onClick={() => handleCategorySelect(category.slug)}
-                          >
-                            {category.name}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </li>
+                  item={item}
+                  subItems={item.name == "Thể loại" ? categories : countries}
+                />
               );
             }
-            if (item.name === "Quốc gia") {
-              return (
-                <li
-                  key={index}
-                  className="relative ml-4 text-sm font-bold hover:text-primary transition-all duration-200 hover:scale-105"
-                >
-                  <button
-                    className="cursor-pointer focus:outline-none"
-                    onClick={() => {
-                      setIsCountryDropdownOpen((prev) => !prev);
-                      setIsCategoryDropdownOpen(false); // Đóng menu "Thể loại" nếu đang mở
-                    }}
-                  >
-                    Quốc gia
-                  </button>
-                  <AnimatePresence>
-                    {isCountryDropdownOpen && (
-                      <motion.div
-                        className="absolute top-full left-0 mt-2 bg-white text-black rounded shadow-lg z-50 w-[180px]"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        {countries.map((country) => (
-                          <Link
-                            key={country.slug}
-                            to={`/quoc-gia/${country.slug}`}
-                            className="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                            onClick={() => handleCountrySelect(country.slug)}
-                          >
-                            {country.name}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </li>
-              );
-            }
+
             return (
               <li
                 key={index}
-                className={`ml-4 text-sm font-bold hover:text-primary transition-all duration-200 hover:scale-105 ${item.link === location.pathname ? "text-primary" : ""
-                  }`}
+                className={`ml-4 text-sm font-bold hover:text-primary transition-all duration-200 hover:scale-105 ${
+                  item.link === location.pathname ? "text-primary" : ""
+                }`}
               >
                 <Link to={item.link}>{item.name}</Link>
               </li>
@@ -330,6 +247,7 @@ const NavbarSearch = () => {
 // Cuộn từ bên trái sang
 const NavbarMobile = () => {
   const [openNavMobile, setOpenNavMobile] = useState(false);
+  const location = useLocation();
 
   const wrapperRef = useRef(null);
 
@@ -361,8 +279,9 @@ const NavbarMobile = () => {
               {navlink.map((item, index) => (
                 <li
                   key={index}
-                  className={`ml-4 text-xl font-bold hover:text-primary transition-all duration-200 hover:scale-105 @max-5xl:pl-10 @max-5xl:w-full @max-5xl:hover:scale-100  ${item.link === location.pathname ? "text-primary" : ""
-                    }`}
+                  className={`ml-4 text-xl font-bold hover:text-primary transition-all duration-200 hover:scale-105 @max-5xl:pl-10 @max-5xl:w-full @max-5xl:hover:scale-100  ${
+                    item.link === location.pathname ? "text-primary" : ""
+                  }`}
                 >
                   <Link to={item.link}>{item.name}</Link>
                 </li>
@@ -372,6 +291,60 @@ const NavbarMobile = () => {
         )}
       </AnimatePresence>
     </div>
+  );
+};
+
+const NavItemDropDown = ({ item, subItems }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const wrapperRef = useRef(null);
+
+  const handleCategorySelect = slug => {
+    setIsOpen(false);
+    navigate(`/the-loai/${slug}`);
+  };
+
+  // Xử lý khi click ra ngoài
+  useClickOutSide(wrapperRef, () => {
+    setIsOpen(false);
+  });
+
+  return (
+    <li
+      className="relative ml-4 text-sm font-bold transition-all duration-200 hover:scale-105"
+      ref={wrapperRef}
+    >
+      <button
+        className="cursor-pointer focus:outline-none hover:text-primary"
+        onClick={() => setIsOpen(prev => !prev)}
+      >
+        {item.name}
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="absolute top-full left-0 mt-2 bg-foreground rounded-md shadow-lg z-50 w-[180px] py-1 px-2 overflow-hidden"
+            initial={{ height: 0 }}
+            animate={{
+              height: "auto",
+            }}
+            exit={{ height: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {subItems.map(subItem => (
+              <Link
+                key={subItem.slug}
+                to={`${item.link}/${subItem.slug}`}
+                className="block px-4 py-2 hover:text-primary"
+                onClick={() => handleCategorySelect(subItem.slug)}
+              >
+                {subItem.name}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </li>
   );
 };
 

@@ -1,8 +1,14 @@
+import { Dropdown, Modal } from "antd";
+import { signOut } from "firebase/auth";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { auth } from "../app/firebase";
 import { navlink } from "../constants/navlink";
+import { useAuth } from "../context/AuthProvider";
 import useClickOutSide from "../hooks/useClickOutSide";
 import { useDebounce } from "../hooks/useDebounce";
 import Icons from "./Icons";
@@ -36,8 +42,61 @@ const countries = [
   { name: "Ấn Độ", slug: "an-do" },
 ];
 
+const navUserItems = displayName => [
+  {
+    key: "display-name",
+    label: <h1 className="p-1 font-bold">Xin chào, {displayName}</h1>,
+  },
+  {
+    key: "divider-1",
+    label: <div className="border-t border-1"></div>,
+  },
+  {
+    key: "your-account",
+    label: (
+      <Button className="w-full hover:text-primary flex justify-start">
+        Tài khoản của bạn
+      </Button>
+    ),
+  },
+  {
+    key: "list-loves",
+    label: (
+      <Button className="w-full hover:text-primary flex justify-start">
+        Yêu thích
+      </Button>
+    ),
+  },
+  {
+    key: "list-watch-later",
+    label: (
+      <Button className="w-full hover:text-primary flex justify-start">
+        Xem sau
+      </Button>
+    ),
+  },
+  {
+    key: "divider-2",
+    label: <div className="border-t border-1/4"></div>,
+  },
+  {
+    key: "logout",
+    label: (
+      <Button
+        className="hover:text-primary w-full flex justify-start"
+        onClick={async () => {
+          await signOut(auth);
+        }}
+      >
+        Đăng xuất
+      </Button>
+    ),
+  },
+];
+
 const Navbar = () => {
   const location = useLocation();
+  const { user } = useAuth();
 
   return (
     <div className="@container flex justify-between items-center h-[60px] px-4 text-white mx-auto">
@@ -84,11 +143,332 @@ const Navbar = () => {
             <Icons.Notification className="w-6 h-6" />
           </Button>
 
-          <Button>
-            <Icons.User className="w-6 h-6" />
-          </Button>
+          <>
+            {user ? (
+              <Dropdown
+                menu={{ items: navUserItems(user.displayName) }}
+                trigger={["click"]}
+                placement="bottomRight"
+                arrow
+                dropdownRender={menu => (
+                  <div className="min-w-[200px] rounded-md p-0">
+                    {React.cloneElement(menu)}
+                  </div>
+                )}
+              >
+                <Button className="flex items-center gap-2">
+                  {user.photoURL ? (
+                    <img
+                      className="w-6 h-6"
+                      src={user.photoURL}
+                      alt={user.displayName}
+                    />
+                  ) : (
+                    <Icons.User className="w-6 h-6" />
+                  )}
+                </Button>
+              </Dropdown>
+            ) : (
+              <NavbarLogin />
+            )}
+          </>
         </ul>
       </div>
+    </div>
+  );
+};
+
+// NavbarLogin - Modal Login
+const NavbarLogin = () => {
+  const { handleSubmit, register, formState, setError, reset, watch } = useForm(
+    {
+      defaultValues: {
+        email: "",
+        password: "",
+        name: "", // Thêm trường "Tên" cho đăng ký
+        phone: "", // Thêm trường "Số điện thoại" cho đăng ký
+      },
+    },
+  );
+  const [openLogin, setOpenLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
+  const {
+    loginWithEmailPassword,
+    loginWithGoogle,
+    register: registerUser,
+    forgotPassword,
+  } = useAuth();
+
+  const handleLogin = async data => {
+    try {
+      const { email, password } = data;
+      const result = await loginWithEmailPassword(email, password);
+
+      if (result) {
+        setOpenLogin(false);
+      }
+    } catch (error) {
+      setError("root", {
+        message: "Đăng nhập thất bại",
+      });
+      toast.error(error?.message || "Đăng nhập thất bại");
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    const email = watch("email");
+
+    if (email.trim().length == 0) {
+      setError("email", {
+        message: "Vui lòng nhập email để reset mật khẩu",
+      });
+      return;
+    }
+
+    await forgotPassword(watch("email"));
+  };
+
+  const handleSignUp = async data => {
+    try {
+      const { email, password, name, phone } = data;
+
+      const result = await registerUser({
+        email,
+        password,
+        displayName: name,
+        phoneNumber: phone,
+        photoURL: "/images/user.png",
+      });
+
+      if (result) {
+        toast.success("Đăng ký thành công!");
+        setOpenLogin(false);
+        setIsLogin(true);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Đăng ký thất bại!");
+    }
+  };
+
+  const handleLoginGoogle = async () => {
+    try {
+      await loginWithGoogle();
+      toast.success("Đăng nhập bằng Google thành công!");
+      setOpenLogin(false);
+    } catch (error) {
+      console.log(error);
+      toast.error("Đăng nhập bằng Google thất bại!");
+    }
+  };
+
+  return (
+    <div className="relative flex items-center gap-2">
+      <Button
+        onClick={() => setOpenLogin(true)}
+        className="bg-transparent text-white hover:text-primary"
+      >
+        {isLogin ? "Đăng nhập" : "Đăng ký"}
+      </Button>
+
+      <Modal
+        centered
+        open={openLogin}
+        onCancel={() => setOpenLogin(false)}
+        footer={false}
+        className="bg-foreground rounded-xl p-2"
+        motion={false} // Tắt motion
+        maskTransitionName="" // Tắt hiệu ứng mờ background
+        transitionName="" // Tắt hiệu ứng chính của modal
+      >
+        <form
+          onSubmit={
+            isLogin ? handleSubmit(handleLogin) : handleSubmit(handleSignUp)
+          }
+          className="flex flex-col gap-4 p-2"
+        >
+          <h1 className="text-3xl font-bold text-center mb-4">
+            {isLogin ? "Đăng nhập" : "Đăng ký"}
+          </h1>
+
+          <div>
+            <input
+              className="w-full p-3 bg-foreground rounded-md outline-none text-white placeholder:text-white"
+              type="email"
+              placeholder="Email"
+              {...register("email", {
+                required: { value: true, message: "Vui lòng nhập email" },
+              })}
+            />
+            {formState?.errors?.email?.message && (
+              <p className="text-primary">
+                {formState?.errors?.email?.message}
+              </p>
+            )}
+          </div>
+
+          {!isLogin && (
+            <>
+              <div>
+                <input
+                  className="w-full p-3 bg-foreground rounded-md outline-none text-white placeholder:text-white"
+                  type="text"
+                  placeholder="Tên"
+                  {...register("name", {
+                    required: { value: true, message: "Vui lòng nhập tên" },
+                    pattern: {
+                      value: /^[A-Za-zÀ-ỵ\s.-]+$/,
+                      message: "Tên không hợp lệ", // Thông báo nếu không đúng định dạng
+                    },
+                    maxLength: {
+                      message: "Tên quá dài rồi! Đừng troll nữa!!",
+                      value: 30,
+                    },
+                  })}
+                />
+                {formState?.errors?.name?.message && (
+                  <>
+                    <p className="text-primary">
+                      {formState?.errors?.name?.message}
+                    </p>
+                  </>
+                )}
+
+                {/* Gợi ý cho user */}
+                <p className="ml-2 text-secondary">
+                  - Không chứa kí tự đặc biệt
+                </p>
+              </div>
+
+              <div>
+                <input
+                  className="w-full p-3 bg-foreground rounded-md outline-none text-white placeholder:text-white"
+                  type="text"
+                  placeholder="Số điện thoại"
+                  {...register("phone", {
+                    required: {
+                      value: true,
+                      message: "Vui lòng nhập số điện thoại",
+                    },
+                    // Thiết kế pattern phone 10 chữ bắt đầu bằng 0
+                    pattern: {
+                      value: /^0\d{9}$/, // Regex cho số điện thoại
+                      message: "Số điện thoại không hợp lệ ",
+                    },
+                  })}
+                />
+                {formState?.errors?.phone?.message && (
+                  <p className="text-primary">
+                    {formState?.errors?.phone?.message}
+                  </p>
+                )}
+              </div>
+            </>
+          )}
+
+          <div>
+            <input
+              className="w-full p-3 bg-foreground rounded-md outline-none text-white placeholder:text-white"
+              type="password"
+              placeholder="Mật khẩu"
+              {...register(
+                "password",
+                !isLogin && {
+                  required: { value: true, message: "Vui lòng nhập mật khẩu" },
+                  minLength: {
+                    value: 8,
+                    message: "Mật khẩu phải lớn hơn 8 kí tự!",
+                  },
+                },
+              )}
+            />
+
+            {/* Gợi ý cho user */}
+
+            {formState?.errors?.password?.message && (
+              <p className="text-primary">
+                {formState?.errors?.password?.message}
+              </p>
+            )}
+
+            {!isLogin && (
+              <p className="ml-2 text-secondary">
+                - Độ dài mật khẩu lớn hơn 8 kí tự
+              </p>
+            )}
+          </div>
+
+          <div className="flex justify-end mt-2">
+            {isLogin && (
+              <p
+                className="text-sm text-primary hover:underline cursor-pointer"
+                onClick={handleForgotPassword}
+              >
+                Quên mật khẩu?
+              </p>
+            )}
+          </div>
+
+          <Button
+            className="bg-red-600 hover:bg-red-700 text-white font-bold p-2 rounded-md"
+            type="submit"
+            disabled={formState.isSubmitting}
+          >
+            {formState.isSubmitting
+              ? isLogin
+                ? "Đang đăng nhập..."
+                : "Đang đăng ký..."
+              : isLogin
+                ? "Đăng nhập"
+                : "Đăng ký"}
+          </Button>
+
+          {formState?.errors?.root?.message && (
+            <p className="text-primary">{formState?.errors?.root?.message}</p>
+          )}
+
+          <div className="flex items-center gap-2">
+            <div className="flex-1 h-px bg-gray-600" />
+            <span className="text-gray-400 text-sm">Hoặc</span>
+            <div className="flex-1 h-px bg-gray-600" />
+          </div>
+
+          <Button
+            onClick={handleLoginGoogle}
+            className="flex items-center justify-center gap-2 bg-white text-black font-semibold p-2 rounded-md"
+          >
+            <FcGoogle className="text-2xl" />
+            Đăng nhập với Google
+          </Button>
+
+          <p className="text-center text-sm text-gray-400 mt-4">
+            {isLogin ? (
+              <>
+                Bạn chưa có tài khoản?{" "}
+                <span
+                  className="text-white font-semibold cursor-pointer hover:underline"
+                  onClick={() => {
+                    setIsLogin(false);
+                    reset();
+                  }}
+                >
+                  Đăng ký
+                </span>
+              </>
+            ) : (
+              <>
+                Bạn đã có tài khoản?{" "}
+                <span
+                  className="text-white font-semibold cursor-pointer hover:underline"
+                  onClick={() => setIsLogin(true)}
+                >
+                  Đăng nhập
+                </span>
+              </>
+            )}
+          </p>
+        </form>
+      </Modal>
     </div>
   );
 };

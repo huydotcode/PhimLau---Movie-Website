@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
+import { IoLogIn } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { auth } from "../app/firebase";
@@ -266,9 +267,16 @@ const NavbarLogin = () => {
     <div className="relative flex items-center gap-2">
       <Button
         onClick={() => setOpenLogin(true)}
-        className="bg-transparent text-white hover:text-primary"
+        className="bg-transparent text-white hover:text-primary hidden md:flex"
       >
         {isLogin ? "Đăng nhập" : "Đăng ký"}
+      </Button>
+
+      <Button
+        onClick={() => setOpenLogin(true)}
+        className="bg-transparent text-white hover:text-primary md:hidden"
+      >
+        <IoLogIn className="w-8 h-8" />
       </Button>
 
       <Modal

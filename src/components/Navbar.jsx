@@ -160,7 +160,7 @@ const Navbar = () => {
                 <Button className="flex items-center gap-2">
                   {user.photoURL ? (
                     <img
-                      className="w-6 h-6"
+                      className="w-8 h-8 rounded-full"
                       src={user.photoURL}
                       alt={user.displayName}
                     />

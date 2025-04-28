@@ -7,12 +7,14 @@ const Button = ({
   className = "",
   onClick = () => {},
   href = "",
+  ...props
 }) => {
   if (href.length > 0) {
     return (
       <Link
         className={`flex items-center justify-center gap-2 cursor-pointer hover:opacity-80 transition-all duration-200 ${className}`}
         to={href}
+        {...props}
       >
         {children}
       </Link>
@@ -24,6 +26,7 @@ const Button = ({
       className={`flex items-center justify-center gap-2 cursor-pointer hover:opacity-80 transition-all duration-200 ${className}`}
       onClick={onClick}
       type={type}
+      {...props}
     >
       {children}
     </button>

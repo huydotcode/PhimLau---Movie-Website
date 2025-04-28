@@ -5,7 +5,7 @@ import Container from "../components/Container";
 import Icons from "../components/Icons";
 import Button from "../components/ui/Button";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import { TopMovieSection } from "./HomePage";
+import { TopNewMovieSection } from "./HomePage";
 
 /*
 {
@@ -248,7 +248,7 @@ const MovieInfomationPage = () => {
       </Container>
 
       <div className="px-4">
-        <TopMovieSection />
+        <TopNewMovieSection />
       </div>
 
       {loading && (

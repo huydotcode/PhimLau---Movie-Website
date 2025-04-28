@@ -11,7 +11,8 @@ import {
   useKoreanMovies,
   useNewSeriesMovies,
   useNewSingleMovies,
-  useTopMovies,
+  useTopNewMovies,
+  useTopViewMovies,
   useTrendingMovies,
 } from "../hooks/useMovies";
 
@@ -22,7 +23,8 @@ const HomePage = () => {
 
       <Container>
         <div className="w-full mt-[100px] pb-[100px]">
-          <TopMovieSection />
+          <TopNewMovieSection />
+          <TopViewMovieSection />
           <TopCategorySection />
           <NewSingleMovieSection />
           <NewSeriesMovieSection />
@@ -35,19 +37,55 @@ const HomePage = () => {
   );
 };
 
-// Phim thịnh hành
-export const TopMovieSection = () => {
+// Phim thịnh hành trong tháng này
+export const TopNewMovieSection = () => {
   const { ref, inView } = useInView({
     threshold: 0,
     triggerOnce: true,
   });
-  const { data: topMovies, isLoading } = useTopMovies({
+  const {
+    data: topMovies,
+    error,
+    isLoading,
+  } = useTopNewMovies({
     enabled: inView,
   });
+
+  if (error) {
+    return <></>;
+  }
 
   return (
     <ListMovieContainer
       title={"Hiện đang thịnh hành"}
+      wrapperRef={ref}
+      movies={topMovies}
+      isLoading={isLoading}
+    />
+  );
+};
+
+// Phim thịnh hành
+export const TopViewMovieSection = () => {
+  const { ref, inView } = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
+  const {
+    data: topMovies,
+    error,
+    isLoading,
+  } = useTopViewMovies({
+    enabled: inView,
+  });
+
+  if (error) {
+    return <></>;
+  }
+
+  return (
+    <ListMovieContainer
+      title={"Phim nhiều lượt xem nhất"}
       wrapperRef={ref}
       movies={topMovies}
       isLoading={isLoading}
@@ -62,9 +100,17 @@ const TopCategorySection = () => {
     triggerOnce: true,
   });
 
-  const { data: topCategories, isLoading } = useTopCategories({
+  const {
+    data: topCategories,
+    error,
+    isLoading,
+  } = useTopCategories({
     enable: inView,
   });
+
+  if (error) {
+    return <></>;
+  }
 
   return (
     <div ref={ref} className="relative mx-auto py-4 min-h-[400px]">
@@ -88,9 +134,17 @@ const NewSingleMovieSection = () => {
     triggerOnce: true,
   });
 
-  const { data: newMovies, isLoading } = useNewSingleMovies({
+  const {
+    data: newMovies,
+    error,
+    isLoading,
+  } = useNewSingleMovies({
     enabled: inView,
   });
+
+  if (error) {
+    return <></>;
+  }
 
   return (
     <ListMovieContainer
@@ -110,9 +164,17 @@ const NewSeriesMovieSection = () => {
     triggerOnce: true,
   });
 
-  const { data: newMovies, isLoading } = useNewSeriesMovies({
+  const {
+    data: newMovies,
+    error,
+    isLoading,
+  } = useNewSeriesMovies({
     enabled: inView,
   });
+
+  if (error) {
+    return <></>;
+  }
 
   return (
     <ListMovieContainer
@@ -132,9 +194,17 @@ const TrendingMovieSection = () => {
     triggerOnce: true,
   });
 
-  const { data: trendingMovies, isLoading } = useTrendingMovies({
+  const {
+    data: trendingMovies,
+    error,
+    isLoading,
+  } = useTrendingMovies({
     enabled: inView,
   });
+
+  if (error) {
+    return <></>;
+  }
 
   return (
     <ListMovieContainer
@@ -154,9 +224,17 @@ const KoreanMovieSection = () => {
     triggerOnce: true,
   });
 
-  const { data: koreanMovies, isLoading } = useKoreanMovies({
+  const {
+    data: koreanMovies,
+    error,
+    isLoading,
+  } = useKoreanMovies({
     enabled: inView,
   });
+
+  if (error) {
+    return <></>;
+  }
 
   return (
     <ListMovieContainer
@@ -176,9 +254,17 @@ const AmericanMovieSection = () => {
     triggerOnce: true,
   });
 
-  const { data: americanMovies, isLoading } = useAmericanMovies({
+  const {
+    data: americanMovies,
+    error,
+    isLoading,
+  } = useAmericanMovies({
     enabled: inView,
   });
+
+  if (error) {
+    return <></>;
+  }
 
   return (
     <ListMovieContainer

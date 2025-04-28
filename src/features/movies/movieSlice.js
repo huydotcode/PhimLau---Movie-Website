@@ -1,33 +1,108 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchMovies } from "./movieAPI";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  getFavoriteMovies,
+  getSavedMovies,
+  getWatchedMovies,
+} from "../../services/movieService";
 
-const initialState = {
-  list: [],
-  status: "idle",
-};
+// Async Thunks
+export const fetchSavedMovies = createAsyncThunk(
+  "movies/fetchSavedMovies",
+  async (uid, { rejectWithValue }) => {
+    try {
+      const data = await getSavedMovies(uid);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
-export const getMovies = createAsyncThunk("movies/getMovies", async () => {
-  const response = await fetchMovies(); // gọi API
-  return response;
-});
+export const fetchFavoriteMovies = createAsyncThunk(
+  "movies/fetchFavoriteMovies",
+  async (uid, { rejectWithValue }) => {
+    try {
+      const data = await getFavoriteMovies(uid);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
-const movieSlice = createSlice({
+export const fetchWatchedMovies = createAsyncThunk(
+  "movies/fetchWatchedMovies",
+  async (uid, { rejectWithValue }) => {
+    try {
+      const data = await getWatchedMovies(uid);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+// Slice
+const moviesSlice = createSlice({
   name: "movies",
-  initialState,
-  reducers: {},
+  initialState: {
+    savedMovies: [],
+    favoriteMovies: [],
+    watchedMovies: [],
+    loading: false,
+    error: null,
+  },
+  reducers: {
+    clearMoviesState: state => {
+      state.savedMovies = [];
+      state.favoriteMovies = [];
+      state.watchedMovies = [];
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers: builder => {
     builder
-      .addCase(getMovies.pending, state => {
-        state.status = "loading";
+      // Fetch Saved
+      .addCase(fetchSavedMovies.pending, state => {
+        state.loading = true;
       })
-      .addCase(getMovies.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.list = action.payload;
+      .addCase(fetchSavedMovies.fulfilled, (state, action) => {
+        state.loading = false;
+        state.savedMovies = action.payload;
       })
-      .addCase(getMovies.rejected, state => {
-        state.status = "failed";
+      .addCase(fetchSavedMovies.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // Fetch Favorite
+      .addCase(fetchFavoriteMovies.pending, state => {
+        state.loading = true;
+      })
+      .addCase(fetchFavoriteMovies.fulfilled, (state, action) => {
+        state.loading = false;
+        state.favoriteMovies = action.payload;
+      })
+      .addCase(fetchFavoriteMovies.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // Fetch Watched
+      .addCase(fetchWatchedMovies.pending, state => {
+        state.loading = true;
+      })
+      .addCase(fetchWatchedMovies.fulfilled, (state, action) => {
+        state.loading = false;
+        state.watchedMovies = action.payload;
+      })
+      .addCase(fetchWatchedMovies.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
-export default movieSlice.reducer;
+export const { clearMoviesState } = moviesSlice.actions;
+export default moviesSlice.reducer;

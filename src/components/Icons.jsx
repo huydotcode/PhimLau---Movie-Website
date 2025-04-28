@@ -1,4 +1,6 @@
+import { BiSolidLike } from "react-icons/bi";
 import {
+  FaChevronDown,
   FaCommentDots,
   FaHeart,
   FaPlay,
@@ -9,7 +11,6 @@ import {
 } from "react-icons/fa";
 import { IoIosArrowUp, IoIosMenu } from "react-icons/io";
 import { IoNotifications, IoSend } from "react-icons/io5";
-import { BiSolidLike } from "react-icons/bi";
 
 const Icons = {
   Play: ({ className = "" }) => <FaPlay className={className} />,
@@ -26,6 +27,7 @@ const Icons = {
   RegStar: ({ className = "" }) => <FaRegStar className={className} />,
   Heart: ({ className = "" }) => <FaHeart className={className} />,
   Send: ({ className = "" }) => <IoSend className={className} />,
+  ChevronDown: ({ className = "" }) => <FaChevronDown className={className} />,
 };
 
 export default Icons;

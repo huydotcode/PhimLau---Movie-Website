@@ -21,6 +21,10 @@ const CategoryCard = ({ category }) => {
         return "from-green-400 to-green-700";
       case "chính kịch":
         return "from-purple-600 to-purple-900";
+      case "kinh dị":
+        return "from-red-800 to-red-900";
+      case "viễn tưởng":
+        return "from-blue-500 to-blue-700";
 
       default:
         return "from-gray-700 to-gray-900";

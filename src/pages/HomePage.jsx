@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useInView } from "react-intersection-observer";
-import { toast } from "sonner";
+import Banner from "../components/Banner";
 import CategoryCard from "../components/CategoryCard";
+import Container from "../components/Container";
 import ListMovieContainer from "../components/ListMovieContainer";
 import Loading from "../components/Loading";
-import Banner from "../components/Banner";
-import Container from "../components/Container";
+import { useTopCategories } from "../hooks/useCategory";
+import {
+  useAmericanMovies,
+  useKoreanMovies,
+  useNewSeriesMovies,
+  useNewSingleMovies,
+  useTopMovies,
+  useTrendingMovies,
+} from "../hooks/useMovies";
 
 const HomePage = () => {
   return (
@@ -29,33 +37,13 @@ const HomePage = () => {
 
 // Phim thịnh hành
 export const TopMovieSection = () => {
-  const [topMovies, setTopMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { ref, inView } = useInView({
-    /* Optional options */
     threshold: 0,
     triggerOnce: true,
   });
-
-  // Nếu in view thì gọi API
-  useEffect(() => {
-    if (inView) {
-      (async () => {
-        try {
-          setIsLoading(true);
-
-          const res = await fetch("/json/movies_top_rated.json");
-          const data = await res.json();
-          setTopMovies(data);
-        } catch (err) {
-          console.log(err);
-          toast("Có lỗi xảy ra khi lấy danh sách phim!");
-        } finally {
-          setIsLoading(false);
-        }
-      })();
-    }
-  }, [inView]);
+  const { data: topMovies, isLoading } = useTopMovies({
+    enabled: inView,
+  });
 
   return (
     <ListMovieContainer
@@ -69,33 +57,14 @@ export const TopMovieSection = () => {
 
 // Thể loại phim thịnh hành
 const TopCategorySection = () => {
-  const [topCategories, setTopCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { ref, inView } = useInView({
-    /* Optional options */
     threshold: 0,
     triggerOnce: true,
   });
 
-  // Nếu in view thì gọi API
-  useEffect(() => {
-    if (inView) {
-      (async () => {
-        try {
-          setIsLoading(true);
-
-          const res = await fetch("/json/movie_top_categories.json");
-          const data = await res.json();
-          setTopCategories(data.slice(0, 6));
-        } catch (err) {
-          console.log(err);
-          toast("Có lỗi xảy ra khi lấy danh sách thể loại!");
-        } finally {
-          setIsLoading(false);
-        }
-      })();
-    }
-  }, [inView]);
+  const { data: topCategories, isLoading } = useTopCategories({
+    enable: inView,
+  });
 
   return (
     <div ref={ref} className="relative mx-auto py-4 min-h-[400px]">
@@ -113,33 +82,15 @@ const TopCategorySection = () => {
 
 // Phim lẻ mới ra
 const NewSingleMovieSection = () => {
-  const [newMovies, setNewMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
     triggerOnce: true,
   });
 
-  // Nếu in view thì gọi API
-  useEffect(() => {
-    if (inView) {
-      (async () => {
-        try {
-          setIsLoading(true);
-
-          const res = await fetch("/json/movies_single_new.json");
-          const data = await res.json();
-          setNewMovies(data);
-        } catch (err) {
-          console.log(err);
-          toast("Có lỗi xảy ra khi lấy danh sách phim!");
-        } finally {
-          setIsLoading(false);
-        }
-      })();
-    }
-  }, [inView]);
+  const { data: newMovies, isLoading } = useNewSingleMovies({
+    enabled: inView,
+  });
 
   return (
     <ListMovieContainer
@@ -153,33 +104,15 @@ const NewSingleMovieSection = () => {
 
 // Phim bộ mới ra
 const NewSeriesMovieSection = () => {
-  const [newMovies, setNewMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
     triggerOnce: true,
   });
 
-  // Nếu in view thì gọi API
-  useEffect(() => {
-    if (inView) {
-      (async () => {
-        try {
-          setIsLoading(true);
-
-          const res = await fetch("/json/movies_series_new.json");
-          const data = await res.json();
-          setNewMovies(data);
-        } catch (err) {
-          console.log(err);
-          toast("Có lỗi xảy ra khi lấy danh sách phim!");
-        } finally {
-          setIsLoading(false);
-        }
-      })();
-    }
-  }, [inView]);
+  const { data: newMovies, isLoading } = useNewSeriesMovies({
+    enabled: inView,
+  });
 
   return (
     <ListMovieContainer
@@ -193,33 +126,15 @@ const NewSeriesMovieSection = () => {
 
 // Phim được trending
 const TrendingMovieSection = () => {
-  const [trendingMovies, setTrendingMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
     triggerOnce: true,
   });
 
-  // Nếu in view thì gọi API
-  useEffect(() => {
-    if (inView) {
-      (async () => {
-        try {
-          setIsLoading(true);
-
-          const res = await fetch("/json/movies_trending.json");
-          const data = await res.json();
-          setTrendingMovies(data);
-        } catch (err) {
-          console.log(err);
-          toast("Có lỗi xảy ra khi lấy danh sách phim!");
-        } finally {
-          setIsLoading(false);
-        }
-      })();
-    }
-  }, [inView]);
+  const { data: trendingMovies, isLoading } = useTrendingMovies({
+    enabled: inView,
+  });
 
   return (
     <ListMovieContainer
@@ -233,33 +148,15 @@ const TrendingMovieSection = () => {
 
 // Phim hàn thịnh hành
 const KoreanMovieSection = () => {
-  const [koreanMovies, setKoreanMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
     triggerOnce: true,
   });
 
-  // Nếu in view thì gọi API
-  useEffect(() => {
-    if (inView) {
-      (async () => {
-        try {
-          setIsLoading(true);
-
-          const res = await fetch("/json/movies_trending_korean.json");
-          const data = await res.json();
-          setKoreanMovies(data.slice(0, 10));
-        } catch (err) {
-          console.log(err);
-          toast("Có lỗi xảy ra khi lấy danh sách phim!");
-        } finally {
-          setIsLoading(false);
-        }
-      })();
-    }
-  }, [inView]);
+  const { data: koreanMovies, isLoading } = useKoreanMovies({
+    enabled: inView,
+  });
 
   return (
     <ListMovieContainer
@@ -273,33 +170,15 @@ const KoreanMovieSection = () => {
 
 // Phim mỹ thịnh hành
 const AmericanMovieSection = () => {
-  const [americanMovies, setAmericanMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
     triggerOnce: true,
   });
 
-  // Nếu in view thì gọi API
-  useEffect(() => {
-    if (inView) {
-      (async () => {
-        try {
-          setIsLoading(true);
-
-          const res = await fetch("/json/movies_trending_us.json");
-          const data = await res.json();
-          setAmericanMovies(data);
-        } catch (err) {
-          console.log(err);
-          toast("Có lỗi xảy ra khi lấy danh sách phim!");
-        } finally {
-          setIsLoading(false);
-        }
-      })();
-    }
-  }, [inView]);
+  const { data: americanMovies, isLoading } = useAmericanMovies({
+    enabled: inView,
+  });
 
   return (
     <ListMovieContainer

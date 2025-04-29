@@ -4,101 +4,6 @@ import CommentSection from "../components/CommentSection";
 import VideoPlayer from "../components/VideoPlayer";
 import { TopNewMovieSection } from "./HomePage";
 
-/**
- "movie": {
-"tmdb": {
-"type": "movie",
-"id": "1419826",
-"season": null,
-"vote_average": 8,
-"vote_count": 1
-},
-"imdb": {
-"id": "tt26595906"
-},
-"created": {
-"time": "2025-04-08T21:23:51.000Z"
-},
-"modified": {
-"time": "2025-04-08T21:59:44.000Z"
-},
-"_id": "67f53177b42714dde6d85605",
-"name": "Thế Giới Hiểm Nguy",
-"slug": "the-gioi-hiem-nguy",
-"origin_name": "The World Will Tremble",
-"content": "<p>Bộ phim dựa trên câu chuyện có thật đầy kinh ngạc về một nhóm tù nhân trong Thế chiến thứ hai, những người đã thực hiện một cuộc trốn thoát tưởng chừng bất khả thi khỏi trại hủy diệt Chełmno - trại tử thần đầu tiên của Đức Quốc xã - nhằm cung cấp bằng chứng trực tiếp đầu tiên về Holocaust (Cuộc diệt chủng Do Thái).phim xoay quanh Solomon Wiener (Oliver Jackson-Cohen) và Michael Podchlebnik (Jeremy Neumark Jones), hai tù nhân tại trại Chełmno, nơi hàng ngàn người, chủ yếu là người Do Thái, bị sát hại dã man bằng cách ngạt khí trong các xe tải. Họ chứng kiến những cảnh tượng kinh hoàng: những con người bị giết chết bằng khí độc, tiếng hét của các nạn nhân khi họ ngạt thở, và những thi thể bị chôn vùi trong các hố chôn tập thể. Trước thực tại rằng cái chết là không thể tránh khỏi nếu ở lại, nhóm tù nhân, bao gồm cả Solomon và Michael, quyết định lên kế hoạch trốn thoát để cảnh báo thế giới về những gì đang xảy ra.</p><p>&nbsp;</p>",
-"type": "single",
-"status": "completed",
-"thumb_url": "https://img.ophim.live/uploads/movies/the-gioi-hiem-nguy-thumb.jpg",
-"poster_url": "https://img.ophim.live/uploads/movies/the-gioi-hiem-nguy-poster.jpg",
-"is_copyright": false,
-"sub_docquyen": false,
-"chieurap": false,
-"trailer_url": "https://www.youtube.com/watch?v=XOo51-v7sxM",
-"time": "109 Phút",
-"episode_current": "Full",
-"episode_total": "1",
-"quality": "HD",
-"lang": "Vietsub",
-"notify": "",
-"showtimes": "",
-"year": 2025,
-"view": 164,
-"actor": [
-"Oliver Jackson-Cohen",
-"Jeremy Neumark Jones",
-"David Kross",
-"Michael Epp"
-],
-"director": [
-"Lior Geller"
-],
-"category": [
-{
-"id": "620a2253e0fc277084dfd339",
-"name": "Chiến Tranh",
-"slug": "chien-tranh"
-},
-{
-"id": "620f3d2b91fa4af90ab697fe",
-"name": "Chính kịch",
-"slug": "chinh-kich"
-}
-],
-"country": [
-{
-"id": "620a231fe0fc277084dfd7ce",
-"name": "Âu Mỹ",
-"slug": "au-my"
-},
-{
-"id": "620a2370e0fc277084dfd91e",
-"name": "Anh",
-"slug": "anh"
-},
-{
-"id": "62121edd1f1609c9d9345940",
-"name": "Nga",
-"slug": "nga"
-}
-]
-},
-"episodes": [
-{
-"server_name": "Vietsub #1",
-"server_data": [
-{
-"name": "Full",
-"slug": "full",
-"filename": "(Sub Viet) The World Will Tremble 2025 1080p AMZN WEB-DL DDP2 0 H 264-BYNDR",
-"link_embed": "https://vip.opstream90.com/share/254ed7d2de3b23ab10936522dd547b78",
-"link_m3u8": "https://vip.opstream90.com/20250408/4002_254ed7d2/index.m3u8"
-}
-]
-}
-]
- */
-
 const WatchMoviePage = () => {
   const { slug } = useParams();
   const searchParams = useSearchParams();
@@ -109,10 +14,6 @@ const WatchMoviePage = () => {
   const [currentEpisode, setCurrentEpisode] = useState(t < 0 ? 0 : t);
   const [episodes, setEpisodes] = useState([]);
   const videoRef = useRef(null);
-
-  useEffect(() => {
-    console.log({ currentEpisode });
-  }, [currentEpisode]);
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -141,11 +42,7 @@ const WatchMoviePage = () => {
     if (videoRef.current) {
       videoRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [currentEpisode, videoRef.current]);
-
-  useEffect(() => {
-    // console.log("movie", movie);
-  }, [movie]);
+  }, [currentEpisode]);
 
   return (
     <div className="@container relative bg-gradient-to-t from-foreground to-foreground via-transparent">
@@ -173,10 +70,10 @@ const WatchMoviePage = () => {
                 IMDB: {movie?.tmdb.vote_average.toFixed(1)}
               </span>
               <span className="bg-[rgba(0,0,0,0.5)]  px-2 py-1 text-sm rounded">
-                {movie?.category.map(cat => cat.name).join(", ")}
+                {movie?.category.map((cat) => cat.name).join(", ")}
               </span>
               <span className="bg-[rgba(0,0,0,0.5)]  px-2 py-1 text-sm rounded">
-                {movie?.country.map(country => country.name).join(", ")}
+                {movie?.country.map((country) => country.name).join(", ")}
               </span>
             </div>
             <div

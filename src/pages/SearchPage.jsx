@@ -1,10 +1,10 @@
+import { Pagination } from "antd";
 import React, { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import Loading from "../components/Loading";
+import { useSearchParams } from "react-router-dom";
 import FilterPanel from "../components/FilterPanel";
+import Loading from "../components/Loading";
 import MovieCard from "../components/MovieCard";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import { Pagination } from "antd";
 
 const PAGE_SIZE = 20; // Số lượng kết quả tối đa để hiển thị
 
@@ -39,7 +39,7 @@ const SearchPage = () => {
 
         const filtered = data
           .filter(
-            movie =>
+            (movie) =>
               movie?.name.toLowerCase().includes(query.toLowerCase()) ||
               movie?.slug.includes(query.toLowerCase()),
           )
@@ -58,22 +58,22 @@ const SearchPage = () => {
 
   const handleFilter = () => {
     console.log("handleFilter");
-    let results = searchResults.filter(movie => {
+    let results = searchResults.filter((movie) => {
       const matchCountry =
         filters.country.length === 0 ||
-        filters.country.some(country =>
-          movie.country?.some(c => c.name === country),
+        filters.country.some((country) =>
+          movie.country?.some((c) => c.name === country),
         );
       const matchCategory =
         filters.category.length === 0 ||
-        filters.category.some(category =>
-          movie.category?.some(cat => cat.name === category),
+        filters.category.some((category) =>
+          movie.category?.some((cat) => cat.name === category),
         );
       // const matchYear =
       //   filters.year.length === 0 || filters.year.includes(movie.year?.toString());
       const matchYear =
         filters.year.length === 0 ||
-        filters.year.some(year => {
+        filters.year.some((year) => {
           if (year === "Cũ hơn") {
             return movie.year < 2020; // Lọc phim có năm sản xuất cũ hơn 2020
           }
@@ -115,7 +115,7 @@ const SearchPage = () => {
 
   const totalMovies = filteredResults.length;
 
-  const handlePageChange = page => {
+  const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
@@ -131,7 +131,7 @@ const SearchPage = () => {
       <div className="mb-6">
         <button
           className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-md"
-          onClick={() => setShowFilters(prev => !prev)}
+          onClick={() => setShowFilters((prev) => !prev)}
         >
           <span>🔍</span> Bộ lọc
         </button>
@@ -165,7 +165,7 @@ const SearchPage = () => {
             total={totalMovies}
             onChange={handlePageChange}
             showSizeChanger={false}
-            showTotal={total => `Tổng số ${total} phim`}
+            showTotal={(total) => `Tổng số ${total} phim`}
           />
         </div>
       )}

@@ -1,4 +1,4 @@
-export const convertTime = time => {
+export const convertTime = (time) => {
   const date = new Date(time);
   const options = {
     year: "numeric",

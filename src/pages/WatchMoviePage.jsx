@@ -214,12 +214,12 @@ const WatchMoviePage = () => {
         {movie && movie?.type !== "single" && (
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-bold">Chọn tập phim</h2>
-            <div className="flex flex-wrap gap-4">
+            <div className="grid grid-cols-[repeat(auto-fit,_minmax(50px,_80px))] gap-4">
               {episodes?.server_data &&
                 episodes?.server_data.map((episode, index) => (
                   <Link
                     key={index}
-                    className={`px-4 py-2 rounded-lg ${
+                    className={`px-4 py-2 rounded-lg text-center ${
                       currentEpisode === index ? "bg-primary" : "bg-secondary"
                     }`}
                     onClick={() => setCurrentEpisode(index)}

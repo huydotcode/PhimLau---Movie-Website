@@ -111,7 +111,7 @@ const WatchMoviePage = () => {
         {movie && movie?.type !== "single" && (
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-bold">Chọn tập phim</h2>
-            <div className="grid grid-cols-[repeat(auto-fit,_minmax(50px,_80px))] gap-4">
+            <div className="grid grid-cols-[repeat(auto-fit,_minmax(50px,_80px))] gap-4 max-h-[50vh] overflow-scroll">
               {episodes?.server_data &&
                 episodes?.server_data.map((episode, index) => (
                   <Link

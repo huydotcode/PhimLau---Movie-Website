@@ -125,11 +125,13 @@ const UpdateInfo = () => {
 
       {/* Avatar */}
       <div className="flex items-center space-x-4 mb-6">
-        <img
-          src={user?.photoURL}
-          alt="Avatar"
-          className="w-16 h-16 rounded-full object-cover"
-        />
+        {user?.photoURL.length > 0 && (
+          <img
+            src={user?.photoURL}
+            alt="Avatar"
+            className="w-16 h-16 rounded-full object-cover"
+          />
+        )}
         <div>
           <p className="text-lg font-semibold">{user?.displayName}</p>
           <p className="text-sm text-gray-400">{user?.email}</p>

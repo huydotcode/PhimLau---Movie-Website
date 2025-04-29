@@ -72,7 +72,7 @@ const navUserItems = displayName => [
 
 const Navbar = () => {
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const { data: categories } = useAllCategories({ enable: true });
   const { data: countries } = useAllCountries({ enable: true });
 
@@ -121,35 +121,37 @@ const Navbar = () => {
             <Icons.Notification className="w-6 h-6" />
           </Button>
 
-          <>
-            {user ? (
-              <Dropdown
-                menu={{ items: navUserItems(user.displayName) }}
-                trigger={["click"]}
-                placement="bottomRight"
-                arrow
-                dropdownRender={menu => (
-                  <div className="min-w-[200px] rounded-md p-0">
-                    {React.cloneElement(menu)}
-                  </div>
-                )}
-              >
-                <Button className="flex items-center gap-2">
-                  {user.photoURL ? (
-                    <img
-                      className="w-8 h-8 rounded-full"
-                      src={user.photoURL}
-                      alt={user.displayName}
-                    />
-                  ) : (
-                    <Icons.User className="w-6 h-6" />
+          {!loading && (
+            <>
+              {user ? (
+                <Dropdown
+                  menu={{ items: navUserItems(user.displayName) }}
+                  trigger={["click"]}
+                  placement="bottomRight"
+                  arrow
+                  dropdownRender={menu => (
+                    <div className="min-w-[200px] rounded-md p-0">
+                      {React.cloneElement(menu)}
+                    </div>
                   )}
-                </Button>
-              </Dropdown>
-            ) : (
-              <NavbarLogin />
-            )}
-          </>
+                >
+                  <Button className="flex items-center gap-2">
+                    {user.photoURL ? (
+                      <img
+                        className="w-8 h-8 rounded-full"
+                        src={user.photoURL}
+                        alt={user.displayName}
+                      />
+                    ) : (
+                      <Icons.User className="w-6 h-6" />
+                    )}
+                  </Button>
+                </Dropdown>
+              ) : (
+                <NavbarLogin />
+              )}
+            </>
+          )}
         </ul>
       </div>
     </div>

@@ -23,15 +23,6 @@ import { auth, db } from "../app/firebase"; // đường dẫn tới firebase.js
 const AuthContext = createContext();
 const provider = new GoogleAuthProvider();
 
-/*
-USER:
-- displayName
-- email
-- phoneNumber
-- photoURL
-- uid
-*/
-
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // chờ load firebase

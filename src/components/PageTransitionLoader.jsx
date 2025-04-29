@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { publicRoutes } from "../routes";
 import Footer from "./Footer";
@@ -50,16 +50,19 @@ const PageTransitionLoader = () => {
 
         <Routes location={location} key={location.pathname}>
           {publicRoutes.map((route, index) => {
-            const Layout = route.layout;
+            const Layout = route?.layout ?? React.Fragment;
+
             const Page = route.element;
             return (
               <Route
                 key={index}
                 path={route.path}
                 element={
-                  <Layout>
-                    <Page />
-                  </Layout>
+                  <>
+                    <Layout>
+                      <Page />
+                    </Layout>
+                  </>
                 }
               />
             );

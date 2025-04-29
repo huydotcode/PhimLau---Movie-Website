@@ -53,9 +53,9 @@ const CategoryPage = () => {
 
 
   const handleFilter = () => {
-    if (!data?.movies) return;
+    if (!data?.movies) return [];
 
-    let results = data.filter((movie) => {
+    let results = data.movies.filter((movie) => {
       // Lọc theo quốc gia
       const matchCountry =
         filters.country.length === 0 ||

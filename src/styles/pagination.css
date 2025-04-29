@@ -1,0 +1,74 @@
+/* Dark theme styles for Ant Design Pagination
+.dark-pagination .ant-pagination-item {
+  background-color: #1f2937;
+  border-color: #374151;
+}
+
+.dark-pagination .ant-pagination-item a {
+  color: #e5e7eb;
+}
+
+.dark-pagination .ant-pagination-item:hover {
+  border-color: #4b5563;
+}
+
+.dark-pagination .ant-pagination-item:hover a {
+  color: #60a5fa;
+}
+
+.dark-pagination .ant-pagination-item-active {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.dark-pagination .ant-pagination-item-active a {
+  color: #ffffff;
+}
+
+.dark-pagination .ant-pagination-prev .ant-pagination-item-link,
+.dark-pagination .ant-pagination-next .ant-pagination-item-link {
+  background-color: #1f2937;
+  border-color: #374151;
+  color: #e5e7eb;
+}
+
+.dark-pagination .ant-pagination-prev:hover .ant-pagination-item-link,
+.dark-pagination .ant-pagination-next:hover .ant-pagination-item-link {
+  border-color: #4b5563;
+  color: #60a5fa;
+}
+
+.dark-pagination .ant-pagination-disabled .ant-pagination-item-link {
+  background-color: #1f2937;
+  border-color: #374151;
+  color: #6b7280;
+}
+
+.dark-pagination .ant-pagination-options {
+  color: #e5e7eb;
+}
+
+.dark-pagination .ant-select-selector {
+  background-color: #1f2937 !important;
+  border-color: #374151 !important;
+  color: #e5e7eb !important;
+}
+
+.dark-pagination .ant-select-arrow {
+  color: #e5e7eb;
+}
+
+.dark-pagination .ant-pagination-options-quick-jumper input {
+  background-color: #1f2937;
+  border-color: #374151;
+  color: #e5e7eb;
+}
+
+.dark-pagination .ant-pagination-options-quick-jumper input:hover,
+.dark-pagination .ant-pagination-options-quick-jumper input:focus {
+  border-color: #4b5563;
+}
+
+.dark-pagination .ant-pagination-total-text {
+  color: #e5e7eb;
+} */

@@ -5,7 +5,7 @@ import Container from "../components/Container";
 import Icons from "../components/Icons";
 import Button from "../components/ui/Button";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import { TopMovieSection } from "./HomePage";
+import { TopNewMovieSection } from "./HomePage";
 
 /*
 {
@@ -150,6 +150,19 @@ const MovieInfomationPage = () => {
         {/* Banner */}
         <div className="absolute inset-0 gradient-left-right z-10"></div>
 
+        {/* {movie?.trailer_url.length > 0 && (
+          <div className="absolute inset-0 z-20 flex items-center justify-center">
+            <Button
+              className="bg-primary px-8 py-3 rounded-full font-semibold uppercase flex items-center gap-2 text-md hover:opacity-40"
+              onClick={() => {
+                naviagte(`/xem-phim/${movie.slug}`);
+              }}
+            >
+              <Icons.Play /> Xem ngay
+            </Button>
+          </div>
+        )} */}
+
         <div
           className="relative inset-0 bg-cover bg-center brightness-[.5] h-[50vh] lg:h-[80vh]"
           style={{
@@ -235,7 +248,7 @@ const MovieInfomationPage = () => {
       </Container>
 
       <div className="px-4">
-        <TopMovieSection />
+        <TopNewMovieSection />
       </div>
 
       {loading && (

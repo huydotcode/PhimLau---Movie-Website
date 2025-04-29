@@ -96,7 +96,7 @@ const MovieCard = ({ movie }) => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        {movie?.tmdb?.vote_average && (
+        {movie?.tmdb?.vote_average > 0 && (
           <span className="bg-[rgba(0,0,0,0.8)] px-2 py-1 rounded-md flex items-center gap-1 text-primary">
             {movie.tmdb.vote_average.toFixed(1)}
           </span>
@@ -105,12 +105,6 @@ const MovieCard = ({ movie }) => {
         {movie?.episode_total > 0 && (
           <span className="bg-[rgba(0,0,0,0.4)] px-2 py-1 rounded-md">
             {movie.episode_total} Tập
-          </span>
-        )}
-
-        {movie?.type == "single" && (
-          <span className="bg-[rgba(0,0,0,0.4)] px-2 py-1 rounded-md">
-            Phim lẻ
           </span>
         )}
 

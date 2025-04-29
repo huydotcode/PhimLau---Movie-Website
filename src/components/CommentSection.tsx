@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { toast } from "sonner";
 import useFetch from "../hooks/useFetch";
-import Icons from "./Icons";
-import Avatar from "./Avatar";
 import { convertTime } from "../utils/convertTime";
+import Avatar from "./Avatar";
+import Icons from "./Icons";
 import Loading from "./Loading";
 import Button from "./ui/Button";
-import { toast } from "sonner";
 
 /*
 {

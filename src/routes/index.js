@@ -2,6 +2,7 @@ import LayoutWithBanner from "../layouts/LayoutWithBanner";
 import LayoutWithoutBanner from "../layouts/LayoutWithoutBanner";
 import CategoryPage from "../pages/CategoryPage";
 import CountryPage from "../pages/CountryPage";
+import DashboardUserPage from "../pages/DashboardUserPage";
 import FilterMoviePager from "../pages/FilterMoviePager";
 import HomePage from "../pages/HomePage";
 import MovieInfomationPage from "../pages/MovieInfomationPage";
@@ -9,7 +10,6 @@ import SearchPage from "../pages/SearchPage";
 import SerieMoviePage from "../pages/SerieMoviePage";
 import SingleMoviePage from "../pages/SingleMoviePage";
 import WatchMoviePage from "../pages/WatchMoviePage";
-
 
 export const publicRoutes = [
   { path: "/", element: HomePage, layout: LayoutWithBanner },
@@ -41,6 +41,11 @@ export const publicRoutes = [
   {
     path: "/the-loai/:slug",
     element: CategoryPage,
+    layout: LayoutWithoutBanner,
+  },
+  {
+    path: "/dashboard",
+    element: DashboardUserPage,
     layout: LayoutWithoutBanner,
   }
 ];

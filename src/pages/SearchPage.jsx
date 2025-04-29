@@ -4,15 +4,18 @@ import Loading from "../components/Loading";
 import FilterPanel from "../components/FilterPanel";
 import MovieCard from "../components/MovieCard";
 import { useScrollToTop } from "../hooks/useScrollToTop";
+import { Pagination } from "antd";
 
-const MAX_RESULTS = 20; // Số lượng kết quả tối đa để hiển thị
+const PAGE_SIZE = 20; // Số lượng kết quả tối đa để hiển thị
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q");
+
   const [searchResults, setSearchResults] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
-  const [page, setPage] = useState(1); // Trang hiện tại
+  const [currentPage, setCurrentPage] = useState(1);
+
   const [isLoading, setIsLoading] = useState(false);
   const [filters, setFilters] = useState({
     country: [], // Lưu nhiều quốc gia
@@ -23,7 +26,6 @@ const SearchPage = () => {
     sort: "Mới nhất", // Sắp xếp
   });
   const [showFilters, setShowFilters] = useState(false); // Hiển thị bộ lọc
-  const navigate = useNavigate();
   useScrollToTop();
 
   useEffect(() => {
@@ -34,17 +36,20 @@ const SearchPage = () => {
       try {
         const res = await fetch("/json/movies_details.json"); // Lấy dữ liệu từ file JSON
         const data = await res.json();
+
         const filtered = data
-          .filter(movie =>
-            movie.name.toLowerCase().includes(query.toLowerCase()),
+          .filter(
+            movie =>
+              movie?.name.toLowerCase().includes(query.toLowerCase()) ||
+              movie?.slug.includes(query.toLowerCase()),
           )
-          .slice(0, MAX_RESULTS) // Giới hạn số lượng kết quả
+          .slice(0, 100)
           .sort((a, b) => new Date(b.created.time) - new Date(a.created.time));
 
         setSearchResults(filtered);
         setFilteredResults(filtered);
       } catch (err) {
-        console.error("Error fetching search results:", err);
+        console.log(err);
       } finally {
         setIsLoading(false);
       }
@@ -52,6 +57,7 @@ const SearchPage = () => {
   }, [query]);
 
   const handleFilter = () => {
+    console.log("handleFilter");
     let results = searchResults.filter(movie => {
       const matchCountry =
         filters.country.length === 0 ||
@@ -75,6 +81,11 @@ const SearchPage = () => {
         });
       const matchLang =
         filters.lang.length === 0 || filters.lang.includes(movie.lang);
+
+      console.log({
+        filterType: filters.type,
+      });
+
       const matchType =
         filters.type.length === 0 ||
         (filters.type.includes("Phim lẻ") && movie.type === "single") ||
@@ -99,47 +110,28 @@ const SearchPage = () => {
     }
 
     setFilteredResults(results);
+    setCurrentPage(1);
   };
 
-  // const handleFilterChange = (key, value) => {
-  //   if (key === "sort") {
-  //     // Chỉ cho phép chọn một tiêu chí sắp xếp
-  //     setFilters(prev => ({
-  //       ...prev,
-  //       [key]: value,
-  //     }));
-  //   } else {
-  //     // Cho phép chọn nhiều tiêu chí lọc
-  //     setFilters(prev => ({
-  //       ...prev,
-  //       [key]: prev[key].includes(value)
-  //         ? prev[key].filter(item => item !== value) // Bỏ nếu đã chọn
-  //         : [...prev[key], value], // Thêm nếu chưa chọn
-  //     }));
-  //   }
-  // };
+  const totalMovies = filteredResults.length;
 
-  // const handleClearFilter = key => {
-  //   setFilters(prev => ({
-  //     ...prev,
-  //     [key]: key === "sort" ? "Mới nhất" : [], // Đặt lại mặc định cho sắp xếp hoặc xóa tất cả tiêu chí
-  //   }));
-  // };
+  const handlePageChange = page => {
+    setCurrentPage(page);
+  };
 
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">
         Kết quả tìm kiếm cho: "{query}"
       </h1>
-      {isLoading && <Loading isLoading />}
+      <Loading isLoading={isLoading} />
       {!isLoading && filteredResults.length === 0 && (
         <p className="text-gray-500">Không tìm thấy kết quả nào.</p>
       )}
-
       <div className="mb-6">
         <button
           className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-md"
-          onClick={() => setShowFilters(!showFilters)}
+          onClick={() => setShowFilters(prev => !prev)}
         >
           <span>🔍</span> Bộ lọc
         </button>
@@ -156,10 +148,27 @@ const SearchPage = () => {
 
       {/* Danh sách phim */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-        {filteredResults.map(movie => (
-          <MovieCard key={movie.slug} movie={movie} />
-        ))}
+        {!isLoading &&
+          filteredResults
+            .slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
+            .map((movie, index) => (
+              <MovieCard key={movie?._id + index} movie={movie} />
+            ))}
       </div>
+
+      {!isLoading && filteredResults.length > 0 && (
+        <div className="mt-8 flex justify-center">
+          <Pagination
+            className="dark-pagination"
+            current={currentPage}
+            pageSize={20}
+            total={totalMovies}
+            onChange={handlePageChange}
+            showSizeChanger={false}
+            showTotal={total => `Tổng số ${total} phim`}
+          />
+        </div>
+      )}
     </div>
   );
 };

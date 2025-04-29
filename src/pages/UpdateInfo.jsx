@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthProvider";
+import { updateUserField } from "../services/updateInforService";
+import { toast } from "sonner";
 
 const UpdateInfo = () => {
   const { user } = useAuth();
-
   const {
     register,
     handleSubmit,
@@ -12,18 +13,57 @@ const UpdateInfo = () => {
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      displayName: user.displayName || "",
-      email: user.email || "",
-      phoneNumber: user.phoneNumber || "",
+      displayName: user?.displayName || "",
+      email: user?.email || "",
+      phoneNumber: user?.phoneNumber || "",
     },
   });
 
   const [editField, setEditField] = useState(null);
 
   const onSubmit = async (data) => {
-    console.log("Data submitted:", data);
-    // TODO: Thực hiện cập nhật lên Firebase hoặc API của bạn ở đây
-    setEditField(null);
+    const value = data[editField];
+
+    try {
+      await updateUserField(user?.uid, editField, value);
+      user[editField] = value; // cập nhật local (nếu cần)
+      toast.success(`Đã cập nhật ${editField} thành công!`);
+      setEditField(null);
+    } catch (error) {
+      toast.error("Lỗi khi cập nhật: " + error.message);
+    }
+  };
+
+  const getValidation = (name) => {
+    switch (name) {
+      case "displayName":
+        return {
+          required: "Tên hiển thị không được để trống.",
+          minLength: {
+            value: 3,
+            message: "Tên phải ít nhất 3 ký tự.",
+          },
+        };
+      case "email":
+        return {
+          required: "Email không được để trống.",
+          pattern: {
+            value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+            message: "Email không hợp lệ.",
+          },
+        };
+      case "phoneNumber":
+        return {
+          required: "Số điện thoại không được để trống.",
+          pattern: {
+            value: /^(0|\+84)\d{9,10}$/,
+            message:
+              "Số điện thoại không hợp lệ (phải 10-11 số và đúng định dạng VN).",
+          },
+        };
+      default:
+        return {};
+    }
   };
 
   const renderField = (label, name, type = "text") => (
@@ -37,7 +77,7 @@ const UpdateInfo = () => {
           className="flex items-center space-x-2"
         >
           <input
-            {...register(name, { required: `${label} không được để trống.` })}
+            {...register(name, getValidation(name))}
             type={type}
             className="bg-secondary text-white px-3 py-2 rounded w-full"
           />
@@ -52,7 +92,7 @@ const UpdateInfo = () => {
             type="button"
             onClick={() => {
               setEditField(null);
-              setValue(name, user[name] || ""); // reset nếu hủy
+              setValue(name, user[name] || "");
             }}
             className="text-gray-400 text-sm hover:text-red-500"
           >
@@ -77,6 +117,7 @@ const UpdateInfo = () => {
       )}
     </div>
   );
+  if (!user) return null; // Nếu chưa có user, không render gì cả
 
   return (
     <div className="mx-auto p-4">
@@ -85,17 +126,16 @@ const UpdateInfo = () => {
       {/* Avatar */}
       <div className="flex items-center space-x-4 mb-6">
         <img
-          src={user.photoURL}
+          src={user?.photoURL}
           alt="Avatar"
           className="w-16 h-16 rounded-full object-cover"
         />
         <div>
-          <p className="text-lg font-semibold">{user.displayName}</p>
-          <p className="text-sm text-gray-400">{user.email}</p>
+          <p className="text-lg font-semibold">{user?.displayName}</p>
+          <p className="text-sm text-gray-400">{user?.email}</p>
         </div>
       </div>
 
-      {/* Form fields */}
       {renderField("Tên hiển thị", "displayName")}
       {renderField("Email", "email")}
       {renderField("Số điện thoại", "phoneNumber")}

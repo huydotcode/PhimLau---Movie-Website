@@ -155,6 +155,8 @@ const FilterPanel = ({
   handleFilter,
   setShowFilters,
   hasTypeFilter = true,
+  hasCategoryFilter = true, // Mặc định hiển thị bộ lọc thể loại
+  hasCountryFilter = true,
 }) => {
   const handleFilterChange = (key, value) => {
     if (key === "sort") {
@@ -183,83 +185,92 @@ const FilterPanel = ({
     <div className="mb-6 p-4 bg-gray-900 rounded-md">
       <div className="gap-4">
         {/* Quốc gia */}
-        <div className="flex items-start mb-3">
-          <h3 className="text-white font-semibold mb-1 min-w-[120px]">
-            Quốc gia:
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {[
-              "Việt Nam",
-              "Hàn Quốc",
-              "Nhật Bản",
-              "Âu Mỹ",
-              "Trung Quốc",
-              "Anh",
-              "Pháp",
-              "Thái Lan",
-              "Ấn Độ",
-            ].map(country => (
+        {hasCountryFilter && (
+          <div className="flex items-start mb-3">
+            <h3 className="text-white font-semibold mb-1 min-w-[120px]">
+              Quốc gia:
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "Việt Nam",
+                "Hàn Quốc",
+                "Nhật Bản",
+                "Âu Mỹ",
+                "Trung Quốc",
+                "Anh",
+                "Pháp",
+                "Thái Lan",
+                "Ấn Độ",
+              ].map(country => (
+                <button
+                  key={country}
+                  className={`px-4 ${filters.country.includes(country) ? "text-yellow-500" : "text-white"}`}
+                  onClick={() => handleFilterChange("country", country)}
+                >
+                  {country}
+                </button>
+              ))}
               <button
-                key={country}
-                className={`px-4 ${filters.country.includes(country) ? "text-yellow-500" : "text-white"}`}
-                onClick={() => handleFilterChange("country", country)}
+                className="bg-gray-500 rounded-full px-4 text-secondary"
+                onClick={() => handleClearFilter("country")}
               >
-                {country}
+                Xóa
               </button>
-            ))}
-            <button
-              className="bg-gray-500 rounded-full px-4 text-secondary"
-              onClick={() => handleClearFilter("country")}
-            >
-              Xóa
-            </button>
+            </div>
           </div>
-        </div>
+        )
+        }
+
 
         {/* Thể loại */}
-        <div className="flex items-start mb-3">
-          <h3 className="text-white font-semibold mb-1 min-w-[120px]">
-            Thể loại:
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {[
-              "Bí ẩn",
-              "Chiến Tranh",
-              "Chính kịch",
-              "Cổ Trang",
-              "Gia Đình",
-              "Hài Hước",
-              "Hành Động",
-              "Hình Sự",
-              "Học Đường",
-              "Khoa Học",
-              "Kinh Dị",
-              "Phim 18+",
-              "Phiêu Lưu",
-              "Thể Thao",
-              "Tài Liệu",
-              "Tâm Lý",
-              "Tình Cảm",
-              "Viễn Tưởng",
-              "Võ Thuật",
-              "Âm Nhạc",
-            ].map(category => (
-              <button
-                key={category}
-                className={`px-4 ${filters.category.includes(category) ? "text-yellow-500" : "text-white"}`}
-                onClick={() => handleFilterChange("category", category)}
-              >
-                {category}
-              </button>
-            ))}
-            <button
-              className="bg-gray-500 rounded-full px-4 text-secondary"
-              onClick={() => handleClearFilter("category")}
-            >
-              Xóa
-            </button>
-          </div>
-        </div>
+        {
+          hasCategoryFilter && (
+            <div className="flex items-start mb-3">
+              <h3 className="text-white font-semibold mb-1 min-w-[120px]">
+                Thể loại:
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Bí ẩn",
+                  "Chiến Tranh",
+                  "Chính kịch",
+                  "Cổ Trang",
+                  "Gia Đình",
+                  "Hài Hước",
+                  "Hành Động",
+                  "Hình Sự",
+                  "Học Đường",
+                  "Khoa Học",
+                  "Kinh Dị",
+                  "Phim 18+",
+                  "Phiêu Lưu",
+                  "Thể Thao",
+                  "Tài Liệu",
+                  "Tâm Lý",
+                  "Tình Cảm",
+                  "Viễn Tưởng",
+                  "Võ Thuật",
+                  "Âm Nhạc",
+                ].map(category => (
+                  <button
+                    key={category}
+                    className={`px-4 ${filters.category.includes(category) ? "text-yellow-500" : "text-white"}`}
+                    onClick={() => handleFilterChange("category", category)}
+                  >
+                    {category}
+                  </button>
+                ))}
+                <button
+                  className="bg-gray-500 rounded-full px-4 text-secondary"
+                  onClick={() => handleClearFilter("category")}
+                >
+                  Xóa
+                </button>
+              </div>
+            </div>
+          )
+        }
+
 
         {/* Năm */}
         <div className="flex items-start mb-3">

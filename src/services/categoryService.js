@@ -22,3 +22,22 @@ export const getTopCategories = async () => {
     throw error;
   }
 };
+
+export const getAllCategories = async () => {
+  try {
+    const q = query(
+      collection(db, "categories"),
+      orderBy("totalViews", "desc"),
+    );
+
+    const querySnapshot = await getDocs(q);
+    const categories = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return categories;
+  } catch (error) {
+    console.error("Error fetching all categories:", error);
+    throw error;
+  }
+};

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router";
 import CommentSection from "../components/CommentSection";
 import VideoPlayer from "../components/VideoPlayer";
-import { TopMovieSection } from "./HomePage";
+import { TopNewMovieSection } from "./HomePage";
 
 /**
  "movie": {
@@ -233,7 +233,7 @@ const WatchMoviePage = () => {
 
         {movie?._id && <CommentSection movieId={movie._id} />}
 
-        <TopMovieSection />
+        <TopNewMovieSection />
       </div>
     </div>
   );

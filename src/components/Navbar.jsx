@@ -9,39 +9,14 @@ import { toast } from "sonner";
 import { auth } from "../app/firebase";
 import { navlink } from "../constants/navlink";
 import { useAuth } from "../context/AuthProvider";
+import { useAllCategories } from "../hooks/useCategory";
 import useClickOutSide from "../hooks/useClickOutSide";
+import { useAllCountries } from "../hooks/useCountry";
 import { useDebounce } from "../hooks/useDebounce";
 import Icons from "./Icons";
 import Loading from "./Loading";
 import Button from "./ui/Button";
 import { Modal } from "antd";
-
-// Lọc theo thể loại
-const categories = [
-  { name: "Chính kịch", slug: "chinh-kich" },
-  { name: "Hành động", slug: "hanh-dong" },
-  { name: "Hài hước", slug: "hai-huoc" },
-  { name: "Phiêu lưu", slug: "phieu-luu" },
-  { name: "Hình sự", slug: "hinh-su" },
-  { name: "Tình cảm", slug: "tinh-cam" },
-  { name: "Viễn tưởng", slug: "vien-tuong" },
-  { name: "Bí ẩn", slug: "bi-an" },
-  { name: "Khoa học", slug: "khoa-hoc" },
-  { name: "Kinh dị", slug: "kinh-di" },
-];
-
-// Lọc theo quốc gia
-const countries = [
-  { name: "Việt Nam", slug: "viet-nam" },
-  { name: "Hàn Quốc", slug: "han-quoc" },
-  { name: "Nhật Bản", slug: "nhat-ban" },
-  { name: "Âu Mỹ", slug: "au-my" },
-  { name: "Trung Quốc", slug: "trung-quoc" },
-  { name: "Anh", slug: "anh" },
-  { name: "Pháp", slug: "phap" },
-  { name: "Thái Lan", slug: "thai-lan" },
-  { name: "Ấn Độ", slug: "an-do" },
-];
 
 const navUserItems = displayName => [
   {
@@ -98,6 +73,8 @@ const navUserItems = displayName => [
 const Navbar = () => {
   const location = useLocation();
   const { user } = useAuth();
+  const { data: categories } = useAllCategories({ enable: true });
+  const { data: countries } = useAllCountries({ enable: true });
 
   return (
     <div className="@container flex justify-between items-center h-[60px] px-4 text-white mx-auto">
@@ -639,6 +616,8 @@ const NavbarSearch = () => {
 const NavbarMobile = () => {
   const [openNavMobile, setOpenNavMobile] = useState(false);
   const location = useLocation();
+  const { data: categories } = useAllCategories({ enable: true });
+  const { data: countries } = useAllCountries({ enable: true });
 
   const wrapperRef = useRef(null);
 
@@ -660,13 +639,13 @@ const NavbarMobile = () => {
       <AnimatePresence>
         {openNavMobile && (
           <motion.div
-            className="fixed top-[60px] left-0 bg-black text-white min-w-[400px] h-screen flex items-center justify-center z-50 @max-5xl:justify-start"
+            className="fixed top-[60px] left-0 bg-black text-white min-w-[400px] h-screen flex items-center justify-center z-50 @max-5xl:justify-start overflow-scroll"
             initial={{ opacity: 0, x: "-100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "-100%" }}
             transition={{ duration: 0.3 }}
           >
-            <ul className="flex items-center gap-4 flex-col h-full py-10 @max-5xl:items-start @max-5xl:w-full @max-5xl:gap-0">
+            <ul className="flex items-center gap-4 flex-col h-full py-10 @max-5xl:items-start @max-5xl:w-full @max-5xl:gap-0 overflow-scroll">
               {navlink.map((item, index) => {
                 if (["Thể loại", "Quốc gia"].includes(item.name)) {
                   return (
@@ -726,15 +705,15 @@ const NavItemDropDown = ({ item, subItems, isMobile = false }) => {
           }`}
         onClick={() => setIsOpen(prev => !prev)}
       >
-        {item.name}
+        {item.name} <Icons.ChevronDown className="w-3 h-3 inline-block" />
       </button>
       <AnimatePresence>
         {isOpen && (
           <motion.div
             className={`absolute ${isMobile
-              ? "relative ml-4 w-3/4 left-0 top-0 mt-2 bg-black rounded-none shadow-none"
-              : "top-full left-0 mt-2 bg-foreground rounded-md shadow-lg w-[180px]"
-              } flex flex-col py-1 overflow-hidden z-50`}
+              ? "relative ml-4 w-full left-0 top-0 mt-2 bg-black rounded-none shadow-none"
+              : "top-full left-0 mt-2 bg-foreground rounded-md shadow-lg w-[500px]"
+              } grid grid-cols-2 md:grid-cols-3 py-1 overflow-hidden z-50`}
             initial={{ height: 0 }}
             animate={{
               height: "auto",

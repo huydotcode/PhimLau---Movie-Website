@@ -6,13 +6,37 @@ import {
   orderBy,
   query,
   setDoc,
-  updateDoc,
+  Timestamp,
   where,
 } from "firebase/firestore";
 import { db } from "../app/firebase";
 
+// Danh sách phim mới tháng nay và có view nhiều nhất
+export const getTopNewMovies = async () => {
+  const oneMonthAgo = new Date();
+  oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1); // lùi lại 1 tháng
+
+  const oneMonthAgoTimestamp = Timestamp.fromDate(oneMonthAgo);
+
+  try {
+    const q = query(
+      collection(db, "movies"),
+      where("createdTime", ">=", oneMonthAgoTimestamp),
+      orderBy("view", "desc"),
+      limit(10),
+    );
+
+    const snapshot = await getDocs(q);
+
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  } catch (error) {
+    console.error("Error fetching new movies:", error);
+    throw error;
+  }
+};
+
 // Top view nhiều nhất
-export const getTopMovies = async () => {
+export const getTopViewMovies = async () => {
   try {
     const q = query(
       collection(db, "movies"),

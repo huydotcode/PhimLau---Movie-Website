@@ -772,7 +772,7 @@ const NavItemDropDown = ({ item, subItems, isMobile = false }) => {
             className={`absolute ${
               isMobile
                 ? "relative ml-4 w-full left-0 top-0 mt-2 bg-black rounded-none shadow-none"
-                : "top-full -left-10 mt-2 bg-foreground rounded-md shadow-lg w-[500px]"
+                : "top-full -left-40 mt-2 bg-foreground rounded-md shadow-lg w-[500px]"
             } grid grid-cols-2 md:grid-cols-4 xl:grid-cols-3 py-1 overflow-hidden z-50`}
             initial={{ height: 0 }}
             animate={{

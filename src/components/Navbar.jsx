@@ -1,4 +1,3 @@
-import { Dropdown, Modal } from "antd";
 import { signOut } from "firebase/auth";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
@@ -15,6 +14,7 @@ import { useDebounce } from "../hooks/useDebounce";
 import Icons from "./Icons";
 import Loading from "./Loading";
 import Button from "./ui/Button";
+import { Modal } from "antd";
 
 // Lọc theo thể loại
 const categories = [
@@ -123,9 +123,8 @@ const Navbar = () => {
             return (
               <li
                 key={index}
-                className={`ml-4 w-full text-sm font-bold hover:text-primary transition-all duration-200 text-nowrap ${
-                  item.link === location.pathname ? "text-primary" : ""
-                }`}
+                className={`ml-4 w-full text-sm font-bold hover:text-primary transition-all duration-200 text-nowrap ${item.link === location.pathname ? "text-primary" : ""
+                  }`}
               >
                 <Link to={item.link}>{item.name}</Link>
               </li>
@@ -685,9 +684,8 @@ const NavbarMobile = () => {
                 return (
                   <li
                     key={index}
-                    className={`ml-4 text-xl w-full font-bold hover:text-primary transition-all duration-200 @max-5xl:py-4 @max-5xl:pl-10 @max-5xl:hover:scale-100 cursor-pointer ${
-                      item.link === location.pathname ? "text-primary" : ""
-                    }`}
+                    className={`ml-4 text-xl w-full font-bold hover:text-primary transition-all duration-200 @max-5xl:py-4 @max-5xl:pl-10 @max-5xl:hover:scale-100 cursor-pointer ${item.link === location.pathname ? "text-primary" : ""
+                      }`}
                   >
                     <Link to={item.link}>{item.name}</Link>
                   </li>
@@ -719,15 +717,13 @@ const NavItemDropDown = ({ item, subItems, isMobile = false }) => {
 
   return (
     <li
-      className={`w-full relative ml-4 text-sm font-bold transition-all duration-200 @max-5xl:py-4 cursor-pointer text-nowrap ${
-        isMobile && "text-xl"
-      }`}
+      className={`w-full relative ml-4 text-sm font-bold transition-all duration-200 @max-5xl:py-4 cursor-pointer text-nowrap ${isMobile && "text-xl"
+        }`}
       ref={wrapperRef}
     >
       <button
-        className={`cursor-pointer focus:outline-none hover:text-primary ${location.pathname.includes(item.link) ? "text-primary" : ""} ${
-          isMobile ? "w-full text-left pl-10" : ""
-        }`}
+        className={`cursor-pointer focus:outline-none hover:text-primary ${location.pathname.includes(item.link) ? "text-primary" : ""} ${isMobile ? "w-full text-left pl-10" : ""
+          }`}
         onClick={() => setIsOpen(prev => !prev)}
       >
         {item.name}
@@ -735,11 +731,10 @@ const NavItemDropDown = ({ item, subItems, isMobile = false }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className={`absolute ${
-              isMobile
-                ? "relative ml-4 w-3/4 left-0 top-0 mt-2 bg-black rounded-none shadow-none"
-                : "top-full left-0 mt-2 bg-foreground rounded-md shadow-lg w-[180px]"
-            } flex flex-col py-1 overflow-hidden z-50`}
+            className={`absolute ${isMobile
+              ? "relative ml-4 w-3/4 left-0 top-0 mt-2 bg-black rounded-none shadow-none"
+              : "top-full left-0 mt-2 bg-foreground rounded-md shadow-lg w-[180px]"
+              } flex flex-col py-1 overflow-hidden z-50`}
             initial={{ height: 0 }}
             animate={{
               height: "auto",
@@ -752,13 +747,11 @@ const NavItemDropDown = ({ item, subItems, isMobile = false }) => {
                 <Link
                   key={subItem.slug}
                   to={`${item.link}/${subItem.slug}`}
-                  className={`py-2 hover:text-primary ${
-                    isMobile ? "pl-10" : "px-4"
-                  } ${
-                    location.pathname.includes(
+                  className={`py-2 hover:text-primary ${isMobile ? "pl-10" : "px-4"
+                    } ${location.pathname.includes(
                       `${item.link}/${subItem.slug}`,
                     ) && "text-primary"
-                  }`}
+                    }`}
                   onClick={() => handleCategorySelect(subItem.slug)}
                 >
                   {subItem.name}

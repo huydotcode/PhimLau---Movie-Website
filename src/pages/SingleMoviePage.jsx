@@ -32,7 +32,7 @@ const SingleMoviePage = () => {
         const data = await res.json();
 
         // Lọc các bộ phim lẻ
-        const singleMovies = data.filter(movie => movie.type === "single");
+        const singleMovies = data.filter((movie) => movie.type === "single");
 
         // Sắp xếp mặc định theo "Mới nhất"
         const sortedMovies = singleMovies.sort(
@@ -50,23 +50,23 @@ const SingleMoviePage = () => {
   }, []);
 
   const handleFilter = () => {
-    let results = movies.filter(movie => {
+    let results = movies.filter((movie) => {
       const matchCountry =
         filters.country.length === 0 || // Lọc nhiều quốc gia
-        filters.country.some(country =>
-          movie.country?.some(c => c.name === country),
+        filters.country.some((country) =>
+          movie.country?.some((c) => c.name === country),
         );
 
       const matchCategory =
         filters.category.length === 0 ||
-        filters.category.some(category =>
-          movie.category?.some(cat => cat.name === category),
+        filters.category.some((category) =>
+          movie.category?.some((cat) => cat.name === category),
         );
       // const matchYear =
       //   filters.year.length === 0 || filters.year.includes(movie.year?.toString());
       const matchYear =
         filters.year.length === 0 ||
-        filters.year.some(year => {
+        filters.year.some((year) => {
           if (year === "Cũ hơn") {
             return movie.year < 2020; // Lọc phim có năm sản xuất cũ hơn 2020
           }
@@ -97,7 +97,7 @@ const SingleMoviePage = () => {
 
   const totalMovies = filteredResults.length;
 
-  const handlePageChange = page => {
+  const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
@@ -135,7 +135,7 @@ const SingleMoviePage = () => {
         {!isLoading &&
           filteredResults
             .slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
-            .map(movie => <MovieCard key={movie.slug} movie={movie} />)}
+            .map((movie) => <MovieCard key={movie.slug} movie={movie} />)}
       </div>
 
       {!isLoading && filteredResults.length > 0 && (
@@ -147,7 +147,7 @@ const SingleMoviePage = () => {
             total={totalMovies}
             onChange={handlePageChange}
             showSizeChanger={false}
-            showTotal={total => `Tổng số ${total} phim`}
+            showTotal={(total) => `Tổng số ${total} phim`}
           />
         </div>
       )}

@@ -17,8 +17,10 @@ import { useDebounce } from "../hooks/useDebounce";
 import Icons from "./Icons";
 import Loading from "./Loading";
 import Button from "./ui/Button";
+import { useQuery } from "@tanstack/react-query";
+import { convertTime } from "../utils/convertTime";
 
-const navUserItems = displayName => [
+const navUserItems = (displayName) => [
   {
     key: "display-name",
     label: <h1 className="p-1 font-bold">Xin chào, {displayName}</h1>,
@@ -117,9 +119,7 @@ const Navbar = () => {
 
           <NavbarMobile />
 
-          <Button>
-            <Icons.Notification className="w-6 h-6" />
-          </Button>
+          <NavbarNotification />
 
           {!loading && (
             <>
@@ -129,7 +129,7 @@ const Navbar = () => {
                   trigger={["click"]}
                   placement="bottomRight"
                   arrow
-                  dropdownRender={menu => (
+                  dropdownRender={(menu) => (
                     <div className="min-w-[200px] rounded-md p-0">
                       {React.cloneElement(menu)}
                     </div>
@@ -179,7 +179,7 @@ const NavbarLogin = () => {
     forgotPassword,
   } = useAuth();
 
-  const handleLogin = async data => {
+  const handleLogin = async (data) => {
     try {
       const { email, password } = data;
       const result = await loginWithEmailPassword(email, password);
@@ -208,7 +208,7 @@ const NavbarLogin = () => {
     await forgotPassword(watch("email"));
   };
 
-  const handleSignUp = async data => {
+  const handleSignUp = async (data) => {
     try {
       const { email, password, name, phone } = data;
 
@@ -460,10 +460,68 @@ const NavbarLogin = () => {
   );
 };
 
-const NavbarSearch = () => {
-  const [openSearch, setOpenSearch] = useState(false);
-  // const [searchResults, setSearchResults] = useState([1, 231, 312]);
+const NavbarNotification = () => {
+  const [openNotification, setOpenNotification] = useState(false);
+  const wrapperRef = useRef(null);
+  const { user } = useAuth();
+  const { data: notifications } = useQuery({
+    queryKey: ["notifications", user?.uid],
+    queryFn: async () => {
+      const res = await fetch("/json/notification.json");
+      const data = await res.json();
 
+      return data;
+    },
+    enabled: !!user?.uid,
+    initialData: [],
+  });
+
+  // Đóng khi click ra ngoài
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      console.log(wrapperRef.current.contains(e.target));
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setOpenNotification(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div
+      className={`relative flex items-center gap-2 ${openNotification && "px-3 py-2 rounded-xl  bg-black"} transition-all duration-200 z-50`}
+      ref={wrapperRef}
+    >
+      <Button onClick={() => setOpenNotification((prev) => !prev)}>
+        <Icons.Notification className="w-6 h-6" />
+      </Button>
+
+      {/* Danh sách phim hiển thị ở đây */}
+      {openNotification && (
+        <div className="absolute top-full mt-1 rounded-xl -left-50 w-64 text-white bg-black shadow-lg max-h-80 overflow-y-auto no-scrollbar">
+          <div className="flex flex-col px-4 py-2">
+            <h1 className="font-bold text-xl">Thông báo</h1>
+
+            {notifications.map((noti) => {
+              return (
+                <div key={noti?.id}>
+                  <p>{noti.content}</p>
+                  <p className="text-xs text-right">
+                    {convertTime(noti.createdAt)}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const NavbarSearch = () => {
+  const [openNotification, setOpenNotification] = useState(false);
   const [searchResults, setSearchResults] = useState([]); //Sang test
 
   const wrapperRef = useRef(null);
@@ -474,10 +532,9 @@ const NavbarSearch = () => {
 
   // Đóng khi click ra ngoài
   useEffect(() => {
-    const handleClickOutside = e => {
-      console.log(wrapperRef.current.contains(e.target));
+    const handleClickOutside = (e) => {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-        setOpenSearch(false);
+        setOpenNotification(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -500,7 +557,7 @@ const NavbarSearch = () => {
         // setSearchResults(data); // Cập nhật state
 
         //Sang cập nhật ở đây
-        const filtered = data.filter(movie =>
+        const filtered = data.filter((movie) =>
           movie.name.toLowerCase().includes(debouncedQuery.toLowerCase()),
         );
         setSearchResults(filtered);
@@ -517,11 +574,11 @@ const NavbarSearch = () => {
 
   return (
     <div
-      className={`relative flex items-center gap-2 ${openSearch && "px-3 py-2 rounded-xl  bg-black"} transition-all duration-200 z-50`}
+      className={`relative flex items-center gap-2 ${openNotification && "px-3 py-2 rounded-xl  bg-black"} transition-all duration-200 z-50`}
       ref={wrapperRef}
     >
       <AnimatePresence>
-        {openSearch && (
+        {openNotification && (
           <motion.input
             key="search"
             initial={{ width: 0, opacity: 0 }}
@@ -532,12 +589,12 @@ const NavbarSearch = () => {
             className=" text-white text-sm pl-3 pr-10 outline-none"
             autoFocus
             value={query}
-            onChange={e => setQuery(e.target.value)}
+            onChange={(e) => setQuery(e.target.value)}
             // Sang thêm
-            onKeyDown={e => {
+            onKeyDown={(e) => {
               if (e.key === "Enter") {
                 navigate(`/tim-kiem?q=${query}`);
-                setOpenSearch(false);
+                setOpenNotification(false);
               }
             }}
           />
@@ -546,7 +603,7 @@ const NavbarSearch = () => {
 
       <Button
         onClick={() => {
-          setOpenSearch(s => !s);
+          setOpenNotification((s) => !s);
         }}
         className="rounded-md transition"
       >
@@ -554,19 +611,19 @@ const NavbarSearch = () => {
       </Button>
 
       {/* Danh sách phim hiển thị ở đây */}
-      {openSearch && (
+      {openNotification && (
         <div className="absolute top-full mt-1 rounded-xl left-0 w-64 text-white bg-black shadow-lg max-h-80 overflow-y-auto no-scrollbar">
           {searchResults.length > 0 &&
             !isLoading &&
-            searchResults.map(movie => (
+            searchResults.map((movie) => (
               <div
                 // key={movie}
                 key={movie.slug} // test
                 className="px-3 py-2 hover:opacity-85 cursor-pointer flex items-center gap-2"
-                onClick={e => {
+                onClick={(e) => {
                   e.stopPropagation();
                   navigate(`/phim/${movie.slug}`);
-                  setOpenSearch(false);
+                  setOpenNotification(false);
                 }}
               >
                 <div
@@ -596,7 +653,7 @@ const NavbarSearch = () => {
               <Button
                 onClick={() => {
                   navigate(`/tim-kiem?q=${query}`);
-                  setOpenSearch(false);
+                  setOpenNotification(false);
                 }}
               >
                 Xem toàn bộ kết quả
@@ -629,7 +686,7 @@ const NavbarMobile = () => {
     <div ref={wrapperRef} className="flex items-center h-full @min-5xl:hidden">
       <Button
         onClick={() => {
-          setOpenNavMobile(prev => !prev);
+          setOpenNavMobile((prev) => !prev);
         }}
       >
         <Icons.Menu className="w-8 h-8 hidden @max-5xl:flex items-center gap-4" />
@@ -638,7 +695,7 @@ const NavbarMobile = () => {
       <AnimatePresence>
         {openNavMobile && (
           <motion.div
-            className="fixed top-[60px] left-0 bg-black text-white min-w-[400px] h-screen flex items-center justify-center z-50 @max-5xl:justify-start overflow-scroll"
+            className="fixed top-[60px] left-0 bg-black text-white min-w-[400px] h-screen flex items-center justify-center z-50 @max-5xl:justify-start overflow-scroll pr-4"
             initial={{ opacity: 0, x: "-100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "-100%" }}
@@ -684,7 +741,7 @@ const NavItemDropDown = ({ item, subItems, isMobile = false }) => {
   const wrapperRef = useRef(null);
   const location = useLocation();
 
-  const handleCategorySelect = slug => {
+  const handleCategorySelect = (slug) => {
     setIsOpen(false);
     navigate(`/the-loai/${slug}`);
   };
@@ -705,7 +762,7 @@ const NavItemDropDown = ({ item, subItems, isMobile = false }) => {
         className={`cursor-pointer focus:outline-none hover:text-primary ${location.pathname.includes(item.link) ? "text-primary" : ""} ${
           isMobile ? "w-full text-left pl-10" : ""
         }`}
-        onClick={() => setIsOpen(prev => !prev)}
+        onClick={() => setIsOpen((prev) => !prev)}
       >
         {item.name} <Icons.ChevronDown className="w-3 h-3 inline-block" />
       </button>
@@ -715,8 +772,8 @@ const NavItemDropDown = ({ item, subItems, isMobile = false }) => {
             className={`absolute ${
               isMobile
                 ? "relative ml-4 w-full left-0 top-0 mt-2 bg-black rounded-none shadow-none"
-                : "top-full left-0 mt-2 bg-foreground rounded-md shadow-lg w-[500px]"
-            } grid grid-cols-2 md:grid-cols-3 py-1 overflow-hidden z-50`}
+                : "top-full -left-10 mt-2 bg-foreground rounded-md shadow-lg w-[500px]"
+            } grid grid-cols-2 md:grid-cols-4 xl:grid-cols-3 py-1 overflow-hidden z-50`}
             initial={{ height: 0 }}
             animate={{
               height: "auto",
@@ -724,7 +781,7 @@ const NavItemDropDown = ({ item, subItems, isMobile = false }) => {
             exit={{ height: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {subItems.map(subItem => {
+            {subItems.map((subItem) => {
               return (
                 <Link
                   key={subItem.slug}

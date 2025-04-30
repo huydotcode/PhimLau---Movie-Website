@@ -31,7 +31,7 @@ export const getMoviesByCountry = async (countrySlug, page, lastVisible = null) 
     let q = query(
       collection(db, "movies"),
       where("countrySlugs", "array-contains", countrySlug),
-      orderBy("created.time", "desc"),
+      orderBy("year", "desc"),
       // limit(PAGE_SIZE)
     );
 
@@ -40,7 +40,7 @@ export const getMoviesByCountry = async (countrySlug, page, lastVisible = null) 
       q = query(
         collection(db, "movies"),
         where("countrySlugs", "array-contains", countrySlug),
-        orderBy("created.time", "desc"),
+        orderBy("year", "desc"),
         startAfter(lastVisible),
         // limit(PAGE_SIZE)
       );

@@ -48,7 +48,7 @@ export const getMoviesByCategory = async (categorySlug, page, lastVisible = null
     let q = query(
       collection(db, "movies"),
       where("categorySlugs", "array-contains", categorySlug), // Lọc theo slug thể loại
-      orderBy("created.time", "desc"),
+      orderBy("year", "desc"),
       // limit(PAGE_SIZE)
     );
 
@@ -57,7 +57,7 @@ export const getMoviesByCategory = async (categorySlug, page, lastVisible = null
       q = query(
         collection(db, "movies"),
         where("categorySlugs", "array-contains", categorySlug),
-        orderBy("created.time", "desc"),
+        orderBy("year", "desc"),
         startAfter(lastVisible),
         // limit(PAGE_SIZE)
       );

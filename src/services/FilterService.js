@@ -1,19 +1,18 @@
-import { collection, getDocs, query, where, orderBy, startAfter } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, startAfter, limit } from "firebase/firestore";
 import { db } from "../app/firebase";
 
 
 /**
- * Lấy danh sách phim lẻ (single) với phân trang
+ * Lấy tất cả phim từ Firestore với phân trang
  * @param {number} page - Trang hiện tại
  * @param {object} lastVisible - Document cuối cùng của trang trước (nếu có)
  * @returns {Promise<{movies: Array, lastVisible: object}>}
  */
-export const getSingleMovies = async (page, lastVisible = null) => {
+export const getAllMovies = async (page, lastVisible = null) => {
   try {
     let q = query(
       collection(db, "movies"),
-      where("type", "==", "single"), // Chỉ lấy phim lẻ dựa trên type
-      orderBy("year", "desc"),
+      orderBy("year", "desc"), // Sắp xếp theo năm phát hành giảm dần
 
     );
 
@@ -21,7 +20,6 @@ export const getSingleMovies = async (page, lastVisible = null) => {
     if (lastVisible) {
       q = query(
         collection(db, "movies"),
-        where("type", "==", "single"),
         orderBy("year", "desc"),
         startAfter(lastVisible),
 
@@ -39,7 +37,7 @@ export const getSingleMovies = async (page, lastVisible = null) => {
       lastVisible: newLastVisible,
     };
   } catch (error) {
-    console.error("Error fetching single movies:", error);
+    console.error("Error fetching all movies:", error);
     throw error;
   }
 };

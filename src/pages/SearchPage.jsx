@@ -41,8 +41,6 @@ const SearchPage = () => {
     }
   }, [data]);
 
-  // const filteredResults = data?.movies || [];
-
   // useEffect(() => {
   //   if (!query) return;
 

@@ -12,7 +12,7 @@ export const getSerieMovies = async (page, lastVisible = null) => {
     let q = query(
       collection(db, "movies"),
       where("type", "==", "series"), // Chỉ lấy phim bộ dựa trên type
-      orderBy("created.time", "desc"),
+      orderBy("year", "desc"),
     );
 
     // Nếu có `lastVisible`, thêm `startAfter` để phân trang
@@ -20,7 +20,7 @@ export const getSerieMovies = async (page, lastVisible = null) => {
       q = query(
         collection(db, "movies"),
         where("type", "==", "series"),
-        orderBy("created.time", "desc"),
+        orderBy("year", "desc"),
         startAfter(lastVisible),
       );
     }

@@ -90,8 +90,8 @@ export const searchMovies = async (searchQuery, page, lastVisible = null) => {
           movie?.name?.toLowerCase().includes(lowerCaseQuery) || // Tìm trong tên phim
           movie?.slug?.toLowerCase().includes(lowerCaseQuery) // Tìm trong slug
       )
-      .slice(0, 100) // Giới hạn kết quả
-      .sort((a, b) => new Date(b.created.time) - new Date(a.created.time)); // Sắp xếp theo thời gian tạo
+      // .slice(0, 100) // Giới hạn kết quả
+      .sort((a, b) => b.year - a.year); // Sắp xếp theo năm phát hành giảm dần
 
     // Lấy document cuối cùng để hỗ trợ phân trang
     const newLastVisible = snapshot.docs[snapshot.docs.length - 1];

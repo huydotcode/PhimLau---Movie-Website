@@ -88,9 +88,7 @@ const CountryPage = () => {
     } else if (filters.sort === "Lượt xem") {
       results = results.sort((a, b) => b.view - a.view);
     } else if (filters.sort === "Mới nhất") {
-      results = results.sort(
-        (a, b) => new Date(b.created.time) - new Date(a.created.time)
-      );
+      results = results.sort((a, b) => b.year - a.year); // Sắp xếp theo năm phát hành giảm dần
     }
 
     setFilteredResults(results);

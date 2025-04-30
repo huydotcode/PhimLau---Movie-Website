@@ -1,27 +1,30 @@
 import { collection, getDocs, query, where, orderBy, startAfter } from "firebase/firestore";
 import { db } from "../app/firebase";
 
+
 /**
- * Lấy danh sách phim bộ (series) với phân trang
+ * Lấy danh sách phim lẻ (single) với phân trang
  * @param {number} page - Trang hiện tại
  * @param {object} lastVisible - Document cuối cùng của trang trước (nếu có)
  * @returns {Promise<{movies: Array, lastVisible: object}>}
  */
-export const getSerieMovies = async (page, lastVisible = null) => {
+export const getSingleMovies = async (page, lastVisible = null) => {
   try {
     let q = query(
       collection(db, "movies"),
-      where("type", "==", "series"), // Chỉ lấy phim bộ dựa trên type
+      where("type", "==", "single"), // Chỉ lấy phim lẻ dựa trên type
       orderBy("created.time", "desc"),
+
     );
 
     // Nếu có `lastVisible`, thêm `startAfter` để phân trang
     if (lastVisible) {
       q = query(
         collection(db, "movies"),
-        where("type", "==", "series"),
+        where("type", "==", "single"),
         orderBy("created.time", "desc"),
         startAfter(lastVisible),
+
       );
     }
 
@@ -36,7 +39,7 @@ export const getSerieMovies = async (page, lastVisible = null) => {
       lastVisible: newLastVisible,
     };
   } catch (error) {
-    console.error("Error fetching series movies:", error);
+    console.error("Error fetching single movies:", error);
     throw error;
   }
 };

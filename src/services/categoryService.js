@@ -2,7 +2,7 @@ import { collection, getDocs, limit, orderBy, query, startAfter, where } from "f
 import { db } from "../app/firebase";
 
 const MAX_CATEGORIES = 6;
-const PAGE_SIZE = 20; // Số lượng phim hiển thị trên mỗi trang
+// const PAGE_SIZE = 20; // Số lượng phim hiển thị trên mỗi trang
 
 export const getTopCategories = async () => {
   try {
@@ -49,7 +49,7 @@ export const getMoviesByCategory = async (categorySlug, page, lastVisible = null
       collection(db, "movies"),
       where("categorySlugs", "array-contains", categorySlug), // Lọc theo slug thể loại
       orderBy("created.time", "desc"),
-      limit(PAGE_SIZE)
+      // limit(PAGE_SIZE)
     );
 
     // Nếu có `lastVisible`, thêm `startAfter` để phân trang
@@ -59,7 +59,7 @@ export const getMoviesByCategory = async (categorySlug, page, lastVisible = null
         where("categorySlugs", "array-contains", categorySlug),
         orderBy("created.time", "desc"),
         startAfter(lastVisible),
-        limit(PAGE_SIZE)
+        // limit(PAGE_SIZE)
       );
     }
 

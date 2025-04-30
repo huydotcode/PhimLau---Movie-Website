@@ -12,6 +12,11 @@ const PageTransitionLoader = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (location.pathname.includes("/admin")) {
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
     const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
@@ -53,6 +58,36 @@ const PageTransitionLoader = () => {
             const Layout = route?.layout ?? React.Fragment;
 
             const Page = route.element;
+            // Nếu route có children thì render children
+            if (route.children) {
+              return (
+                <Route
+                  path={route.path}
+                  element={
+                    <Layout>
+                      <Page />
+                    </Layout>
+                  }
+                >
+                  {route.children.map((child, index) => {
+                    const ChildLayout = child?.layout ?? React.Fragment;
+                    const ChildPage = child.element;
+                    return (
+                      <Route
+                        key={index}
+                        path={child.path}
+                        element={
+                          <ChildLayout>
+                            <ChildPage />
+                          </ChildLayout>
+                        }
+                      />
+                    );
+                  })}
+                </Route>
+              );
+            }
+
             return (
               <Route
                 key={index}

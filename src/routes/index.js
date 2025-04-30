@@ -1,5 +1,11 @@
+import AdminLayout from "../layouts/AdminLayout";
 import LayoutWithBanner from "../layouts/LayoutWithBanner";
 import LayoutWithoutBanner from "../layouts/LayoutWithoutBanner";
+import CategoryList from "../pages/admin/CategoryList";
+import FavoriteList from "../pages/admin/FavoriteList";
+import MovieList from "../pages/admin/MovieList";
+import UserList from "../pages/admin/UserList";
+import AdminPage from "../pages/AdminPage";
 import CategoryPage from "../pages/CategoryPage";
 import CountryPage from "../pages/CountryPage";
 import FilterMoviePager from "../pages/FilterMoviePager";
@@ -41,5 +47,28 @@ export const publicRoutes = [
     path: "/the-loai/:slug",
     element: CategoryPage,
     layout: LayoutWithoutBanner,
+  },
+  {
+    path: "/admin",
+    element: AdminPage,
+    layout: AdminLayout,
+    children: [
+      {
+        path: "movies",
+        element: MovieList,
+      },
+      {
+        path: "categories",
+        element: CategoryList,
+      },
+      {
+        path: "users",
+        element: UserList,
+      },
+      {
+        path: "favorites",
+        element: FavoriteList,
+      },
+    ],
   },
 ];

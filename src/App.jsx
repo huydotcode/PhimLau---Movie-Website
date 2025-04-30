@@ -1,17 +1,18 @@
-import { BrowserRouter } from "react-router";
-import { Toaster } from "sonner";
 import { ConfigProvider } from "antd";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router";
+import { Toaster } from "sonner";
 import { store } from "./app/store";
 import PageTransitionLoader from "./components/PageTransitionLoader";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import React from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import "./styles/App.css";
 import { AuthProvider } from "./context/AuthProvider";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "./styles/App.css";
 
 const queryClient = new QueryClient();
 

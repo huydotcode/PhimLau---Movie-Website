@@ -5,6 +5,10 @@ import {
   deleteSavedMovie,
   getSavedMoviesByUser,
 } from "../services/movieSavedService";
+import MovieCard from "../components/MovieCard";
+import DropdownButton from "antd/es/dropdown/dropdown-button";
+import Button from "../components/ui/Button";
+import Icons from "../components/Icons";
 
 const SavedMovies = () => {
   const { user } = useAuth();
@@ -40,30 +44,19 @@ const SavedMovies = () => {
       {movies.length === 0 ? (
         <p className="text-gray-400">Bạn chưa lưu phim nào.</p>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {movies.map((movie) => (
-            <div
-              key={movie.id}
-              className="bg-foreground rounded p-2 relative group"
-            >
-              <img
-                src={movie.thumb_url}
-                alt={movie.origin_name}
-                className="rounded mb-2 w-full h-48 object-cover"
-              />
-              <h3 className="text-lg font-semibold">{movie.origin_name}</h3>
-              <p className="text-sm text-gray-400">
-                {movie.category?.join(", ")}
-              </p>
-              <p className="text-xs text-gray-500 mt-1">
-                Năm: {movie.year} - Chất lượng: {movie.quality}
-              </p>
-              <button
-                onClick={() => handleDelete(movie.id)}
-                className="absolute top-2 right-2 bg-red-500 text-white rounded-full px-2 py-1 text-xs opacity-0 group-hover:opacity-100 transition"
-              >
-                Xoá
-              </button>
+            <div className="relative" key={movie._id}>
+              <MovieCard movie={movie} />
+
+              <div className="flex justify-end items-center mt-2">
+                <Button
+                  className="bg-primary text-white mt-2 p-2 rounded-xl absolute top-1 left-1 flex items-center gap-2"
+                  onClick={() => handleDelete(movie._id)}
+                >
+                  <Icons.Close className="text-xl text-white" />
+                </Button>
+              </div>
             </div>
           ))}
         </div>

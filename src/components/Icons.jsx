@@ -10,7 +10,7 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { IoIosArrowUp, IoIosMenu } from "react-icons/io";
-import { IoNotifications, IoSend } from "react-icons/io5";
+import { IoClose, IoNotifications, IoSend } from "react-icons/io5";
 
 const Icons = {
   Play: ({ className = "" }) => <FaPlay className={className} />,
@@ -28,6 +28,7 @@ const Icons = {
   Heart: ({ className = "" }) => <FaHeart className={className} />,
   Send: ({ className = "" }) => <IoSend className={className} />,
   ChevronDown: ({ className = "" }) => <FaChevronDown className={className} />,
+  Close: ({ className = "" }) => <IoClose className={className} />,
 };
 
 export default Icons;

@@ -5,9 +5,6 @@ import VideoPlayer from "../components/VideoPlayer";
 import { TopNewMovieSection } from "./HomePage";
 import { useAuth } from "../context/AuthProvider";
 import { addWatchedMovie } from "../services/watchedService";
-import { addSavedMovie } from "../services/movieSavedService";
-import { addFavorite } from "../services/favoriteService";
-// const [isFavorited, setIsFavorited] = useState(false);
 
 const WatchMoviePage = () => {
   const { user } = useAuth();
@@ -66,24 +63,6 @@ const WatchMoviePage = () => {
       videoRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [currentEpisode]);
-
-  useEffect(() => {
-    const saveMovie = async () => {
-      if (user?.uid && movie?._id) {
-        try {
-          await addSavedMovie({
-            userId: user.uid,
-            movieId: movie._id,
-          });
-          console.log("luu phim thanh cong");
-        } catch (error) {
-          console.error("Lỗi khi lưu phim đã xem:", error);
-        }
-      }
-    };
-
-    saveMovie();
-  }, [user, movie]);
 
   return (
     <div className="@container relative bg-gradient-to-t from-foreground to-foreground via-transparent">

@@ -4,7 +4,7 @@ import Button from "../components/ui/Button";
 import FavoriteMovies from "./FavoriteMovies";
 import SavedMovies from "./SavedMovies";
 import UpdateInfo from "./UpdateInfo";
-import WatchedMovies from "./WatchedMovies";
+import WatchedMovies from "./WatchMoviePage";
 
 import { useAuth } from "../context/AuthProvider";
 

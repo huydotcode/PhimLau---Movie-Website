@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthProvider";
-
 import { toast } from "sonner";
 import {
   getFavoritesByUser,
@@ -9,10 +8,13 @@ import {
 import MovieCard from "../components/MovieCard";
 import Button from "../components/ui/Button";
 import Icons from "../components/Icons";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../app/firebase";
 
 const FavoriteMovies = () => {
   const { user } = useAuth();
   const [favorites, setFavorites] = useState([]);
+  const [refresh, setRefresh] = useState(false); // để re-fetch
 
   const fetchFavorites = async () => {
     if (!user?.uid) return;
@@ -22,23 +24,36 @@ const FavoriteMovies = () => {
 
   useEffect(() => {
     fetchFavorites();
-  }, [user]);
+  }, [user, refresh]);
 
-  const handleWatch = (slug) => {
-    window.open(`/phim/${slug}`, "_blank");
+  // Xử lý bỏ yêu thích
+  const handleUnfavorite = async (movieId) => {
+    try {
+      const q = query(
+        collection(db, "favorites"),
+        where("user_id", "==", user.uid),
+        where("movie_id", "==", movieId),
+      );
+
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        toast.error("❌ Không tìm thấy phim yêu thích để xoá.");
+        return;
+      }
+
+      for (const docSnap of querySnapshot.docs) {
+        await removeFavorite(docSnap.id); // Truyền đúng ID tài liệu Firestore
+      }
+
+      toast.success("🗑️ Đã bỏ yêu thích!");
+      setRefresh((r) => !r); // Trigger re-fetch
+      setFavorites((prev) => prev.filter((m) => m.movie_id !== movieId));
+    } catch (error) {
+      console.error("Lỗi khi bỏ yêu thích:", error);
+      toast.error("⚠️ Lỗi khi bỏ yêu thích!");
+    }
   };
-
-  const handleUnfavorite = async (id) => {
-    const movie = favorites.find((m) => m._id === id);
-    if (!movie) return;
-
-    const docToRemove = favorites.find((m) => m._id === id)?.id;
-    await removeFavorite(docToRemove);
-    toast.success("Đã bỏ yêu thích!");
-    setFavorites((prev) => prev.filter((m) => m._id !== id));
-  };
-
-  const handleRemove = handleUnfavorite; // giống bỏ yêu thích
 
   return (
     <div className="p-4">
@@ -49,13 +64,13 @@ const FavoriteMovies = () => {
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {favorites.map((movie) => (
-            <div key={movie._id} className="relative">
+            <div key={movie.id} className="relative">
               <MovieCard movie={movie} />
 
               <div className="flex justify-end items-center mt-2">
                 <Button
                   className="bg-primary text-white mt-2 p-2 rounded-xl absolute top-1 left-1 flex items-center gap-2"
-                  onClick={() => handleRemove(movie._id)}
+                  onClick={() => handleUnfavorite(movie.id)} // Xóa khỏi yêu thích
                 >
                   <Icons.Close className="text-xl text-white" />
                 </Button>

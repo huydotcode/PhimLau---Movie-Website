@@ -9,10 +9,13 @@ import MovieCard from "../components/MovieCard";
 import DropdownButton from "antd/es/dropdown/dropdown-button";
 import Button from "../components/ui/Button";
 import Icons from "../components/Icons";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../app/firebase";
 
 const SavedMovies = () => {
   const { user } = useAuth();
   const [movies, setMovies] = useState([]);
+  const [refresh, setRefresh] = useState(false); // state để trigger useEffect
 
   const fetchData = async () => {
     if (!user?.uid) return;
@@ -22,18 +25,33 @@ const SavedMovies = () => {
 
   useEffect(() => {
     fetchData();
-  }, [user]);
+  }, [user, refresh]);
 
   const handleDelete = async (movieId) => {
     try {
-      const savedMovie = movies.find((m) => m.id === movieId);
-      if (!savedMovie) return;
+      const q = query(
+        collection(db, "saved_movies"),
+        where("user_id", "==", user.uid),
+        where("movie_id", "==", movieId),
+      );
 
-      await deleteSavedMovie(movieId);
-      toast.success("Đã xoá khỏi danh sách!");
-      setMovies((prev) => prev.filter((m) => m.id !== movieId));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        toast.error("❌ Không tìm thấy phim đã lưu.");
+        return;
+      }
+
+      for (const docSnap of querySnapshot.docs) {
+        await deleteSavedMovie(docSnap.id); // truyền ID, không phải doc(...)
+      }
+
+      toast.success("🗑️ Đã xoá phim khỏi danh sách!");
+      setRefresh(true); // Cập nhật state để trigger lại useEffect
+      setMovies((prev) => prev.filter((m) => m.movie_id !== movieId));
     } catch (error) {
-      toast.error("Lỗi khi xoá phim!");
+      console.error("Lỗi khi xoá phim đã lưu:", error);
+      toast.error("⚠️ Lỗi khi xoá phim!");
     }
   };
 

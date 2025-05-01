@@ -42,12 +42,20 @@ export const getFavoritesByUser = async (userId) => {
     const snapshot = await getDocs(q);
 
     return snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data().movie_data,
+        id: doc.id, // Lấy ID tài liệu Firestore
+        ...doc.data().movie_data, // Lấy thông tin movie_data
     }));
 };
 
-// Xoá khỏi danh sách yêu thích
+
+
 export const removeFavorite = async (favoriteDocId) => {
-    await deleteDoc(doc(db, "favorites", favoriteDocId));
+    try {
+        // Sử dụng đúng ID của tài liệu Firestore để xóa
+        await deleteDoc(doc(db, "favorites", favoriteDocId));
+        console.log("Đã xóa phim khỏi danh sách yêu thích.");
+    } catch (error) {
+        console.error("Lỗi khi xóa phim khỏi danh sách yêu thích:", error);
+    }
 };
+

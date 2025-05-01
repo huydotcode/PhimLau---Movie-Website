@@ -3,8 +3,14 @@ import { Link, useParams, useSearchParams } from "react-router";
 import CommentSection from "../components/CommentSection";
 import VideoPlayer from "../components/VideoPlayer";
 import { TopNewMovieSection } from "./HomePage";
+import { useAuth } from "../context/AuthProvider";
+import { addWatchedMovie } from "../services/watchedService";
+import { addSavedMovie } from "../services/movieSavedService";
+import { addFavorite } from "../services/favoriteService";
+// const [isFavorited, setIsFavorited] = useState(false);
 
 const WatchMoviePage = () => {
+  const { user } = useAuth();
   const { slug } = useParams();
   const searchParams = useSearchParams();
   const t = parseInt(searchParams[0].get("t")) - 1 || 0;
@@ -37,18 +43,52 @@ const WatchMoviePage = () => {
     fetchMovie();
   }, [slug]);
 
-  // Scroll to video ref
+  useEffect(() => {
+    if (user?.uid && movie?._id) {
+      addWatchedMovie({
+        userId: user.uid,
+        movie: {
+          _id: movie._id,
+          name: movie.name,
+          origin_name: movie.origin_name,
+          thumb_url: movie.thumb_url,
+          slug: movie.slug,
+          year: movie.year,
+          quality: movie.quality,
+          lang: movie.lang,
+        },
+      });
+    }
+  }, [user, movie]);
+
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [currentEpisode]);
 
+  useEffect(() => {
+    const saveMovie = async () => {
+      if (user?.uid && movie?._id) {
+        try {
+          await addSavedMovie({
+            userId: user.uid,
+            movieId: movie._id,
+          });
+          console.log("luu phim thanh cong");
+        } catch (error) {
+          console.error("Lỗi khi lưu phim đã xem:", error);
+        }
+      }
+    };
+
+    saveMovie();
+  }, [user, movie]);
+
   return (
     <div className="@container relative bg-gradient-to-t from-foreground to-foreground via-transparent">
       {movie && (
         <div className="@container relative flex h-[90vh]">
-          {/* Hình background */}
           <div
             className="absolute inset-0 bg-cover bg-top brightness-[.5]"
             style={{
@@ -62,7 +102,6 @@ const WatchMoviePage = () => {
             }}
           ></div>
 
-          {/* Thông tin phim bên trái */}
           <div className="relative z-10 flex flex-col justify-center pl-10 text-white w-1/2 gap-2 mt-[20vh] @max-3xl:w-3/4 @max-3xl:mt-[5vh]">
             <h1 className="text-5xl font-bold mb-4">{movie?.name}</h1>
             <div className="flex gap-2 mb-3 @max-xl:hidden">
@@ -97,7 +136,6 @@ const WatchMoviePage = () => {
             )}
         </h2>
 
-        {/* Separte */}
         <div className="h-[1px] bg-gray-500 opacity-20 w-full" />
 
         {episodes?.server_data && (

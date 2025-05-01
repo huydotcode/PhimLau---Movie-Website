@@ -4,6 +4,8 @@ import Button from "../components/ui/Button";
 import FavoriteMovies from "./FavoriteMovies";
 import SavedMovies from "./SavedMovies";
 import UpdateInfo from "./UpdateInfo";
+import WatchedMovies from "./WatchedMovies";
+
 import { useAuth } from "../context/AuthProvider";
 
 /*
@@ -20,6 +22,7 @@ function Sidebar({ activeTab }) {
     { key: "update", label: "Cập nhật thông tin" },
     { key: "saved", label: "Phim đã lưu" },
     { key: "favorite", label: "Phim yêu thích" },
+    { key: "history", label: "Phim đã xem" },
   ];
 
   const { user } = useAuth();
@@ -84,6 +87,8 @@ const DashboardUserPage = () => {
         return <SavedMovies />;
       case "favorite":
         return <FavoriteMovies />;
+      case "history":
+        return <WatchedMovies />;
       default:
         return <UpdateInfo />;
     }

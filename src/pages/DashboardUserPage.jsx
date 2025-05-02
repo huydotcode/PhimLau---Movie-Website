@@ -1,23 +1,16 @@
-import React from "react";
-import { Link, useSearchParams } from "react-router";
+import React, { useState } from "react";
+import { useSearchParams } from "react-router";
 import Button from "../components/ui/Button";
 import FavoriteMovies from "./FavoriteMovies";
 import SavedMovies from "./SavedMovies";
 import UpdateInfo from "./UpdateInfo";
+import WatchedMoviesPage from "./WatchedMovie";
+import HelpModal from "../components/HelpModal"; // Import modal trợ giúp
+import FeedbackModal from "../components/FeedbackModal"; // Import modal phản hồi
 
 import { useAuth } from "../context/AuthProvider";
-import WatchedMoviesPage from "./WatchedMovie";
 
-/*
-  createdAt: April 27, 2025 at 1:35:48 PM UTC+7
-  displayName: "Test User1"
-  email: "testuser@gmail.com"
-  phoneNumber: "0937130758"
-  photoURL: ""
-  uid: "JrGzxcUIODa0bxL3372nxhTyUKJ3"
-*/
-
-function Sidebar({ activeTab }) {
+function Sidebar({ activeTab, onOpenHelp, onOpenFeedback }) {
   const tabItems = [
     { key: "update", label: "Cập nhật thông tin" },
     { key: "saved", label: "Phim đã lưu" },
@@ -27,15 +20,13 @@ function Sidebar({ activeTab }) {
 
   const { user } = useAuth();
 
-  // Hàm tạo avatar fallback (chữ cái đầu)
   const getInitial = (name) => name?.charAt(0).toUpperCase() || "?";
 
-  if (!user) return null; // Hoặc có thể hiển thị một thông báo lỗi
+  if (!user) return null;
 
   return (
     <aside className="w-[300px] bg-foreground text-white p-6 border-r border-secondary hidden md:flex flex-col justify-between">
       <div>
-        {/* User info */}
         <div className="flex items-center space-x-4 mb-8">
           {user.photoURL ? (
             <img
@@ -54,7 +45,6 @@ function Sidebar({ activeTab }) {
           </div>
         </div>
 
-        {/* Tab navigation */}
         <ul className="space-y-3">
           {tabItems.map((item) => (
             <Button
@@ -69,6 +59,19 @@ function Sidebar({ activeTab }) {
               {item.label}
             </Button>
           ))}
+          <Button
+            onClick={onOpenHelp}
+            className="justify-start block w-full text-left px-4 py-2 rounded-lg font-medium transition bg-secondary hover:bg-primary hover:text-white"
+          >
+            Trợ giúp
+          </Button>
+
+          <Button
+            onClick={onOpenFeedback}
+            className="justify-start block w-full text-left px-4 py-2 rounded-lg font-medium transition bg-secondary hover:bg-primary hover:text-white"
+          >
+            Gửi Phản Hồi
+          </Button>
         </ul>
       </div>
     </aside>
@@ -78,6 +81,13 @@ function Sidebar({ activeTab }) {
 const DashboardUserPage = () => {
   const [searchParams] = useSearchParams();
   const activeTab = searchParams.get("t") || "update";
+  const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
+
+  const closeHelpModal = () => setIsHelpModalOpen(false);
+  const closeFeedbackModal = () => setIsFeedbackModalOpen(false);
+  const openHelpModal = () => setIsHelpModalOpen(true);
+  const openFeedbackModal = () => setIsFeedbackModalOpen(true);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -96,10 +106,20 @@ const DashboardUserPage = () => {
 
   return (
     <div className="flex h-screen bg-background text-white mt-[60px] rounded-xl overflow-hidden">
-      <Sidebar activeTab={activeTab} />
+      <Sidebar
+        activeTab={activeTab}
+        onOpenHelp={openHelpModal}
+        onOpenFeedback={openFeedbackModal}
+      />
       <main className="flex-1 overflow-auto px-4 py-6 bg-background">
         {renderContent()}
       </main>
+
+      <HelpModal isOpen={isHelpModalOpen} onClose={closeHelpModal} />
+      <FeedbackModal
+        isOpen={isFeedbackModalOpen}
+        onClose={closeFeedbackModal}
+      />
     </div>
   );
 };

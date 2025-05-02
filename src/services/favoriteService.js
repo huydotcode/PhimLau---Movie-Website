@@ -41,11 +41,17 @@ export const getFavoritesByUser = async (userId) => {
     const q = query(favRef, where("user_id", "==", userId));
     const snapshot = await getDocs(q);
 
-    return snapshot.docs.map((doc) => ({
-        id: doc.id, // Lấy ID tài liệu Firestore
-        ...doc.data().movie_data, // Lấy thông tin movie_data
-    }));
+    return snapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+            id: doc.id, // ID tài liệu
+            movie_id: data.movie_id, // Cần để handleUnfavorite hoạt động
+            user_id: data.user_id,   // Có thể cần kiểm tra
+            ...data.movie_data,      // Dữ liệu phim
+        };
+    });
 };
+
 
 
 

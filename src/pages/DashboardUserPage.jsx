@@ -4,9 +4,9 @@ import Button from "../components/ui/Button";
 import FavoriteMovies from "./FavoriteMovies";
 import SavedMovies from "./SavedMovies";
 import UpdateInfo from "./UpdateInfo";
-import WatchedMovies from "./WatchMoviePage";
 
 import { useAuth } from "../context/AuthProvider";
+import WatchedMoviesPage from "./WatchedMovie";
 
 /*
   createdAt: April 27, 2025 at 1:35:48 PM UTC+7
@@ -88,7 +88,7 @@ const DashboardUserPage = () => {
       case "favorite":
         return <FavoriteMovies />;
       case "history":
-        return <WatchedMovies />;
+        return <WatchedMoviesPage />;
       default:
         return <UpdateInfo />;
     }

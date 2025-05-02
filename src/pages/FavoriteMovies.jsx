@@ -28,6 +28,14 @@ const FavoriteMovies = () => {
 
   // Xử lý bỏ yêu thích
   const handleUnfavorite = async (movieId) => {
+    console.log("movieId:", movieId);
+    console.log("userId:", user?.uid);
+
+    if (!movieId || !user?.uid) {
+      toast.error("❌ Thiếu movieId hoặc userId.");
+      return;
+    }
+
     try {
       const q = query(
         collection(db, "favorites"),
@@ -43,11 +51,11 @@ const FavoriteMovies = () => {
       }
 
       for (const docSnap of querySnapshot.docs) {
-        await removeFavorite(docSnap.id); // Truyền đúng ID tài liệu Firestore
+        await removeFavorite(docSnap.id);
       }
 
       toast.success("🗑️ Đã bỏ yêu thích!");
-      setRefresh((r) => !r); // Trigger re-fetch
+      setRefresh((r) => !r);
       setFavorites((prev) => prev.filter((m) => m.movie_id !== movieId));
     } catch (error) {
       console.error("Lỗi khi bỏ yêu thích:", error);
@@ -70,7 +78,9 @@ const FavoriteMovies = () => {
               <div className="flex justify-end items-center mt-2">
                 <Button
                   className="bg-primary text-white mt-2 p-2 rounded-xl absolute top-1 left-1 flex items-center gap-2"
-                  onClick={() => handleUnfavorite(movie.id)} // Xóa khỏi yêu thích
+                  onClick={() => handleUnfavorite(movie.movie_id)}
+
+                  // Xóa khỏi yêu thích
                 >
                   <Icons.Close className="text-xl text-white" />
                 </Button>

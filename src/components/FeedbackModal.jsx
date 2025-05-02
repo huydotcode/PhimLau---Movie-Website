@@ -36,23 +36,21 @@ const FeedbackModal = ({ isOpen, onClose }) => {
     setMessage("");
 
     try {
-      // Lưu ảnh vào Firebase Storage và lấy URL
+      // Giả lập lưu ảnh vào Firebase Storage và lấy URL
       const imageUrls = [];
-      for (let i = 0; i < images.length; i++) {
-        const imageRef = ref(storage, `feedback_images/${images[i].name}`);
-        const uploadResult = await uploadBytes(imageRef, images[i]);
-        const downloadURL = await getDownloadURL(uploadResult.ref);
-        imageUrls.push(downloadURL);
+      if (images.length > 0) {
+        for (let i = 0; i < images.length; i++) {
+          // Chỉ tạo URL giả lập cho ảnh
+          const imageUrl = URL.createObjectURL(images[i]);
+          imageUrls.push(imageUrl);
+        }
       }
 
-      // Lưu feedback vào Firestore
-      await addDoc(collection(db, "feedbacks"), {
-        name,
-        feedback,
-        errorDescription,
-        images: imageUrls,
-        timestamp: new Date(),
-      });
+      // Giả lập lưu feedback vào Firestore
+      console.log("Tên: ", name);
+      console.log("Phản hồi: ", feedback);
+      console.log("Mô tả lỗi: ", errorDescription);
+      console.log("Chọn tối đa 3 ảnh: ", imageUrls);
 
       setMessage("Cảm ơn bạn đã gửi phản hồi!");
       setFeedback("");

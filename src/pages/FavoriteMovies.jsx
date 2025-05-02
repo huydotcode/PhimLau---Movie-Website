@@ -70,17 +70,15 @@ const FavoriteMovies = () => {
       {favorites.length === 0 ? (
         <p className="text-gray-400">Bạn chưa có phim yêu thích nào.</p>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {favorites.map((movie) => (
             <div key={movie.id} className="relative">
               <MovieCard movie={movie} />
 
-              <div className="flex justify-end items-center mt-2">
+              <div className="absolute top-2 right-2 z-10">
                 <Button
-                  className="bg-primary text-white mt-2 p-2 rounded-xl absolute top-1 left-1 flex items-center gap-2"
+                  className="bg-primary text-white p-2 rounded-full"
                   onClick={() => handleUnfavorite(movie.movie_id)}
-
-                  // Xóa khỏi yêu thích
                 >
                   <Icons.Close className="text-xl text-white" />
                 </Button>

@@ -67,7 +67,7 @@ const FeedbackModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
-      <div className="bg-white max-w-md rounded-lg p-6 text-black shadow-xl overflow-auto w-full">
+      <div className="bg-white max-w-lg md:max-w-xl lg:max-w-2xl rounded-lg p-6 text-black shadow-xl overflow-auto w-full">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold text-gray-900">Gửi Phản Hồi</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-black">
@@ -149,7 +149,7 @@ const FeedbackModal = ({ isOpen, onClose }) => {
               <h4 className="font-medium text-sm text-gray-700">
                 Ảnh đã chọn:
               </h4>
-              <div className="flex space-x-2 mt-2">
+              <div className="flex space-x-2 mt-2 overflow-x-auto">
                 {images.map((image, index) => (
                   <img
                     key={index}

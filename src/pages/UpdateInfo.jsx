@@ -79,7 +79,7 @@ const UpdateInfo = () => {
           <input
             {...register(name, getValidation(name))}
             type={type}
-            className="bg-secondary text-white px-3 py-2 rounded w-full"
+            className="bg-secondary text-white px-3 py-2 rounded w-full sm:w-80"
           />
           <button
             type="submit"
@@ -117,10 +117,11 @@ const UpdateInfo = () => {
       )}
     </div>
   );
+
   if (!user) return null; // Nếu chưa có user, không render gì cả
 
   return (
-    <div className="mx-auto p-4">
+    <div className="mx-auto p-4 sm:max-w-xl">
       <h1 className="text-2xl font-bold mb-6">🎯 Cập nhật thông tin cá nhân</h1>
 
       {/* Avatar */}

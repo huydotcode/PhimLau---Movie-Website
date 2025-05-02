@@ -6,7 +6,6 @@ import {
   getSavedMoviesByUser,
 } from "../services/movieSavedService";
 import MovieCard from "../components/MovieCard";
-import DropdownButton from "antd/es/dropdown/dropdown-button";
 import Button from "../components/ui/Button";
 import Icons from "../components/Icons";
 import { collection, query, where, getDocs } from "firebase/firestore";
@@ -62,14 +61,14 @@ const SavedMovies = () => {
       {movies.length === 0 ? (
         <p className="text-gray-400">Bạn chưa lưu phim nào.</p>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {movies.map((movie) => (
             <div className="relative" key={movie._id}>
               <MovieCard movie={movie} />
 
-              <div className="flex justify-end items-center mt-2">
+              <div className="absolute top-2 right-2 z-10">
                 <Button
-                  className="bg-primary text-white mt-2 p-2 rounded-xl absolute top-1 left-1 flex items-center gap-2"
+                  className="bg-primary text-white p-2 rounded-full"
                   onClick={() => handleDelete(movie._id)}
                 >
                   <Icons.Close className="text-xl text-white" />

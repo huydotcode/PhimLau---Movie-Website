@@ -1,5 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllCountries,getMoviesByCountry } from "../services/countryService";
+import {
+  getAllCountries,
+  getMoviesByCountry,
+} from "../services/countryService";
 
 export const useAllCountries = ({ enable = true }) => {
   return useQuery({

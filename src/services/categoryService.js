@@ -1,4 +1,18 @@
-import { collection, getDocs, limit, orderBy, query, startAfter, where } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  setDoc,
+  startAfter,
+  Timestamp,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import mongoose from "mongoose";
 import { db } from "../app/firebase";
 
 const MAX_CATEGORIES = 6;
@@ -43,7 +57,11 @@ export const getAllCategories = async () => {
   }
 };
 
-export const getMoviesByCategory = async (categorySlug, page, lastVisible = null) => {
+export const getMoviesByCategory = async (
+  categorySlug,
+  page,
+  lastVisible = null,
+) => {
   try {
     let q = query(
       collection(db, "movies"),
@@ -75,6 +93,57 @@ export const getMoviesByCategory = async (categorySlug, page, lastVisible = null
     };
   } catch (error) {
     console.error("Error fetching movies by category:", error);
+    throw error;
+  }
+};
+
+// Thêm thể loại
+export const addCategory = async (category) => {
+  try {
+    const categoryId = new mongoose.Types.ObjectId().toString(); // Tạo ID mới cho thể loại
+    const newCategory = {
+      ...category,
+      id: categoryId,
+      totalViews: 0, // Khởi tạo totalViews bằng 0
+      createdAt: Timestamp.now(), // Thời gian tạo thể loại
+      updatedAt: Timestamp.now(), // Thời gian cập nhật thể loại
+    };
+
+    // Thêm thể loại vào Firestore
+    const docRef = doc(db, "categories", categoryId);
+
+    await setDoc(docRef, newCategory);
+
+    return newCategory;
+  } catch (error) {
+    console.error("Error adding category:", error);
+    throw error;
+  }
+};
+
+// Cập nhật thể loại
+export const updateCategory = async (categoryId, updatedData) => {
+  try {
+    // Cập nhật thể loại trong Firestore
+    const categoryRef = doc(db, "categories", categoryId);
+    await updateDoc(categoryRef, {
+      ...updatedData,
+      updatedAt: Timestamp.now(), // Cập nhật thời gian cập nhật
+    });
+  } catch (error) {
+    console.error("Error updating category:", error);
+    throw error;
+  }
+};
+
+// Xóa thể loại
+export const deleteCategory = async (categoryId) => {
+  console.log("Deleting category with ID:", categoryId);
+  try {
+    const categoryRef = doc(db, "categories", categoryId);
+    await deleteDoc(categoryRef);
+  } catch (error) {
+    console.error("Error deleting category:", error);
     throw error;
   }
 };

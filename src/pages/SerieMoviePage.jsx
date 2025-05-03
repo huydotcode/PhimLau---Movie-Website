@@ -4,7 +4,6 @@ import MovieCard from "../components/MovieCard";
 import FilterPanel from "../components/FilterPanel";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { Pagination } from "antd";
-import "../styles/pagination.css";
 import { useSerieMovies } from "../hooks/useSerie"; // Import useSerieMovies
 
 const PAGE_SIZE = 20; // Số lượng kết quả tối đa để hiển thị
@@ -36,7 +35,6 @@ const SerieMoviePage = () => {
     }
   }, [data]);
 
-
   // useEffect(() => {
   //   (async () => {
   //     setIsLoading(true);
@@ -62,27 +60,26 @@ const SerieMoviePage = () => {
   //   })();
   // }, []);
 
-
   const handleFilter = () => {
     if (!data?.movies) return;
 
-    let results = data.movies.filter(movie => {
+    let results = data.movies.filter((movie) => {
       const matchCountry =
         filters.country.length === 0 || // Lọc nhiều quốc gia
-        filters.country.some(country =>
-          movie.country?.some(c => c.name === country),
+        filters.country.some((country) =>
+          movie.country?.some((c) => c.name === country),
         );
 
       const matchCategory =
         filters.category.length === 0 ||
-        filters.category.some(category =>
-          movie.category?.some(cat => cat.name === category),
+        filters.category.some((category) =>
+          movie.category?.some((cat) => cat.name === category),
         );
       // const matchYear =
       //   filters.year.length === 0 || filters.year.includes(movie.year?.toString());
       const matchYear =
         filters.year.length === 0 ||
-        filters.year.some(year => {
+        filters.year.some((year) => {
           if (year === "Cũ hơn") {
             return movie.year < 2020; // Lọc phim có năm sản xuất cũ hơn 2020
           }
@@ -111,7 +108,7 @@ const SerieMoviePage = () => {
 
   const totalMovies = filteredResults.length;
 
-  const handlePageChange = page => {
+  const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
@@ -149,7 +146,7 @@ const SerieMoviePage = () => {
         {!isLoading &&
           filteredResults
             .slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
-            .map(movie => <MovieCard key={movie.slug} movie={movie} />)}
+            .map((movie) => <MovieCard key={movie.slug} movie={movie} />)}
       </div>
 
       {!isLoading && filteredResults.length > 0 && (
@@ -161,7 +158,7 @@ const SerieMoviePage = () => {
             total={totalMovies}
             onChange={handlePageChange}
             showSizeChanger={false}
-            showTotal={total => `Tổng số ${total} phim`}
+            showTotal={(total) => `Tổng số ${total} phim`}
           />
         </div>
       )}

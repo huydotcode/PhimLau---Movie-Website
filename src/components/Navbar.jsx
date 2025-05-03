@@ -6,6 +6,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { IoLogIn } from "react-icons/io5";
+import { RiAdminFill } from "react-icons/ri";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { auth } from "../app/firebase";
@@ -19,7 +20,6 @@ import { convertTime } from "../utils/convertTime";
 import Icons from "./Icons";
 import Loading from "./Loading";
 import Button from "./ui/Button";
-
 const navUserItems = (displayName) => [
   {
     key: "display-name",
@@ -123,6 +123,13 @@ const Navbar = () => {
 
           {!loading && (
             <>
+              {user?.role === "admin" && (
+                <Link to="/admin">
+                  <Button className="w-full hover:text-primary flex justify-start">
+                    <RiAdminFill className="w-6 h-6" />
+                  </Button>
+                </Link>
+              )}
               {user ? (
                 <Dropdown
                   menu={{ items: navUserItems(user.displayName) }}

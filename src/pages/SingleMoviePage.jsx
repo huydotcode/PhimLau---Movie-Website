@@ -4,7 +4,6 @@ import MovieCard from "../components/MovieCard";
 import FilterPanel from "../components/FilterPanel";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { Pagination } from "antd";
-import "../styles/pagination.css";
 import { useSingleMovies } from "../hooks/useSingle"; // Import useSingleMovies
 
 const PAGE_SIZE = 20; // Số lượng kết quả tối đa để hiển thị
@@ -59,7 +58,6 @@ const SingleMoviePage = () => {
   //     }
   //   })();
   // }, []);
-
 
   const handleFilter = () => {
     if (!data?.movies) return;

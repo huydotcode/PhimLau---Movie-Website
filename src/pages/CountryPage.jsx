@@ -5,7 +5,6 @@ import MovieCard from "../components/MovieCard";
 import FilterPanel from "../components/FilterPanel"; // Import FilterPanel
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { Pagination } from "antd"; // Import Pagination từ Ant Design
-import "../styles/pagination.css"; // Đảm bảo bạn có style cho Pagination
 import { useCountryMovies, useAllCountries } from "../hooks/useCountry"; // Import custom hook
 
 const PAGE_SIZE = 20; // Số lượng phim hiển thị trên mỗi trang

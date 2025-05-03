@@ -2,6 +2,7 @@ import AdminLayout from "../layouts/AdminLayout";
 import LayoutWithBanner from "../layouts/LayoutWithBanner";
 import LayoutWithoutBanner from "../layouts/LayoutWithoutBanner";
 import CategoryList from "../pages/admin/CategoryList";
+import Dashboard from "../pages/admin/Dashboard";
 import FavoriteList from "../pages/admin/FavoriteList";
 import MovieList from "../pages/admin/MovieList";
 import UserList from "../pages/admin/UserList";
@@ -48,11 +49,18 @@ export const publicRoutes = [
     element: CategoryPage,
     layout: LayoutWithoutBanner,
   },
+];
+
+export const adminRoutes = [
   {
     path: "/admin",
     element: AdminPage,
     layout: AdminLayout,
     children: [
+      {
+        path: "",
+        element: Dashboard,
+      },
       {
         path: "movies",
         element: MovieList,

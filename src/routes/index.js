@@ -54,7 +54,7 @@ export const publicRoutes = [
     path: "/dashboard",
     element: DashboardUserPage,
     layout: LayoutWithoutBanner,
-  }
+  },
 ];
 
 export const adminRoutes = [

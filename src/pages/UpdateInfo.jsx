@@ -48,7 +48,8 @@ const UpdateInfo = () => {
       user.photoURL = photoURL;
       toast.success("Cập nhật ảnh đại diện thành công!");
     } catch (err) {
-      toast.error("Lỗi khi cập nhật ảnh đại diện: " + err.message);
+      console.log(err);
+      toast.error("Lỗi khi cập nhật ảnh đại diện");
     } finally {
       setUploading(false);
     }
@@ -99,12 +100,12 @@ const UpdateInfo = () => {
           <input
             {...register(name, getValidation(name))}
             type={type}
-            className="bg-secondary text-white px-3 py-2 rounded w-full sm:w-80"
+            className="bg-secondary flex-1 h-[48px] text-white px-3 py-2 rounded w-full sm:w-80"
           />
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-primary text-white px-3 py-1 rounded"
+            className="bg-primary text-white px-3 py-1 rounded h-[48px]"
           >
             Lưu
           </button>
@@ -141,8 +142,8 @@ const UpdateInfo = () => {
   if (!user) return null;
 
   return (
-    <div className="mx-auto p-4 sm:max-w-xl">
-      <h1 className="text-2xl font-bold mb-6">🎯 Cập nhật thông tin cá nhân</h1>
+    <div className="p-4 max-w-xl bg-background rounded-lg shadow-md">
+      <h1 className="text-2xl font-bold mb-6">Cập nhật thông tin cá nhân</h1>
 
       {/* Avatar */}
       <div className="flex items-center space-x-4 mb-6">

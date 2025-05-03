@@ -1,7 +1,8 @@
-import { doc, updateDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
-import { db, storage, auth } from "../app/firebase"; // Import cấu hình Firebase
+import { doc, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { auth, db } from "../app/firebase"; // Import cấu hình Firebase
+import { storage2 } from "../app/firebase_upload";
 
 /**
  * Cập nhật một field cụ thể của người dùng trong Firestore
@@ -10,12 +11,12 @@ import { db, storage, auth } from "../app/firebase"; // Import cấu hình Fireb
  * @param {*} value - Giá trị mới
  */
 export const updateUserField = async (userId, field, value) => {
-    if (!userId) throw new Error("Không tìm thấy userId.");
+  if (!userId) throw new Error("Không tìm thấy userId.");
 
-    const userRef = doc(db, "users", userId);
-    await updateDoc(userRef, {
-        [field]: value,
-    });
+  const userRef = doc(db, "users", userId);
+  await updateDoc(userRef, {
+    [field]: value,
+  });
 };
 
 /**
@@ -28,24 +29,24 @@ export const updateUserField = async (userId, field, value) => {
  * @returns {Promise<string>} - URL ảnh mới
  */
 export const updateUserPhoto = async (userId, file) => {
-    if (!userId || !file) throw new Error("Thiếu userId hoặc file.");
+  if (!userId || !file) throw new Error("Thiếu userId hoặc file.");
 
-    // Tạo đường dẫn lưu ảnh trong Storage
-    const imageRef = ref(storage, `avatars/${userId}/${file.name}`);
+  // Tạo đường dẫn lưu ảnh trong Storage
+  const imageRef = ref(storage2, `avatars/${userId}/${file.name}`);
 
-    // Upload ảnh lên Storage
-    await uploadBytes(imageRef, file);
+  // Upload ảnh lên Storage
+  await uploadBytes(imageRef, file);
 
-    // Lấy URL ảnh sau khi upload
-    const photoURL = await getDownloadURL(imageRef);
+  // Lấy URL ảnh sau khi upload
+  const photoURL = await getDownloadURL(imageRef);
 
-    // Cập nhật ảnh đại diện trong Firestore
-    await updateUserField(userId, "photoURL", photoURL);
+  // Cập nhật ảnh đại diện trong Firestore
+  await updateUserField(userId, "photoURL", photoURL);
 
-    // Nếu đang đăng nhập đúng user thì cập nhật vào Firebase Auth luôn
-    if (auth.currentUser?.uid === userId) {
-        await updateProfile(auth.currentUser, { photoURL });
-    }
+  // Nếu đang đăng nhập đúng user thì cập nhật vào Firebase Auth luôn
+  if (auth.currentUser?.uid === userId) {
+    await updateProfile(auth.currentUser, { photoURL });
+  }
 
-    return photoURL;
+  return photoURL;
 };

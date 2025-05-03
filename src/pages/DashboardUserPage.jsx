@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import { useSearchParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router";
+import FeedbackModal from "../components/FeedbackModal"; // Import modal phản hồi
+import HelpModal from "../components/HelpModal"; // Import modal trợ giúp
 import Button from "../components/ui/Button";
 import FavoriteMovies from "./FavoriteMovies";
 import SavedMovies from "./SavedMovies";
 import UpdateInfo from "./UpdateInfo";
 import WatchedMoviesPage from "./WatchedMovie";
-import HelpModal from "../components/HelpModal"; // Import modal trợ giúp
-import FeedbackModal from "../components/FeedbackModal"; // Import modal phản hồi
 
+import Icons from "../components/Icons";
 import { useAuth } from "../context/AuthProvider";
 
 function Sidebar({
@@ -44,10 +45,20 @@ function Sidebar({
       <aside
         className={`${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } fixed top-0 left-0 w-[250px] bg-foreground text-white p-6 border-r border-secondary flex flex-col justify-between transition-transform duration-300 ease-in-out z-50
-md:translate-x-0 md:relative md:z-auto md:h-auto`}
+        } fixed top-0 left-0 w-[300px] bg-background text-white p-6 border-r-2 border-secondary flex flex-col justify-between transition-transform duration-300 ease-in-out z-50
+md:translate-x-0 md:relative md:z-auto md:h-auto h-full`}
       >
         <div>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-bold">Tài khoản</h2>
+            <button
+              className="absolute top-4 right-4 md:hidden py-2 px-4 text-white text-weight-bold bg-secondary rounded-lg transition-transform duration-300 ease-in-out hover:bg-primary"
+              onClick={toggleSidebar}
+            >
+              <Icons.Close className="w-6 h-6" />
+            </button>
+          </div>
+
           <div className="flex items-center space-x-4 mb-8">
             {user.photoURL ? (
               <img
@@ -66,38 +77,44 @@ md:translate-x-0 md:relative md:z-auto md:h-auto`}
             </div>
           </div>
 
-          <ul className="space-y-3">
+          <ul className="rounded-sm overflow-hidden">
             {tabItems.map((item) => (
               <Button
                 key={item.key}
-                className={`justify-start block w-full text-left px-4 py-2 rounded-lg font-medium transition ${
+                className={`justify-start block w-full text-base text-left px-4 py-2 font-medium transition ${
                   activeTab === item.key
                     ? "bg-primary text-white"
-                    : "bg-secondary hover:bg-primary hover:text-white"
+                    : " hover:bg-primary hover:text-white"
                 }`}
-                href={`/dashboard?t=${item.key}`}
+                // href={`/dashboard?t=${item.key}`}
                 onClick={() => {
                   onTabClick(item.key);
-                  toggleSidebar(); // Close sidebar after tab click on mobile
+
+                  if (isSidebarOpen) {
+                    toggleSidebar(); // Đóng sidebar khi click vào tab
+                  }
                 }}
               >
                 {item.label}
               </Button>
             ))}
-            <Button
-              onClick={onOpenHelp}
-              className="justify-start block w-full text-left px-4 py-2 rounded-lg font-medium transition bg-secondary hover:bg-primary hover:text-white"
-            >
-              Trợ giúp
-            </Button>
-
-            <Button
-              onClick={onOpenFeedback}
-              className="justify-start block w-full text-left px-4 py-2 rounded-lg font-medium transition bg-secondary hover:bg-primary hover:text-white"
-            >
-              Gửi Phản Hồi
-            </Button>
           </ul>
+        </div>
+
+        <div>
+          <Button
+            onClick={onOpenHelp}
+            className="justify-start block w-full text-left text-xs px-4 py-2 font-medium transition  hover:underline hover:text-white"
+          >
+            Trợ giúp
+          </Button>
+
+          <Button
+            onClick={onOpenFeedback}
+            className="justify-start block w-full text-left text-xs px-4 py-2 font-medium transition  hover:underline hover:text-white"
+          >
+            Gửi Phản Hồi
+          </Button>
         </div>
       </aside>
     </>
@@ -110,16 +127,18 @@ const DashboardUserPage = () => {
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Track the sidebar state
+  const navigate = useNavigate(); // Hook to programmatically navigate
 
   const closeHelpModal = () => setIsHelpModalOpen(false);
   const closeFeedbackModal = () => setIsFeedbackModalOpen(false);
   const openHelpModal = () => setIsHelpModalOpen(true);
   const openFeedbackModal = () => setIsFeedbackModalOpen(true);
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev); // Toggle sidebar state
 
   const onTabClick = (tab) => {
     // Handle tab change logic if needed
+    navigate(`/dashboard?t=${tab}`); // Navigate to the new tab
   };
 
   const renderContent = () => {
@@ -137,14 +156,22 @@ const DashboardUserPage = () => {
     }
   };
 
+  useEffect(() => {
+    console.log("isSidebarOpen", isSidebarOpen);
+  }, [isSidebarOpen]);
+
   return (
-    <div className="flex h-screen bg-background text-white mt-[60px] rounded-xl overflow-hidden relative">
+    <div className="flex h-screen bg-background text-white rounded-xl overflow-hidden relative">
       {/* Hamburger Button for mobile */}
       <button
-        className="absolute top-3 right-4 md:hidden p-4 text-white text-weight-bold bg-primary rounded-full shadow-lg transition-transform duration-300 ease-in-out hover:bg-secondary"
+        className="absolute top-4 right-4 md:hidden py-2 px-4 text-white text-weight-bold bg-secondary rounded-lg transition-transform duration-300 ease-in-out hover:bg-primary"
         onClick={toggleSidebar}
       >
-        {isSidebarOpen ? "Đóng Menu" : "More"}
+        {isSidebarOpen ? (
+          <Icons.Close className="w-6 h-6" />
+        ) : (
+          <Icons.Menu className="w-6 h-6" />
+        )}
       </button>
 
       <Sidebar
@@ -156,7 +183,7 @@ const DashboardUserPage = () => {
         onTabClick={onTabClick}
       />
 
-      <main className="flex-1 overflow-auto px-4 py-6 bg-background md:ml-[250px] mt-[100px] md:mt-0">
+      <main className="flex-1 overflow-auto px-4 py-6 bg-background md:ml-0 md:mt-0">
         {renderContent()}
       </main>
 

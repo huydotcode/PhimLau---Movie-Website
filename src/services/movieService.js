@@ -1,14 +1,19 @@
 import {
   collection,
+  deleteDoc,
   doc,
+  getCountFromServer,
   getDocs,
   limit,
   orderBy,
   query,
   setDoc,
+  startAfter,
   Timestamp,
+  updateDoc,
   where,
 } from "firebase/firestore";
+import mongoose from "mongoose";
 import { db } from "../app/firebase";
 
 // Danh sách phim mới tháng nay và có view nhiều nhất
@@ -28,7 +33,7 @@ export const getTopNewMovies = async () => {
 
     const snapshot = await getDocs(q);
 
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error fetching new movies:", error);
     throw error;
@@ -46,7 +51,7 @@ export const getTopViewMovies = async () => {
 
     const snapshot = await getDocs(q);
 
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error fetching top movies:", error);
     throw error;
@@ -63,7 +68,7 @@ export const getNewSingleMovies = async () => {
       limit(10),
     );
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error fetching new single movies:", error);
     throw error;
@@ -80,7 +85,7 @@ export const getNewSeriesMovies = async () => {
       limit(10),
     );
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error fetching new series movies:", error);
     throw error;
@@ -97,7 +102,7 @@ export const getTrendingMovies = async () => {
       limit(10),
     );
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error fetching trending movies:", error);
     throw error;
@@ -115,7 +120,7 @@ export const getKoreanMovies = async () => {
     );
 
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error fetching Korean movies:", error);
     throw error;
@@ -132,7 +137,7 @@ export const getAmericanMovies = async () => {
       limit(10),
     );
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error fetching American movies:", error);
     throw error;
@@ -140,12 +145,12 @@ export const getAmericanMovies = async () => {
 };
 
 // Lấy danh sách Saved Movies
-export const getSavedMovies = async uid => {
+export const getSavedMovies = async (uid) => {
   try {
     const snapshot = await getDocs(
       query(collection(db, "users", uid, "savedMovies")),
     );
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error fetching saved movies:", error);
     throw error;
@@ -153,12 +158,12 @@ export const getSavedMovies = async uid => {
 };
 
 // Lấy danh sách Favorite Movies
-export const getFavoriteMovies = async uid => {
+export const getFavoriteMovies = async (uid) => {
   try {
     const snapshot = await getDocs(
       query(collection(db, "users", uid, "favoriteMovies")),
     );
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error fetching favorite movies:", error);
     throw error;
@@ -166,12 +171,12 @@ export const getFavoriteMovies = async uid => {
 };
 
 // Lấy danh sách Watched Movies
-export const getWatchedMovies = async uid => {
+export const getWatchedMovies = async (uid) => {
   try {
     const snapshot = await getDocs(
       query(collection(db, "users", uid, "watchedMovies")),
     );
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error fetching watched movies:", error);
     throw error;
@@ -207,6 +212,324 @@ export const watchMovie = async (uid, movie) => {
     await setDoc(movieRef, movie);
   } catch (error) {
     console.error("Error watching movie:", error);
+    throw error;
+  }
+};
+
+// Lấy page đầu tiên
+export const fetchMoviesFirstPage = async (pageSize = 10) => {
+  const q = query(
+    collection(db, "movies"),
+    orderBy("year", "desc"),
+    limit(pageSize),
+  );
+  const snapshot = await getDocs(q);
+  const lastVisible = snapshot.docs[snapshot.docs.length - 1];
+
+  return {
+    movies: snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+    lastVisible,
+  };
+};
+
+// Lấy trang kế tiếp (dựa vào lastVisible)
+export const fetchNextPage = async (lastVisible, pageSize = 10) => {
+  const q = query(
+    collection(db, "movies"),
+    orderBy("year", "desc"),
+    startAfter(lastVisible),
+    limit(pageSize),
+  );
+  const snapshot = await getDocs(q);
+  const newLast = snapshot.docs[snapshot.docs.length - 1];
+
+  return {
+    movies: snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+    lastVisible: newLast,
+  };
+};
+
+export const searchMovies = async ({
+  searchTerm = "",
+  page = 1,
+  filters = {},
+  lastVisible = null,
+  pageSize = 10,
+}) => {
+  console.log("searchMovies: ", { searchTerm, page, filters });
+  try {
+    const movieRef = collection(db, "movies");
+
+    let constraints = [];
+
+    // Tìm kiếm theo tên (dạng lowercase)
+    if (searchTerm.trim() !== "") {
+      const termLower = searchTerm.toLowerCase();
+      constraints.push(
+        where("name_lowercase", ">=", termLower),
+        where("name_lowercase", "<=", termLower + "\uf8ff"),
+      );
+    }
+
+    // Lọc theo category (slug)
+    if (filters.category && filters.category.length > 0) {
+      constraints.push(
+        where("categorySlugs", "array-contains-any", filters.category),
+      );
+    }
+
+    // Lọc theo year
+    if (filters.year && filters.year.length > 0) {
+      if (filters.year.includes("Cũ hơn")) {
+        // Pussh các năm từ 2020 trở về trước vào mảng
+
+        const years = Array.from(
+          { length: 2020 - 2000 + 1 },
+          (_, i) => 2020 - i,
+        ).map((year) => year.toString());
+        filters.year = [...filters.year, ...years].filter(
+          (year) => year !== "Cũ hơn",
+        );
+      }
+
+      constraints.push(
+        where(
+          "year",
+          "in",
+          filters.year.map((year) => parseInt(year)),
+        ),
+      );
+    }
+
+    // Order by Mới nhất IMDB Lượt xem
+    if (filters.sort === "IMDB") {
+      constraints.push(orderBy("tmdb.vote_average", "desc"));
+    } else if (filters.sort === "Lượt xem") {
+      constraints.push(orderBy("view", "desc"));
+    } else if (filters.sort === "Mới nhất") {
+      constraints.push(orderBy("year", "desc"));
+    } else {
+      constraints.push(orderBy("year", "desc"));
+    }
+
+    let q = null;
+    if (lastVisible) {
+      q = query(
+        movieRef,
+        ...constraints,
+        startAfter(lastVisible),
+        limit(pageSize),
+      );
+    } else {
+      q = query(movieRef, ...constraints, limit(pageSize));
+    }
+    const querySnapshot = await getDocs(q);
+
+    let movies = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    // Lọc theo country (slug)
+    if (filters.country && filters.country.length > 0) {
+      movies = movies.filter((movie) =>
+        movie.countrySlugs?.some((country) =>
+          filters.country.includes(country),
+        ),
+      );
+    }
+
+    // Sắp xếp theo thời gian tạo (mới nhất trước)
+    movies.sort((a, b) => {
+      const dateA = new Date(a.created.time);
+      const dateB = new Date(b.created.time);
+      return dateB - dateA; // Sắp xếp mới nhất trước
+    });
+
+    // Lấy tổng số lượng phim
+    const countQuery = query(movieRef, ...constraints);
+    const snapshot = await getCountFromServer(countQuery);
+    const totalCount = snapshot.data().count;
+
+    return {
+      movies,
+      lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1],
+      totalMovies: totalCount,
+      totalPages: Math.ceil(totalCount / pageSize),
+    };
+  } catch (error) {
+    console.error("Lỗi khi tìm kiếm phim từ Firestore:", error);
+    return { movies: [], lastVisible: null };
+  }
+};
+
+// Thêm phim mới vào Firestore
+export const addMovie = async ({
+  actor = [{ name: "Chưa cập nhật", slug: "chua-cap-nhat" }],
+  category = [
+    {
+      name: "Chưa cập nhật",
+      slug: "chua-cap-nhat",
+    },
+  ],
+  categorySlugs = ["chua-cap-nhat"],
+  chieurap = false,
+  content = "",
+  country = [
+    {
+      name: "Chưa cập nhật",
+      slug: "chua-cap-nhat",
+    },
+  ],
+  countrySlugs = ["chua-cap-nhat"],
+  createdTime = new Date().toISOString,
+  director = [
+    {
+      name: "Chưa cập nhật",
+      slug: "chua-cap-nhat",
+    },
+  ],
+  episode_current = "Chưa cập nhật",
+  episode_total = 0,
+  imdb = {
+    id: "Chưa cập nhật",
+  },
+  is_copyright = false,
+  lang = "Chưa cập nhật",
+  name = "Chưa cập nhật",
+  notify = "",
+  origin_name = "",
+  poster_url = "",
+  quality = "",
+  showtimes = "",
+  slug = "chua-cap-nhat",
+
+  // Chưa hoàn thành
+  status = "uncompleted",
+  sub_docquyen = false,
+  thumb_url = "",
+  time = "",
+  tmdb = {
+    id: "Chưa cập nhật",
+    session: null,
+    type: "movie",
+    vote_average: 0,
+    vote_count: 0,
+  },
+  trailer_url = "",
+  type = "",
+  view = 0,
+  year = new Date().getFullYear(),
+}) => {
+  console.log("ADD MOVIE: ", {
+    actor,
+    category,
+    categorySlugs,
+    chieurap,
+    content,
+    country,
+    countrySlugs,
+    createdTime,
+    director,
+    episode_current,
+    episode_total,
+    imdb,
+    is_copyright,
+    lang,
+    name,
+    notify,
+    origin_name,
+    poster_url,
+    quality,
+    showtimes,
+    slug,
+    status,
+    sub_docquyen,
+    thumb_url,
+    time,
+    tmdb,
+    trailer_url,
+    type,
+    view,
+    year,
+  });
+  try {
+    const newObjectId = new mongoose.Types.ObjectId();
+    const movieId = newObjectId.toString(); // Chuyển đổi ObjectId thành chuỗi
+
+    const movieRef = doc(db, "movies", movieId);
+
+    await setDoc(movieRef, {
+      _id: movieId,
+      actor,
+      category,
+      categorySlugs,
+      chieurap,
+      content,
+      country,
+      countrySlugs,
+      created: {
+        time: Timestamp.fromDate(new Date()),
+      },
+      createdTime: Timestamp.fromDate(new Date()),
+      director,
+      episode_current,
+      episode_total,
+      imdb,
+      is_copyright,
+      lang,
+      modified: {
+        time: Timestamp.fromDate(new Date()),
+        by: "admin",
+      },
+      name,
+      name_lowercase: name.toLowerCase(), // Chuyển đổi tên thành chữ thường
+      notify,
+      origin_name,
+      poster_url,
+      quality,
+      showtimes,
+      slug,
+      status,
+      sub_docquyen,
+      thumb_url,
+      time,
+      tmdb,
+      trailer_url,
+      type,
+      view,
+      year,
+    });
+  } catch (error) {
+    console.error("Error adding movie:", error);
+    throw error;
+  }
+};
+
+export async function updateMovie(id, updatedData) {
+  try {
+    const movieRef = doc(db, "movies", id);
+
+    await updateDoc(movieRef, {
+      ...updatedData,
+      name_lowercase: updatedData.name?.toLowerCase() || "", // đảm bảo đồng bộ field này
+    });
+
+    console.log("Cập nhật phim thành công");
+    return true;
+  } catch (error) {
+    console.error("Lỗi khi cập nhật phim:", error);
+    throw error;
+  }
+}
+
+export const deleteMovie = async (id) => {
+  try {
+    const movieRef = doc(db, "movies", id);
+    await deleteDoc(movieRef);
+    console.log("Xóa phim thành công");
+  } catch (error) {
+    console.error("Lỗi khi xóa phim:", error);
     throw error;
   }
 };

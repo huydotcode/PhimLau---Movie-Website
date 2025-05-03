@@ -5,6 +5,6 @@ export const convertTime = (time) => {
     month: "2-digit",
     day: "2-digit",
   };
-  const formattedDate = date.toLocaleString("en-US", options);
+  const formattedDate = date.toLocaleString("vi-VN", options);
   return formattedDate;
 };

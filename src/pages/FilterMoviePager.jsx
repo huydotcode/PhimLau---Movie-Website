@@ -6,14 +6,12 @@
 
 // export default FilterMoviePager;
 
-
 import React, { useState } from "react";
 import Loading from "../components/Loading";
 import MovieCard from "../components/MovieCard";
 import FilterPanel from "../components/FilterPanel";
 import { Pagination } from "antd";
 import { useAllMovies } from "../hooks/useFilter";
-import "../styles/pagination.css";
 
 const PAGE_SIZE = 20; // Số lượng kết quả tối đa để hiển thị
 
@@ -40,20 +38,18 @@ const FilterMoviePager = () => {
     }
   }, [data]);
 
-
-
   const handleFilter = () => {
     let results = data.movies.filter((movie) => {
       const matchCountry =
         filters.country.length === 0 ||
         filters.country.some((country) =>
-          movie.country?.some((c) => c.name === country)
+          movie.country?.some((c) => c.name === country),
         );
 
       const matchCategory =
         filters.category.length === 0 ||
         filters.category.some((category) =>
-          movie.category?.some((cat) => cat.name === category)
+          movie.category?.some((cat) => cat.name === category),
         );
 
       const matchYear =
@@ -81,7 +77,7 @@ const FilterMoviePager = () => {
     // Sắp xếp kết quả
     if (filters.sort === "IMDB") {
       results = results.sort(
-        (a, b) => b.tmdb.vote_average - a.tmdb.vote_average
+        (a, b) => b.tmdb.vote_average - a.tmdb.vote_average,
       );
     } else if (filters.sort === "Lượt xem") {
       results = results.sort((a, b) => b.view - a.view);

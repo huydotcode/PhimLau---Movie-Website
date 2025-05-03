@@ -28,8 +28,10 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true); // chờ load firebase
 
   useEffect(() => {
+    // Kiểm tra trạng thái xác thực người dùng
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("onAuthStateChanged", { currentUser });
+
       if (currentUser) {
         // Query từ firebase
         const userDocRef = doc(db, "users", currentUser.uid);
@@ -44,6 +46,8 @@ export const AuthProvider = ({ children }) => {
                 phoneNumber: userData.phoneNumber,
                 photoURL: userData.photoURL,
                 uid: currentUser.uid,
+                role: userData.role,
+                createdAt: userData.createdAt,
               });
             } else {
               setUser(null);
@@ -159,6 +163,7 @@ export const AuthProvider = ({ children }) => {
           phoneNumber,
           photoURL: photoURL || "", // Nếu không có photoURL thì để trống
           createdAt: new Date(), // Lưu thời gian tạo tài khoản
+          role: "user", // Mặc định là user, có thể thay đổi sau này
         });
 
         // Lưu thông tin người dùng vào state (nếu có)
@@ -168,6 +173,7 @@ export const AuthProvider = ({ children }) => {
           email,
           phoneNumber,
           photoURL,
+          role: "user",
         });
       }
 
@@ -183,8 +189,11 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await signOut(auth);
+      setUser(null); // Đặt lại state user về null sau khi đăng xuất
+      toast("Đăng xuất thành công!");
     } catch (error) {
       console.error("Error signing out: ", error);
+      toast("Đăng xuất thất bại!");
     }
   };
 
@@ -198,20 +207,32 @@ export const AuthProvider = ({ children }) => {
       const { uid, displayName, email, photoURL, phoneNumber } = user;
 
       const userRef = doc(db, "users", uid); // Tạo document với UID của người dùng
-      await setDoc(
-        userRef,
-        {
-          uid,
-          displayName,
-          email,
-          photoURL,
-          phoneNumber,
-          createdAt: new Date(), // Thêm thời gian tạo người dùng
-        },
-        {
-          merge: true,
-        },
-      );
+
+      // Kiểm tra xem người dùng đã tồn tại trong Firestore chưa
+      const userDoc = await getDoc(userRef);
+      if (userDoc.exists()) {
+        // Nếu người dùng đã tồn tại, không cần tạo mới
+        console.log("User already exists in Firestore:", userDoc.data());
+      } else {
+        // Nếu người dùng chưa tồn tại, tạo mới
+        console.log("Creating new user in Firestore");
+
+        await setDoc(
+          userRef,
+          {
+            uid,
+            displayName,
+            email,
+            photoURL,
+            phoneNumber,
+            createdAt: new Date(), // Thêm thời gian tạo người dùng
+            role: "user", // Mặc định là user, có thể thay đổi sau này
+          },
+          {
+            merge: true,
+          },
+        );
+      }
     } catch (error) {
       console.error("Error signing in with Google: ", error);
       toast.error("Đăng nhập bằng Google thất bại");

@@ -5,7 +5,7 @@ import MovieCard from "../components/MovieCard";
 import FilterPanel from "../components/FilterPanel"; // Import FilterPanel
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { Pagination } from "antd"; // Import Pagination từ Ant Design
-import "../styles/pagination.css"; // Đảm bảo bạn có style cho Pagination
+
 import { useCategoryMovies, useAllCategories } from "../hooks/useCategory";
 
 const PAGE_SIZE = 20; // Số lượng phim hiển thị trên mỗi trang
@@ -26,11 +26,12 @@ const CategoryPage = () => {
   const [showFilters, setShowFilters] = useState(false); // State để hiển thị bộ lọc
   const [filteredResults, setFilteredResults] = useState([]);
 
-
   // Lấy danh sách loại từ Firestore
-  const { data: categories, isLoading: isLoadingCategories } = useAllCategories({
-    enable: true,
-  });
+  const { data: categories, isLoading: isLoadingCategories } = useAllCategories(
+    {
+      enable: true,
+    },
+  );
 
   // Tìm tên loại dựa trên slug
   const categoryName =
@@ -51,7 +52,6 @@ const CategoryPage = () => {
 
   // useScrollToTop();
 
-
   const handleFilter = () => {
     if (!data?.movies) return [];
 
@@ -60,7 +60,7 @@ const CategoryPage = () => {
       const matchCountry =
         filters.country.length === 0 ||
         filters.country.some((country) =>
-          movie.country?.some((c) => c.name === country)
+          movie.country?.some((c) => c.name === country),
         );
 
       // Lọc theo năm
@@ -89,7 +89,7 @@ const CategoryPage = () => {
     // Sắp xếp kết quả
     if (filters.sort === "IMDB") {
       results = results.sort(
-        (a, b) => b.tmdb.vote_average - a.tmdb.vote_average
+        (a, b) => b.tmdb.vote_average - a.tmdb.vote_average,
       );
     } else if (filters.sort === "Lượt xem") {
       results = results.sort((a, b) => b.view - a.view);
@@ -169,4 +169,3 @@ const CategoryPage = () => {
 };
 
 export default CategoryPage;
-

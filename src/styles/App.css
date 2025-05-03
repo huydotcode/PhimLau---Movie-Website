@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+@import "swiper/css/scrollbar";
+@import "../styles/pagination.css";
 @import "tailwindcss";
 
 @theme {
@@ -10,6 +15,10 @@
 
 body {
   font-family: "Be Vietnam Pro", sans-serif;
+}
+
+input {
+  outline: none;
 }
 
 button {
@@ -61,4 +70,41 @@ button:hover {
 .scrollbar-white {
   scrollbar-color: #fff transparent; /* Màu thanh cuộn và nền */
   scrollbar-width: thin; /* Độ dày thanh cuộn */
+}
+
+/* Table ANTD */
+/* styles.css hoặc styles.module.css */
+.dark-table .ant-table {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.dark-table .ant-table-cell {
+  padding: 0;
+  margin: 0;
+}
+
+.dark-table .ant-table-thead > tr > th {
+  background-color: #2c2c2c;
+  color: #fff;
+}
+
+.dark-table .ant-table-tbody > tr > td {
+  background-color: #1e1e1e;
+  color: #ddd;
+}
+
+.dark-table .ant-pagination {
+  color: white;
+}
+
+/* Dark mode for selected items in Select */
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: #1f2937 !important; /* Tailwind's gray-800 */
+  color: #ffffff !important;
+}
+
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: #374151 !important; /* Tailwind's gray-700 */
+  color: #ffffff !important;
 }

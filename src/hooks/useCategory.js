@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   getAllCategories,
   getTopCategories,
-  getMoviesByCategory
+  getMoviesByCategory,
 } from "../services/categoryService";
 
 export const useTopCategories = ({ enable = true }) => {

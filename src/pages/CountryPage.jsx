@@ -5,7 +5,6 @@ import MovieCard from "../components/MovieCard";
 import FilterPanel from "../components/FilterPanel"; // Import FilterPanel
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { Pagination } from "antd"; // Import Pagination từ Ant Design
-import "../styles/pagination.css"; // Đảm bảo bạn có style cho Pagination
 import { useCountryMovies, useAllCountries } from "../hooks/useCountry"; // Import custom hook
 
 const PAGE_SIZE = 20; // Số lượng phim hiển thị trên mỗi trang
@@ -74,7 +73,7 @@ const CountryPage = () => {
       const matchCategory =
         filters.category.length === 0 ||
         filters.category.some((category) =>
-          movie.category?.some((cat) => cat.name === category)
+          movie.category?.some((cat) => cat.name === category),
         );
 
       return matchYear && matchLang && matchType && matchCategory;
@@ -83,7 +82,7 @@ const CountryPage = () => {
     // Sắp xếp kết quả
     if (filters.sort === "IMDB") {
       results = results.sort(
-        (a, b) => b.tmdb.vote_average - a.tmdb.vote_average
+        (a, b) => b.tmdb.vote_average - a.tmdb.vote_average,
       );
     } else if (filters.sort === "Lượt xem") {
       results = results.sort((a, b) => b.view - a.view);

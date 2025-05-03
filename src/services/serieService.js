@@ -1,4 +1,13 @@
-import { collection, getDocs, query, where, orderBy, startAfter } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  orderBy,
+  startAfter,
+  limit,
+  getCountFromServer,
+} from "firebase/firestore";
 import { db } from "../app/firebase";
 
 /**
@@ -9,19 +18,22 @@ import { db } from "../app/firebase";
  */
 export const getSerieMovies = async (page, lastVisible = null) => {
   try {
+    const pageSize = 10;
+
     let q = query(
       collection(db, "movies"),
-      where("type", "==", "series"), // Chỉ lấy phim bộ dựa trên type
+      where("type", "==", "series"),
       orderBy("year", "desc"),
+      limit(pageSize),
     );
 
-    // Nếu có `lastVisible`, thêm `startAfter` để phân trang
     if (lastVisible) {
       q = query(
         collection(db, "movies"),
         where("type", "==", "series"),
         orderBy("year", "desc"),
         startAfter(lastVisible),
+        limit(pageSize),
       );
     }
 
@@ -30,10 +42,25 @@ export const getSerieMovies = async (page, lastVisible = null) => {
     // Lấy document cuối cùng để hỗ trợ phân trang
     const newLastVisible = snapshot.docs[snapshot.docs.length - 1];
 
+    const snapshot2 = await getCountFromServer(q);
+    const totalCount = snapshot2.data().count;
+
+    const totalPages = Math.ceil(totalCount / pageSize);
+
+    console.log("getSerieMovies:", {
+      page,
+      movies: snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+      lastVisible: newLastVisible,
+      totalCount,
+      totalPages,
+    });
+
     // Trả về danh sách phim và document cuối cùng
     return {
       movies: snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
       lastVisible: newLastVisible,
+      totalPages: totalPages,
+      totalCount: totalCount,
     };
   } catch (error) {
     console.error("Error fetching series movies:", error);

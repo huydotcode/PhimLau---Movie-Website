@@ -1,7 +1,8 @@
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useState } from "react";
-import { db, storage } from "../app/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db } from "../app/firebase";
+import { storage2 } from "../app/firebase_upload";
 import { useAuth } from "../context/AuthProvider";
 
 const FeedbackModal = ({ isOpen, onClose }) => {
@@ -39,7 +40,7 @@ const FeedbackModal = ({ isOpen, onClose }) => {
       for (let i = 0; i < images.length; i++) {
         const image = images[i];
         const imageRef = ref(
-          storage,
+          storage2,
           `feedback/${user.uid}/${Date.now()}_${image.name}`,
         );
         await uploadBytes(imageRef, image);

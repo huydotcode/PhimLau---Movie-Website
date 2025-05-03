@@ -32,7 +32,10 @@ const navUserItems = (displayName) => [
   {
     key: "your-account",
     label: (
-      <Button className="w-full hover:text-primary flex justify-start">
+      <Button
+        className="w-full hover:text-primary flex justify-start"
+        href="/dashboard?t=update"
+      >
         Tài khoản của bạn
       </Button>
     ),
@@ -40,7 +43,10 @@ const navUserItems = (displayName) => [
   {
     key: "list-loves",
     label: (
-      <Button className="w-full hover:text-primary flex justify-start">
+      <Button
+        className="w-full hover:text-primary flex justify-start"
+        href="/dashboard?t=favorite"
+      >
         Yêu thích
       </Button>
     ),
@@ -48,7 +54,10 @@ const navUserItems = (displayName) => [
   {
     key: "list-watch-later",
     label: (
-      <Button className="w-full hover:text-primary flex justify-start">
+      <Button
+        className="w-full hover:text-primary flex justify-start"
+        href="/dashboard?t=saved"
+      >
         Xem sau
       </Button>
     ),

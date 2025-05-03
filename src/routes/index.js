@@ -9,6 +9,7 @@ import UserList from "../pages/admin/UserList";
 import AdminPage from "../pages/AdminPage";
 import CategoryPage from "../pages/CategoryPage";
 import CountryPage from "../pages/CountryPage";
+import DashboardUserPage from "../pages/DashboardUserPage";
 import FilterMoviePager from "../pages/FilterMoviePager";
 import HomePage from "../pages/HomePage";
 import MovieInfomationPage from "../pages/MovieInfomationPage";
@@ -49,6 +50,11 @@ export const publicRoutes = [
     element: CategoryPage,
     layout: LayoutWithoutBanner,
   },
+  {
+    path: "/dashboard",
+    element: DashboardUserPage,
+    layout: LayoutWithoutBanner,
+  }
 ];
 
 export const adminRoutes = [

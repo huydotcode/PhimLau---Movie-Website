@@ -6,6 +6,10 @@ import Icons from "../components/Icons";
 import Button from "../components/ui/Button";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { TopNewMovieSection } from "./HomePage";
+import { addSavedMovie } from "../services/movieSavedService"; // hoặc đường dẫn đúng
+import { useAuth } from "../context/AuthProvider"; // hook custom nếu bạn có
+import { toast } from "sonner";
+import { addFavorite } from "../services/favoriteService"; // hoặc đúng đường dẫn
 
 const MovieInfomationPage = () => {
   const { slug } = useParams();
@@ -37,6 +41,47 @@ const MovieInfomationPage = () => {
 
     fetchMovie();
   }, [slug]);
+  const { user } = useAuth();
+  const handleAddFavorite = async () => {
+    if (!user) {
+      toast.warning("Bạn cần đăng nhập để thêm yêu thích.");
+      return;
+    }
+
+    try {
+      const result = await addFavorite({ userId: user.uid, movie });
+      if (result) {
+        toast.success("❤️ Đã thêm vào danh sách yêu thích!");
+      } else {
+        toast.info("Phim đã có trong danh sách yêu thích.");
+      }
+    } catch (error) {
+      console.error("Lỗi khi thêm yêu thích:", error);
+      toast.error("⚠️ Lỗi khi thêm yêu thích!");
+    }
+  };
+
+  const handleSaveMovie = async () => {
+    if (!user) {
+      toast.warning("Bạn cần đăng nhập để lưu phim.");
+      return;
+    }
+
+    try {
+      const result = await addSavedMovie({
+        userId: user.uid,
+        movieId: movie._id,
+      });
+      if (result) {
+        toast.success("Đã lưu phim thành công!");
+      } else {
+        toast.info("Phim đã được lưu trước đó.");
+      }
+    } catch (error) {
+      toast.error("Lỗi khi lưu phim.");
+      console.error(error);
+    }
+  };
 
   return (
     <div className="@container">
@@ -104,11 +149,17 @@ const MovieInfomationPage = () => {
               </Button>
 
               <div className="flex-1 flex items-center justify-start gap-2">
-                <Button className="bg-transparent px-4 py-2 rounded-full flex items-center gap-2 flex-col text-sm hover:text-primary">
+                <Button
+                  className="bg-transparent px-4 py-2 rounded-full flex items-center gap-2 flex-col text-sm hover:text-primary"
+                  onClick={handleSaveMovie}
+                >
                   <Icons.Play /> Xem sau
                 </Button>
 
-                <Button className="bg-transparent px-4 py-2 rounded-full flex items-center gap-2 flex-col text-sm hover:text-primary">
+                <Button
+                  className="bg-transparent px-4 py-2 rounded-full flex items-center gap-2 flex-col text-sm hover:text-primary"
+                  onClick={handleAddFavorite}
+                >
                   <Icons.Heart /> Yêu thích
                 </Button>
               </div>

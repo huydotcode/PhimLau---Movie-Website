@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthProvider";
-import { updateUserField } from "../services/updateInforService";
+import {
+  updateUserField,
+  updateUserPhoto,
+} from "../services/updateInforService";
 import { toast } from "sonner";
 
 const UpdateInfo = () => {
@@ -20,17 +23,34 @@ const UpdateInfo = () => {
   });
 
   const [editField, setEditField] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   const onSubmit = async (data) => {
     const value = data[editField];
 
     try {
       await updateUserField(user?.uid, editField, value);
-      user[editField] = value; // cập nhật local (nếu cần)
+      user[editField] = value; // cập nhật local
       toast.success(`Đã cập nhật ${editField} thành công!`);
       setEditField(null);
     } catch (error) {
       toast.error("Lỗi khi cập nhật: " + error.message);
+    }
+  };
+
+  const handleAvatarChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const photoURL = await updateUserPhoto(user.uid, file);
+      user.photoURL = photoURL;
+      toast.success("Cập nhật ảnh đại diện thành công!");
+    } catch (err) {
+      toast.error("Lỗi khi cập nhật ảnh đại diện: " + err.message);
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -118,7 +138,7 @@ const UpdateInfo = () => {
     </div>
   );
 
-  if (!user) return null; // Nếu chưa có user, không render gì cả
+  if (!user) return null;
 
   return (
     <div className="mx-auto p-4 sm:max-w-xl">
@@ -126,16 +146,24 @@ const UpdateInfo = () => {
 
       {/* Avatar */}
       <div className="flex items-center space-x-4 mb-6">
-        {user?.photoURL.length > 0 && (
-          <img
-            src={user?.photoURL}
-            alt="Avatar"
-            className="w-16 h-16 rounded-full object-cover"
-          />
-        )}
+        <img
+          src={user?.photoURL || "/default-avatar.png"}
+          alt="Avatar"
+          className="w-16 h-16 rounded-full object-cover"
+        />
         <div>
           <p className="text-lg font-semibold">{user?.displayName}</p>
           <p className="text-sm text-gray-400">{user?.email}</p>
+
+          <label className="mt-2 inline-block text-sm text-primary cursor-pointer hover:underline">
+            {uploading ? "Đang tải..." : "Thay đổi ảnh đại diện"}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleAvatarChange}
+              className="hidden"
+            />
+          </label>
         </div>
       </div>
 

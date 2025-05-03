@@ -43,8 +43,9 @@ function Sidebar({
 
       <aside
         className={`${
-          isSidebarOpen ? "translate-y-0" : "-translate-y-full"
-        } fixed top-0 right-0 w-[250px] bg-foreground text-white p-6 border-l border-secondary flex flex-col justify-between transition-transform duration-300 ease-in-out z-50`}
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } fixed top-0 left-0 w-[250px] bg-foreground text-white p-6 border-r border-secondary flex flex-col justify-between transition-transform duration-300 ease-in-out z-50
+md:translate-x-0 md:relative md:z-auto md:h-auto`}
       >
         <div>
           <div className="flex items-center space-x-4 mb-8">
@@ -140,10 +141,10 @@ const DashboardUserPage = () => {
     <div className="flex h-screen bg-background text-white mt-[60px] rounded-xl overflow-hidden relative">
       {/* Hamburger Button for mobile */}
       <button
-        className="absolute top-6 right-4 md:hidden p-4 text-white"
+        className="absolute top-3 right-4 md:hidden p-4 text-white text-weight-bold bg-primary rounded-full shadow-lg transition-transform duration-300 ease-in-out hover:bg-secondary"
         onClick={toggleSidebar}
       >
-        {isSidebarOpen ? "Đóng Menu" : "Mở Menu"}
+        {isSidebarOpen ? "Đóng Menu" : "More"}
       </button>
 
       <Sidebar
@@ -155,7 +156,7 @@ const DashboardUserPage = () => {
         onTabClick={onTabClick}
       />
 
-      <main className="flex-1 overflow-auto px-4 py-6 bg-background">
+      <main className="flex-1 overflow-auto px-4 py-6 bg-background md:ml-[250px] mt-[100px] md:mt-0">
         {renderContent()}
       </main>
 

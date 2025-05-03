@@ -156,7 +156,7 @@ const DashboardUserPage = () => {
         onTabClick={onTabClick}
       />
 
-      <main className="flex-1 overflow-auto px-4 py-6 bg-background md:ml-[250px] mt-[100px] md:mt-0">
+      <main className="flex-1 overflow-auto px-4 py-6 bg-background md:ml-[100px] mt-[100px] md:mt-0">
         {renderContent()}
       </main>
 

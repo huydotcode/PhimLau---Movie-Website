@@ -3,7 +3,6 @@ import LayoutWithBanner from "../layouts/LayoutWithBanner";
 import LayoutWithoutBanner from "../layouts/LayoutWithoutBanner";
 import CategoryList from "../pages/admin/CategoryList";
 import Dashboard from "../pages/admin/Dashboard";
-import FavoriteList from "../pages/admin/FavoriteList";
 import MovieList from "../pages/admin/MovieList";
 import UserList from "../pages/admin/UserList";
 import AdminPage from "../pages/AdminPage";
@@ -78,10 +77,6 @@ export const adminRoutes = [
       {
         path: "users",
         element: UserList,
-      },
-      {
-        path: "favorites",
-        element: FavoriteList,
       },
     ],
   },

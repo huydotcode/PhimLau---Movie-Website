@@ -17,11 +17,20 @@ import { IoAddOutline } from "react-icons/io5";
 import { toast } from "sonner";
 import { moviesLang } from "../../data/movies_lang";
 import { moviesType } from "../../data/movies_type";
+import Icons from "../../components/Icons";
 
 const PAGE_SIZE = 10;
 
 const ModalAdd = ({ show, setShow, loadFirstPage }) => {
-  const { control, register, handleSubmit, reset } = useForm();
+  const {
+    control,
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: "onSubmit",
+  });
   const { data: categories } = useAllCategories({ enable: true });
   const { data: countries } = useAllCountries({ enable: true });
 
@@ -75,19 +84,37 @@ const ModalAdd = ({ show, setShow, loadFirstPage }) => {
             <label className="block text-white mb-2">Tên phim</label>
             <input
               type="text"
-              {...register("name")}
+              {...register("name", {
+                required: "Tên phim là bắt buộc",
+              })}
               className="border border-gray-300 rounded px-3 py-2 w-full"
             />
+            {errors.name && (
+              <span className="text-red-500 text-sm">
+                {errors.name.message}
+              </span>
+            )}
           </div>
 
           {/* Năm */}
-          <div className="mb-4">
+          <div className="mb-4 w-1/4">
             <label className="block text-white mb-2">Năm</label>
             <input
               type="text"
-              {...register("year")}
+              {...register("year", {
+                required: "Năm là bắt buộc",
+                pattern: {
+                  value: /^\d{4}$/,
+                  message: "Năm phải là 4 chữ số",
+                },
+              })}
               className="border border-gray-300 rounded px-3 py-2 w-full"
             />
+            {errors.year && (
+              <span className="text-red-500 text-sm">
+                {errors.year.message}
+              </span>
+            )}
           </div>
         </div>
 
@@ -97,6 +124,7 @@ const ModalAdd = ({ show, setShow, loadFirstPage }) => {
           <Controller
             control={control}
             name="category"
+            rules={{ required: "Thể loại là bắt buộc" }}
             render={({ field }) => (
               <Select
                 key={field.value}
@@ -120,6 +148,7 @@ const ModalAdd = ({ show, setShow, loadFirstPage }) => {
           <label className="block text-white mb-2">Quốc gia</label>
           <Controller
             control={control}
+            rules={{ required: "Thể loại là bắt buộc" }}
             name="country"
             render={({ field }) => (
               <Select
@@ -145,7 +174,9 @@ const ModalAdd = ({ show, setShow, loadFirstPage }) => {
             <label className="block text-white mb-2">Ngôn ngữ</label>
             <select
               type="text"
-              {...register("lang")}
+              {...register("lang", {
+                required: "Ngôn ngữ là bắt buộc",
+              })}
               className="border border-gray-300 rounded px-3 py-2 w-full bg-black"
             >
               {moviesLang.map((lang) => (
@@ -154,6 +185,12 @@ const ModalAdd = ({ show, setShow, loadFirstPage }) => {
                 </option>
               ))}
             </select>
+
+            {errors.lang && (
+              <span className="text-red-500 text-sm">
+                {errors.lang.message}
+              </span>
+            )}
           </div>
 
           {/* Loại phim */}
@@ -161,7 +198,9 @@ const ModalAdd = ({ show, setShow, loadFirstPage }) => {
             <label className="block text-white mb-2">Loại phim</label>
             <select
               type="text"
-              {...register("type")}
+              {...register("type", {
+                required: "Loại phim là bắt buộc",
+              })}
               className="border border-gray-300 rounded px-3 py-2 w-full bg-black"
             >
               {moviesType.map((type) => (
@@ -170,6 +209,12 @@ const ModalAdd = ({ show, setShow, loadFirstPage }) => {
                 </option>
               ))}
             </select>
+
+            {errors.type && (
+              <span className="text-red-500 text-sm">
+                {errors.type.message}
+              </span>
+            )}
           </div>
         </div>
 
@@ -178,9 +223,17 @@ const ModalAdd = ({ show, setShow, loadFirstPage }) => {
           <label className="block text-white mb-2">Poster URL</label>
           <input
             type="text"
-            {...register("poster_url")}
+            {...register("poster_url", {
+              required: "Poster URL là bắt buộc",
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.poster_url && (
+            <span className="text-red-500 text-sm">
+              {errors.poster_url.message}
+            </span>
+          )}
         </div>
 
         {/* Trailer URL */}
@@ -191,13 +244,25 @@ const ModalAdd = ({ show, setShow, loadFirstPage }) => {
             {...register("trailer_url")}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.trailer_url && (
+            <span className="text-red-500 text-sm">
+              {errors.trailer_url.message}
+            </span>
+          )}
         </div>
 
         {/* Nội dung */}
         <div className="mb-4">
           <label className="block text-white mb-2">Nội dung</label>
           <textarea
-            {...register("content")}
+            {...register("content", {
+              required: "Nội dung là bắt buộc",
+              minLength: {
+                value: 10,
+                message: "Nội dung phải có ít nhất 10 ký tự",
+              },
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
             rows={4}
           ></textarea>
@@ -228,7 +293,13 @@ const ModalAdd = ({ show, setShow, loadFirstPage }) => {
 };
 
 const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
-  const { control, register, handleSubmit, reset } = useForm();
+  const {
+    control,
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const { data: categories } = useAllCategories({ enable: true });
   const { data: countries } = useAllCountries({ enable: true });
 
@@ -289,14 +360,44 @@ const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
       footer={null}
     >
       <form onSubmit={handleSubmit(onSubmit)} className="p-4">
-        {/* Tên phim */}
-        <div className="mb-4">
-          <label className="block text-white mb-2">Tên phim</label>
-          <input
-            type="text"
-            {...register("name")}
-            className="border border-gray-300 rounded px-3 py-2 w-full"
-          />
+        <div className="flex w-full justify-between gap-4">
+          {/* Tên phim */}
+          <div className="mb-4 flex-1">
+            <label className="block text-white mb-2">Tên phim</label>
+            <input
+              type="text"
+              {...register("name", {
+                required: "Tên phim là bắt buộc",
+              })}
+              className="border border-gray-300 rounded px-3 py-2 w-full"
+            />
+            {errors.name && (
+              <span className="text-red-500 text-sm">
+                {errors.name.message}
+              </span>
+            )}
+          </div>
+
+          {/* Năm */}
+          <div className="mb-4 w-1/4">
+            <label className="block text-white mb-2">Năm</label>
+            <input
+              type="text"
+              {...register("year", {
+                required: "Năm là bắt buộc",
+                pattern: {
+                  value: /^\d{4}$/,
+                  message: "Năm phải là 4 chữ số",
+                },
+              })}
+              className="border border-gray-300 rounded px-3 py-2 w-full"
+            />
+            {errors.year && (
+              <span className="text-red-500 text-sm">
+                {errors.year.message}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Thể loại */}
@@ -305,10 +406,11 @@ const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
           <Controller
             control={control}
             name="category"
+            rules={{ required: "Thể loại là bắt buộc" }}
             render={({ field }) => (
               <Select
                 key={field.value}
-                className="bg-black"
+                className="bg-black px-3 py-2 border rounded"
                 mode="tags"
                 style={{ width: "100%" }}
                 placeholder="Chọn hoặc nhập thể loại"
@@ -328,11 +430,12 @@ const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
           <label className="block text-white mb-2">Quốc gia</label>
           <Controller
             control={control}
+            rules={{ required: "Thể loại là bắt buộc" }}
             name="country"
             render={({ field }) => (
               <Select
                 key={field.value}
-                className="bg-black"
+                className="bg-black px-3 py-2 border rounded"
                 mode="tags"
                 style={{ width: "100%" }}
                 placeholder="Chọn hoặc nhập quốc gia"
@@ -347,34 +450,54 @@ const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
           />
         </div>
 
-        {/* Năm */}
-        <div className="mb-4">
-          <label className="block text-white mb-2">Năm</label>
-          <input
-            type="text"
-            {...register("year")}
-            className="border border-gray-300 rounded px-3 py-2 w-full"
-          />
-        </div>
+        <div className="flex w-full justify-between gap-4">
+          {/* Ngôn ngữ */}
+          <div className="mb-4 flex-1">
+            <label className="block text-white mb-2">Ngôn ngữ</label>
+            <select
+              type="text"
+              {...register("lang", {
+                required: "Ngôn ngữ là bắt buộc",
+              })}
+              className="border border-gray-300 rounded px-3 py-2 w-full bg-black"
+            >
+              {moviesLang.map((lang) => (
+                <option key={lang.slug} value={lang.slug}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
 
-        {/* Ngôn ngữ */}
-        <div className="mb-4">
-          <label className="block text-white mb-2">Ngôn ngữ</label>
-          <input
-            type="text"
-            {...register("lang")}
-            className="border border-gray-300 rounded px-3 py-2 w-full"
-          />
-        </div>
+            {errors.lang && (
+              <span className="text-red-500 text-sm">
+                {errors.lang.message}
+              </span>
+            )}
+          </div>
 
-        {/* Loại phim */}
-        <div className="mb-4">
-          <label className="block text-white mb-2">Loại phim</label>
-          <input
-            type="text"
-            {...register("type")}
-            className="border border-gray-300 rounded px-3 py-2 w-full"
-          />
+          {/* Loại phim */}
+          <div className="mb-4 flex-1">
+            <label className="block text-white mb-2">Loại phim</label>
+            <select
+              type="text"
+              {...register("type", {
+                required: "Loại phim là bắt buộc",
+              })}
+              className="border border-gray-300 rounded px-3 py-2 w-full bg-black"
+            >
+              {moviesType.map((type) => (
+                <option key={type.slug} value={type.slug}>
+                  {type.name}
+                </option>
+              ))}
+            </select>
+
+            {errors.type && (
+              <span className="text-red-500 text-sm">
+                {errors.type.message}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Poster URL */}
@@ -382,9 +505,17 @@ const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
           <label className="block text-white mb-2">Poster URL</label>
           <input
             type="text"
-            {...register("poster_url")}
+            {...register("poster_url", {
+              required: "Poster URL là bắt buộc",
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.poster_url && (
+            <span className="text-red-500 text-sm">
+              {errors.poster_url.message}
+            </span>
+          )}
         </div>
 
         {/* Trailer URL */}
@@ -395,24 +526,49 @@ const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
             {...register("trailer_url")}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.trailer_url && (
+            <span className="text-red-500 text-sm">
+              {errors.trailer_url.message}
+            </span>
+          )}
         </div>
 
         {/* Nội dung */}
         <div className="mb-4">
           <label className="block text-white mb-2">Nội dung</label>
           <textarea
-            {...register("content")}
+            {...register("content", {
+              required: "Nội dung là bắt buộc",
+              minLength: {
+                value: 10,
+                message: "Nội dung phải có ít nhất 10 ký tự",
+              },
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
             rows={4}
           ></textarea>
         </div>
 
-        <button
-          type="submit"
-          className="bg-primary text-white px-4 py-2 rounded"
-        >
-          Lưu
-        </button>
+        <div className="flex justify-center gap-2">
+          <button
+            type="submit"
+            className="bg-primary text-white px-4 py-2 rounded w-1/2"
+          >
+            Lưu
+          </button>
+
+          <button
+            type="button"
+            className="bg-secondary text-white px-4 py-2 rounded"
+            onClick={() => {
+              reset(); // Reset form
+              setShow(false); // Đóng modal
+            }}
+          >
+            Hủy
+          </button>
+        </div>
       </form>
     </Modal>
   );
@@ -626,7 +782,8 @@ const MovieList = () => {
             className="bg-primary text-white px-4 py-1 rounded flex items-center gap-2 hover:opacity-80"
             onClick={() => setShowAddMovie((prev) => !prev)}
           >
-            <IoAddOutline /> Thêm phim
+            <IoAddOutline className="w-6 h-6" />{" "}
+            <span className="hidden md:block">Thêm phim</span>
           </button>
         </div>
 
@@ -643,16 +800,18 @@ const MovieList = () => {
           />
           <button
             onClick={handleSearch}
-            className="bg-secondary text-sm text-white px-8 py-2 rounded"
+            className="bg-secondary text-sm text-white px-8 py-2 rounded h-full"
           >
-            Tìm
+            <Icons.Search className="w-4 h-4" />
           </button>
 
           <button
             onClick={() => setShowFilter((prev) => !prev)}
-            className="bg-primary text-sm text-white px-8 py-2 rounded"
+            className={`text-sm text-white px-8 py-2 rounded ${
+              showFilter ? "bg-primary" : "bg-secondary"
+            }`}
           >
-            Lọc
+            <Icons.Filter className="w-4 h-4" />
           </button>
 
           {showFilter && (
@@ -666,7 +825,10 @@ const MovieList = () => {
 
           {/* Sort */}
           <div className="flex items-center ml-auto">
-            <label className="text-white mr-2 text-sm">Sắp xếp:</label>
+            <label className="text-white text-sm">
+              <Icons.Sort className="w-5 h-5" />
+            </label>
+
             <select
               value={filters.sort}
               onChange={(e) => {
@@ -681,6 +843,7 @@ const MovieList = () => {
               <option value="TMDB cao nhất">TMDB cao nhất</option>
               <option value="TMDB thấp nhất">TMDB thấp nhất</option>
               <option value="Tên A-Z">Tên A-Z</option>
+              <option value="Tên Z-A">Tên Z-A</option>
             </select>
           </div>
         </div>
@@ -690,13 +853,21 @@ const MovieList = () => {
           <table className="min-w-full border border-gray-900 text-sm text-left text-white">
             <thead className="bg-primary">
               <tr>
-                <th className="px-4 py-2 border border-gray-900">Poster</th>
+                <th className="px-4 py-2 border border-gray-900 hidden xl:table-cell">
+                  Poster
+                </th>
                 <th className="px-4 py-2 border border-gray-900">Tên phim</th>
                 <th className="px-4 py-2 border border-gray-900">Thể loại</th>
-                <th className="px-4 py-2 border border-gray-900">Quốc gia</th>
+                <th className="px-4 py-2 border border-gray-900 hidden xl:table-cell">
+                  Quốc gia
+                </th>
                 <th className="px-4 py-2 border border-gray-900">Năm</th>
-                <th className="px-4 py-2 border border-gray-900">Lượt xem</th>
-                <th className="px-4 py-2 border border-gray-900">TMDB</th>
+                <th className="px-4 py-2 border border-gray-900 hidden xl:table-cell">
+                  Lượt xem
+                </th>
+                <th className="px-4 py-2 border border-gray-900 hidden xl:table-cell">
+                  TMDB
+                </th>
                 <th className="px-4 py-2 border border-gray-900">Hành động</th>
               </tr>
             </thead>
@@ -728,7 +899,7 @@ const MovieList = () => {
                     key={movie.id}
                     className="hover:bg-gray-700 border border-gray-800"
                   >
-                    <td className="px-4 py-2">
+                    <td className="px-4 py-2 hidden xl:table-cell">
                       <img src={movie.poster_url} alt={movie.name} width={50} />
                     </td>
                     <td className="px-4 py-2 max-w-[200px]">{movie.name}</td>
@@ -750,7 +921,7 @@ const MovieList = () => {
                         })}
                       </div>
                     </td>
-                    <td className="px-4 py-2 max-w-[200px]">
+                    <td className="px-4 py-2 max-w-[200px] hidden xl:table-cell">
                       <div className="flex flex-wrap gap-1">
                         {movie.countrySlugs?.map((c) => {
                           const country = countries.find(
@@ -769,8 +940,10 @@ const MovieList = () => {
                       </div>
                     </td>
                     <td className="px-4 py-2">{movie.year}</td>
-                    <td className="px-4 py-2">{movie.view}</td>
-                    <td className="px-4 py-2">
+                    <td className="px-4 py-2 hidden xl:table-cell">
+                      {movie.view}
+                    </td>
+                    <td className="px-4 py-2 hidden xl:table-cell">
                       {movie.tmdb.vote_average.toFixed(1)}
                     </td>
                     <td className="px-4 py-2 flex items-center">

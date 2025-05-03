@@ -160,7 +160,7 @@ const UpdateInfo = () => {
 
   return (
     <div className="p-4 max-w-xl bg-background rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-6">Cập nhật thông tin cá nhân</h1>
+      <h1 className="text-2xl font-bold mb-6">Cập nhật thông tin</h1>
 
       {/* Avatar */}
       <div className="flex items-center space-x-4 mb-6">

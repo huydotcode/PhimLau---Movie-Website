@@ -11,11 +11,17 @@ import {
   deleteCategory,
   updateCategory,
 } from "../../services/categoryService";
+import Icons from "../../components/Icons";
 
 const PAGE_SIZE = 10;
 
 const ModalAdd = ({ show, setShow }) => {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const queryClient = useQueryClient();
 
   const onSubmit = async (data) => {
@@ -55,9 +61,19 @@ const ModalAdd = ({ show, setShow }) => {
           <label className="block text-white mb-2">Tên thể loại</label>
           <input
             type="text"
-            {...register("name")}
+            {...register("name", {
+              required: "Tên thể loại là bắt buộc",
+              minLength: {
+                value: 3,
+                message: "Tên thể loại phải có ít nhất 3 ký tự",
+              },
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.name && (
+            <span className="text-red-500 text-sm">{errors.name.message}</span>
+          )}
         </div>
 
         {/* Slug */}
@@ -65,9 +81,18 @@ const ModalAdd = ({ show, setShow }) => {
           <label className="block text-white mb-2">Slug</label>
           <input
             type="text"
-            {...register("slug")}
+            {...register("slug", {
+              required: "Slug là bắt buộc",
+              minLength: {
+                value: 3,
+              },
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.slug && (
+            <span className="text-red-500 text-sm">{errors.slug.message}</span>
+          )}
         </div>
 
         <div className="flex justify-center gap-2">
@@ -95,7 +120,12 @@ const ModalAdd = ({ show, setShow }) => {
 };
 
 const ModalEdit = ({ show, setShow, category }) => {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -147,9 +177,15 @@ const ModalEdit = ({ show, setShow, category }) => {
           <label className="block text-white mb-2">Tên thể loại</label>
           <input
             type="text"
-            {...register("name")}
+            {...register("name", {
+              required: "Tên thể loại là bắt buộc",
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.name && (
+            <span className="text-red-500 text-sm">{errors.name.message}</span>
+          )}
         </div>
 
         {/* Slug */}
@@ -157,9 +193,15 @@ const ModalEdit = ({ show, setShow, category }) => {
           <label className="block text-white mb-2">Slug</label>
           <input
             type="text"
-            {...register("slug")}
+            {...register("slug", {
+              required: "Slug là bắt buộc",
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.slug && (
+            <span className="text-red-500 text-sm">{errors.slug.message}</span>
+          )}
         </div>
 
         {/* Tổng lượt xem */}
@@ -167,9 +209,21 @@ const ModalEdit = ({ show, setShow, category }) => {
           <label className="block text-white mb-2">Tổng lượt xem</label>
           <input
             type="text"
-            {...register("totalViews")}
+            {...register("totalViews", {
+              required: "Tổng lượt xem là bắt buộc",
+              pattern: {
+                value: /^[0-9]+$/,
+                message: "Tổng lượt xem phải là một số",
+              },
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.totalViews && (
+            <span className="text-red-500 text-sm">
+              {errors.totalViews.message}
+            </span>
+          )}
         </div>
 
         <div className="flex justify-center gap-2">
@@ -239,7 +293,6 @@ const ModalDelete = ({ show, setShow, category }) => {
 };
 
 const CategoryList = () => {
-  const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const { data } = useAllCategories({ enable: true });
   const fileredCategories = data?.filter((category) =>
@@ -303,7 +356,8 @@ const CategoryList = () => {
             className="bg-primary text-white px-4 py-1 rounded flex items-center gap-2 hover:opacity-80"
             onClick={() => setShowAddMovie((prev) => !prev)}
           >
-            <IoAddOutline /> Thêm thể loại
+            <IoAddOutline className="w-6 h-6" />{" "}
+            <span className="hidden md:block">Thêm thể loại</span>
           </button>
         </div>
 
@@ -321,7 +375,9 @@ const CategoryList = () => {
 
           {/* Sort */}
           <div className="flex items-center ml-auto">
-            <label className="text-white mr-2 text-sm">Sắp xếp:</label>
+            <label className="text-white text-sm">
+              <Icons.Sort className="w-5 h-5" />
+            </label>
             <select
               value={sort}
               onChange={(e) => {
@@ -334,6 +390,7 @@ const CategoryList = () => {
               <option value="Xem nhiều nhất">Xem nhiều nhất</option>
               <option value="Xem ít nhất">Xem ít nhất</option>
               <option value="Tên A-Z">Tên A-Z</option>
+              <option value="Tên Z-A">Tên Z-A</option>
             </select>
           </div>
         </div>
@@ -344,7 +401,9 @@ const CategoryList = () => {
             <thead className="bg-primary">
               <tr>
                 <th className="px-4 py-2 border border-gray-900">Tên</th>
-                <th className="px-4 py-2 border border-gray-900">Slug</th>
+                <th className="px-4 py-2 border border-gray-900 hidden xl:table-cell">
+                  Slug
+                </th>
                 <th className="px-4 py-2 border border-gray-900">
                   Tổng lượt xem
                 </th>
@@ -352,7 +411,7 @@ const CategoryList = () => {
               </tr>
             </thead>
             <tbody>
-              {data
+              {fileredCategories
                 .sort((a, b) => {
                   if (sort === "Mới nhất") {
                     return b.createdAt - a.createdAt;
@@ -364,6 +423,10 @@ const CategoryList = () => {
                     return a.totalViews - b.totalViews;
                   } else if (sort === "Tên A-Z") {
                     return a.name.localeCompare(b.name);
+                  } else if (sort === "Tên Z-A") {
+                    return b.name.localeCompare(a.name);
+                  } else {
+                    return 0; // Không sắp xếp nếu không có điều kiện nào khớp
                   }
                 })
                 .map((category) => (
@@ -374,7 +437,7 @@ const CategoryList = () => {
                     <td className="px-4 py-2 border border-gray-900">
                       {category.name}
                     </td>
-                    <td className="px-4 py-2 border border-gray-900">
+                    <td className="px-4 py-2 border border-gray-900 hidden xl:table-cell">
                       {category.slug}
                     </td>
                     <td className="px-4 py-2 border border-gray-900">

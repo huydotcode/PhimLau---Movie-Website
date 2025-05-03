@@ -4,12 +4,18 @@ import { useForm } from "react-hook-form";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import Icons from "../../components/Icons";
 import { useAllUsers } from "../../hooks/useUser";
 import { assignRole, deleteUser, updateUser } from "../../services/userService";
 import { convertTime } from "../../utils/convertTime";
 
 const ModalEdit = ({ show, setShow, user }) => {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -60,9 +66,21 @@ const ModalEdit = ({ show, setShow, user }) => {
           <label className="block text-white mb-2">Tên người dùng</label>
           <input
             type="text"
-            {...register("displayName")}
+            {...register("displayName", {
+              required: "Tên người dùng là bắt buộc",
+              minLength: {
+                value: 3,
+                message: "Tên người dùng phải có ít nhất 3 ký tự",
+              },
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.displayName && (
+            <span className="text-red-500 text-sm">
+              {errors.displayName.message}
+            </span>
+          )}
         </div>
 
         {/* Email */}
@@ -70,9 +88,19 @@ const ModalEdit = ({ show, setShow, user }) => {
           <label className="block text-white mb-2">Email</label>
           <input
             type="text"
-            {...register("email")}
+            {...register("email", {
+              required: "Email là bắt buộc",
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Email không hợp lệ",
+              },
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.email && (
+            <span className="text-red-500 text-sm">{errors.email.message}</span>
+          )}
         </div>
 
         {/* Số điện thoại */}
@@ -80,9 +108,21 @@ const ModalEdit = ({ show, setShow, user }) => {
           <label className="block text-white mb-2">Số điện thoại</label>
           <input
             type="text"
-            {...register("phoneNumber")}
+            {...register("phoneNumber", {
+              required: "Số điện thoại là bắt buộc",
+              pattern: {
+                value: /^\d{10,11}$/, // Kiểm tra định dạng số điện thoại
+                message: "Số điện thoại không hợp lệ",
+              },
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.phoneNumber && (
+            <span className="text-red-500 text-sm">
+              {errors.phoneNumber.message}
+            </span>
+          )}
         </div>
 
         {/* Ảnh đại diện */}
@@ -90,9 +130,17 @@ const ModalEdit = ({ show, setShow, user }) => {
           <label className="block text-white mb-2">Ảnh đại diện</label>
           <input
             type="text"
-            {...register("photoURL")}
+            {...register("photoURL", {
+              required: "Ảnh đại diện là bắt buộc",
+            })}
             className="border border-gray-300 rounded px-3 py-2 w-full"
           />
+
+          {errors.photoURL && (
+            <span className="text-red-500 text-sm">
+              {errors.photoURL.message}
+            </span>
+          )}
         </div>
 
         <div className="flex justify-center gap-2">
@@ -166,6 +214,7 @@ const ModalDelete = ({ show, setShow, user }) => {
 const UserList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { data } = useAllUsers({ enable: true });
+  const queryClient = useQueryClient();
   const fileredUsers = data?.filter((user) =>
     user.displayName.toLowerCase().includes(searchTerm.toLowerCase()),
   );
@@ -187,6 +236,19 @@ const UserList = () => {
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleChangeRole = async (e, userId) => {
+    try {
+      assignRole(userId, e.target.value);
+      toast("Phân quyền thành công");
+      await queryClient.invalidateQueries({
+        queryKey: ["allUsers"],
+      });
+    } catch (error) {
+      console.error("Error assigning role:", error);
+      toast.error("Phân quyền thất bại");
+    }
   };
 
   const handleEditUser = (user) => {
@@ -231,7 +293,7 @@ const UserList = () => {
 
           <input
             type="text"
-            placeholder="Tìm kiếm tên thể loại..."
+            placeholder="Tìm kiếm tên người dùng..."
             value={searchTerm}
             onChange={handleInputChange}
             className=" px-3 py-2 text-sm rounded bg-foreground w-64"
@@ -239,7 +301,9 @@ const UserList = () => {
 
           {/* Sort */}
           <div className="flex items-center ml-auto">
-            <label className="text-white mr-2 text-sm">Sắp xếp:</label>
+            <label className="text-white text-sm">
+              <Icons.Sort className="w-5 h-5" />
+            </label>
             <select
               value={sort}
               onChange={(e) => {
@@ -249,6 +313,10 @@ const UserList = () => {
             >
               <option value="Tên A-Z">Tên A-Z</option>
               <option value="Tên Z-A">Tên Z-A</option>
+              <option value="Tham gia gần đây">Tham gia gần đây</option>
+              <option value="Tham gia lâu nhất">Tham gia lâu nhất</option>
+              <option value="Quyền admin">Quyền admin</option>
+              <option value="Quyền người dùng">Quyền người dùng</option>
             </select>
           </div>
         </div>
@@ -260,8 +328,12 @@ const UserList = () => {
               <tr>
                 <th className="px-4 py-2 border border-gray-900"></th>
                 <th className="px-4 py-2 border border-gray-900">Tên</th>
-                <th className="px-4 py-2 border border-gray-900">Email</th>
-                <th className="px-4 py-2 border border-gray-900">SDT</th>
+                <th className="px-4 py-2 border border-gray-900 hidden xl:table-cell">
+                  Email
+                </th>
+                <th className="px-4 py-2 border border-gray-900 hidden xl:table-cell">
+                  SDT
+                </th>
                 <th className="px-4 py-2 border border-gray-900">
                   Tham gia ngày
                 </th>
@@ -277,7 +349,16 @@ const UserList = () => {
                     return a.displayName.localeCompare(b.displayName);
                   } else if (sort === "Tên Z-A") {
                     return b.displayName.localeCompare(a.displayName);
+                  } else if (sort === "Tham gia gần đây") {
+                    return b.createdAt - a.createdAt;
+                  } else if (sort === "Tham gia lâu nhất") {
+                    return a.createdAt - b.createdAt;
+                  } else if (sort === "Quyền admin") {
+                    return a.role === "admin" ? -1 : 1;
+                  } else if (sort === "Quyền người dùng") {
+                    return a.role === "user" ? -1 : 1;
                   }
+
                   return 0;
                 })
                 .map((user) => (
@@ -297,10 +378,10 @@ const UserList = () => {
                     <td className="px-4 py-2 border border-gray-900">
                       {user?.displayName}
                     </td>
-                    <td className="px-4 py-2 border border-gray-900">
+                    <td className="px-4 py-2 border border-gray-900 hidden xl:table-cell">
                       {user?.email}
                     </td>
-                    <td className="px-4 py-2 border border-gray-900">
+                    <td className="px-4 py-2 border border-gray-900 hidden xl:table-cell">
                       {user?.phoneNumber}
                     </td>
                     <td className="px-4 py-2 border border-gray-900">
@@ -308,19 +389,12 @@ const UserList = () => {
                     </td>
                     <td className="px-4 py-2 border border-gray-900">
                       <div className="flex items-center justify-between">
-                        {/* Quyền và phân quyền */}
-                        {user?.role === "admin" ? (
-                          <span className="text-green-500">Admin</span>
-                        ) : (
-                          <span className="text-yellow-500">Người dùng</span>
-                        )}
                         <select
                           value={user?.role}
                           onChange={(e) => {
-                            assignRole(user.id, e.target.value);
-                            toast("Phân quyền thành công");
+                            handleChangeRole(e, user.id);
                           }}
-                          className="bg-black text-sm text-white px-3 py-2 rounded ml-2"
+                          className="bg-black text-sm text-white px-3 py-2 rounded"
                         >
                           <option value="user">Người dùng</option>
                           <option value="admin">Admin</option>

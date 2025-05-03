@@ -16,11 +16,20 @@ const Header = () => {
   };
 
   return (
-    <div className="left-[90px] md:left-[220px] fixed top-0 h-[60px] w-[calc(100vw-220px)] flex items-center justify-between p-4 bg-black border border-[#2c2c2c]">
-      <h1 className="text-2xl font-bold">Admin</h1>
+    <div className="left-[90px] md:left-[220px] fixed top-0 h-[60px] w-[calc(100vw-90px)] md:w-[calc(100vw-220px)] flex items-center justify-between p-4 bg-black border border-[#2c2c2c]">
+      <div className="flex items-center gap-4">
+        <Link className="flex items-center gap-2 hover:text-primary" to="/">
+          <Icons.Return className="w-6 h-8 " />{" "}
+          <span className="hidden xl:block">Trở về trang chủ</span>
+        </Link>
+
+        <h1 className="text-2xl font-bold text-primary cursor-pointer">
+          Admin
+        </h1>
+      </div>
 
       <div className="flex items-center gap-4">
-        <h1 className="font-bold">{auth.user?.displayName}</h1>
+        <h1 className="font-bold hidden xl:block">{auth.user?.displayName}</h1>
         {auth.user?.photoURL && (
           <img
             src={auth.user?.photoURL}
@@ -30,9 +39,10 @@ const Header = () => {
         )}
         <button
           onClick={handleLogout}
-          className="bg-primary text-white px-4 py-1 rounded-xl"
+          className="bg-secondary text-white px-4 py-1 rounded-xl flex items-center gap-2 hover:bg-primary transition duration-200"
         >
-          Đăng xuất
+          <Icons.Logout className="w-6 h-8" />{" "}
+          <span className="hidden xl:block">Đăng xuất</span>
         </button>
       </div>
     </div>

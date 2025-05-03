@@ -34,10 +34,6 @@ const COLORS = [
 
 const CHART_HEIGHT = 450;
 
-const formatDataForChart = (dataObj) => {
-  return Object.entries(dataObj).map(([name, value]) => ({ name, value }));
-};
-
 const Dashboard = () => {
   return (
     <div className="p-6 space-y-6">
@@ -48,8 +44,8 @@ const Dashboard = () => {
       <TopMoviesChart />
 
       {/* Thống kê phim theo năm và ngôn ngữ */}
-      <div className="bg-foreground p-4 rounded-lg shadow text-white">
-        <h2 className="text-lg font-semibold mb-4">📊 Thống kê phim</h2>
+      <div>
+        <h2 className="text-2xl font-bold mb-4">Thống kê phim</h2>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-4">
           <MovieByCategoryStats />
@@ -70,17 +66,23 @@ const OverviewStats = () => {
     return <p className="text-center text-gray-400">Đang tải...</p>;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-      {overviewStats &&
-        overviewStats.map((item, idx) => (
-          <div
-            key={idx}
-            className="bg-foreground text-white p-4 rounded-lg shadow flex flex-col items-start"
-          >
-            <p className="text-sm text-gray-400">{item.title}</p>
-            <p className="text-2xl font-bold mt-1">{formatView(item.value)}</p>
-          </div>
-        ))}
+    <div>
+      <h2 className="text-2xl font-bold mb-4 text-white">Tổng quan</h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+        {overviewStats &&
+          overviewStats.map((item, idx) => (
+            <div
+              key={idx}
+              className="bg-foreground text-white p-4 rounded-lg shadow flex flex-col items-start"
+            >
+              <p className="text-sm text-gray-400">{item.title}</p>
+              <p className="text-2xl font-bold mt-1">
+                {formatView(item.value)}
+              </p>
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
@@ -91,69 +93,78 @@ const TopMoviesChart = () => {
   const { data: moviesByCategory } = useTopViewedCategories(10);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="bg-foreground p-4 rounded-lg shadow text-white">
-        <h2 className="text-lg font-semibold mb-4">
-          🔥 Top phim xem nhiều nhất
-        </h2>
-        <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
-          <BarChart data={topMovies}>
-            <XAxis
-              dataKey="name"
-              stroke="#ddd"
-              tickFormatter={(value) => {
-                if (value.length > 10) {
-                  return value.slice(0, 5) + "...";
-                }
-                return value;
-              }}
-            />
-            <YAxis stroke="#ddd" tickFormatter={(value) => formatView(value)} />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "#1f2937",
-                border: "none",
-                color: "#fff",
-              }}
-              formatter={(value) => [formatView(value), "Lượt xem"]}
-            />
-            <Legend wrapperStyle={{ color: "#fff" }} />
-            <Bar dataKey="view" fill="#3b82f6" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+    <div>
+      <h2 className="text-2xl font-bold mb-4 text-white">
+        Thống kê xu hướng xem
+      </h2>
 
-      <div className="bg-foreground p-4 rounded-lg shadow text-white">
-        <h2 className="text-lg font-semibold mb-4">
-          📚 Thể loại phim được xem nhiều nhất
-        </h2>
-        <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
-          <PieChart>
-            <Pie
-              data={moviesByCategory}
-              dataKey="count"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
-              outerRadius={100}
-              label
-            >
-              {moviesByCategory &&
-                moviesByCategory.map((_, index) => (
-                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                ))}
-            </Pie>
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "white",
-                border: "none",
-                color: "#ffffff",
-              }}
-              formatter={(value) => [value, "Lượt xem"]}
-            />
-            <Legend wrapperStyle={{ color: "#fff" }} />
-          </PieChart>
-        </ResponsiveContainer>
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <div className="bg-foreground p-4 rounded-lg shadow text-white">
+          <h2 className="text-lg font-semibold mb-4">
+            Top phim xem nhiều nhất
+          </h2>
+          <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
+            <BarChart data={topMovies}>
+              <XAxis
+                dataKey="name"
+                stroke="#ddd"
+                tickFormatter={(value) => {
+                  if (value.length > 10) {
+                    return value.slice(0, 5) + "...";
+                  }
+                  return value;
+                }}
+              />
+              <YAxis
+                stroke="#ddd"
+                tickFormatter={(value) => formatView(value)}
+              />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#1f2937",
+                  border: "none",
+                  color: "#fff",
+                }}
+                formatter={(value) => [formatView(value), "Lượt xem"]}
+              />
+              <Legend wrapperStyle={{ color: "#fff" }} />
+              <Bar dataKey="view" fill="#3b82f6" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="bg-foreground p-4 rounded-lg shadow text-white">
+          <h2 className="text-lg font-semibold mb-4">
+            Thể loại phim được xem nhiều nhất
+          </h2>
+          <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
+            <PieChart>
+              <Pie
+                data={moviesByCategory}
+                dataKey="count"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                outerRadius={100}
+                label
+              >
+                {moviesByCategory &&
+                  moviesByCategory.map((_, index) => (
+                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                  ))}
+              </Pie>
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "white",
+                  border: "none",
+                  color: "#ffffff",
+                }}
+                formatter={(value) => [value, "Lượt xem"]}
+              />
+              <Legend wrapperStyle={{ color: "#fff" }} />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );
@@ -168,7 +179,7 @@ const MovieByCategoryStats = () => {
   return (
     <div className="bg-foreground p-4 rounded-lg shadow">
       <h3 className="text-xl font-semibold text-white mb-4">
-        Số lượng phim theo thể loại
+        Phim theo thể loại
       </h3>
       <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
         <PieChart>
@@ -202,7 +213,7 @@ const CountryStats = () => {
   return (
     <div className="bg-foreground p-4 rounded-lg shadow">
       <h3 className="text-xl font-semibold text-white mb-4">
-        Số lượng phim theo quốc gia
+        Phim theo quốc gia
       </h3>
       <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
         <PieChart>
@@ -286,9 +297,7 @@ const MovieTypeStats = () => {
 
   return (
     <div className="bg-foreground p-4 rounded-lg shadow">
-      <h3 className="text-xl font-semibold text-white mb-4">
-        Số lượng phim theo loại
-      </h3>
+      <h3 className="text-xl font-semibold text-white mb-4">Phim theo loại</h3>
       <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
         <PieChart>
           <Pie

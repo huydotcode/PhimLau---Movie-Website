@@ -1,6 +1,5 @@
 import AdminLayout from "../layouts/AdminLayout";
 import CategoryList from "../pages/admin/CategoryList";
-import FavoriteList from "../pages/admin/FavoriteList";
 import MovieList from "../pages/admin/MovieList";
 import UserList from "../pages/admin/UserList";
 import AdminPage from "../pages/AdminPage";
@@ -23,11 +22,6 @@ export const adminRoutes = {
     {
       path: "users",
       element: UserList,
-      layout: AdminLayout,
-    },
-    {
-      path: "favorites",
-      element: FavoriteList,
       layout: AdminLayout,
     },
   ],

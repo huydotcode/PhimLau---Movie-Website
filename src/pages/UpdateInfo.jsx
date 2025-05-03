@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthProvider";
 import {
@@ -25,7 +25,10 @@ const UpdateInfo = () => {
   const [editField, setEditField] = useState(null);
   const [uploading, setUploading] = useState(false);
 
+  const inputRef = useRef(null);
+
   const onSubmit = async (data) => {
+    console.log("data", data);
     const value = data[editField];
 
     try {
@@ -67,10 +70,13 @@ const UpdateInfo = () => {
         };
       case "email":
         return {
-          required: "Email không được để trống.",
           pattern: {
             value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
             message: "Email không hợp lệ.",
+          },
+          required: {
+            value: true,
+            message: "Email không được để trống.",
           },
         };
       case "phoneNumber":
@@ -94,13 +100,18 @@ const UpdateInfo = () => {
       </label>
       {editField === name ? (
         <form
+          key={name}
           onSubmit={handleSubmit(onSubmit)}
           className="flex items-center space-x-2"
         >
           <input
             {...register(name, getValidation(name))}
             type={type}
-            className="bg-secondary flex-1 h-[48px] text-white px-3 py-2 rounded w-full sm:w-80"
+            ref={(e) => {
+              register(name).ref(e); // Đảm bảo RHF nhận ref
+              inputRef.current = e; // Gán ref cho bạn dùng
+            }}
+            className="flex-1 h-[48px] bg-foreground text-white px-3 py-2 rounded w-full sm:w-80"
           />
           <button
             type="submit"
@@ -126,10 +137,16 @@ const UpdateInfo = () => {
             {user[name] || <em className="text-gray-500">Chưa có</em>}
           </span>
           <button
-            onClick={() => setEditField(name)}
+            onClick={() => {
+              setEditField(name);
+              setValue(name, user[name] || "");
+              setTimeout(() => {
+                inputRef.current?.focus();
+              }, 0);
+            }}
             className="text-primary text-sm hover:underline"
           >
-            Sửa
+            Cập nhật
           </button>
         </div>
       )}

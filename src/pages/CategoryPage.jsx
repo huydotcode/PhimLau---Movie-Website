@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import MovieCard from "../components/MovieCard";
@@ -6,15 +6,15 @@ import FilterPanel from "../components/FilterPanel"; // Import FilterPanel
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { Pagination } from "antd"; // Import Pagination từ Ant Design
 import "../styles/pagination.css"; // Đảm bảo bạn có style cho Pagination
+import { useCategoryMovies, useAllCategories } from "../hooks/useCategory";
 
 const PAGE_SIZE = 20; // Số lượng phim hiển thị trên mỗi trang
 
 const CategoryPage = () => {
   const { slug } = useParams(); // Lấy slug thể loại từ URL
-  const [movies, setMovies] = useState([]);
-  const [filteredResults, setFilteredResults] = useState([]);
+  // const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
     country: [], // Lưu nhiều quốc gia
     // category: [],
@@ -24,55 +24,38 @@ const CategoryPage = () => {
     sort: "Mới nhất", // Sắp xếp
   });
   const [showFilters, setShowFilters] = useState(false); // State để hiển thị bộ lọc
+  const [filteredResults, setFilteredResults] = useState([]);
 
-  // Map slug thành tên thể loại
-  const categoryNameMap = {
-    "chinh-kich": "Chính kịch",
-    "hanh-dong": "Hành động",
-    "hai-huoc": "Hài hước",
-    "phieu-luu": "Phiêu lưu",
-    "hinh-su": "Hình sự",
-    "tinh-cam": "Tình cảm",
-    "vien-tuong": "Viễn tưởng",
-    "bi-an": "Bí ẩn",
-    "khoa-hoc": "Khoa học",
-    "kinh-di": "Kinh dị",
-  };
 
-  const categoryName = categoryNameMap[slug] || "Thể loại không xác định";
+  // Lấy danh sách loại từ Firestore
+  const { data: categories, isLoading: isLoadingCategories } = useAllCategories({
+    enable: true,
+  });
+
+  // Tìm tên loại dựa trên slug
+  const categoryName =
+    categories?.find((category) => category.slug === slug)?.name ||
+    "Thể loại không xác định";
+
+  // Lấy danh sách phim theo thể loại
+  const { data, isLoading } = useCategoryMovies(slug, currentPage);
 
   useScrollToTop();
 
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      try {
-        const res = await fetch("/json/movies_lastest.json"); // Đường dẫn đến file JSON
-        const data = await res.json();
+  // Gắn dữ liệu fetch về vào filteredResults
+  React.useEffect(() => {
+    if (data?.movies) {
+      setFilteredResults(data.movies);
+    }
+  }, [data]);
 
-        // Lọc phim theo thể loại
-        const categoryMovies = data.filter((movie) =>
-          movie.category?.some((c) => c.slug === slug)
-        );
-
-        // Sắp xếp mặc định theo "Mới nhất"
-        const sortedMovies = categoryMovies.sort(
-          (a, b) => new Date(b.created.time) - new Date(a.created.time)
-        );
-
-        setMovies(sortedMovies); // Lưu danh sách phim đã sắp xếp
-        setFilteredResults(sortedMovies); // Hiển thị dữ liệu đã sắp xếp
-      } catch (err) {
-        console.error("Error fetching movies by category:", err);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, [slug]); // Chạy lại khi slug thay đổi
+  // useScrollToTop();
 
 
   const handleFilter = () => {
-    let results = movies.filter((movie) => {
+    if (!data?.movies) return [];
+
+    let results = data.movies.filter((movie) => {
       // Lọc theo quốc gia
       const matchCountry =
         filters.country.length === 0 ||
@@ -111,20 +94,20 @@ const CategoryPage = () => {
     } else if (filters.sort === "Lượt xem") {
       results = results.sort((a, b) => b.view - a.view);
     } else if (filters.sort === "Mới nhất") {
-      results = results.sort(
-        (a, b) => new Date(b.created.time) - new Date(a.created.time)
-      );
+      results = results.sort((a, b) => b.year - a.year); // Sắp xếp theo năm phát hành giảm dần
     }
 
     setFilteredResults(results);
     setCurrentPage(1);
   };
 
-  const totalMovies = filteredResults.length;
-
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  if (isLoadingCategories) {
+    return <Loading isLoading />;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -155,7 +138,6 @@ const CategoryPage = () => {
           setFilters={setFilters}
           handleFilter={handleFilter}
           setShowFilters={setShowFilters}
-
           hasCategoryFilter={false} // Không hiển thị bộ lọc thể loại
         />
       )}
@@ -175,7 +157,7 @@ const CategoryPage = () => {
             className="dark-pagination"
             current={currentPage}
             pageSize={PAGE_SIZE}
-            total={totalMovies}
+            total={filteredResults.length}
             onChange={handlePageChange}
             showSizeChanger={false}
             showTotal={(total) => `Tổng số ${total} phim`}
@@ -187,3 +169,4 @@ const CategoryPage = () => {
 };
 
 export default CategoryPage;
+

@@ -5,109 +5,7 @@ import Container from "../components/Container";
 import Icons from "../components/Icons";
 import Button from "../components/ui/Button";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import { TopMovieSection } from "./HomePage";
-
-/*
-{
-    "status": true,
-    "msg": "",
-    "movie": {
-        "tmdb": {
-            "type": "tv",
-            "id": "216005",
-            "season": null,
-            "vote_average": 6.971,
-            "vote_count": 52
-        },
-        "imdb": {
-            "id": "tt23732458"
-        },
-        "created": {
-            "time": "2023-01-04T17:02:21.000Z"
-        },
-        "modified": {
-            "time": "2025-04-09T11:24:51.000Z"
-        },
-        "_id": "63b54eadee616770bad8be46",
-        "name": "MADOFF: Quái vật phố Wall",
-        "origin_name": "MADOFF: The Monster of Wall Street",
-        "content": "<p>Loạt phim tài liệu này dõi theo hành trình thăng trầm của nhà tài chính Bernie Madoff, người dàn dựng một trong những mô hình Ponzi lớn nhất lịch sử Phố Wall.</p>",
-        "type": "series",
-        "status": "completed",
-        "thumb_url": "https://img.ophim.live/uploads/movies/madoff-quai-vat-pho-wall-thumb.jpg",
-        "poster_url": "https://img.ophim.live/uploads/movies/madoff-quai-vat-pho-wall-poster.jpg",
-        "is_copyright": false,
-        "sub_docquyen": false,
-        "chieurap": false,
-        "trailer_url": "",
-        "time": "54 phút/tập",
-        "episode_current": "Hoàn Tất (4/4)",
-        "episode_total": "4 Tập",
-        "quality": "HD",
-        "lang": "Vietsub",
-        "notify": "",
-        "showtimes": "",
-        "slug": "madoff-quai-vat-pho-wall",
-        "year": 2023,
-        "view": 222,
-        "actor": [
-            ""
-        ],
-        "director": [
-            ""
-        ],
-        "category": [
-            {
-                "id": "620e0e64d9648f114cde7728",
-                "name": "Tài Liệu",
-                "slug": "tai-lieu"
-            }
-        ],
-        "country": [
-            {
-                "id": "620a231fe0fc277084dfd7ce",
-                "name": "Âu Mỹ",
-                "slug": "au-my"
-            }
-        ]
-    },
-    "episodes": [
-        {
-            "server_name": "Vietsub #1",
-            "server_data": [
-                {
-                    "name": "1",
-                    "slug": "1",
-                    "filename": "MADOFF_ Quái vật phố Wall_S01E01_Kẻ nói dối, không phải kẻ thất bại",
-                    "link_embed": "https://vip.opstream14.com/share/e3030406173074724559c34666f5830f",
-                    "link_m3u8": "https://vip.opstream14.com/20230104/29074_52cf140a/index.m3u8"
-                },
-                {
-                    "name": "2",
-                    "slug": "2",
-                    "filename": "MADOFF_ Quái vật phố Wall_S01E02_Đừng hỏi, đừng nói",
-                    "link_embed": "https://vip.opstream14.com/share/b025330edaf516645245e837c04682f8",
-                    "link_m3u8": "https://vip.opstream14.com/20230104/29075_c82938fb/index.m3u8"
-                },
-                {
-                    "name": "3",
-                    "slug": "3",
-                    "filename": "MADOFF_ Quái vật phố Wall_S01E03_Nhắm mắt làm ngơ",
-                    "link_embed": "https://vip.opstream14.com/share/744c7571cf7ab98667accb835b549b85",
-                    "link_m3u8": "https://vip.opstream14.com/20230104/29076_5aa1c0fb/index.m3u8"
-                },
-                {
-                    "name": "4",
-                    "slug": "4",
-                    "filename": "MADOFF_ Quái vật phố Wall_S01E04_Cái giá của việc tin tưởng",
-                    "link_embed": "https://vip.opstream14.com/share/0853de1f652d3a206e18264d18eb3bb0",
-                    "link_m3u8": "https://vip.opstream14.com/20230104/29077_db934b4a/index.m3u8"
-                }
-            ]
-        }
-    ]
-}
-*/
+import { TopNewMovieSection } from "./HomePage";
 
 const MovieInfomationPage = () => {
   const { slug } = useParams();
@@ -139,10 +37,6 @@ const MovieInfomationPage = () => {
 
     fetchMovie();
   }, [slug]);
-
-  useEffect(() => {
-    console.log(movie);
-  }, [movie]);
 
   return (
     <div className="@container">
@@ -242,13 +136,13 @@ const MovieInfomationPage = () => {
               </div>
             )}
 
-            <CommentSection movieId={movie._id} />
+            {movie && <CommentSection movieId={movie._id} />}
           </div>
         </div>
       </Container>
 
       <div className="px-4">
-        <TopMovieSection />
+        <TopNewMovieSection />
       </div>
 
       {loading && (
@@ -291,7 +185,7 @@ const InfomationSection = ({ movie }) => {
         )}
 
         {movie?.category &&
-          movie?.category?.map(cat => (
+          movie?.category?.map((cat) => (
             <div
               className="p-1 rounded-md border text-sm bg-secondary"
               key={cat.name}
@@ -311,7 +205,7 @@ const InfomationSection = ({ movie }) => {
         <p className="font-semibold">
           Quốc gia:{" "}
           <span className="font-light">
-            {movie.country?.map(country => country.name).join(", ")}
+            {movie.country?.map((country) => country.name).join(", ")}
           </span>
         </p>
       )}

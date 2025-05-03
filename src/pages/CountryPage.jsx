@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import MovieCard from "../components/MovieCard";
@@ -6,15 +6,15 @@ import FilterPanel from "../components/FilterPanel"; // Import FilterPanel
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { Pagination } from "antd"; // Import Pagination từ Ant Design
 import "../styles/pagination.css"; // Đảm bảo bạn có style cho Pagination
+import { useCountryMovies, useAllCountries } from "../hooks/useCountry"; // Import custom hook
 
 const PAGE_SIZE = 20; // Số lượng phim hiển thị trên mỗi trang
 
 const CountryPage = () => {
   const { slug } = useParams(); // Lấy slug quốc gia từ URL
-  const [movies, setMovies] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
+
   const [filters, setFilters] = useState({
     year: [], // Lọc theo năm
     category: [],
@@ -22,55 +22,34 @@ const CountryPage = () => {
     type: [], // Lọc theo loại phim
     sort: "Mới nhất", // Sắp xếp mặc định
   });
+
   const [showFilters, setShowFilters] = useState(false); // State để hiển thị bộ lọc
 
-  // Map slug thành tên quốc gia
-  const countryNameMap = {
-    "viet-nam": "Việt Nam",
-    "han-quoc": "Hàn Quốc",
-    "nhat-ban": "Nhật Bản",
-    "au-my": "Âu Mỹ",
-    "trung-quoc": "Trung Quốc",
-    "anh": "Anh",
-    "phap": "Pháp",
-    "thai-lan": "Thái Lan",
-    "an-do": "Ấn Độ",
-  };
+  // Lấy danh sách quốc gia
+  const { data: countries, isLoading: isLoadingCountries } = useAllCountries({
+    enable: true,
+  });
 
-  const countryName = countryNameMap[slug] || "Quốc gia không xác định";
+  // Tìm tên quốc gia dựa trên slug
+  const countryName =
+    countries?.find((country) => country.slug === slug)?.name ||
+    "Quốc gia không xác định";
 
   useScrollToTop();
 
+  const { data, isLoading } = useCountryMovies(slug, currentPage);
+
   useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      try {
-        const res = await fetch("/json/movies_lastest.json"); // Đường dẫn đến file JSON
-        const data = await res.json();
+    if (data?.movies) {
+      setFilteredResults(data.movies); // Gắn dữ liệu fetch về vào filteredResults
+    }
+  }, [data]);
 
-        // Lọc phim theo quốc gia
-        const countryMovies = data.filter((movie) =>
-          movie.country?.some((c) => c.slug === slug)
-        );
-
-        // Sắp xếp mặc định theo "Mới nhất"
-        const sortedMovies = countryMovies.sort(
-          (a, b) => new Date(b.created.time) - new Date(a.created.time)
-        );
-
-        setMovies(sortedMovies); // Lưu danh sách phim đã sắp xếp
-        setFilteredResults(sortedMovies); // Hiển thị dữ liệu đã sắp xếp
-      } catch (err) {
-        console.error("Error fetching movies by country:", err);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, [slug]); // Chạy lại khi slug thay đổi
-
-
+  // logic lọc
   const handleFilter = () => {
-    let results = movies.filter((movie) => {
+    if (!data?.movies) return [];
+
+    let results = data.movies.filter((movie) => {
       // Lọc theo năm
       const matchYear =
         filters.year.length === 0 ||
@@ -109,20 +88,20 @@ const CountryPage = () => {
     } else if (filters.sort === "Lượt xem") {
       results = results.sort((a, b) => b.view - a.view);
     } else if (filters.sort === "Mới nhất") {
-      results = results.sort(
-        (a, b) => new Date(b.created.time) - new Date(a.created.time)
-      );
+      results = results.sort((a, b) => b.year - a.year); // Sắp xếp theo năm phát hành giảm dần
     }
 
     setFilteredResults(results);
     setCurrentPage(1);
   };
 
-  const totalMovies = filteredResults.length;
-
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  if (isLoadingCountries) {
+    return <Loading isLoading />;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -172,7 +151,7 @@ const CountryPage = () => {
             className="dark-pagination"
             current={currentPage}
             pageSize={PAGE_SIZE}
-            total={totalMovies}
+            total={filteredResults.length}
             onChange={handlePageChange}
             showSizeChanger={false}
             showTotal={(total) => `Tổng số ${total} phim`}

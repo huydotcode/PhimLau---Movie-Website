@@ -4,17 +4,28 @@ import {
   getKoreanMovies,
   getNewSeriesMovies,
   getNewSingleMovies,
-  getTopMovies,
+  getTopNewMovies,
+  getTopViewMovies,
   getTrendingMovies,
 } from "../services/movieService";
 
 const SLATE_TIME = 1 * 60 * 1000; // 5 phút
 const INITIAL_DATA = [];
 
-export const useTopMovies = ({ enabled = true }) => {
+export const useTopNewMovies = ({ enabled = true }) => {
   return useQuery({
-    queryKey: ["topMovies"],
-    queryFn: getTopMovies,
+    queryKey: ["topNewMovies"],
+    queryFn: getTopNewMovies,
+    enabled,
+    // staleTime: SLATE_TIME,
+    initialData: INITIAL_DATA,
+  });
+};
+
+export const useTopViewMovies = ({ enabled = true }) => {
+  return useQuery({
+    queryKey: ["topViewMovies"],
+    queryFn: getTopViewMovies,
     enabled,
     // staleTime: SLATE_TIME, // cache 5 phút
     initialData: INITIAL_DATA,

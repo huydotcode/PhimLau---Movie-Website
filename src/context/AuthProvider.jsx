@@ -23,28 +23,19 @@ import { auth, db } from "../app/firebase"; // đường dẫn tới firebase.js
 const AuthContext = createContext();
 const provider = new GoogleAuthProvider();
 
-/*
-USER:
-- displayName
-- email
-- phoneNumber
-- photoURL
-- uid
-*/
-
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // chờ load firebase
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("onAuthStateChanged", { currentUser });
       if (currentUser) {
         // Query từ firebase
         const userDocRef = doc(db, "users", currentUser.uid);
 
         if (userDocRef) {
-          getDoc(userDocRef).then(docSnapshot => {
+          getDoc(userDocRef).then((docSnapshot) => {
             if (docSnapshot.exists()) {
               const userData = docSnapshot.data();
               setUser({
@@ -68,6 +59,10 @@ export const AuthProvider = ({ children }) => {
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    console.log("Current User", user);
+  }, [user]);
 
   // Đăng nhập
   const loginWithEmailPassword = async (email, password) => {
@@ -223,7 +218,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const forgotPassword = async email => {
+  const forgotPassword = async (email) => {
     try {
       if (!email) {
         toast.error("Vui lòng nhập email trước khi reset mật khẩu!");

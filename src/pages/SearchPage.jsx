@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import Loading from "../components/Loading";
+import { Pagination } from "antd";
+import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import FilterPanel from "../components/FilterPanel";
+import Loading from "../components/Loading";
 import MovieCard from "../components/MovieCard";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import { Pagination } from "antd";
+import { useSearchMovies } from "../hooks/useSearch";
 
 const PAGE_SIZE = 20; // Số lượng kết quả tối đa để hiển thị
 
@@ -12,11 +13,11 @@ const SearchPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q");
 
-  const [searchResults, setSearchResults] = useState([]);
-  const [filteredResults, setFilteredResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  // const [searchResults, setSearchResults] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [filters, setFilters] = useState({
     country: [], // Lưu nhiều quốc gia
     category: [],
@@ -26,54 +27,65 @@ const SearchPage = () => {
     sort: "Mới nhất", // Sắp xếp
   });
   const [showFilters, setShowFilters] = useState(false); // Hiển thị bộ lọc
+
   useScrollToTop();
 
-  useEffect(() => {
-    if (!query) return;
 
-    (async () => {
-      setIsLoading(true);
-      try {
-        const res = await fetch("/json/movies_details.json"); // Lấy dữ liệu từ file JSON
-        const data = await res.json();
+  // Lấy danh sách phim từ Firestore
+  const { data, isLoading } = useSearchMovies(query, currentPage);
 
-        const filtered = data
-          .filter(
-            movie =>
-              movie?.name.toLowerCase().includes(query.toLowerCase()) ||
-              movie?.slug.includes(query.toLowerCase()),
-          )
-          .slice(0, 100)
-          .sort((a, b) => new Date(b.created.time) - new Date(a.created.time));
+  // Gắn dữ liệu fetch về vào filteredResults
+  React.useEffect(() => {
+    if (data?.movies) {
+      setFilteredResults(data.movies);
+    }
+  }, [data]);
 
-        setSearchResults(filtered);
-        setFilteredResults(filtered);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, [query]);
+  // useEffect(() => {
+  //   if (!query) return;
+
+  //   (async () => {
+  //     setIsLoading(true);
+  //     try {
+  //       const res = await fetch("/json/movies_details.json"); // Lấy dữ liệu từ file JSON
+  //       const data = await res.json();
+
+  //       const filtered = data
+  //         .filter(
+  //           (movie) =>
+  //             movie?.name.toLowerCase().includes(query.toLowerCase()) ||
+  //             movie?.slug.includes(query.toLowerCase()),
+  //         )
+  //         .slice(0, 100)
+  //         .sort((a, b) => new Date(b.created.time) - new Date(a.created.time));
+
+  //       setSearchResults(filtered);
+  //       setFilteredResults(filtered);
+  //     } catch (err) {
+  //       console.log(err);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   })();
+  // }, [query]);
 
   const handleFilter = () => {
-    console.log("handleFilter");
-    let results = searchResults.filter(movie => {
+    let results = filteredResults.filter((movie) => {
       const matchCountry =
         filters.country.length === 0 ||
-        filters.country.some(country =>
-          movie.country?.some(c => c.name === country),
+        filters.country.some((country) =>
+          movie.country?.some((c) => c.name === country),
         );
       const matchCategory =
         filters.category.length === 0 ||
-        filters.category.some(category =>
-          movie.category?.some(cat => cat.name === category),
+        filters.category.some((category) =>
+          movie.category?.some((cat) => cat.name === category),
         );
       // const matchYear =
       //   filters.year.length === 0 || filters.year.includes(movie.year?.toString());
       const matchYear =
         filters.year.length === 0 ||
-        filters.year.some(year => {
+        filters.year.some((year) => {
           if (year === "Cũ hơn") {
             return movie.year < 2020; // Lọc phim có năm sản xuất cũ hơn 2020
           }
@@ -104,9 +116,7 @@ const SearchPage = () => {
     } else if (filters.sort === "Lượt xem") {
       results = results.sort((a, b) => b.view - a.view);
     } else if (filters.sort === "Mới nhất") {
-      results = results.sort(
-        (a, b) => new Date(b.created.time) - new Date(a.created.time),
-      );
+      results = results.sort((a, b) => b.year - a.year); // Sắp xếp theo năm phát hành giảm dần
     }
 
     setFilteredResults(results);
@@ -115,7 +125,7 @@ const SearchPage = () => {
 
   const totalMovies = filteredResults.length;
 
-  const handlePageChange = page => {
+  const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
@@ -131,7 +141,7 @@ const SearchPage = () => {
       <div className="mb-6">
         <button
           className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-md"
-          onClick={() => setShowFilters(prev => !prev)}
+          onClick={() => setShowFilters((prev) => !prev)}
         >
           <span>🔍</span> Bộ lọc
         </button>
@@ -165,7 +175,7 @@ const SearchPage = () => {
             total={totalMovies}
             onChange={handlePageChange}
             showSizeChanger={false}
-            showTotal={total => `Tổng số ${total} phim`}
+            showTotal={(total) => `Tổng số ${total} phim`}
           />
         </div>
       )}
@@ -174,3 +184,4 @@ const SearchPage = () => {
 };
 
 export default SearchPage;
+

@@ -2,17 +2,22 @@ import { BiSolidLike } from "react-icons/bi";
 import {
   FaChevronDown,
   FaCommentDots,
+  FaFacebook,
   FaFilter,
   FaHeart,
+  FaLink,
   FaPlay,
   FaRegStar,
   FaSearch,
+  FaShare,
   FaSort,
   FaStar,
+  FaTelegram,
+  FaTwitter,
   FaUser,
 } from "react-icons/fa";
 import { IoIosArrowUp, IoIosMenu, IoMdReturnLeft } from "react-icons/io";
-import { IoClose, IoNotifications, IoSend } from "react-icons/io5";
+import { IoClose, IoMail, IoNotifications, IoSend } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
 
 const Icons = {
@@ -36,6 +41,14 @@ const Icons = {
   Filter: ({ className = "" }) => <FaFilter className={className} />,
   Return: ({ className = "" }) => <IoMdReturnLeft className={className} />,
   Sort: ({ className = "" }) => <FaSort className={className} />,
+  Share: ({ className = "" }) => <FaShare className={className} />,
+
+  // Social
+  Facebook: ({ className = "" }) => <FaFacebook className={className} />,
+  Twitter: ({ className = "" }) => <FaTwitter className={className} />,
+  Telegram: ({ className = "" }) => <FaTelegram className={className} />,
+  Gmail: ({ className = "" }) => <IoMail className={className} />,
+  Link: ({ className = "" }) => <FaLink className={className} />,
 };
 
 export default Icons;

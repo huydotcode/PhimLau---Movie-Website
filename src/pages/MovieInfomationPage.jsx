@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { toast } from "sonner";
 import CommentSection from "../components/CommentSection";
 import Container from "../components/Container";
 import Icons from "../components/Icons";
+import MovieCard from "../components/MovieCard";
 import Button from "../components/ui/Button";
-import { useScrollToTop } from "../hooks/useScrollToTop";
-import { TopNewMovieSection } from "./HomePage";
-import { addSavedMovie } from "../services/movieSavedService"; // hoặc đường dẫn đúng
 import { useAuth } from "../context/AuthProvider"; // hook custom nếu bạn có
-import { toast } from "sonner";
+import { useScrollToTop } from "../hooks/useScrollToTop";
+import { useSearchMovies } from "../hooks/useSearchMovie";
 import { addFavorite } from "../services/favoriteService"; // hoặc đúng đường dẫn
+import { addSavedMovie } from "../services/movieSavedService"; // hoặc đường dẫn đúng
+import { TopNewMovieSection } from "./HomePage";
+import { Modal } from "antd";
+import { SORT_OPTIONS } from "../constants/sortFilter";
 
 const MovieInfomationPage = () => {
   const { slug } = useParams();
@@ -18,7 +22,17 @@ const MovieInfomationPage = () => {
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
   const [episodes, setEpisodes] = useState([]);
+  const [showModalShare, setShowModalShare] = useState(false);
   useScrollToTop();
+
+  const currentUrl = window.location.href; // Lấy URL hiện tại của trang
+
+  const shareLinks = {
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`,
+    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(movie?.title || "Xem phim hay tại đây!")}`,
+    telegram: `https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(movie?.title)}`,
+    email: `mailto:?subject=${encodeURIComponent("Mời bạn xem phim " + movie?.title)}&body=${encodeURIComponent(currentUrl)}`,
+  };
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -83,24 +97,15 @@ const MovieInfomationPage = () => {
     }
   };
 
+  const handleShare = () => {
+    setShowModalShare(true);
+  };
+
   return (
     <div className="@container">
       <div className="relative w-screen">
         {/* Banner */}
         <div className="absolute inset-0 gradient-left-right z-10"></div>
-
-        {/* {movie?.trailer_url.length > 0 && (
-          <div className="absolute inset-0 z-20 flex items-center justify-center">
-            <Button
-              className="bg-primary px-8 py-3 rounded-full font-semibold uppercase flex items-center gap-2 text-md hover:opacity-40"
-              onClick={() => {
-                naviagte(`/xem-phim/${movie.slug}`);
-              }}
-            >
-              <Icons.Play /> Xem ngay
-            </Button>
-          </div>
-        )} */}
 
         <div
           className="relative inset-0 bg-cover bg-center brightness-[.5] h-[50vh] lg:h-[80vh]"
@@ -112,6 +117,7 @@ const MovieInfomationPage = () => {
 
       <Container className="-top-[160px] z-10">
         <div className="rounded-xl mt-10 flex justify-between gap-4 flex-col lg:flex-row">
+          {/* Thông tin phim */}
           <div className="flex flex-col gap-4 lg:bg-gradient-to-t lg:from-foreground lg:to-foreground via-transparent rounded-xl p-6 w-full lg:w-1/3">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col justify-center items-center">
@@ -137,6 +143,7 @@ const MovieInfomationPage = () => {
             </div>
           </div>
 
+          {/* Các hành động xem phim */}
           <div className="flex-1 bg-gradient-to-t from-foreground to-foreground via-transparent rounded-xl p-4 flex flex-col gap-10">
             <div className="flex items-center justify-center lg:justify-start flex-wrap gap-4">
               <Button
@@ -162,6 +169,65 @@ const MovieInfomationPage = () => {
                 >
                   <Icons.Heart /> Yêu thích
                 </Button>
+
+                <Button
+                  className="bg-transparent px-4 py-2 rounded-full flex items-center gap-2 flex-col text-sm hover:text-primary"
+                  onClick={handleShare}
+                >
+                  <Icons.Share /> Chia sẻ
+                </Button>
+
+                <Modal
+                  open={showModalShare}
+                  onCancel={() => setShowModalShare(false)}
+                  footer={null}
+                  centered
+                  title="Chia sẻ phim"
+                  className="w-[90vw] lg:w-[50vw]"
+                >
+                  <div className="mt-6 flex items-center gap-4">
+                    <a
+                      href={shareLinks.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      <Icons.Facebook className="w-8 h-8" />
+                    </a>
+
+                    <a
+                      href={shareLinks.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      <Icons.Twitter className="w-8 h-8" />
+                    </a>
+
+                    <a
+                      href={shareLinks.telegram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      <Icons.Telegram className="w-8 h-8" />
+                    </a>
+
+                    <a href={shareLinks.email} className="hover:underline">
+                      <Icons.Gmail className="w-10 h-10 text-gray-500" />
+                    </a>
+
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(currentUrl);
+                        toast("Đã sao chép liên kết!");
+                      }}
+                      className="text-gray-700 hover:underline"
+                    >
+                      <Icons.Link className="w-8 h-8" />
+                    </button>
+                  </div>
+                </Modal>
               </div>
             </div>
 
@@ -187,29 +253,35 @@ const MovieInfomationPage = () => {
               </div>
             )}
 
+            {/* Trailer */}
+            {movie?.trailer_url && (
+              <div className="flex flex-col gap-4 mt-6">
+                <h2 className="text-xl font-semibold">Trailer</h2>
+                <div className="rounded-2xl overflow-hidden shadow-lg">
+                  <iframe
+                    className="w-full aspect-video"
+                    src={movie?.trailer_url.replace("watch?v=", "embed/")}
+                    title={`Trailer của ${movie?.title}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                  ></iframe>
+                </div>
+              </div>
+            )}
+
+            {/* Comment Section */}
+
             {movie && <CommentSection movieId={movie._id} />}
           </div>
         </div>
       </Container>
 
-      <div className="px-4">
+      <Container className="px-4">
+        <SuggestionMovie movie={movie} />
         <TopNewMovieSection />
-      </div>
-
-      {loading && (
-        <div className="flex justify-center items-center h-screen">
-          <svg
-            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="currentColor"
-              d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8.009 8.009 0 0 1 12 20Z"
-            />
-          </svg>
-        </div>
-      )}
+      </Container>
     </div>
   );
 };
@@ -295,6 +367,39 @@ const InfomationSection = ({ movie }) => {
           <span className="font-light">{movie.director.join(", ")}</span>
         </p>
       )}
+    </div>
+  );
+};
+
+// Gợi ý phim theo chủ đề của phim hiện tại
+const SuggestionMovie = ({ movie }) => {
+  const { data: suggestionMovies, isLoading } = useSearchMovies({
+    filters: {
+      category: movie?.category?.map((cat) => cat.slug),
+      country: movie?.country?.map((country) => country.slug),
+      sort: SORT_OPTIONS.IMDB,
+    },
+    page: 1,
+  });
+
+  const navigate = useNavigate();
+
+  if (isLoading) return <div>Đang tải...</div>;
+
+  return (
+    <div className="flex flex-col gap-4">
+      <h2 className="text-2xl font-bold">Gợi ý phim cho bạn</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {suggestionMovies?.movies &&
+          suggestionMovies?.movies.map((suggestion) => (
+            <MovieCard
+              key={suggestion._id}
+              movie={suggestion}
+              className="relative"
+              onClick={() => navigate(`/phim/${suggestion.slug}`)}
+            />
+          ))}
+      </div>
     </div>
   );
 };

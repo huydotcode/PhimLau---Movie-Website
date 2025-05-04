@@ -123,9 +123,17 @@ export const addCategory = async (category) => {
 
 // Cập nhật thể loại
 export const updateCategory = async (categoryId, updatedData) => {
+  console.log({
+    categoryId,
+    updatedData,
+  });
   try {
     // Cập nhật thể loại trong Firestore
-    const categoryRef = doc(db, "categories", categoryId);
+    const categoryRef = doc(
+      db,
+      "categories",
+      Array.isArray(categoryId) ? categoryId[0] : categoryId,
+    );
     await updateDoc(categoryRef, {
       ...updatedData,
       updatedAt: Timestamp.now(), // Cập nhật thời gian cập nhật
@@ -140,7 +148,12 @@ export const updateCategory = async (categoryId, updatedData) => {
 export const deleteCategory = async (categoryId) => {
   console.log("Deleting category with ID:", categoryId);
   try {
-    const categoryRef = doc(db, "categories", categoryId);
+    const categoryRef = doc(
+      db,
+      "categories",
+      Array.isArray(categoryId) ? categoryId[0] : categoryId,
+    );
+
     await deleteDoc(categoryRef);
   } catch (error) {
     console.error("Error deleting category:", error);

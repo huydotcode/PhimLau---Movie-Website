@@ -15,6 +15,8 @@ export const useSearchMovies = ({
       page,
       filters?.category,
       filters?.country,
+      filters?.lang,
+      filters?.year,
       filters?.sort,
       lastVisible?._id,
       pageSize,
@@ -27,24 +29,6 @@ export const useSearchMovies = ({
         pageSize,
         searchTerm,
       });
-
-      // Nếu không có dữ liệu, thử tìm data mà bỏ filters.country
-      if (
-        !data?.movies?.length &&
-        filters?.country &&
-        filters?.country !== "" &&
-        filters?.category !== "" &&
-        filters?.category !== undefined
-      ) {
-        const newData = await searchMovies({
-          filters: { ...filters, country: "" },
-          lastVisible,
-          page,
-          pageSize,
-          searchTerm,
-        });
-        return newData;
-      }
 
       return data;
     },

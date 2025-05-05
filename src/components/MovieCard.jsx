@@ -74,10 +74,14 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
   },
 */
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, espicode = null }) => {
   const navigate = useNavigate();
   const handleClickMovie = () => {
-    navigate(`/phim/${movie.slug}`);
+    if (espicode) {
+      navigate(`/xem-phim/${movie.slug}${espicode ? `?t=${espicode}` : ""}`);
+    } else {
+      navigate(`/phim/${movie.slug}`);
+    }
   };
 
   return (
@@ -89,6 +93,12 @@ const MovieCard = ({ movie }) => {
           alt={movie.name}
         />
       </CardContainer>
+
+      {espicode && (
+        <span className="text-sm absolute top-2 left-2 bg-[rgba(0,0,0,0.5)] text-white px-2 py-1 rounded-md">
+          Xem tiếp tập {espicode}
+        </span>
+      )}
 
       <motion.div
         className="absolute top-1 right-1 flex items-end justify-center text-white text-sm font-semibold flex-col gap-1 select-none bg-transparent"
@@ -114,7 +124,7 @@ const MovieCard = ({ movie }) => {
       </motion.div>
 
       <h3 className="p-2 text-white text-base font-semibold truncate whitespace-break-spaces text-center">
-        {movie.name}
+        {movie.name}{" "}
       </h3>
     </div>
   );

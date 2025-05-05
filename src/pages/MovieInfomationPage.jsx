@@ -1,27 +1,49 @@
+import { Modal } from "antd";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
 import CommentSection from "../components/CommentSection";
 import Container from "../components/Container";
 import Icons from "../components/Icons";
-import MovieCard from "../components/MovieCard";
+import ListMovieContainer from "../components/ListMovieContainer";
 import Button from "../components/ui/Button";
+import { SORT_OPTIONS } from "../constants/sortFilter";
 import { useAuth } from "../context/AuthProvider"; // hook custom nếu bạn có
+import {
+  addFavoriteMovieThunk,
+  fetchFavoriteMovies,
+  removeFavoriteMovieThunk,
+} from "../features/movies/favoriteMovieThunk";
+import {
+  addSavedMovieThunk,
+  fetchSavedMovies,
+  removeSavedMovieThunk,
+} from "../features/movies/savedMovieThunk";
+import { useEpsicodes, useMovie } from "../hooks/useMovie";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { useSearchMovies } from "../hooks/useSearchMovie";
-import { addFavorite } from "../services/favoriteService"; // hoặc đúng đường dẫn
-import { addSavedMovie } from "../services/movieSavedService"; // hoặc đường dẫn đúng
 import { TopNewMovieSection } from "./HomePage";
-import { Modal } from "antd";
-import { SORT_OPTIONS } from "../constants/sortFilter";
 
 const MovieInfomationPage = () => {
   const { slug } = useParams();
   const naviagte = useNavigate();
+  const { data: movie, isLoading: isLoadingMovie } = useMovie({
+    slug,
+    enabled: true,
+  });
+  const { data: episodes, isLoading: isLoadingEpsicodes } = useEpsicodes({
+    slug,
+    enabled: true,
+  });
 
-  const [movie, setMovie] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [episodes, setEpisodes] = useState([]);
+  const { savedMovies, favoriteMovies } = useSelector((state) => state.movies);
+  const dispatch = useDispatch(); // Lấy hàm dispatch từ Redux store
+  const isSaved = savedMovies?.some((saved) => saved.movie_id === movie?._id);
+  const isFavorite = favoriteMovies?.some(
+    (favorite) => favorite.movie_id === movie?._id,
+  );
+
   const [showModalShare, setShowModalShare] = useState(false);
   useScrollToTop();
 
@@ -34,27 +56,6 @@ const MovieInfomationPage = () => {
     email: `mailto:?subject=${encodeURIComponent("Mời bạn xem phim " + movie?.title)}&body=${encodeURIComponent(currentUrl)}`,
   };
 
-  useEffect(() => {
-    const fetchMovie = async () => {
-      try {
-        const response = await fetch(`https://ophim1.com/phim/${slug}`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setMovie(data.movie);
-        if (data.episodes && data.episodes.length > 0) {
-          setEpisodes(data.episodes[0]);
-        }
-      } catch (error) {
-        console.error("Error fetching movie data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMovie();
-  }, [slug]);
   const { user } = useAuth();
   const handleAddFavorite = async () => {
     if (!user) {
@@ -63,11 +64,21 @@ const MovieInfomationPage = () => {
     }
 
     try {
-      const result = await addFavorite({ userId: user.uid, movie });
-      if (result) {
-        toast.success("❤️ Đã thêm vào danh sách yêu thích!");
+      if (isFavorite) {
+        dispatch(
+          removeFavoriteMovieThunk({
+            favoriteId: favoriteMovies.find(
+              (favorite) => favorite.movie_id === movie._id,
+            ).id,
+          }),
+        );
       } else {
-        toast.info("Phim đã có trong danh sách yêu thích.");
+        dispatch(
+          addFavoriteMovieThunk({
+            uid: user.uid,
+            movie,
+          }),
+        );
       }
     } catch (error) {
       console.error("Lỗi khi thêm yêu thích:", error);
@@ -82,14 +93,20 @@ const MovieInfomationPage = () => {
     }
 
     try {
-      const result = await addSavedMovie({
-        userId: user.uid,
-        movieId: movie._id,
-      });
-      if (result) {
-        toast.success("Đã lưu phim thành công!");
+      if (isSaved) {
+        dispatch(
+          removeSavedMovieThunk({
+            savedId: savedMovies.find((saved) => saved.movie_id === movie._id)
+              .saved_id,
+          }),
+        );
       } else {
-        toast.info("Phim đã được lưu trước đó.");
+        dispatch(
+          addSavedMovieThunk({
+            uid: user.uid,
+            movie,
+          }),
+        );
       }
     } catch (error) {
       toast.error("Lỗi khi lưu phim.");
@@ -100,6 +117,15 @@ const MovieInfomationPage = () => {
   const handleShare = () => {
     setShowModalShare(true);
   };
+
+  useEffect(() => {
+    if (user?.uid) {
+      dispatch(fetchFavoriteMovies(user?.uid));
+      dispatch(fetchSavedMovies(user?.uid));
+    }
+  }, [dispatch, user?.uid]);
+
+  if (isLoadingMovie || isLoadingEpsicodes) return <div>Đang tải...</div>;
 
   return (
     <div className="@container">
@@ -157,14 +183,14 @@ const MovieInfomationPage = () => {
 
               <div className="flex-1 flex items-center justify-start gap-2">
                 <Button
-                  className="bg-transparent px-4 py-2 rounded-full flex items-center gap-2 flex-col text-sm hover:text-primary"
+                  className={`bg-transparent px-4 py-2 rounded-full flex items-center gap-2 flex-col text-sm hover:text-primary ${isSaved ? "text-primary" : ""}`}
                   onClick={handleSaveMovie}
                 >
-                  <Icons.Play /> Xem sau
+                  <Icons.Save /> Lưu phim
                 </Button>
 
                 <Button
-                  className="bg-transparent px-4 py-2 rounded-full flex items-center gap-2 flex-col text-sm hover:text-primary"
+                  className={`bg-transparent px-4 py-2 rounded-full flex items-center gap-2 flex-col text-sm hover:text-primary ${isFavorite ? "text-primary" : ""}`}
                   onClick={handleAddFavorite}
                 >
                   <Icons.Heart /> Yêu thích
@@ -279,7 +305,7 @@ const MovieInfomationPage = () => {
       </Container>
 
       <Container className="px-4">
-        <SuggestionMovie movie={movie} />
+        <SuggestionMovieByMovie movie={movie} />
         <TopNewMovieSection />
       </Container>
     </div>
@@ -372,7 +398,7 @@ const InfomationSection = ({ movie }) => {
 };
 
 // Gợi ý phim theo chủ đề của phim hiện tại
-const SuggestionMovie = ({ movie }) => {
+export const SuggestionMovieByMovie = ({ movie }) => {
   const { data: suggestionMovies, isLoading } = useSearchMovies({
     filters: {
       category: movie?.category?.map((cat) => cat.slug),
@@ -382,25 +408,15 @@ const SuggestionMovie = ({ movie }) => {
     page: 1,
   });
 
-  const navigate = useNavigate();
-
   if (isLoading) return <div>Đang tải...</div>;
 
   return (
-    <div className="flex flex-col gap-4">
-      <h2 className="text-2xl font-bold">Gợi ý phim cho bạn</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {suggestionMovies?.movies &&
-          suggestionMovies?.movies.map((suggestion) => (
-            <MovieCard
-              key={suggestion._id}
-              movie={suggestion}
-              className="relative"
-              onClick={() => navigate(`/phim/${suggestion.slug}`)}
-            />
-          ))}
-      </div>
-    </div>
+    <ListMovieContainer
+      title={`Có thể bạn sẽ thích`}
+      wrapperRef={null}
+      isLoading={isLoading}
+      movies={suggestionMovies.movies}
+    />
   );
 };
 

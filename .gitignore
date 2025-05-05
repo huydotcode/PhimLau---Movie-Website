@@ -7,6 +7,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+.firebase-data
+.firebaserc
+firebase.json
+firebase-export-1746425764841XG7lIq
+
+
 node_modules
 dist
 dist-ssr

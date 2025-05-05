@@ -34,5 +34,11 @@ export const useSearchMovies = ({
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,
+    initialData: () => {
+      return {
+        movies: [],
+        lastVisible: null,
+      };
+    },
   });
 };

@@ -1,36 +1,43 @@
 import {
   collection,
-  addDoc,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   query,
-  where,
+  setDoc,
   Timestamp,
+  where,
 } from "firebase/firestore";
 import { db } from "../app/firebase";
 
 // Thêm phim đã xem
-export const addWatchedMovie = async ({ userId, movie }) => {
-  const watchedRef = collection(db, "watched_movies");
+export const addWatchedMovie = async ({ userId, movie, currentEpisode }) => {
+  const docId = `${userId}_${movie._id}_${currentEpisode}`;
+  const docRef = doc(db, "watched_movies", docId);
 
-  const q = query(
-    watchedRef,
-    where("user_id", "==", userId),
-    where("movie_id", "==", movie._id),
-  );
-  const exists = await getDocs(q);
-  if (!exists.empty) {
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
     console.log("Phim đã xem trước đó.");
-    return;
+    // return;
   }
 
-  await addDoc(watchedRef, {
+  await setDoc(docRef, {
     user_id: userId,
     movie_id: movie._id,
     watched_at: Timestamp.now(),
     movie_data: movie,
+    episode: currentEpisode,
   });
+
+  return {
+    id: docRef.id,
+    user_id: userId,
+    movie_id: movie._id,
+    watched_at: new Date().toISOString(),
+    movie_data: movie,
+    episode: currentEpisode,
+  };
 };
 
 // Lấy danh sách phim đã xem
@@ -41,8 +48,8 @@ export const getWatchedMoviesByUser = async (userId) => {
 
   return snapshot.docs.map((doc) => ({
     id: doc.id,
-    ...doc.data().movie_data,
-    watched_at: doc.data().watched_at?.toDate(), // Chuyển đổi Timestamp thành Date
+    ...doc.data(),
+    watched_at: doc.data().watched_at?.toDate().toISOString(),
   }));
 };
 

@@ -16,17 +16,77 @@ import {
 import mongoose from "mongoose";
 import { db } from "../app/firebase";
 
-// Danh sách phim mới tháng nay và có view nhiều nhất
+// Lấy phim theo slug thông tin phim
+export const getMovieBySlug = async (slug) => {
+  try {
+    const res = await fetch(`https://ophim1.com/phim/${slug}`);
+    const data = await res.json();
+
+    return data?.movie;
+  } catch (error) {
+    console.error("Error fetching movie by slug:", error);
+    throw error;
+  }
+};
+
+// Lấy danh sách tập phim theo slug gồm các tập
+export const getEpsicodesBySlug = async (slug) => {
+  try {
+    const res = await fetch(`https://ophim1.com/phim/${slug}`);
+    const data = await res.json();
+
+    if (!data?.episodes || data?.episodes.length === 0) {
+      console.error("No episodes found for this movie:", slug);
+      return []; // Hoặc có thể ném lỗi tùy ý
+    }
+
+    return data?.episodes[0];
+  } catch (error) {
+    console.error("Error fetching movie by slug:", error);
+    throw error;
+  }
+};
+
+// Danh sách phim gợi ý từ những phim người dùng xem lấy từ những thể lọai phim đã xem
+export const getSuggestionMovies = async (uid) => {
+  try {
+    const watchedMoviesRef = collection(db, "watched_movies");
+    const qWatched = query(watchedMoviesRef, where("user_id", "==", uid));
+    const snapshotWached = await getDocs(qWatched);
+    const watchedMovies = snapshotWached.docs.map(
+      (doc) => doc.data().movie_data,
+    );
+
+    const watchedMovieCategories = watchedMovies.map(
+      (movie) => movie.category.map((cat) => cat.slug)[0],
+    );
+    const watchedMovieCountries = watchedMovies.map(
+      (movie) => movie.country.map((country) => country.slug)[0],
+    );
+
+    const suggesstionMovies = await searchMovies({
+      filters: {
+        category: watchedMovieCategories,
+        country: watchedMovieCountries,
+        sort: "view",
+      },
+      page: 1,
+      pageSize: 10,
+    });
+
+    return suggesstionMovies.movies;
+  } catch (error) {
+    console.error("Error fetching suggestion movies:", error);
+    throw error;
+  }
+};
+
+// Danh sách phim mới năm nay và có view nhiều nhất
 export const getTopNewMovies = async () => {
-  const oneMonthAgo = new Date();
-  oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1); // lùi lại 1 tháng
-
-  const oneMonthAgoTimestamp = Timestamp.fromDate(oneMonthAgo);
-
   try {
     const q = query(
       collection(db, "movies"),
-      where("createdTime", ">=", oneMonthAgoTimestamp),
+      where("year", "==", new Date().getFullYear()),
       orderBy("view", "desc"),
       limit(10),
     );

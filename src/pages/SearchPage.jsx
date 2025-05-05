@@ -30,7 +30,6 @@ const SearchPage = () => {
 
   useScrollToTop();
 
-
   // Lấy danh sách phim từ Firestore
   const { data, isLoading } = useSearchMovies(query, currentPage);
 
@@ -40,34 +39,6 @@ const SearchPage = () => {
       setFilteredResults(data.movies);
     }
   }, [data]);
-
-  // useEffect(() => {
-  //   if (!query) return;
-
-  //   (async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       const res = await fetch("/json/movies_details.json"); // Lấy dữ liệu từ file JSON
-  //       const data = await res.json();
-
-  //       const filtered = data
-  //         .filter(
-  //           (movie) =>
-  //             movie?.name.toLowerCase().includes(query.toLowerCase()) ||
-  //             movie?.slug.includes(query.toLowerCase()),
-  //         )
-  //         .slice(0, 100)
-  //         .sort((a, b) => new Date(b.created.time) - new Date(a.created.time));
-
-  //       setSearchResults(filtered);
-  //       setFilteredResults(filtered);
-  //     } catch (err) {
-  //       console.log(err);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   })();
-  // }, [query]);
 
   const handleFilter = () => {
     let results = filteredResults.filter((movie) => {
@@ -93,10 +64,6 @@ const SearchPage = () => {
         });
       const matchLang =
         filters.lang.length === 0 || filters.lang.includes(movie.lang);
-
-      console.log({
-        filterType: filters.type,
-      });
 
       const matchType =
         filters.type.length === 0 ||
@@ -184,4 +151,3 @@ const SearchPage = () => {
 };
 
 export default SearchPage;
-

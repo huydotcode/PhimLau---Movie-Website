@@ -4,6 +4,7 @@ import {
   getKoreanMovies,
   getNewSeriesMovies,
   getNewSingleMovies,
+  getSuggestionMovies,
   getTopNewMovies,
   getTopViewMovies,
   getTrendingMovies,
@@ -11,6 +12,20 @@ import {
 
 const SLATE_TIME = 1 * 60 * 1000; // 5 phút
 const INITIAL_DATA = [];
+
+// Phim gợi ý cho người dùng
+export const useSuggestionMovies = ({ enabled = true, userId }) => {
+  return useQuery({
+    queryKey: ["suggestionMovies", userId],
+    queryFn: async () => {
+      const data = await getSuggestionMovies(userId);
+      return data;
+    },
+    enabled,
+    // staleTime: SLATE_TIME, // cache 5 phút
+    initialData: INITIAL_DATA,
+  });
+};
 
 export const useTopNewMovies = ({ enabled = true }) => {
   return useQuery({

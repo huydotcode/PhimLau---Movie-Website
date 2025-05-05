@@ -30,8 +30,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     // Kiểm tra trạng thái xác thực người dùng
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("onAuthStateChanged", { currentUser });
-
       if (currentUser) {
         // Query từ firebase
         const userDocRef = doc(db, "users", currentUser.uid);
@@ -63,10 +61,6 @@ export const AuthProvider = ({ children }) => {
 
     return () => unsubscribe();
   }, []);
-
-  useEffect(() => {
-    console.log("Current User", user);
-  }, [user]);
 
   // Đăng nhập
   const loginWithEmailPassword = async (email, password) => {

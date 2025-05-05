@@ -1,4 +1,5 @@
 import AdminLayout from "../layouts/AdminLayout";
+import DashboardLayout from "../layouts/DashboardLayout";
 import LayoutWithBanner from "../layouts/LayoutWithBanner";
 import LayoutWithoutBanner from "../layouts/LayoutWithoutBanner";
 import CategoryList from "../pages/admin/CategoryList";
@@ -52,7 +53,7 @@ export const publicRoutes = [
   {
     path: "/dashboard",
     element: DashboardUserPage,
-    layout: LayoutWithoutBanner,
+    layout: DashboardLayout,
   },
 ];
 

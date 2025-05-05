@@ -32,34 +32,45 @@ const navUserItems = (displayName) => [
   {
     key: "your-account",
     label: (
-      <Button
+      <Link
         className="w-full hover:text-primary flex justify-start"
-        href="/dashboard?t=update"
+        to="/dashboard?t=update"
       >
         Tài khoản của bạn
-      </Button>
+      </Link>
     ),
   },
   {
     key: "list-loves",
     label: (
-      <Button
+      <Link
         className="w-full hover:text-primary flex justify-start"
-        href="/dashboard?t=favorite"
+        to="/dashboard?t=favorite"
       >
         Yêu thích
-      </Button>
+      </Link>
     ),
   },
   {
     key: "list-watch-later",
     label: (
-      <Button
+      <Link
         className="w-full hover:text-primary flex justify-start"
-        href="/dashboard?t=saved"
+        to="/dashboard?t=saved"
       >
         Xem sau
-      </Button>
+      </Link>
+    ),
+  },
+  {
+    key: "list-watched-movies",
+    label: (
+      <Link
+        className="w-full hover:text-primary flex justify-start"
+        to="/dashboard?t=history"
+      >
+        Phim đã xem
+      </Link>
     ),
   },
   {
@@ -495,7 +506,6 @@ const NavbarNotification = () => {
   // Đóng khi click ra ngoài
   useEffect(() => {
     const handleClickOutside = (e) => {
-      console.log(wrapperRef.current.contains(e.target));
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
         setOpenNotification(false);
       }

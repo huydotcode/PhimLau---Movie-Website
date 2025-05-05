@@ -5,12 +5,14 @@ import CategoryCard from "../components/CategoryCard";
 import Container from "../components/Container";
 import ListMovieContainer from "../components/ListMovieContainer";
 import Loading from "../components/Loading";
+import { useAuth } from "../context/AuthProvider";
 import { useTopCategories } from "../hooks/useCategory";
 import {
   useAmericanMovies,
   useKoreanMovies,
   useNewSeriesMovies,
   useNewSingleMovies,
+  useSuggestionMovies,
   useTopNewMovies,
   useTopViewMovies,
   useTrendingMovies,
@@ -24,6 +26,7 @@ const HomePage = () => {
       <Container>
         <div className="w-full mt-[100px] pb-[100px]">
           <TopNewMovieSection />
+          <SuggestMovieSection />
           <TopViewMovieSection />
           <TopCategorySection />
           <NewSingleMovieSection />
@@ -34,6 +37,36 @@ const HomePage = () => {
         </div>
       </Container>
     </>
+  );
+};
+
+// Phim gợi ý cho người dùng
+export const SuggestMovieSection = () => {
+  const { user } = useAuth();
+  const { ref, inView } = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
+  const {
+    data: suggestionMovies,
+    error,
+    isLoading,
+  } = useSuggestionMovies({
+    enabled: inView && !!user,
+    userId: user?.uid,
+  });
+
+  if (error) {
+    return <></>;
+  }
+
+  return (
+    <ListMovieContainer
+      title={"Gợi ý cho bạn"}
+      wrapperRef={ref}
+      movies={suggestionMovies}
+      isLoading={isLoading}
+    />
   );
 };
 

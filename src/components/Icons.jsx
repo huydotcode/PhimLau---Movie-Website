@@ -1,5 +1,6 @@
 import { BiSolidLike } from "react-icons/bi";
 import {
+  FaBookmark,
   FaChevronDown,
   FaCommentDots,
   FaFacebook,
@@ -17,8 +18,13 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { IoIosArrowUp, IoIosMenu, IoMdReturnLeft } from "react-icons/io";
-import { IoClose, IoMail, IoNotifications, IoSend } from "react-icons/io5";
-import { IoLogOut } from "react-icons/io5";
+import {
+  IoClose,
+  IoLogOut,
+  IoMail,
+  IoNotifications,
+  IoSend,
+} from "react-icons/io5";
 
 const Icons = {
   Play: ({ className = "" }) => <FaPlay className={className} />,
@@ -42,6 +48,7 @@ const Icons = {
   Return: ({ className = "" }) => <IoMdReturnLeft className={className} />,
   Sort: ({ className = "" }) => <FaSort className={className} />,
   Share: ({ className = "" }) => <FaShare className={className} />,
+  Save: ({ className = "" }) => <FaBookmark className={className} />,
 
   // Social
   Facebook: ({ className = "" }) => <FaFacebook className={className} />,

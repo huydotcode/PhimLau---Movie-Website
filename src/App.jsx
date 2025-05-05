@@ -37,10 +37,17 @@ function App() {
             }}
           >
             <BrowserRouter>
-              <Toaster richColors position="bottom-right" theme="dark" />
+              <Toaster
+                richColors
+                position="bottom-right"
+                theme="dark"
+                duration={3000}
+                closeButton={false}
+                expand={false}
+                containerClassName="z-50"
+              />
 
               <PageTransitionLoader />
-
               {/* Nội dung app luôn luôn render */}
               <motion.div
                 initial={{ opacity: 0 }}

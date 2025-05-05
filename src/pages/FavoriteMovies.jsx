@@ -1,15 +1,15 @@
+import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthProvider";
 import { toast } from "sonner";
+import { db } from "../app/firebase";
+import Icons from "../components/Icons";
+import MovieCard from "../components/MovieCard";
+import Button from "../components/ui/Button";
+import { useAuth } from "../context/AuthProvider";
 import {
   getFavoritesByUser,
   removeFavorite,
 } from "../services/favoriteService";
-import MovieCard from "../components/MovieCard";
-import Button from "../components/ui/Button";
-import Icons from "../components/Icons";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../app/firebase";
 
 const FavoriteMovies = () => {
   const { user } = useAuth();
@@ -28,9 +28,6 @@ const FavoriteMovies = () => {
 
   // Xử lý bỏ yêu thích
   const handleUnfavorite = async (movieId) => {
-    console.log("movieId:", movieId);
-    console.log("userId:", user?.uid);
-
     if (!movieId || !user?.uid) {
       toast.error("❌ Thiếu movieId hoặc userId.");
       return;

@@ -1,46 +1,15 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import {
-  getFavoriteMovies,
-  getSavedMovies,
-  getWatchedMovies,
-} from "../../services/movieService";
-
-// Async Thunks
-export const fetchSavedMovies = createAsyncThunk(
-  "movies/fetchSavedMovies",
-  async (uid, { rejectWithValue }) => {
-    try {
-      const data = await getSavedMovies(uid);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  },
-);
-
-export const fetchFavoriteMovies = createAsyncThunk(
-  "movies/fetchFavoriteMovies",
-  async (uid, { rejectWithValue }) => {
-    try {
-      const data = await getFavoriteMovies(uid);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  },
-);
-
-export const fetchWatchedMovies = createAsyncThunk(
-  "movies/fetchWatchedMovies",
-  async (uid, { rejectWithValue }) => {
-    try {
-      const data = await getWatchedMovies(uid);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  },
-);
+  addFavoriteMovieThunk,
+  fetchFavoriteMovies,
+  removeFavoriteMovieThunk,
+} from "./favoriteMovieThunk";
+import {
+  addSavedMovieThunk,
+  fetchSavedMovies,
+  removeSavedMovieThunk,
+} from "./savedMovieThunk";
+import { addWatchedMovieThunk, fetchWatchedMovies } from "./watchedMovieThunk";
 
 // Slice
 const moviesSlice = createSlice({
@@ -53,7 +22,7 @@ const moviesSlice = createSlice({
     error: null,
   },
   reducers: {
-    clearMoviesState: state => {
+    clearMoviesState: (state) => {
       state.savedMovies = [];
       state.favoriteMovies = [];
       state.watchedMovies = [];
@@ -61,10 +30,10 @@ const moviesSlice = createSlice({
       state.error = null;
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       // Fetch Saved
-      .addCase(fetchSavedMovies.pending, state => {
+      .addCase(fetchSavedMovies.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchSavedMovies.fulfilled, (state, action) => {
@@ -76,8 +45,36 @@ const moviesSlice = createSlice({
         state.error = action.payload;
       })
 
+      // Add Saved
+      .addCase(addSavedMovieThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addSavedMovieThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.savedMovies = [...state.savedMovies, action.payload];
+      })
+      .addCase(addSavedMovieThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // Remove Saved
+      .addCase(removeSavedMovieThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(removeSavedMovieThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.savedMovies = state.savedMovies.filter(
+          (movie) => movie.saved_id !== action.payload.savedId,
+        );
+      })
+      .addCase(removeSavedMovieThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
       // Fetch Favorite
-      .addCase(fetchFavoriteMovies.pending, state => {
+      .addCase(fetchFavoriteMovies.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchFavoriteMovies.fulfilled, (state, action) => {
@@ -89,8 +86,38 @@ const moviesSlice = createSlice({
         state.error = action.payload;
       })
 
+      // Add Favorite
+      .addCase(addFavoriteMovieThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addFavoriteMovieThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        if (action.payload) {
+          state.favoriteMovies = [...state.favoriteMovies, action.payload];
+        }
+      })
+      .addCase(addFavoriteMovieThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // Remove Favorite
+      .addCase(removeFavoriteMovieThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(removeFavoriteMovieThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.favoriteMovies = state.favoriteMovies.filter(
+          (movie) => movie.id !== action.payload.favoriteId,
+        );
+      })
+      .addCase(removeFavoriteMovieThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
       // Fetch Watched
-      .addCase(fetchWatchedMovies.pending, state => {
+      .addCase(fetchWatchedMovies.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchWatchedMovies.fulfilled, (state, action) => {
@@ -98,6 +125,21 @@ const moviesSlice = createSlice({
         state.watchedMovies = action.payload;
       })
       .addCase(fetchWatchedMovies.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // Add Watched
+      .addCase(addWatchedMovieThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addWatchedMovieThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        if (action.payload) {
+          state.watchedMovies = [...state.watchedMovies, action.payload];
+        }
+      })
+      .addCase(addWatchedMovieThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

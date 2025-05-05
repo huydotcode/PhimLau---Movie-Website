@@ -99,7 +99,7 @@ export const getOverviewStats = async () => {
   const moviesSnapshot = await getDocs(collection(db, "movies"));
   const usersSnapshot = await getDocs(collection(db, "users"));
   const newMoviesSnapshot = await getDocs(
-    query(collection(db, "movies"), orderBy("createdAt", "desc"), limit(7)),
+    query(collection(db, "movies"), orderBy("year", "desc"), limit(7)),
   );
 
   const totalMovies = moviesSnapshot.size;

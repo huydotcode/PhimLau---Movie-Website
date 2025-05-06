@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import Banner from "../components/Banner";
 import CategoryCard from "../components/CategoryCard";
@@ -56,10 +56,6 @@ export const SuggestMovieSection = () => {
     userId: user?.uid,
   });
 
-  if (error) {
-    return <></>;
-  }
-
   return (
     <ListMovieContainer
       title={"Gợi ý cho bạn"}
@@ -83,10 +79,6 @@ export const TopNewMovieSection = () => {
   } = useTopNewMovies({
     enabled: inView,
   });
-
-  if (error) {
-    return <></>;
-  }
 
   return (
     <ListMovieContainer

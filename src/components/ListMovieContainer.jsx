@@ -8,6 +8,14 @@ const ListMovieContainer = ({
   movies = [],
   isLoading = true,
 }) => {
+  if (isLoading) {
+    return (
+      <div ref={wrapperRef}>
+        <Loading isLoading={isLoading} imageWidth={100} />
+      </div>
+    );
+  }
+
   return (
     <div ref={wrapperRef} className="relative py-4 mx-auto w-full">
       <h2 className="text-2xl font-bold mb-4">{title}</h2>
@@ -15,11 +23,8 @@ const ListMovieContainer = ({
         {!isLoading &&
           movies.map((movie) => <MovieCard key={movie._id} movie={movie} />)}
       </div>
-      {isLoading && (
-        <div className="h-[200px]">
-          <Loading isLoading imageWidth={100} />
-        </div>
-      )}
+
+      <Loading isLoading={isLoading} imageWidth={100} />
     </div>
   );
 };

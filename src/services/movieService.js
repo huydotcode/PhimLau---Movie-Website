@@ -60,14 +60,10 @@ export const getSuggestionMovies = async (uid) => {
     const watchedMovieCategories = watchedMovies.map(
       (movie) => movie.category.map((cat) => cat.slug)[0],
     );
-    const watchedMovieCountries = watchedMovies.map(
-      (movie) => movie.country.map((country) => country.slug)[0],
-    );
 
     const suggesstionMovies = await searchMovies({
       filters: {
         category: watchedMovieCategories,
-        country: watchedMovieCountries,
         sort: "view",
       },
       page: 1,
@@ -83,15 +79,20 @@ export const getSuggestionMovies = async (uid) => {
 
 // Danh sách phim mới năm nay và có view nhiều nhất
 export const getTopNewMovies = async () => {
+  console.log("getTopNewMovies");
+  const currentYear = new Date().getFullYear();
   try {
     const q = query(
       collection(db, "movies"),
-      where("year", "==", new Date().getFullYear()),
-      orderBy("view", "desc"),
+      where("year", "==", currentYear),
       limit(10),
     );
 
     const snapshot = await getDocs(q);
+
+    console.log({
+      data: snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+    });
 
     return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {

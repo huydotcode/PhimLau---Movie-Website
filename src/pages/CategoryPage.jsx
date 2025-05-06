@@ -114,12 +114,6 @@ const CategoryPage = () => {
       <h1 className="text-2xl font-bold mb-4">
         Danh sách phim theo thể loại: {categoryName}
       </h1>
-      {isLoading && <Loading isLoading />}
-      {!isLoading && filteredResults.length === 0 && (
-        <p className="text-gray-500">
-          Không có phim nào thuộc thể loại này: {categoryName}.
-        </p>
-      )}
 
       {/* Nút hiển thị bộ lọc */}
       <div className="mb-6">
@@ -140,6 +134,13 @@ const CategoryPage = () => {
           setShowFilters={setShowFilters}
           hasCategoryFilter={false} // Không hiển thị bộ lọc thể loại
         />
+      )}
+
+      {isLoading && <Loading isLoading />}
+      {!isLoading && filteredResults.length === 0 && (
+        <p className="text-gray-500">
+          Không có phim nào thuộc thể loại này: {categoryName}.
+        </p>
       )}
 
       {/* Danh sách phim */}

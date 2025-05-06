@@ -114,10 +114,6 @@ const SingleMoviePage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-4">Danh sách phim lẻ</h1>
-      {isLoading && <Loading isLoading />}
-      {!isLoading && filteredResults.length === 0 && (
-        <p className="text-gray-500">Không có phim lẻ nào.</p>
-      )}
 
       {/* Nút hiển thị bộ lọc */}
       <div className="mb-6">
@@ -138,6 +134,11 @@ const SingleMoviePage = () => {
           setShowFilters={setShowFilters}
           hasTypeFilter={false} // Không hiển thị bộ lọc loại phim
         />
+      )}
+
+      {isLoading && <Loading isLoading />}
+      {!isLoading && filteredResults.length === 0 && (
+        <p className="text-gray-500">Không có phim lẻ nào.</p>
       )}
 
       {/* Danh sách phim */}

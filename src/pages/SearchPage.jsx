@@ -101,10 +101,7 @@ const SearchPage = () => {
       <h1 className="text-2xl font-bold mb-4">
         Kết quả tìm kiếm cho: "{query}"
       </h1>
-      <Loading isLoading={isLoading} />
-      {!isLoading && filteredResults.length === 0 && (
-        <p className="text-gray-500">Không tìm thấy kết quả nào.</p>
-      )}
+
       <div className="mb-6">
         <button
           className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-md"
@@ -121,6 +118,11 @@ const SearchPage = () => {
           handleFilter={handleFilter}
           setShowFilters={setShowFilters}
         />
+      )}
+
+      <Loading isLoading={isLoading} />
+      {!isLoading && filteredResults.length === 0 && (
+        <p className="text-gray-500">Không tìm thấy kết quả nào.</p>
       )}
 
       {/* Danh sách phim */}

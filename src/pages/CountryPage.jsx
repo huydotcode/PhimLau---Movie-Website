@@ -107,12 +107,6 @@ const CountryPage = () => {
       <h1 className="text-2xl font-bold mb-4">
         Danh sách phim theo quốc gia: {countryName}
       </h1>
-      {isLoading && <Loading isLoading />}
-      {!isLoading && filteredResults.length === 0 && (
-        <p className="text-gray-500">
-          Không có phim nào thuộc quốc gia này: {countryName}.
-        </p>
-      )}
 
       {/* Nút hiển thị bộ lọc */}
       <div className="mb-6">
@@ -133,6 +127,13 @@ const CountryPage = () => {
           setShowFilters={setShowFilters}
           hasCountryFilter={false} // Không hiển thị bộ lọc quốc gia
         />
+      )}
+
+      {isLoading && <Loading isLoading />}
+      {!isLoading && filteredResults.length === 0 && (
+        <p className="text-gray-500">
+          Không có phim nào thuộc quốc gia này: {countryName}.
+        </p>
       )}
 
       {/* Danh sách phim */}

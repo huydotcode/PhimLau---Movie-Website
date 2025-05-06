@@ -38,7 +38,7 @@ const FilterPanel = ({
   };
 
   return (
-    <div className="mb-6 p-4 bg-gray-900 rounded-md">
+    <div className="mb-6 p-4 bg-background rounded-md">
       <div className="gap-4">
         {/* Quốc gia */}
         {hasCountryFilter && (

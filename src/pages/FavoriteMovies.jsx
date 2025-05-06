@@ -26,6 +26,10 @@ const FavoriteMovies = () => {
     fetchFavorites();
   }, [user, refresh]);
 
+  useEffect(() => {
+    console.log("Favorites:", favorites);
+  }, [favorites]);
+
   // Xử lý bỏ yêu thích
   const handleUnfavorite = async (movieId) => {
     if (!movieId || !user?.uid) {
@@ -70,7 +74,7 @@ const FavoriteMovies = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {favorites.map((movie) => (
             <div key={movie.id} className="relative">
-              <MovieCard movie={movie} />
+              <MovieCard movie={movie.movie_data} />
 
               <div className="absolute top-2 right-2 z-10">
                 <Button

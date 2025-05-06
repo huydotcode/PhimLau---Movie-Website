@@ -91,6 +91,16 @@ const MovieCard = ({ movie, espicode = null }) => {
           className="absolute inset-0 w-full h-full object-bottom object-cover"
           src={movie.thumb_url}
           alt={movie.name}
+          placeholder={
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                background: "url('/logo.png') no-repeat center center",
+                backgroundSize: "contain",
+              }}
+            />
+          }
         />
       </CardContainer>
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Loading from "./Loading";
 import MovieCard from "./MovieCard";
 
@@ -7,7 +7,14 @@ const ListMovieContainer = ({
   title,
   movies = [],
   isLoading = true,
+  error = null,
 }) => {
+  useEffect(() => {
+    if (error) {
+      console.error("Error loading movies:", error);
+    }
+  }, [error]);
+
   if (isLoading) {
     return (
       <div ref={wrapperRef}>

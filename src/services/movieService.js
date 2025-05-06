@@ -15,6 +15,7 @@ import {
 } from "firebase/firestore";
 import mongoose from "mongoose";
 import { db } from "../app/firebase";
+import { signOut } from "firebase/auth";
 
 // Lấy phim theo slug thông tin phim
 export const getMovieBySlug = async (slug) => {
@@ -353,6 +354,11 @@ export const searchMovies = async ({
         );
       }
 
+      console.log(
+        "filters.year: ",
+        filters.year.map((year) => parseInt(year)),
+      );
+
       constraints.push(
         where(
           "year",
@@ -362,7 +368,7 @@ export const searchMovies = async ({
       );
     }
 
-    // Order by Mới nhất IMDB Lượt xem
+    // Sort
     if (filters.sort === "IMDB") {
       constraints.push(orderBy("tmdb.vote_average", "desc"));
     } else if (filters.sort === "Lượt xem") {
@@ -399,13 +405,6 @@ export const searchMovies = async ({
         ),
       );
     }
-
-    // Sắp xếp theo thời gian tạo (mới nhất trước)
-    movies.sort((a, b) => {
-      const dateA = new Date(a.created.time);
-      const dateB = new Date(b.created.time);
-      return dateB - dateA; // Sắp xếp mới nhất trước
-    });
 
     // Lấy tổng số lượng phim
     const countQuery = query(movieRef, ...constraints);

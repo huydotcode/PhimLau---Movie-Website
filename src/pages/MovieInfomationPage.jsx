@@ -261,23 +261,28 @@ const MovieInfomationPage = () => {
               <InfomationSection movie={movie} />
             </div>
 
-            {episodes?.server_data && episodes?.server_data.length > 0 && (
-              <div className="flex flex-col">
-                <h2 className="text-xl font-semibold">Danh sách tập phim</h2>
+            {episodes?.server_data &&
+              episodes?.server_data.filter(
+                (episode) => episode?.slug !== "full",
+              ).length > 0 && (
+                <div className="flex flex-col">
+                  <h2 className="text-xl font-semibold">Danh sách tập phim</h2>
 
-                <div className="mt-2 grid grid-cols-2 md:grid-cols-5 gap-2 max-h-[50vh] overflow-y-scroll scrollbar-white pr-1 rounded-xl">
-                  {episodes?.server_data.map((episode, index) => (
-                    <Button
-                      key={index}
-                      className="flex items-center bg-secondary rounded-sm px-4 py-2 text-sm font-semibold text-white"
-                      href={`/xem-phim/${movie.slug}?t=${episode.slug}`}
-                    >
-                      <Icons.Play /> Tập {episode.name}
-                    </Button>
-                  ))}
+                  <div className="mt-2 grid grid-cols-2 md:grid-cols-5 gap-2 max-h-[50vh] overflow-y-scroll scrollbar-white pr-1 rounded-xl">
+                    {episodes?.server_data
+                      .filter((episode) => episode?.slug !== "full")
+                      .map((episode, index) => (
+                        <Button
+                          key={index}
+                          className="flex items-center bg-secondary rounded-sm px-4 py-2 text-sm font-semibold text-white"
+                          href={`/xem-phim/${movie.slug}?t=${episode.slug}`}
+                        >
+                          <Icons.Play /> Tập {episode.name}
+                        </Button>
+                      ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
             {/* Trailer */}
             {movie?.trailer_url && (

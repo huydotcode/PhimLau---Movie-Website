@@ -6,6 +6,9 @@ import {
   query,
   where,
   getDocs,
+  doc,
+  deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../app/firebase";
 
@@ -65,5 +68,35 @@ export const getCommentsByMovieId = async (movieId) => {
   } catch (error) {
     console.error("Lỗi khi lấy comments:", error);
     return [];
+  }
+};
+
+export const likeComment = async (userId, commentId) => {
+  try {
+    const commentRef = doc(db, "comments", commentId);
+    const commentSnap = await getDoc(commentRef);
+
+    if (commentSnap.exists()) {
+      const currentLikeCount = commentSnap.data().like_count || 0;
+      await updateDoc(commentRef, {
+        like_count: currentLikeCount + 1,
+        likedby: [...(commentSnap.data().likedby || []), userId],
+      });
+      console.log("Comment liked successfully");
+    } else {
+      console.log("No such document!");
+    }
+  } catch (error) {
+    console.error("Error liking comment: ", error);
+  }
+};
+
+export const deleteComment = async (commentId) => {
+  try {
+    const commentRef = doc(db, "comments", commentId);
+    await deleteDoc(commentRef);
+    console.log("Comment deleted successfully");
+  } catch (error) {
+    console.error("Error deleting comment: ", error);
   }
 };

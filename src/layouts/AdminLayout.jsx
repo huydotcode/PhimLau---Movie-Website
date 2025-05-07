@@ -77,6 +77,7 @@ const Sidebar = () => {
     { key: "/admin", icon: <MdSpaceDashboard />, label: "Dashboard" },
     { key: "/admin/movies", icon: <BiSolidMoviePlay />, label: "Phim" },
     { key: "/admin/categories", icon: <TbCategoryFilled />, label: "Thể loại" },
+    { key: "/admin/countries", icon: <Icons.Earth />, label: "Quốc Gia" },
     { key: "/admin/users", icon: <Icons.User />, label: "Người Dùng" },
   ];
 

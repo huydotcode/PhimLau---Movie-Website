@@ -41,6 +41,8 @@ export const getEpsicodesBySlug = async (slug) => {
       return []; // Hoặc có thể ném lỗi tùy ý
     }
 
+    console.log("getEpsicodesBySlug: ", data?.episodes);
+
     return data?.episodes[0];
   } catch (error) {
     console.error("Error fetching movie by slug:", error);
@@ -326,6 +328,7 @@ export const searchMovies = async ({
 
     // Tìm kiếm theo tên (dạng lowercase)
     if (searchTerm.trim() !== "") {
+      console.log("searchTerm: ", searchTerm);
       const termLower = searchTerm.toLowerCase();
       constraints.push(
         where("name_lowercase", ">=", termLower),
@@ -369,7 +372,7 @@ export const searchMovies = async ({
     }
 
     // Sort
-    if (filters.sort === "IMDB") {
+    if (filters.sort && filters.sort === "IMDB") {
       constraints.push(orderBy("tmdb.vote_average", "desc"));
     } else if (filters.sort === "Lượt xem") {
       constraints.push(orderBy("view", "desc"));
@@ -410,6 +413,12 @@ export const searchMovies = async ({
     const countQuery = query(movieRef, ...constraints);
     const snapshot = await getCountFromServer(countQuery);
     const totalCount = snapshot.data().count;
+
+    console.log("Search results:", {
+      movies,
+      lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1],
+      totalCount,
+    });
 
     return {
       movies,

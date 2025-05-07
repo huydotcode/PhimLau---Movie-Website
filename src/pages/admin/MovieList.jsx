@@ -923,10 +923,15 @@ const MovieList = () => {
                     </td>
                     <td className="px-4 py-2 max-w-[200px] hidden xl:table-cell">
                       <div className="flex flex-wrap gap-1">
-                        {movie.countrySlugs?.map((c) => {
+                        {movie.countrySlugs.map((c) => {
                           const country = countries.find(
                             (country) => country.slug === c,
                           );
+
+                          if (!country) {
+                            console.log(c);
+                            return null;
+                          }
 
                           return (
                             <span

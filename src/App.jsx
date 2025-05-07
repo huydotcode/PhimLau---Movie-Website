@@ -11,8 +11,8 @@ import React from "react";
 
 import { AuthProvider } from "./context/AuthProvider";
 import { adminRoutes, publicRoutes } from "./routes";
-import "./styles/App.css";
 import AdminRoutes from "./routes/AdminRoutes";
+import "./styles/App.css";
 
 const queryClient = new QueryClient();
 

@@ -1,4 +1,4 @@
-import { BiSolidLike } from "react-icons/bi";
+import { AiFillLike } from "react-icons/ai";
 import {
   FaBookmark,
   FaChevronDown,
@@ -17,6 +17,7 @@ import {
   FaTwitter,
   FaUser,
 } from "react-icons/fa";
+import { FaEarthAfrica } from "react-icons/fa6";
 import { IoIosArrowUp, IoIosMenu, IoMdReturnLeft } from "react-icons/io";
 import {
   IoClose,
@@ -25,6 +26,7 @@ import {
   IoNotifications,
   IoSend,
 } from "react-icons/io5";
+import { MdDelete } from "react-icons/md";
 
 const Icons = {
   Play: ({ className = "" }) => <FaPlay className={className} />,
@@ -36,7 +38,7 @@ const Icons = {
   Menu: ({ className = "" }) => <IoIosMenu className={className} />,
   ArrowUp: ({ className = "" }) => <IoIosArrowUp className={className} />,
   Comment: ({ className = "" }) => <FaCommentDots className={className} />,
-  Like: ({ className = "" }) => <BiSolidLike className={className} />,
+  Like: ({ className = "" }) => <AiFillLike className={className} />,
   Star: ({ className = "" }) => <FaStar className={className} />,
   RegStar: ({ className = "" }) => <FaRegStar className={className} />,
   Heart: ({ className = "" }) => <FaHeart className={className} />,
@@ -49,6 +51,8 @@ const Icons = {
   Sort: ({ className = "" }) => <FaSort className={className} />,
   Share: ({ className = "" }) => <FaShare className={className} />,
   Save: ({ className = "" }) => <FaBookmark className={className} />,
+  Delete: ({ className = "" }) => <MdDelete className={className} />,
+  Earth: ({ className = "" }) => <FaEarthAfrica className={className} />,
 
   // Social
   Facebook: ({ className = "" }) => <FaFacebook className={className} />,

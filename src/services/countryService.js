@@ -1,5 +1,17 @@
-import { collection, getDocs, orderBy, query, startAfter, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  setDoc,
+  startAfter,
+  where,
+} from "firebase/firestore";
 import { db } from "../app/firebase";
+import mongoose from "mongoose";
 
 const PAGE_SIZE = 20; // Số lượng phim hiển thị trên mỗi trang
 
@@ -8,7 +20,7 @@ export const getAllCountries = async () => {
     const q = query(collection(db, "countries"), orderBy("name", "asc"));
 
     const querySnapshot = await getDocs(q);
-    const countries = querySnapshot.docs.map(doc => ({
+    const countries = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
@@ -26,7 +38,11 @@ export const getAllCountries = async () => {
  * @param {object} lastVisible - Document cuối cùng của trang trước (nếu có)
  * @returns {Promise<{movies: Array, lastVisible: object}>}
  */
-export const getMoviesByCountry = async (countrySlug, page, lastVisible = null) => {
+export const getMoviesByCountry = async (
+  countrySlug,
+  page,
+  lastVisible = null,
+) => {
   try {
     let q = query(
       collection(db, "movies"),
@@ -59,5 +75,43 @@ export const getMoviesByCountry = async (countrySlug, page, lastVisible = null) 
   } catch (error) {
     console.error("Error fetching movies by country:", error);
     throw error;
+  }
+};
+
+export const addCountry = async (country) => {
+  try {
+    const countryId = new mongoose.Types.ObjectId().toString(); // Tạo ID mới cho quốc gia
+    const newCountry = {
+      ...country,
+      id: countryId, // Thêm ID vào đối tượng quốc gia
+    };
+    console.log("newCountry", newCountry);
+    const docRef = doc(db, "countries", newCountry.id);
+
+    await setDoc(docRef, newCountry); // Thêm quốc gia vào Firestore
+
+    return newCountry; // Trả về quốc gia vừa thêm
+  } catch (error) {
+    console.error("Error adding country:", error);
+  }
+};
+
+export const updateCountry = async (countryId, country) => {
+  try {
+    const docRef = doc(db, "countries", countryId);
+    await setDoc(docRef, country, { merge: true }); // Cập nhật quốc gia trong Firestore
+  } catch (error) {
+    console.error("Error updating country:", error);
+  }
+};
+
+export const deleteCountry = async (countryId) => {
+  try {
+    const docRef = doc(db, "countries", countryId);
+
+    await deleteDoc(docRef); // Xóa quốc gia khỏi Firestore
+    console.log("Country deleted successfully:", countryId);
+  } catch (error) {
+    console.error("Error deleting country:", error);
   }
 };

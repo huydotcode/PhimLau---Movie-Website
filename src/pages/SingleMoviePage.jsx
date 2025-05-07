@@ -1,9 +1,9 @@
+import { Pagination } from "antd";
 import React, { useState } from "react";
+import FilterPanel from "../components/FilterPanel";
 import Loading from "../components/Loading";
 import MovieCard from "../components/MovieCard";
-import FilterPanel from "../components/FilterPanel";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import { Pagination } from "antd";
 import { useSingleMovies } from "../hooks/useSingle"; // Import useSingleMovies
 
 const PAGE_SIZE = 20; // Số lượng kết quả tối đa để hiển thị
@@ -33,31 +33,6 @@ const SingleMoviePage = () => {
       setFilteredResults(data.movies);
     }
   }, [data]);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       const res = await fetch("/json/movies_lastest.json"); // Đường dẫn đến file JSON
-  //       const data = await res.json();
-
-  //       // Lọc các bộ phim lẻ
-  //       const singleMovies = data.filter((movie) => movie.type === "single");
-
-  //       // Sắp xếp mặc định theo "Mới nhất"
-  //       const sortedMovies = singleMovies.sort(
-  //         (a, b) => new Date(b.created.time) - new Date(a.created.time),
-  //       );
-
-  //       setMovies(sortedMovies); // Lưu dữ liệu đã sắp xếp
-  //       setFilteredResults(sortedMovies); // Hiển thị dữ liệu đã sắp xếp
-  //     } catch (err) {
-  //       console.error("Error fetching single movies:", err);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   })();
-  // }, []);
 
   const handleFilter = () => {
     if (!data?.movies) return;

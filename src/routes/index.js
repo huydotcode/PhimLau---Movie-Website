@@ -3,6 +3,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import LayoutWithBanner from "../layouts/LayoutWithBanner";
 import LayoutWithoutBanner from "../layouts/LayoutWithoutBanner";
 import CategoryList from "../pages/admin/CategoryList";
+import CountryList from "../pages/admin/CountryList";
 import Dashboard from "../pages/admin/Dashboard";
 import MovieList from "../pages/admin/MovieList";
 import UserList from "../pages/admin/UserList";
@@ -74,6 +75,10 @@ export const adminRoutes = [
       {
         path: "categories",
         element: CategoryList,
+      },
+      {
+        path: "countries",
+        element: CountryList,
       },
       {
         path: "users",

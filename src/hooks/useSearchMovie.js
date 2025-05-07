@@ -7,6 +7,8 @@ export const useSearchMovies = ({
   filters = {},
   lastVisible = null,
   pageSize = 10,
+  enable = true,
+  type = "all",
 }) => {
   return useQuery({
     queryKey: [
@@ -22,6 +24,15 @@ export const useSearchMovies = ({
       pageSize,
     ],
     queryFn: async () => {
+      if (type === "search") {
+        if (!searchTerm) {
+          return {
+            movies: [],
+            lastVisible: null,
+          };
+        }
+      }
+
       const data = await searchMovies({
         filters,
         lastVisible,
@@ -40,5 +51,6 @@ export const useSearchMovies = ({
         lastVisible: null,
       };
     },
+    enabled: enable,
   });
 };

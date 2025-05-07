@@ -23,6 +23,10 @@ const ListMovieContainer = ({
     );
   }
 
+  if (movies.length === 0) {
+    return <div ref={wrapperRef} className="relative mx-auto w-full"></div>;
+  }
+
   return (
     <div ref={wrapperRef} className="relative py-4 mx-auto w-full">
       <h2 className="text-2xl font-bold mb-4">{title}</h2>

@@ -16,6 +16,7 @@ import { useAllCategories } from "../hooks/useCategory";
 import useClickOutSide from "../hooks/useClickOutSide";
 import { useAllCountries } from "../hooks/useCountry";
 import { useDebounce } from "../hooks/useDebounce";
+import { useSearchMovies } from "../hooks/useSearchMovie";
 import { convertTime } from "../utils/convertTime";
 import Icons from "./Icons";
 import Loading from "./Loading";
@@ -548,12 +549,20 @@ const NavbarNotification = () => {
 
 const NavbarSearch = () => {
   const [openNotification, setOpenNotification] = useState(false);
-  const [searchResults, setSearchResults] = useState([]); //Sang test
 
   const wrapperRef = useRef(null);
   const [query, setQuery] = useState("");
   const debouncedQuery = useDebounce(query, 500); // Sử dụng hook debounce
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    data: { movies: searchResults, isLoading },
+  } = useSearchMovies({
+    searchTerm: debouncedQuery,
+    page: 1,
+    pageSize: 10,
+    enabled: debouncedQuery.trim().length > 0,
+    type: "search",
+  });
+
   const navigate = useNavigate();
 
   // Đóng khi click ra ngoài
@@ -566,37 +575,6 @@ const NavbarSearch = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  // Xử lý tìm kiếm phim
-  useEffect(() => {
-    (async () => {
-      if (!debouncedQuery) {
-        setSearchResults([]); // Nếu không có từ khóa tìm kiếm, xóa kết quả
-        return;
-      }
-
-      setIsLoading(true); // Bắt đầu loading
-
-      try {
-        const res = await fetch(`/json/movies_lastest.json`);
-        const data = await res.json();
-        // setSearchResults(data); // Cập nhật state
-
-        //Sang cập nhật ở đây
-        const filtered = data.filter((movie) =>
-          movie.name.toLowerCase().includes(debouncedQuery.toLowerCase()),
-        );
-        setSearchResults(filtered);
-      } catch (err) {
-        console.log(err);
-        toast("Có lỗi xảy ra khi tìm kiếm phim!");
-      } finally {
-        setTimeout(() => {
-          setIsLoading(false); // Kết thúc loading sau 1 giây
-        }, 1000);
-      }
-    })();
-  }, [debouncedQuery]);
 
   return (
     <div
@@ -616,7 +594,6 @@ const NavbarSearch = () => {
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            // Sang thêm
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 navigate(`/tim-kiem?q=${query}`);

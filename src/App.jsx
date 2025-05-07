@@ -1,14 +1,16 @@
 import { ConfigProvider } from "antd";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router";
 import { Toaster } from "sonner";
 import { store } from "./app/store";
 import PageTransitionLoader from "./components/PageTransitionLoader";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
+import { fetchAndActivate, getValue } from "firebase/remote-config";
+import { remoteConfig } from "./app/firebase";
 import { AuthProvider } from "./context/AuthProvider";
 import { adminRoutes, publicRoutes } from "./routes";
 import AdminRoutes from "./routes/AdminRoutes";
@@ -17,6 +19,38 @@ import "./styles/App.css";
 const queryClient = new QueryClient();
 
 function App() {
+  const [isEnabled, setIsEnabled] = useState(true);
+
+  useEffect(() => {
+    // Kiểm tra nếu là localhost thì luôn bật ứng dụng
+    if (
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+    ) {
+      setIsEnabled(true);
+      return;
+    }
+
+    // Kiểm tra trạng thái ứng dụng từ Firebase Remote Config
+    fetchAndActivate(remoteConfig).then(() => {
+      const status = getValue(remoteConfig, "app_enabled").asBoolean();
+      setIsEnabled(status);
+    });
+  }, []);
+
+  if (!isEnabled) {
+    return (
+      <div className="h-screen w-screen flex items-center justify-center bg-black text-white flex-col">
+        <img src="/logo.png" alt="logo" />
+        <h1 className="text-2xl font-bold mt-10">
+          Ứng dụng hiện đang dừng hoạt động
+        </h1>
+        <p>Xin lỗi bạn, ứng dụng hiện đang tạm thời bị tắt để bảo trì.</p>
+        <p>Chúng tôi sẽ sớm trở lại. Cảm ơn bạn đã thông cảm.</p>
+      </div>
+    );
+  }
+
   return (
     <Provider store={store}>
       <AuthProvider>

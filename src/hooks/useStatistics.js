@@ -5,9 +5,17 @@ import {
   getCountMoviesByType,
   getMovieDistribution,
   getOverviewStats,
+  getStatistics,
   getTopViewedCategories,
   getTopViewedMovies,
 } from "../services/statisticsService";
+
+export const useStatistics = () => {
+  return useQuery({
+    queryKey: ["statistics"],
+    queryFn: async () => await getStatistics(),
+  });
+};
 
 export const useCountMoviesByField = (field) => {
   return useQuery({

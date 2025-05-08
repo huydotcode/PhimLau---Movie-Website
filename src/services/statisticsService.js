@@ -1,6 +1,30 @@
-import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  getCountFromServer,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../app/firebase";
 import { moviesType } from "../data/movies_type";
+
+export const getStatistics = async () => {
+  const q = query(collection(db, "statistics"));
+  const snapshot = await getDocs(q);
+  const data = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  if (data.length === 0) {
+    console.log("No statistics data found.");
+    return null;
+  }
+
+  return data[0];
+};
 
 export async function countMoviesByField(field) {
   const snapshot = await getDocs(collection(db, "movies"));
@@ -32,28 +56,32 @@ export async function countMoviesByField(field) {
 }
 
 export async function getMovieDistribution() {
-  const snapshot = await getDocs(collection(db, "movies"));
+  const moviesRef = collection(db, "movies");
 
+  // Đếm số phim theo năm
   const byYear = {};
+  for (let year = 2000; year <= 2025; year++) {
+    const yearQuery = query(moviesRef, where("year", "==", year));
+    const snapshot = await getCountFromServer(yearQuery);
+    const count = snapshot.data().count;
+    if (count > 0) byYear[year] = count;
+  }
+
+  // Đếm số phim theo thể loại
   const byCategory = {};
-  const byLang = {};
-
-  snapshot.forEach((doc) => {
-    const data = doc.data();
-
-    // Năm
-    const year = data.year;
-    if (year) byYear[year] = (byYear[year] || 0) + 1;
-
-    // Thể loại
-    const categories = data.category || [];
+  const categorySnapshot = await getDocs(moviesRef);
+  categorySnapshot.forEach((doc) => {
+    const categories = doc.data().category || [];
     categories.forEach((c) => {
       const name = c.name || c;
       byCategory[name] = (byCategory[name] || 0) + 1;
     });
+  });
 
-    // Ngôn ngữ
-    const lang = data.lang;
+  // Đếm số phim theo ngôn ngữ
+  const byLang = {};
+  categorySnapshot.forEach((doc) => {
+    const lang = doc.data().lang;
     if (lang) byLang[lang] = (byLang[lang] || 0) + 1;
   });
 
@@ -80,15 +108,17 @@ export async function getTopViewedMovies(topN = 10) {
 }
 
 export async function countMoviesByYearRange(start, end) {
-  const snapshot = await getDocs(collection(db, "movies"));
   const counts = {};
 
-  snapshot.forEach((doc) => {
-    const year = doc.data().year;
-    if (year >= start && year <= end) {
-      counts[year] = (counts[year] || 0) + 1;
-    }
-  });
+  for (let year = start; year <= end; year++) {
+    const yearQuery = query(
+      collection(db, "movies"),
+      where("year", "==", year),
+    );
+
+    const snapshot = await getCountFromServer(yearQuery);
+    counts[year] = snapshot.data().count;
+  }
 
   return Object.entries(counts)
     .sort((a, b) => a[0] - b[0])
@@ -96,17 +126,27 @@ export async function countMoviesByYearRange(start, end) {
 }
 
 export const getOverviewStats = async () => {
-  const moviesSnapshot = await getDocs(collection(db, "movies"));
-  const usersSnapshot = await getDocs(collection(db, "users"));
-  const newMoviesSnapshot = await getDocs(
-    query(collection(db, "movies"), orderBy("year", "desc"), limit(7)),
+  // Đếm tổng số phim
+  const moviesCountSnapshot = await getCountFromServer(
+    collection(db, "movies"),
   );
 
-  const totalMovies = moviesSnapshot.size;
-  const totalUsers = usersSnapshot.size;
-  const totalViews = moviesSnapshot.docs.reduce(
-    (acc, doc) => acc + (doc.data().view || 0),
-    0,
+  const totalMovies = moviesCountSnapshot.data().count;
+
+  // Đếm tổng số người dùng
+  const usersCountSnapshot = await getCountFromServer(collection(db, "users"));
+  const totalUsers = usersCountSnapshot.data().count;
+
+  // Tính tổng lượt xem (view) không cần đọc toàn bộ document
+  let totalViews = 0;
+  const moviesSnapshot = await getDocs(collection(db, "movies"));
+  moviesSnapshot.forEach((doc) => {
+    totalViews += doc.data().view || 0;
+  });
+
+  // Đọc 7 phim mới nhất
+  const newMoviesSnapshot = await getDocs(
+    query(collection(db, "movies"), orderBy("year", "desc"), limit(7)),
   );
   const newMoviesCount = newMoviesSnapshot.size;
 
@@ -125,12 +165,15 @@ export const getTopViewedCategories = async (topN) => {
 
   snapshot.forEach((doc) => {
     const categories = doc.data().category || [];
+    const viewCount = doc.data().view || 0;
+
     categories.forEach((c) => {
       const name = c.name || c;
-      counts[name] = (counts[name] || 0) + (doc.data().view || 0);
+      counts[name] = (counts[name] || 0) + viewCount;
     });
   });
 
+  // Sắp xếp và lấy top N thể loại
   const sortedCounts = Object.entries(counts).sort((a, b) => b[1] - a[1]);
   const limitedCounts = sortedCounts.slice(0, topN);
   const othersCount = sortedCounts
@@ -138,7 +181,9 @@ export const getTopViewedCategories = async (topN) => {
     .reduce((acc, [_, count]) => acc + count, 0);
 
   const limitedCountsObj = Object.fromEntries(limitedCounts);
-  limitedCountsObj["Khác"] = othersCount; // Thêm mục "Khác" với tổng số lượng còn lại
+  if (othersCount > 0) {
+    limitedCountsObj["Khác"] = othersCount; // Thêm mục "Khác" với tổng số lượng còn lại
+  }
 
   return Object.entries(limitedCountsObj).map(([name, count]) => ({
     name,
@@ -148,14 +193,28 @@ export const getTopViewedCategories = async (topN) => {
 
 // Thống kê số phim theo loại phim movie.type: ["hoathinh", "series", "single", "tvshows"]
 export const getCountMoviesByType = async () => {
-  const snapshot = await getDocs(collection(db, "movies"));
   const counts = {};
 
-  snapshot.forEach((doc) => {
-    const type = doc.data().type || "Khác"; // Nếu không có loại, gán là "Khác"
-    const typeName = moviesType.find((t) => t.slug === type)?.name || type; // Tìm tên loại phim từ moviesType
-    counts[typeName] = (counts[typeName] || 0) + 1;
-  });
+  for (const type of moviesType) {
+    const typeQuery = query(
+      collection(db, "movies"),
+      where("type", "==", type.slug),
+    );
+    const snapshot = await getCountFromServer(typeQuery);
+    counts[type.name] = snapshot.data().count;
+  }
+
+  // Đếm các phim không thuộc loại đã xác định (Khác)
+  const otherQuery = query(
+    collection(db, "movies"),
+    where(
+      "type",
+      "not-in",
+      moviesType.map((t) => t.slug),
+    ),
+  );
+  const otherSnapshot = await getCountFromServer(otherQuery);
+  counts["Khác"] = otherSnapshot.data().count;
 
   return Object.entries(counts).map(([name, count]) => ({ name, count }));
 };

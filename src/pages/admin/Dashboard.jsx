@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Bar,
   BarChart,
@@ -11,14 +11,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import {
-  useCountMoviesByField,
-  useCountMoviesByType,
-  useCountMoviesByYearRange,
-  useOverviewStats,
-  useTopViewedCategories,
-  useTopViewedMovies,
-} from "../../hooks/useStatistics";
+import Loading from "../../components/Loading";
+import { useStatistics } from "../../hooks/useStatistics";
 import { formatView } from "../../utils/formatView";
 
 const COLORS = [
@@ -35,23 +29,52 @@ const COLORS = [
 const CHART_HEIGHT = 450;
 
 const Dashboard = () => {
+  const { data: statistics, isLoading } = useStatistics();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-[calc(100vh-100px)]">
+        <Loading isLoading={isLoading} />
+      </div>
+    );
+  }
+
+  if (!statistics) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <h1 className="text-2xl font-bold text-white">Không có dữ liệu</h1>
+      </div>
+    );
+  }
+
   return (
     <div className="p-6 space-y-6">
       {/* Tổng quan */}
-      <OverviewStats />
+      {statistics?.overviewStats && (
+        <OverviewStats data={statistics?.overviewStats} />
+      )}
 
       {/* Biểu đồ */}
-      <TopMoviesChart />
+      <TopMoviesChart
+        data={{
+          topMovies: statistics?.topMovies || [],
+          moviesByCategory: statistics?.topCategories || [],
+        }}
+      />
 
       {/* Thống kê phim theo năm và ngôn ngữ */}
       <div>
         <h2 className="text-2xl font-bold mb-4">Thống kê phim</h2>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-4">
-          <MovieByCategoryStats />
-          <CountryStats />
-          <MovieYearStats />
-          <MovieTypeStats />
+          {statistics?.topCategories && (
+            <MovieByCategoryStats data={statistics?.topCategories} />
+          )}
+          {statistics?.countries && (
+            <CountryStats data={statistics?.countries} />
+          )}
+          {statistics?.years && <MovieYearStats data={statistics?.years} />}
+          {statistics?.types && <MovieTypeStats data={statistics?.types} />}
         </div>
       </div>
     </div>
@@ -59,12 +82,7 @@ const Dashboard = () => {
 };
 
 // Tổng quan
-const OverviewStats = () => {
-  const { data: overviewStats, isLoading } = useOverviewStats();
-
-  if (isLoading)
-    return <p className="text-center text-gray-400">Đang tải...</p>;
-
+const OverviewStats = ({ data: overviewStats }) => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4 text-white">Tổng quan</h2>
@@ -88,10 +106,7 @@ const OverviewStats = () => {
 };
 
 // Biểu đồ phim xem nhiều nhất và thể loại phim được xem nhiều nhất
-const TopMoviesChart = () => {
-  const { data: topMovies } = useTopViewedMovies(5);
-  const { data: moviesByCategory } = useTopViewedCategories(10);
-
+const TopMoviesChart = ({ data: { topMovies, moviesByCategory } }) => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4 text-white">
@@ -110,7 +125,7 @@ const TopMoviesChart = () => {
                 stroke="#ddd"
                 tickFormatter={(value) => {
                   if (value.length > 10) {
-                    return value.slice(0, 5) + "...";
+                    return value.slice(0, 3) + "...";
                   }
                   return value;
                 }}
@@ -170,12 +185,7 @@ const TopMoviesChart = () => {
   );
 };
 
-const MovieByCategoryStats = () => {
-  const { data: stats, isLoading } = useCountMoviesByField("category");
-
-  if (isLoading)
-    return <p className="text-center text-gray-400">Đang tải thống kê...</p>;
-
+const MovieByCategoryStats = ({ data: stats }) => {
   return (
     <div className="bg-foreground p-4 rounded-lg shadow">
       <h3 className="text-xl font-semibold text-white mb-4">
@@ -204,12 +214,7 @@ const MovieByCategoryStats = () => {
   );
 };
 
-const CountryStats = () => {
-  const { data: stats, isLoading } = useCountMoviesByField("country");
-
-  if (isLoading)
-    return <p className="text-center text-gray-400">Đang tải thống kê...</p>;
-
+const CountryStats = ({ data: stats }) => {
   return (
     <div className="bg-foreground p-4 rounded-lg shadow">
       <h3 className="text-xl font-semibold text-white mb-4">
@@ -238,16 +243,19 @@ const CountryStats = () => {
   );
 };
 
-const MovieYearStats = () => {
+const MovieYearStats = ({ data: statsByYear }) => {
   const [startYear, setStartYear] = useState(2020);
   const [endYear, setEndYear] = useState(2025);
-  const { data: yearStats, isLoading } = useCountMoviesByYearRange(
-    startYear,
-    endYear,
-  );
 
-  if (isLoading)
-    return <p className="text-center text-gray-400">Đang tải thống kê...</p>;
+  const filteredStats = statsByYear
+    .map((item) => ({
+      name: parseInt(item.name),
+      count: item.count || 0,
+    }))
+    .filter((item) => {
+      const year = parseInt(item.name);
+      return year >= startYear && year <= endYear;
+    });
 
   return (
     <div className="bg-foreground p-4 rounded-lg shadow">
@@ -277,8 +285,8 @@ const MovieYearStats = () => {
       </div>
 
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={yearStats}>
-          <XAxis dataKey="year" tick={{ fill: "#fff" }} />
+        <BarChart data={filteredStats}>
+          <XAxis dataKey="name" tick={{ fill: "#fff" }} />
           <YAxis tick={{ fill: "#fff" }} />
           <Tooltip />
           <Bar dataKey="count" fill="#ff8042" />
@@ -289,12 +297,7 @@ const MovieYearStats = () => {
 };
 
 // getCountMoviesByType
-const MovieTypeStats = () => {
-  const { data: stats, isLoading } = useCountMoviesByType();
-
-  if (isLoading)
-    return <p className="text-center text-gray-400">Đang tải thống kê...</p>;
-
+const MovieTypeStats = ({ data: stats }) => {
   return (
     <div className="bg-foreground p-4 rounded-lg shadow">
       <h3 className="text-xl font-semibold text-white mb-4">Phim theo loại</h3>

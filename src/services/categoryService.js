@@ -11,6 +11,7 @@ import {
   Timestamp,
   updateDoc,
   where,
+  getCountFromServer,
 } from "firebase/firestore";
 import mongoose from "mongoose";
 import { db } from "../app/firebase";
@@ -62,12 +63,14 @@ export const getMoviesByCategory = async (
   page,
   lastVisible = null,
 ) => {
+  const PAGE_SIZE = 20; // Số lượng phim hiển thị trên mỗi trang
+
   try {
     let q = query(
       collection(db, "movies"),
       where("categorySlugs", "array-contains", categorySlug), // Lọc theo slug thể loại
       orderBy("year", "desc"),
-      // limit(PAGE_SIZE)
+      limit(PAGE_SIZE),
     );
 
     // Nếu có `lastVisible`, thêm `startAfter` để phân trang
@@ -77,11 +80,18 @@ export const getMoviesByCategory = async (
         where("categorySlugs", "array-contains", categorySlug),
         orderBy("year", "desc"),
         startAfter(lastVisible),
-        // limit(PAGE_SIZE)
+        limit(PAGE_SIZE),
       );
     }
 
     const snapshot = await getDocs(q);
+
+    const countAllMovies = await getCountFromServer(
+      query(
+        collection(db, "movies"),
+        where("categorySlugs", "array-contains", categorySlug),
+      ),
+    );
 
     // Lấy document cuối cùng để hỗ trợ phân trang
     const newLastVisible = snapshot.docs[snapshot.docs.length - 1];
@@ -90,6 +100,8 @@ export const getMoviesByCategory = async (
     return {
       movies: snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
       lastVisible: newLastVisible,
+      countAllMovies: countAllMovies.data().count,
+      totalPages: Math.ceil(countAllMovies.data().count / PAGE_SIZE), // Tổng số trang
     };
   } catch (error) {
     console.error("Error fetching movies by category:", error);

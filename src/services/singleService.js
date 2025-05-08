@@ -1,6 +1,13 @@
-import { collection, getDocs, query, where, orderBy, startAfter } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  orderBy,
+  startAfter,
+  limit,
+} from "firebase/firestore";
 import { db } from "../app/firebase";
-
 
 /**
  * Lấy danh sách phim lẻ (single) với phân trang
@@ -14,7 +21,7 @@ export const getSingleMovies = async (page, lastVisible = null) => {
       collection(db, "movies"),
       where("type", "==", "single"), // Chỉ lấy phim lẻ dựa trên type
       orderBy("year", "desc"),
-
+      limit(10), // Giới hạn số lượng phim trên mỗi trang
     );
 
     // Nếu có `lastVisible`, thêm `startAfter` để phân trang
@@ -24,7 +31,7 @@ export const getSingleMovies = async (page, lastVisible = null) => {
         where("type", "==", "single"),
         orderBy("year", "desc"),
         startAfter(lastVisible),
-
+        limit(10),
       );
     }
 

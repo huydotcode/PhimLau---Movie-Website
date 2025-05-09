@@ -125,8 +125,10 @@ const Banner = () => {
                   ></div>
 
                   {/* Thông tin phim bên trái */}
-                  <div className="relative z-10 flex flex-col justify-center pl-10 text-white w-1/2 gap-2 mt-[20vh] @max-3xl:w-3/4 @max-3xl:mt-[5vh]">
-                    <h1 className="text-5xl font-bold mb-4">{movie?.name}</h1>
+                  <div className="relative z-10 flex flex-col justify-center pl-10 text-white w-1/2 gap-2 mt-[20vh] @max-3xl:w-3/4 @max-3xl:mt-[20vh]">
+                    <h1 className="text-3xl md:text-5xl font-bold mb-4">
+                      {movie?.name}
+                    </h1>
                     <div className="flex gap-2 mb-3 @max-xl:hidden">
                       <span className="bg-white text-black px-2 py-1 text-sm rounded opacity-70">
                         IMDB: {movie?.tmdb.vote_average.toFixed(1)}

@@ -83,7 +83,7 @@ const Banner = () => {
   const swiperRef = useRef();
   const navigate = useNavigate();
 
-  const { data: bannerMovies } = useTopNewMovies({ enabled: false, limit: 10 });
+  const { data: bannerMovies } = useTopNewMovies({ enabled: true, limit: 10 });
 
   const [activeIndex, setActiveIndex] = useState(0);
 

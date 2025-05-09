@@ -320,7 +320,13 @@ export const searchMovies = async ({
   lastVisible = null,
   pageSize = 10,
 }) => {
-  console.log("searchMovies: ", { searchTerm, page, filters });
+  console.log("SEARCH MOVIES: ", {
+    searchTerm,
+    page,
+    filters,
+    lastVisible,
+    pageSize,
+  });
   try {
     const movieRef = collection(db, "movies");
 
@@ -336,39 +342,51 @@ export const searchMovies = async ({
       );
     }
 
-    // Lọc theo category (slug)
-    if (filters.category && filters.category.length > 0) {
+    if (filters?.category.length > 0 && filters?.country.length > 0) {
+      console.log("filter category and country: ", {
+        category: filters.category,
+        country: filters.country,
+      });
+      const categoryCountrySlugs = [...filters.category, ...filters.country];
+
+      constraints.push(
+        where(
+          "categoryCountrySlugs",
+          "array-contains-any",
+          categoryCountrySlugs,
+        ),
+      );
+    } else if (filters?.category && filters?.category.length > 0) {
       constraints.push(
         where("categorySlugs", "array-contains-any", filters.category),
       );
+    } else if (filters?.country && filters?.country.length > 0) {
+      constraints.push(
+        where("countrySlugs", "array-contains-any", filters.country),
+      );
+    }
+
+    // Lọc theo type
+    if (filters.type && filters.type.length > 0) {
+      console.log("filters.type: ", filters.type);
+      constraints.push(where("type", "in", filters.type));
     }
 
     // Lọc theo year
     if (filters.year && filters.year.length > 0) {
       if (filters.year.includes("Cũ hơn")) {
-        // Pussh các năm từ 2020 trở về trước vào mảng
-
-        const years = Array.from(
-          { length: 2020 - 2000 + 1 },
-          (_, i) => 2020 - i,
-        ).map((year) => year.toString());
-        filters.year = [...filters.year, ...years].filter(
-          (year) => year !== "Cũ hơn",
+        constraints.push(where("year", "<=", 2020));
+        filters.year = filters.year.filter((year) => year !== "Cũ hơn");
+      }
+      if (filters.year.length > 0) {
+        constraints.push(
+          where(
+            "year",
+            "in",
+            filters.year.map((year) => parseInt(year)),
+          ),
         );
       }
-
-      console.log(
-        "filters.year: ",
-        filters.year.map((year) => parseInt(year)),
-      );
-
-      constraints.push(
-        where(
-          "year",
-          "in",
-          filters.year.map((year) => parseInt(year)),
-        ),
-      );
     }
 
     // Sort
@@ -393,6 +411,7 @@ export const searchMovies = async ({
     } else {
       q = query(movieRef, ...constraints, limit(pageSize));
     }
+
     const querySnapshot = await getDocs(q);
 
     let movies = querySnapshot.docs.map((doc) => ({
@@ -400,24 +419,16 @@ export const searchMovies = async ({
       ...doc.data(),
     }));
 
-    // Lọc theo country (slug)
-    if (filters.country && filters.country.length > 0) {
-      movies = movies.filter((movie) =>
-        movie.countrySlugs?.some((country) =>
-          filters.country.includes(country),
-        ),
-      );
-    }
-
     // Lấy tổng số lượng phim
-    const countQuery = query(movieRef, ...constraints);
+    const countQuery = query(collection(db, "movies"), ...constraints);
     const snapshot = await getCountFromServer(countQuery);
     const totalCount = snapshot.data().count;
 
-    console.log("Search results:", {
+    console.log({
       movies,
       lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1],
-      totalCount,
+      totalMovies: totalCount,
+      totalPages: Math.ceil(totalCount / pageSize),
     });
 
     return {
@@ -428,7 +439,7 @@ export const searchMovies = async ({
     };
   } catch (error) {
     console.error("Lỗi khi tìm kiếm phim từ Firestore:", error);
-    return { movies: [], lastVisible: null };
+    return { movies: [], lastVisible: null, totalMovies: 0, totalPages: 0 };
   }
 };
 
@@ -599,6 +610,25 @@ export const deleteMovie = async (id) => {
     console.log("Xóa phim thành công");
   } catch (error) {
     console.error("Lỗi khi xóa phim:", error);
+    throw error;
+  }
+};
+
+export const countMoviesWithoutCategoryCountrySlugs = async () => {
+  try {
+    const movieRef = collection(db, "movies");
+
+    // Query các document không có field `categoryCountrySlugs`
+    const q = query(movieRef, where("categoryCountrySlugs", "==", null));
+
+    const snapshot = await getCountFromServer(q);
+    const count = snapshot.data().count;
+
+    console.log("Số lượng phim không có categoryCountrySlugs:", count);
+
+    return count;
+  } catch (error) {
+    console.error("Lỗi khi đếm phim:", error);
     throw error;
   }
 };

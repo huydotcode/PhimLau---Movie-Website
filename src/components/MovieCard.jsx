@@ -122,7 +122,7 @@ const MovieCard = ({ movie, espicode = null }) => {
           </span>
         )}
 
-        {movie?.episode_total > 0 && (
+        {movie?.episode_total > 1 && (
           <span className="bg-[rgba(0,0,0,0.4)] px-2 py-1 rounded-md">
             {movie.episode_total} Tập
           </span>

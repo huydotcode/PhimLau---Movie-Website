@@ -15,6 +15,7 @@ export const useSearchMovies = ({
       "searchMovies",
       searchTerm,
       page,
+      filters?.type,
       filters?.category,
       filters?.country,
       filters?.lang,
@@ -22,6 +23,7 @@ export const useSearchMovies = ({
       filters?.sort,
       lastVisible?._id,
       pageSize,
+      type,
     ],
     queryFn: async () => {
       if (type === "search") {
@@ -44,7 +46,7 @@ export const useSearchMovies = ({
       return data;
     },
     keepPreviousData: true,
-    refetchOnWindowFocus: false,
+
     initialData: () => {
       return {
         movies: [],

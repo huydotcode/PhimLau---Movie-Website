@@ -16,7 +16,6 @@ const FilterMoviePager = () => {
     <MovieListPage
       title="Danh sách phim theo bộ lọc"
       defaultFilters={defaultFilters}
-      hasTypeFilter={false}
     />
   );
 };

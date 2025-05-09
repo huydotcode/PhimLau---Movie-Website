@@ -462,7 +462,7 @@ const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
               className="border border-gray-300 rounded px-3 py-2 w-full bg-black"
             >
               {moviesLang.map((lang) => (
-                <option key={lang.slug} value={lang.slug}>
+                <option key={lang.slug} value={lang.name}>
                   {lang.name}
                 </option>
               ))}
@@ -577,8 +577,6 @@ const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
 const ModalDelete = ({ show, setShow, movie, loadFirstPage }) => {
   const onDelete = async () => {
     try {
-      console.log("Deleting movie with ID:", movie);
-
       await deleteMovie(movie);
       toast("Xóa phim thành công");
     } catch (error) {
@@ -929,7 +927,6 @@ const MovieList = () => {
                           );
 
                           if (!country) {
-                            console.log(c);
                             return null;
                           }
 

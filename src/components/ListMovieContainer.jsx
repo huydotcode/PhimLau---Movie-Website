@@ -15,9 +15,13 @@ const ListMovieContainer = ({
     }
   }, [error]);
 
+  useEffect(() => {
+    console.log("Is loading:", isLoading);
+  }, [isLoading]);
+
   if (isLoading) {
     return (
-      <div ref={wrapperRef}>
+      <div className="h-[500px]" ref={wrapperRef}>
         <Loading isLoading={isLoading} imageWidth={100} />
       </div>
     );
@@ -28,7 +32,10 @@ const ListMovieContainer = ({
   }
 
   return (
-    <div ref={wrapperRef} className="relative py-4 mx-auto w-full">
+    <div
+      ref={wrapperRef}
+      className="relative py-4 mx-auto w-full min-h-[200px]"
+    >
       <h2 className="text-2xl font-bold mb-4">{title}</h2>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
         {!isLoading &&

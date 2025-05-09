@@ -97,7 +97,11 @@ export const TopNewMovieSection = () => {
     threshold: 0,
     triggerOnce: true,
   });
-  const { data: topMovies, isLoading } = useTopNewMovies({
+  const {
+    data: topMovies,
+    isLoading,
+    isFetching,
+  } = useTopNewMovies({
     enabled: inView,
   });
 
@@ -106,7 +110,7 @@ export const TopNewMovieSection = () => {
       title={"Hiện đang thịnh hành"}
       wrapperRef={ref}
       movies={topMovies}
-      isLoading={isLoading}
+      isLoading={isLoading || isFetching}
     />
   );
 };
@@ -121,6 +125,7 @@ export const TopViewMovieSection = () => {
     data: topMovies,
     error,
     isLoading,
+    isFetching,
   } = useTopViewMovies({
     enabled: inView,
   });
@@ -134,7 +139,7 @@ export const TopViewMovieSection = () => {
       title={"Phim nhiều lượt xem nhất"}
       wrapperRef={ref}
       movies={topMovies}
-      isLoading={isLoading}
+      isLoading={isLoading || isFetching}
     />
   );
 };
@@ -150,6 +155,7 @@ const TopCategorySection = () => {
     data: topCategories,
     error,
     isLoading,
+    isFetching,
   } = useTopCategories({
     enable: inView,
   });
@@ -167,7 +173,7 @@ const TopCategorySection = () => {
             <CategoryCard key={category.id} category={category} />
           ))}
       </div>
-      {isLoading && <Loading isLoading />}
+      {isLoading || (isFetching && <Loading isLoading />)}
     </div>
   );
 };
@@ -184,6 +190,7 @@ const NewSingleMovieSection = () => {
     data: newMovies,
     error,
     isLoading,
+    isFetching,
   } = useNewSingleMovies({
     enabled: inView,
   });
@@ -197,7 +204,7 @@ const NewSingleMovieSection = () => {
       title={"Phim lẻ mới ra"}
       wrapperRef={ref}
       movies={newMovies}
-      isLoading={isLoading}
+      isLoading={isLoading || isFetching}
     />
   );
 };
@@ -214,6 +221,7 @@ const NewSeriesMovieSection = () => {
     data: newMovies,
     error,
     isLoading,
+    isFetching,
   } = useNewSeriesMovies({
     enabled: inView,
   });
@@ -227,7 +235,7 @@ const NewSeriesMovieSection = () => {
       title={"Phim bộ mới ra"}
       wrapperRef={ref}
       movies={newMovies}
-      isLoading={isLoading}
+      isLoading={isLoading || isFetching}
     />
   );
 };
@@ -244,6 +252,7 @@ const TrendingMovieSection = () => {
     data: trendingMovies,
     error,
     isLoading,
+    isFetching,
   } = useTrendingMovies({
     enabled: inView,
   });
@@ -257,7 +266,7 @@ const TrendingMovieSection = () => {
       title={"Phim đang trending"}
       wrapperRef={ref}
       movies={trendingMovies}
-      isLoading={isLoading}
+      isLoading={isLoading || isFetching}
     />
   );
 };
@@ -274,6 +283,7 @@ const KoreanMovieSection = () => {
     data: koreanMovies,
     error,
     isLoading,
+    isFetching,
   } = useKoreanMovies({
     enabled: inView,
   });
@@ -287,7 +297,7 @@ const KoreanMovieSection = () => {
       title={"Phim Hàn Quốc"}
       wrapperRef={ref}
       movies={koreanMovies}
-      isLoading={isLoading}
+      isLoading={isLoading || isFetching}
     />
   );
 };
@@ -304,6 +314,7 @@ const AmericanMovieSection = () => {
     data: americanMovies,
     error,
     isLoading,
+    isFetching,
   } = useAmericanMovies({
     enabled: inView,
   });
@@ -317,7 +328,7 @@ const AmericanMovieSection = () => {
       title={"Phim Mỹ"}
       wrapperRef={ref}
       movies={americanMovies}
-      isLoading={isLoading}
+      isLoading={isLoading || isFetching}
     />
   );
 };

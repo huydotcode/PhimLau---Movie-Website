@@ -46,6 +46,9 @@ export const useSearchMovies = ({
       return data;
     },
     keepPreviousData: true,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchInterval: false,
 
     initialData: () => {
       return {

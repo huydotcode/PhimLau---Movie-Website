@@ -125,7 +125,7 @@ const Banner = () => {
                   ></div>
 
                   {/* Thông tin phim bên trái */}
-                  <div className="relative z-10 flex flex-col justify-center pl-10 text-white w-1/2 gap-2 mt-[20vh] @max-3xl:w-3/4 @max-3xl:mt-[20vh]">
+                  <div className="relative z-10 flex flex-col justify-center pl-10 text-white w-3/4 lg:w-2/5 gap-2">
                     <h1 className="text-3xl md:text-5xl font-bold mb-4">
                       {movie?.name}
                     </h1>
@@ -143,8 +143,12 @@ const Banner = () => {
                       </span>
                     </div>
                     <div
-                      className="text-sm max-w-md text-justify line-clamp-10 @max-3xl:line-clamp-5 @max-xl:max-w-3/4"
-                      dangerouslySetInnerHTML={{ __html: movie?.content }}
+                      className="text-justify line-clamp-5 w-full"
+                      dangerouslySetInnerHTML={{
+                        __html: movie?.content
+                          .concat(movie?.content)
+                          .concat(movie?.content),
+                      }}
                     />
                     <div className="mt-5 flex gap-4 items-center">
                       <Button
@@ -169,7 +173,7 @@ const Banner = () => {
         </Swiper>
 
         {/* Slider thumbnail bên dưới phải */}
-        <div className="absolute bottom-5 right-5 w-4/5 md:w-3/4 xl:w-3/5 flex max-h-[130px]">
+        <div className="absolute bottom-5 right-5 hidden md:flex md:w-3/4 xl:w-3/5 max-h-[130px]">
           <Swiper slidesPerView={10} spaceBetween={10}>
             {bannerMovies &&
               bannerMovies.map((movie, index) => (

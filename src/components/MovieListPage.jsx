@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
 import { Pagination } from "antd";
-import MovieList from "./MovieList";
+import { useEffect, useState } from "react";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 import { useSearchMovies } from "../hooks/useSearchMovie";
 import FilterPanel_2 from "./FilterPanel_2";
-import { useScrollToTop } from "../hooks/useScrollToTop";
-import { countMoviesWithoutCategoryCountrySlugs } from "../services/movieService";
+import MovieList from "./MovieList";
 
 const MovieListPage = ({
   title,
@@ -19,13 +18,6 @@ const MovieListPage = ({
   const [showFilters, setShowFilters] = useState(false);
   const [currentLastVisible, setCurrentLastVisible] = useState(null);
   useScrollToTop();
-
-  useEffect(() => {
-    (async () => {
-      const res = await countMoviesWithoutCategoryCountrySlugs();
-      console.log(res);
-    })();
-  }, []);
 
   const {
     data: { movies, lastVisible, totalPages },

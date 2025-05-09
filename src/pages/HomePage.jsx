@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import Banner from "../components/Banner";
 import CategoryCard from "../components/CategoryCard";

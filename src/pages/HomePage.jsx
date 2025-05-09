@@ -76,11 +76,7 @@ export const SuggestMovieSection = () => {
     threshold: 0,
     triggerOnce: true,
   });
-  const {
-    data: suggestionMovies,
-    error,
-    isLoading,
-  } = useSuggestionMovies({
+  const { data: suggestionMovies, isLoading } = useSuggestionMovies({
     enabled: inView && !!user,
     userId: user?.uid,
   });
@@ -101,11 +97,7 @@ export const TopNewMovieSection = () => {
     threshold: 0,
     triggerOnce: true,
   });
-  const {
-    data: topMovies,
-    error,
-    isLoading,
-  } = useTopNewMovies({
+  const { data: topMovies, isLoading } = useTopNewMovies({
     enabled: inView,
   });
 

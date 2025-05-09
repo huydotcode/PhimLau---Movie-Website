@@ -149,13 +149,22 @@ const WatchMoviePage = () => {
 
         <div className="h-[1px] bg-gray-500 opacity-20 w-full" />
 
-        {episodes?.server_data && (
-          <VideoPlayer
-            ref={videoRef}
-            src={episodes?.server_data[currentEpisode]?.link_embed}
-            poster={movie.poster_url}
-          />
-        )}
+        {episodes?.server_data &&
+          episodes?.server_data[currentEpisode]?.link_embed.length > 0 && (
+            <VideoPlayer
+              ref={videoRef}
+              src={episodes?.server_data[currentEpisode]?.link_embed}
+              poster={movie.poster_url}
+            />
+          )}
+
+        {episodes?.server_data &&
+          episodes?.server_data[currentEpisode] &&
+          episodes?.server_data[currentEpisode]?.link_embed.length == 0 && (
+            <div className="flex items-center justify-center h-[50vh]">
+              Xin lỗi, không tìm thấy video
+            </div>
+          )}
 
         {movie && movie?.type !== "single" && (
           <div className="flex flex-col gap-4">

@@ -23,9 +23,10 @@ const MovieCard = ({ movie, espicode = null }) => {
           className="absolute inset-0 z-10"
         ></Link>
         <LazyLoadImage
-          src={movie.poster_url}
+          wrapperClassName="w-full h-full"
+          src={movie.thumb_url}
           alt={movie.name}
-          className="w-full h-full object-cover rounded-md"
+          className="w-full h-full object-cover object-center"
           effect="opacity"
           placeholder={<Loading />}
         />

@@ -173,6 +173,23 @@ export const getTrendingMovies = async () => {
   }
 };
 
+export const getVietnameseMovies = async () => {
+  try {
+    const q = query(
+      collection(db, "movies"),
+      where("countrySlugs", "array-contains", "vietnam"),
+      orderBy("year", "desc"),
+      limit(10),
+    );
+
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  } catch (error) {
+    console.error("Error fetching Vietnamese movies:", error);
+    throw error;
+  }
+};
+
 // Phim Hàn Quốc
 export const getKoreanMovies = async () => {
   try {
@@ -333,7 +350,7 @@ export const searchMovies = async ({
     let constraints = [];
 
     // Tìm kiếm theo tên (dạng lowercase)
-    if (searchTerm.trim() !== "") {
+    if (searchTerm && searchTerm.trim() !== "") {
       console.log("searchTerm: ", searchTerm);
       const termLower = searchTerm.toLowerCase();
       constraints.push(
@@ -342,7 +359,12 @@ export const searchMovies = async ({
       );
     }
 
-    if (filters?.category.length > 0 && filters?.country.length > 0) {
+    if (
+      filters?.category &&
+      filters?.country &&
+      filters?.category.length > 0 &&
+      filters?.country.length > 0
+    ) {
       console.log("filter category and country: ", {
         category: filters.category,
         country: filters.country,
@@ -367,13 +389,13 @@ export const searchMovies = async ({
     }
 
     // Lọc theo type
-    if (filters.type && filters.type.length > 0) {
+    if (filters?.type && filters?.type.length > 0) {
       console.log("filters.type: ", filters.type);
       constraints.push(where("type", "in", filters.type));
     }
 
     // Lọc theo year
-    if (filters.year && filters.year.length > 0) {
+    if (filters?.year && filters?.year.length > 0) {
       if (filters.year.includes("Cũ hơn")) {
         constraints.push(where("year", "<=", 2020));
         filters.year = filters.year.filter((year) => year !== "Cũ hơn");

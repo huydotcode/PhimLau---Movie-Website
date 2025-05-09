@@ -554,11 +554,13 @@ const NavbarSearch = () => {
   const [query, setQuery] = useState("");
   const debouncedQuery = useDebounce(query, 500); // Sử dụng hook debounce
   const {
-    data: { movies: searchResults, isLoading },
+    data: { movies: searchResults },
+    isLoading,
+    isFetching,
   } = useSearchMovies({
     searchTerm: debouncedQuery,
     page: 1,
-    pageSize: 10,
+    pageSize: 5,
     enabled: debouncedQuery.trim().length > 0,
     type: "search",
   });
@@ -618,6 +620,7 @@ const NavbarSearch = () => {
         <div className="absolute top-full mt-1 rounded-xl left-0 w-64 text-white bg-black shadow-lg max-h-80 overflow-y-auto no-scrollbar">
           {searchResults.length > 0 &&
             !isLoading &&
+            !isFetching &&
             searchResults.map((movie) => (
               <div
                 // key={movie}
@@ -645,13 +648,16 @@ const NavbarSearch = () => {
               </div>
             ))}
 
-          {query.length != 0 && searchResults.length === 0 && !isLoading && (
-            <div className="px-3 py-2 text-white text-xs">
-              Không tìm thấy phim nào!
-            </div>
-          )}
+          {query.length != 0 &&
+            searchResults.length === 0 &&
+            !isLoading &&
+            !isFetching && (
+              <div className="px-3 py-2 text-white text-xs">
+                Không tìm thấy phim nào!
+              </div>
+            )}
 
-          {searchResults.length > 0 && !isLoading && (
+          {searchResults.length > 0 && !isLoading && !isFetching && (
             <div className="px-3 py-2 text-sm text-white text-center hover:text-primary cursor-pointer font-bold">
               <Button
                 onClick={() => {
@@ -664,7 +670,7 @@ const NavbarSearch = () => {
             </div>
           )}
 
-          {isLoading && <Loading isLoading />}
+          {isLoading || (isFetching && <Loading isLoading />)}
         </div>
       )}
     </div>

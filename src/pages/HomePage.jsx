@@ -16,6 +16,7 @@ import {
   useTopNewMovies,
   useTopViewMovies,
   useTrendingMovies,
+  useVietnameseMovies,
 } from "../hooks/useMovies";
 
 const HomePage = () => {
@@ -29,6 +30,7 @@ const HomePage = () => {
           <SuggestMovieSection />
           <TopViewMovieSection />
           <TopCategorySection />
+          <VietnameseMovieSection />
           <NewSingleMovieSection />
           <NewSeriesMovieSection />
           <TrendingMovieSection />
@@ -37,6 +39,34 @@ const HomePage = () => {
         </div>
       </Container>
     </>
+  );
+};
+
+export const VietnameseMovieSection = () => {
+  const { ref, inView } = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
+
+  const {
+    data: vietnameseMovies,
+    error,
+    isLoading,
+  } = useVietnameseMovies({
+    enabled: inView,
+  });
+
+  if (error) {
+    return <></>;
+  }
+
+  return (
+    <ListMovieContainer
+      title={"Phim Việt Nam"}
+      wrapperRef={ref}
+      movies={vietnameseMovies}
+      isLoading={isLoading}
+    />
   );
 };
 

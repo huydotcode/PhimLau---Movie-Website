@@ -8,6 +8,7 @@ import MovieList from "./MovieList";
 const MovieListPage = ({
   title,
   defaultFilters,
+  searchTerm = "",
   hasTypeFilter = true,
   hasCategoryFilter = true,
   hasCountryFilter = true,
@@ -29,6 +30,7 @@ const MovieListPage = ({
     page: currentPage,
     lastVisible: currentLastVisible,
     pageSize,
+    searchTerm,
   });
 
   useEffect(() => {

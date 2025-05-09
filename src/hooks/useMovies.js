@@ -8,6 +8,7 @@ import {
   getTopNewMovies,
   getTopViewMovies,
   getTrendingMovies,
+  getVietnameseMovies,
 } from "../services/movieService";
 
 const SLATE_TIME = 1 * 60 * 1000; // 5 phút
@@ -73,6 +74,15 @@ export const useTrendingMovies = ({ enabled = true }) => {
     queryFn: getTrendingMovies,
     enabled,
     // staleTime: SLATE_TIME,
+    initialData: INITIAL_DATA,
+  });
+};
+
+export const useVietnameseMovies = ({ enabled = true }) => {
+  return useQuery({
+    queryKey: ["vietnameseMovies"],
+    queryFn: getVietnameseMovies,
+    enabled,
     initialData: INITIAL_DATA,
   });
 };

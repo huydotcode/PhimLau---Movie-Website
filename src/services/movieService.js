@@ -81,14 +81,16 @@ export const getSuggestionMovies = async (uid) => {
 };
 
 // Danh sách phim mới năm nay và có view nhiều nhất
-export const getTopNewMovies = async () => {
+export const getTopNewMovies = async (limitMovie = 10) => {
   console.log("getTopNewMovies");
   const currentYear = new Date().getFullYear();
   try {
     const q = query(
       collection(db, "movies"),
       where("year", "==", currentYear),
-      limit(10),
+      where("tmdb.vote_average", ">=", 7),
+      where("view", ">=", 500),
+      limit(limitMovie),
     );
 
     const snapshot = await getDocs(q);

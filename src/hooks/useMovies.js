@@ -28,13 +28,11 @@ export const useSuggestionMovies = ({ enabled = true, userId }) => {
   });
 };
 
-export const useTopNewMovies = ({ enabled = true }) => {
+export const useTopNewMovies = ({ enabled = true, limit = 10 }) => {
   return useQuery({
     queryKey: ["topNewMovies"],
-    queryFn: getTopNewMovies,
+    queryFn: async () => await getTopNewMovies(limit),
     enabled,
-    // staleTime: SLATE_TIME,
-    initialData: INITIAL_DATA,
   });
 };
 

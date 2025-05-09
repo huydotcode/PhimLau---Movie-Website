@@ -177,9 +177,8 @@ export const getVietnameseMovies = async () => {
   try {
     const q = query(
       collection(db, "movies"),
-      where("countrySlugs", "array-contains", "vietnam"),
-      orderBy("year", "desc"),
-      limit(10),
+      where("countrySlugs", "array-contains", "viet-nam"),
+      limit(5),
     );
 
     const snapshot = await getDocs(q);

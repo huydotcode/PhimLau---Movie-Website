@@ -50,10 +50,21 @@ const ModalAdd = ({ show, setShow, loadFirstPage }) => {
         type: data.type,
         poster_url: data.poster_url,
         trailer_url: data.trailer_url,
+        thumb_url: data.thumb_url,
         content: data.content,
         categorySlugs,
         countrySlugs,
+        category: categories.filter((c) => {
+          return categorySlugs.includes(c.slug);
+        }),
+        country: countries.filter((c) => {
+          return countrySlugs.includes(c.slug);
+        }),
       };
+
+      console.log("ADDMOVIE", {
+        movieData,
+      });
 
       await addMovie(movieData);
       toast("Thêm phim thành công");
@@ -236,6 +247,24 @@ const ModalAdd = ({ show, setShow, loadFirstPage }) => {
           )}
         </div>
 
+        {/* Thumb URL */}
+        <div className="mb-4">
+          <label className="block text-white mb-2">Thumb URL</label>
+          <input
+            type="text"
+            {...register("thumb_url", {
+              required: "Thumb URL là bắt buộc",
+            })}
+            className="border border-gray-300 rounded px-3 py-2 w-full"
+          />
+
+          {errors.thumb_url && (
+            <span className="text-red-500 text-sm">
+              {errors.poster_url.message}
+            </span>
+          )}
+        </div>
+
         {/* Trailer URL */}
         <div className="mb-4">
           <label className="block text-white mb-2">Trailer URL</label>
@@ -304,6 +333,10 @@ const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
   const { data: countries } = useAllCountries({ enable: true });
 
   useEffect(() => {
+    console.log("Movie data:", movie);
+  }, [movie]); // Log movie data when it changes
+
+  useEffect(() => {
     if (movie) {
       reset({
         ...movie,
@@ -311,6 +344,12 @@ const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
         country: movie.country,
         trailer_url: movie.trailer_url,
         poster_url: movie.poster_url,
+        thumb_url: movie.thumb_url,
+        lang: movie.lang,
+        type: movie.type,
+        name: movie.name,
+        year: movie.year,
+        content: movie.content,
       });
     }
   }, [movie, reset]);
@@ -332,10 +371,21 @@ const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
         type: data.type,
         poster_url: data.poster_url,
         trailer_url: data.trailer_url,
+        thumb_url: data.thumb_url,
         content: data.content,
         categorySlugs,
         countrySlugs,
+        category: categories.filter((c) => {
+          return categorySlugs.includes(c.slug);
+        }),
+        country: countries.filter((c) => {
+          return countrySlugs.includes(c.slug);
+        }),
       };
+
+      console.log("UPDATE", {
+        moviesLang,
+      });
 
       await updateMovie(movieData.id, movieData);
       toast("Cập nhật phim thành công");
@@ -518,6 +568,23 @@ const ModalEdit = ({ show, setShow, movie, loadFirstPage }) => {
           )}
         </div>
 
+        {/* Thumb URL */}
+        <div className="mb-4">
+          <label className="block text-white mb-2">Thumb URL</label>
+          <input
+            type="text"
+            {...register("thumb_url", {
+              required: "Thumb URL là bắt buộc",
+            })}
+            className="border border-gray-300 rounded px-3 py-2 w-full"
+          />
+          {errors.thumb_url && (
+            <span className="text-red-500 text-sm">
+              {errors.thumb_url.message}
+            </span>
+          )}
+        </div>
+
         {/* Trailer URL */}
         <div className="mb-4">
           <label className="block text-white mb-2">Trailer URL</label>
@@ -645,7 +712,9 @@ const MovieList = () => {
     type: "",
     poster_url: "",
     trailer_url: "",
+    thumb_url: "",
     content: "",
+    tmdb: "",
 
     show: false,
   });
@@ -735,7 +804,9 @@ const MovieList = () => {
       lang: movie.lang,
       type: movie.type,
       poster_url: movie.poster_url,
+      thumb_url: movie.thumb_url,
       trailer_url: movie.trailer_url,
+      tmdb: movie.tmdb,
       content: movie.content,
 
       show: true,

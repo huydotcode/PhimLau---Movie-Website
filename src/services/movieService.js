@@ -373,7 +373,11 @@ export const searchMovies = async ({
       const categoryCountrySlugs = [...filters.category, ...filters.country];
 
       constraints.push(
-        where("categoryCountrySlugs", "array-contains", categoryCountrySlugs),
+        where(
+          "categoryCountrySlugs",
+          "array-contains-any",
+          categoryCountrySlugs,
+        ),
       );
     } else if (filters?.category && filters?.category.length > 0) {
       constraints.push(

@@ -60,7 +60,7 @@ const navUserItems = (displayName) => [
         className="w-full hover:text-primary flex justify-start"
         to="/dashboard?t=saved"
       >
-        Xem sau
+        Đã lưu
       </Link>
     ),
   },

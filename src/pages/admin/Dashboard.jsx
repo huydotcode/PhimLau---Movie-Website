@@ -14,6 +14,8 @@ import {
 import Loading from "../../components/Loading";
 import { useStatistics } from "../../hooks/useStatistics";
 import { formatView } from "../../utils/formatView";
+import { useFeedback } from "../../hooks/useFeedback";
+import { convertTime } from "../../utils/convertTime";
 
 const COLORS = [
   "#f87171",
@@ -76,6 +78,12 @@ const Dashboard = () => {
           {statistics?.years && <MovieYearStats data={statistics?.years} />}
           {statistics?.types && <MovieTypeStats data={statistics?.types} />}
         </div>
+      </div>
+
+      {/* Phản hồi */}
+      <div>
+        <h2 className="text-2xl font-bold mb-4 text-white">Phản hồi</h2>
+        <FeedBackSection />
       </div>
     </div>
   );
@@ -320,6 +328,52 @@ const MovieTypeStats = ({ data: stats }) => {
           <Legend />
         </PieChart>
       </ResponsiveContainer>
+    </div>
+  );
+};
+
+const FeedBackSection = () => {
+  const { data: feedbacks, isLoading } = useFeedback();
+
+  return (
+    <div className="bg-foreground p-4 rounded-lg shadow">
+      <h3 className="text-xl font-semibold text-white mb-4">Phản hồi</h3>
+
+      {feedbacks && feedbacks.length > 0 ? (
+        <ul className="space-y-4">
+          {feedbacks.map((feedback) => (
+            <li
+              key={feedback.id}
+              className="bg-background p-4 rounded-lg shadow"
+            >
+              <h1 className="font-bold">
+                {feedback?.name} - Tên phản hồi: {feedback?.feedback}
+              </h1>
+              <p className="text-white text-sm">
+                Mô tả: {feedback?.errorDescription}
+              </p>
+              <p className="text-gray-400 text-sm">
+                {convertTime(feedback?.createdAt?.toDate().toLocaleString())}
+              </p>
+
+              {feedback?.images && (
+                <div className="mt-2">
+                  {feedback?.images.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`Feedback image ${index + 1}`}
+                      className="w-32 h-32 object-cover rounded-lg mr-2"
+                    />
+                  ))}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-white">Không có phản hồi nào</p>
+      )}
     </div>
   );
 };

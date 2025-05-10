@@ -91,6 +91,7 @@ export const AuthProvider = ({ children }) => {
             photoURL: photoURL || userData.photoURL,
             phoneNumber: phoneNumber || userData.phoneNumber,
             createdAt: userData.createdAt,
+            role: userData.role,
           });
         } else {
           setUser({

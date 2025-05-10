@@ -84,6 +84,7 @@ const MovieListPage = ({
       {showFilters && (
         <FilterPanel_2
           filters={filters}
+          searchTerm={searchTerm}
           handleApplyFilters={handleApplyFilters}
           setShowFilters={setShowFilters}
           hasTypeFilter={hasTypeFilter}

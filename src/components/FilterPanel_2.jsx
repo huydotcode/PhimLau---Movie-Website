@@ -7,6 +7,7 @@ import { moviesType } from "../data/movies_type";
 
 const FilterPanel_2 = ({
   filters,
+  searchTerm = "",
   setShowFilters,
   handleApplyFilters,
   hasTypeFilter = true,
@@ -62,6 +63,7 @@ const FilterPanel_2 = ({
     handleApplyFilters(currentFilters);
     const params = new URLSearchParams();
     console.log({ currentFilters });
+    params.set("q", searchTerm);
     Object.keys(currentFilters).forEach((key) => {
       if (
         Array.isArray(currentFilters[key]) &&

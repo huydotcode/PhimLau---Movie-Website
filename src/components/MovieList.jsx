@@ -4,7 +4,11 @@ import MovieCard from "./MovieCard"; // Giả định component MovieCard
 const MovieList = ({ movies, isLoading, isFetching }) => {
   return (
     <div>
-      {(isLoading || isFetching) && <Loading isLoading />}
+      {(isLoading || isFetching) && (
+        <div className="w-full h-screen flex items-center justify-center">
+          <Loading isLoading />
+        </div>
+      )}
       {!isLoading && !isFetching && movies.length === 0 && (
         <p className="text-gray-500">Không có phim nào.</p>
       )}

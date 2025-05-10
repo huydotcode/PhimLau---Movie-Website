@@ -45,8 +45,14 @@ function App() {
         <h1 className="text-2xl font-bold mt-10">
           Ứng dụng hiện đang dừng hoạt động
         </h1>
-        <p>Xin lỗi bạn, ứng dụng hiện đang tạm thời bị tắt để bảo trì.</p>
-        <p>Chúng tôi sẽ sớm trở lại. Cảm ơn bạn đã thông cảm.</p>
+        <p className="mt-1">
+          Xin lỗi bạn, ứng dụng hiện đang tạm thời ngừng hoạt động để bảo trì và
+          nâng cấp.
+        </p>
+        <p>Chúng tôi sẽ sớm trở lại. Rất mong bạn thông cảm.</p>
+        <p className="text-sm text-gray-400 mt-2">
+          Liên hệ với Admin qua email: ngonhuthuy1234@gmail.com
+        </p>
       </div>
     );
   }

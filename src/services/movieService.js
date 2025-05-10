@@ -373,11 +373,7 @@ export const searchMovies = async ({
       const categoryCountrySlugs = [...filters.category, ...filters.country];
 
       constraints.push(
-        where(
-          "categoryCountrySlugs",
-          "array-contains-any",
-          categoryCountrySlugs,
-        ),
+        where("categoryCountrySlugs", "array-contains", categoryCountrySlugs),
       );
     } else if (filters?.category && filters?.category.length > 0) {
       constraints.push(
@@ -413,13 +409,17 @@ export const searchMovies = async ({
     }
 
     // Sort
-    if (filters.sort && filters.sort === "IMDB") {
+    if ((filters.sort && filters.sort === "IMDB") || filters.sort === "imdb") {
+      console.log("filters.sort imdb: ", filters.sort);
       constraints.push(orderBy("tmdb.vote_average", "desc"));
-    } else if (filters.sort === "Lượt xem") {
+    } else if (filters.sort === "Lượt xem" || filters.sort === "view") {
+      console.log("filters.sort view: ", filters.sort);
       constraints.push(orderBy("view", "desc"));
-    } else if (filters.sort === "Mới nhất") {
+    } else if (filters.sort === "Mới nhất" || filters.sort === "newest") {
+      console.log("filters.sort new : ", filters.sort);
       constraints.push(orderBy("year", "desc"));
     } else {
+      console.log("filters.sort default: ", filters.sort);
       constraints.push(orderBy("year", "desc"));
     }
 

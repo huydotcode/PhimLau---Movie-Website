@@ -4,6 +4,7 @@ import { useScrollToTop } from "../hooks/useScrollToTop";
 import { useSearchMovies } from "../hooks/useSearchMovie";
 import FilterPanel_2 from "./FilterPanel_2";
 import MovieList from "./MovieList";
+import { useNavigate } from "react-router";
 
 const MovieListPage = ({
   title,
@@ -17,7 +18,9 @@ const MovieListPage = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState(defaultFilters);
   const [showFilters, setShowFilters] = useState(false);
-  const [currentLastVisible, setCurrentLastVisible] = useState(null);
+  const [lastVisibleCache, setLastVisibleCache] = useState({});
+
+  const navigate = useNavigate();
   useScrollToTop();
 
   const {
@@ -28,22 +31,34 @@ const MovieListPage = ({
     enable: true,
     filters,
     page: currentPage,
-    lastVisible: currentLastVisible,
+    lastVisible: lastVisibleCache[currentPage] || null,
     pageSize,
     searchTerm,
   });
 
   useEffect(() => {
-    setCurrentPage(1); // Reset trang khi bộ lọc thay đổi
-    setCurrentLastVisible(null); // Reset lastVisible khi bộ lọc thay đổi
-  }, [filters]);
+    if (lastVisible) {
+      console.log("currentPage", currentPage);
+      setLastVisibleCache((prev) => ({
+        ...prev,
+        [currentPage]: lastVisible,
+      }));
+    }
+  }, [lastVisible, currentPage]);
 
   useEffect(() => {
-    setCurrentLastVisible(lastVisible); // Cập nhật lastVisible khi dữ liệu thay đổi
-  }, [lastVisible]);
+    setCurrentPage(1);
+    setLastVisibleCache({});
+  }, [filters, searchTerm]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+    const params = new URLSearchParams(window.location.search);
+    params.set("page", page);
+    navigate({
+      pathname: window.location.pathname,
+      search: params.toString(),
+    });
   };
 
   const handleApplyFilters = (newFilters) => {

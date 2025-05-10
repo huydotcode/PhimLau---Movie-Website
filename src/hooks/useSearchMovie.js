@@ -11,50 +11,22 @@ export const useSearchMovies = ({
   type = "all",
 }) => {
   return useQuery({
-    queryKey: [
-      "searchMovies",
-      searchTerm,
-      page,
-      filters?.type,
-      filters?.category,
-      filters?.country,
-      filters?.lang,
-      filters?.year,
-      filters?.sort,
-      lastVisible?._id,
-      pageSize,
-      type,
-    ],
+    queryKey: ["searchMovies", searchTerm, filters, page, pageSize, type],
     queryFn: async () => {
-      if (type === "search") {
-        if (!searchTerm) {
-          return {
-            movies: [],
-            lastVisible: null,
-          };
-        }
-      }
-
       const data = await searchMovies({
         filters,
-        lastVisible,
+        lastVisible: page === 1 ? null : lastVisible,
         page,
         pageSize,
         searchTerm,
       });
-
       return data;
     },
-    keepPreviousData: true,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    refetchInterval: false,
-
-    initialData: () => {
-      return {
-        movies: [],
-        lastVisible: null,
-      };
+    initialData: {
+      movies: [],
+      lastVisible: null,
+      totalMovies: 0,
+      totalPages: 0,
     },
     enabled: enable,
   });

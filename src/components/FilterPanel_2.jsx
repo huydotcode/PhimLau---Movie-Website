@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAllCountries } from "../hooks/useCountry";
 import { useAllCategories } from "../hooks/useCategory";
+import { useNavigate } from "react-router";
+import { moviesSort } from "../data/movies_sort";
+import { moviesType } from "../data/movies_type";
 
 const FilterPanel_2 = ({
   filters,
@@ -13,6 +16,7 @@ const FilterPanel_2 = ({
   const [currentFilters, setCurrentFilters] = useState(filters);
   const { data: countries } = useAllCountries({ enable: true });
   const { data: categories } = useAllCategories({ enable: true });
+  const navigate = useNavigate();
 
   const handleFilterChange = (key, value) => {
     if (key === "sort") {
@@ -48,8 +52,28 @@ const FilterPanel_2 = ({
     });
   };
 
+  useEffect(() => {
+    console.log("FILTERPANEL_2: ", {
+      currentFilters,
+    });
+  }, [currentFilters]);
+
   const handleFilter = () => {
     handleApplyFilters(currentFilters);
+    const params = new URLSearchParams();
+    console.log({ currentFilters });
+    Object.keys(currentFilters).forEach((key) => {
+      if (
+        Array.isArray(currentFilters[key]) &&
+        currentFilters[key].length > 0
+      ) {
+        params.set(key, currentFilters[key].join(","));
+      } else if (key === "sort") {
+        params.set(key, currentFilters[key]);
+      }
+    });
+    navigate(`?${params.toString()}`);
+
     setShowFilters(false);
   };
 
@@ -179,17 +203,17 @@ const FilterPanel_2 = ({
               Loại phim:
             </h3>
             <div className="flex flex-wrap gap-2">
-              {["Phim lẻ", "Phim bộ"].map((type) => (
+              {moviesType.map((type) => (
                 <button
-                  key={type}
+                  key={type.slug}
                   className={`px-4 ${
-                    currentFilters.type.includes(type)
+                    currentFilters.type.includes(type.slug)
                       ? "text-yellow-500"
                       : "text-white"
                   }`}
-                  onClick={() => handleFilterChange("type", type)}
+                  onClick={() => handleFilterChange("type", type.slug)}
                 >
-                  {type}
+                  {type.name}
                 </button>
               ))}
               <button
@@ -208,17 +232,17 @@ const FilterPanel_2 = ({
             Sắp xếp:
           </h3>
           <div className="flex flex-wrap gap-2">
-            {["Mới nhất", "IMDB", "Lượt xem"].map((sort) => (
+            {moviesSort.map((sort) => (
               <button
-                key={sort}
+                key={sort.slug}
                 className={`px-4 ${
-                  currentFilters.sort === sort
+                  currentFilters.sort === sort.slug
                     ? "text-yellow-500"
                     : "text-white"
                 }`}
-                onClick={() => handleFilterChange("sort", sort)}
+                onClick={() => handleFilterChange("sort", sort.slug)}
               >
-                {sort}
+                {sort.name}
               </button>
             ))}
           </div>

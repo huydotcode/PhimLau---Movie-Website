@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate, useSearchParams } from "react-router";
 import FeedbackModal from "../components/FeedbackModal"; // Import modal phản hồi
 import HelpModal from "../components/HelpModal"; // Import modal trợ giúp
 import Button from "../components/ui/Button";
@@ -122,6 +122,7 @@ lg:translate-x-0 lg:relative lg:z-auto lg:h-auto h-full`}
 }
 
 const DashboardUserPage = () => {
+  const { user } = useAuth();
   const [searchParams] = useSearchParams();
   const activeTab = searchParams.get("t") || "update";
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
@@ -155,6 +156,10 @@ const DashboardUserPage = () => {
         return <UpdateInfo />;
     }
   };
+
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <div className="flex h-full bg-background text-white rounded-xl overflow-hidden relative">

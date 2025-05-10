@@ -21,6 +21,7 @@ import { convertTime } from "../utils/convertTime";
 import Icons from "./Icons";
 import Loading from "./Loading";
 import Button from "./ui/Button";
+import { useAllNotifications } from "../hooks/useNotification";
 const navUserItems = (displayName) => [
   {
     key: "display-name",
@@ -491,18 +492,7 @@ const NavbarLogin = () => {
 const NavbarNotification = () => {
   const [openNotification, setOpenNotification] = useState(false);
   const wrapperRef = useRef(null);
-  const { user } = useAuth();
-  const { data: notifications } = useQuery({
-    queryKey: ["notifications", user?.uid],
-    queryFn: async () => {
-      const res = await fetch("/json/notification.json");
-      const data = await res.json();
-
-      return data;
-    },
-    enabled: !!user?.uid,
-    initialData: [],
-  });
+  const { data: notifications, isLoading } = useAllNotifications();
 
   // Đóng khi click ra ngoài
   useEffect(() => {
@@ -530,16 +520,25 @@ const NavbarNotification = () => {
           <div className="flex flex-col px-4 py-2">
             <h1 className="font-bold text-xl">Thông báo</h1>
 
-            {notifications.map((noti) => {
-              return (
-                <div key={noti?.id}>
-                  <p>{noti.content}</p>
-                  <p className="text-xs text-right">
-                    {convertTime(noti.createdAt)}
-                  </p>
-                </div>
-              );
-            })}
+            {!isLoading &&
+              notifications.map((noti) => {
+                return (
+                  <div key={noti?.id}>
+                    <p>{noti.content}</p>
+                    <p className="text-xs text-right">
+                      {convertTime(noti.createdAt)}
+                    </p>
+                  </div>
+                );
+              })}
+
+            {isLoading && <Loading isLoading />}
+
+            {!isLoading && notifications && notifications.length === 0 && (
+              <div className="mt-2 text-white text-sm">
+                Không có thông báo nào!
+              </div>
+            )}
           </div>
         </div>
       )}

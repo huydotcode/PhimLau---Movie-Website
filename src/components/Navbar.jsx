@@ -526,7 +526,7 @@ const NavbarNotification = () => {
                   <div key={noti?.id}>
                     <p>{noti.content}</p>
                     <p className="text-xs text-right">
-                      {convertTime(noti.createdAt)}
+                      {convertTime(noti.createdAt?.toDate().toLocaleString())}
                     </p>
                   </div>
                 );

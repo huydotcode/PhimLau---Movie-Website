@@ -17,7 +17,10 @@ const LayoutWithBanner = ({ children }) => {
       >
         <Header />
         <ScrollToTop />
-        {children}
+
+        <div className="min-h-screen">
+          {children}
+        </div>
 
         <Footer />
       </motion.div>

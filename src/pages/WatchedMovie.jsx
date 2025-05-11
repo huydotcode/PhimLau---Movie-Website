@@ -48,7 +48,7 @@ const WatchedMoviesPage = () => {
 
   return (
     <div className="p-4 h-full overflow-y-auto">
-      <h1 className="text-2xl font-bold mb-6">Phim Đã Xem</h1>
+      <h1 className="text-2xl font-bold mb-6">Phim Đã Xem: <span className="text-secondary text-md">{watchedMovies.length}</span></h1>
 
       {watchedMovies.length === 0 ? (
         <p className="text-gray-400">Bạn chưa xem phim nào.</p>

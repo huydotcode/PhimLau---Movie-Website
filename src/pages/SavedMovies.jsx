@@ -37,7 +37,7 @@ const SavedMovies = () => {
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.empty) {
-        toast.error("❌ Không tìm thấy phim đã lưu.");
+        toast.error("Không tìm thấy phim đã lưu.");
         return;
       }
 
@@ -45,35 +45,33 @@ const SavedMovies = () => {
         await deleteSavedMovie(docSnap.id); // truyền ID, không phải doc(...)
       }
 
-      toast.success("🗑️ Đã xoá phim khỏi danh sách!");
+      toast.success("Đã xoá phim khỏi danh sách!");
       setRefresh(true); // Cập nhật state để trigger lại useEffect
       setMovies((prev) => prev.filter((m) => m.movie_id !== movieId));
     } catch (error) {
       console.error("Lỗi khi xoá phim đã lưu:", error);
-      toast.error("⚠️ Lỗi khi xoá phim!");
+      toast.error("Lỗi khi xoá phim!");
     }
   };
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-6">🎬 Phim đã lưu</h2>
+      <h2 className="text-2xl font-bold mb-6">Phim đã lưu: <span className="text-secondary text-md">{movies.length}</span></h2>
 
       {movies.length === 0 ? (
         <p className="text-gray-400">Bạn chưa lưu phim nào.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
           {movies.map((movie) => (
             <div className="relative" key={movie._id}>
               <MovieCard movie={movie} />
 
-              <div className="absolute top-2 right-2 z-10">
-                <Button
-                  className="bg-primary text-white p-2 rounded-full"
-                  onClick={() => handleDelete(movie._id)}
-                >
-                  <Icons.Close className="text-xl text-white" />
-                </Button>
-              </div>
+              <Button
+                className="absolute top-2 left-2 z-10 text-white p-2 rounded-full bg-[rgba(0,0,0,0.3)] hover:bg-primary"
+                onClick={() => handleDelete(movie._id)}
+              >
+                <Icons.Close className="text-xl text-white" />
+              </Button>
             </div>
           ))}
         </div>

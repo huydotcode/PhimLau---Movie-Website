@@ -57,11 +57,10 @@ const Menu = ({ items }) => {
       {items.map((item) => (
         <Link to={item.key} key={item.key}>
           <span
-            className={`flex text-white justify-center md:justify-start items-center gap-2 p-2 rounded-lg hover:bg-primary hover:text-white ${
-              location.pathname === item.key
-                ? "bg-primary text-white"
-                : "text-gray-400"
-            }`}
+            className={`flex text-white justify-center md:justify-start items-center gap-2 p-2 rounded-lg hover:bg-primary hover:text-white ${location.pathname === item.key
+              ? "bg-primary text-white"
+              : "text-gray-400"
+              }`}
           >
             <span className="text-white">{item.icon}</span>
             <span className="hidden md:block text-white">{item.label}</span>
@@ -100,7 +99,7 @@ const Sidebar = () => {
 
 const AdminLayout = ({ children }) => {
   return (
-    <div className="h-screen w-screen flex bg-foreground">
+    <div className="h-screen w-screen flex bg-foreground text-white">
       <Header />
       <Sidebar />
       <div className="ml-[90px] md:ml-[220px] mt-[60px] flex-1 bg-black p-2">

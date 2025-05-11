@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useSearchParams } from "react-router";
 import CommentSection from "../components/CommentSection";
@@ -19,7 +19,7 @@ const WatchMoviePage = () => {
   const searchParams = useSearchParams();
   const tParam = searchParams[0].get("t");
   const t = tParam ? parseInt(tParam) - 1 : 0;
-  const [currentEpisode, setCurrentEpisode] = useState(t < 0 ? 0 : t);
+  const currentEpisode = t < 0 ? 0 : t;
 
   const { data: movie, isLoading } = useMovie({
     slug,
@@ -174,10 +174,9 @@ const WatchMoviePage = () => {
                 episodes?.server_data.map((episode, index) => (
                   <Link
                     key={index}
-                    className={`px-4 py-2 rounded-lg text-center ${
-                      currentEpisode === index ? "bg-primary" : "bg-secondary"
-                    }`}
-                    onClick={() => setCurrentEpisode(index)}
+                    className={`px-4 py-2 rounded-lg text-center ${currentEpisode === index ? "bg-primary" : "bg-secondary"
+                      }`}
+                    to={`/xem-phim/${movie.slug}?t=${index + 1}`}
                   >
                     {episode.name}
                   </Link>

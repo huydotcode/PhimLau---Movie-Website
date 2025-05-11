@@ -13,6 +13,7 @@ import CountryPage from "../pages/CountryPage";
 import DashboardUserPage from "../pages/DashboardUserPage";
 import FilterMoviePager from "../pages/FilterMoviePager";
 import HomePage from "../pages/HomePage";
+import LoginPage from "../pages/LoginPage";
 import MovieInfomationPage from "../pages/MovieInfomationPage";
 import SearchPage from "../pages/SearchPage";
 import SerieMoviePage from "../pages/SerieMoviePage";

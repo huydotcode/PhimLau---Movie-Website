@@ -1,6 +1,6 @@
 import { ConfigProvider } from "antd";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
 import { Toaster } from "sonner";
 import { store } from "./app/store";
 import PageTransitionLoader from "./components/PageTransitionLoader";
@@ -12,17 +12,39 @@ import React, { useEffect, useState } from "react";
 import { fetchAndActivate, getValue } from "firebase/remote-config";
 import { remoteConfig } from "./app/firebase";
 import { AuthProvider } from "./context/AuthProvider";
+import LoginPage from "./pages/LoginPage";
 import { adminRoutes, publicRoutes } from "./routes";
-import AdminRoutes from "./routes/AdminRoutes";
+
+import ProtectedRoute from "./routes/ProtectedRoute";
+import Loading from "./components/Loading";
 import "./styles/App.css";
 
 const queryClient = new QueryClient();
+
+import { Suspense, lazy } from "react";
+import { Outlet } from "react-router-dom";
+
+// Lazy load các trang
+// const Dashboard = lazy(() => import("../pages/Dashboard"));
+const AdminRoutes = lazy(() => import("./routes/AdminRoutes"));
+
+const MainLayout = () => (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.3 }} // Giảm thời gian transition để mượt hơn
+    className="relative bg-gradient-to-b from-[#0a0a0abb] to-black min-h-screen text-white z-10 w-full"
+  >
+    <PageTransitionLoader />
+    <Outlet />
+  </motion.div>
+);
 
 function App() {
   const [isEnabled, setIsEnabled] = useState(true);
 
   useEffect(() => {
-    // Kiểm tra nếu là localhost thì luôn bật ứng dụng
     if (
       window.location.hostname === "localhost" ||
       window.location.hostname === "127.0.0.1"
@@ -31,7 +53,6 @@ function App() {
       return;
     }
 
-    // Kiểm tra trạng thái ứng dụng từ Firebase Remote Config
     fetchAndActivate(remoteConfig).then(() => {
       const status = getValue(remoteConfig, "app_enabled").asBoolean();
       setIsEnabled(status);
@@ -86,120 +107,112 @@ function App() {
                 expand={false}
                 containerClassName="z-50"
               />
+              <Suspense fallback={<Loading isLoading={true} />}>
+                <Routes>
+                  {/* Public routes */}
+                  <Route path="/login" element={<LoginPage />} />
 
-              <PageTransitionLoader />
-              {/* Nội dung app luôn luôn render */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                id="page-transition"
-                className="relative bg-gradient-to-b from-[#0a0a0abb] to-black min-h-screen text-white z-10 w-full"
-              >
-                {/* Public routes */}
-                <Routes location={location}>
-                  {publicRoutes.map((route, index) => {
-                    const Layout = route?.layout ?? React.Fragment;
-
-                    const Page = route.element;
-                    // Nếu route có children thì render children
-                    if (route.children) {
-                      return (
-                        <Route
-                          path={route.path}
-                          element={
-                            <Layout>
-                              <Page />
-                            </Layout>
-                          }
-                        >
-                          {route.children.map((child, index) => {
-                            const ChildLayout = child?.layout ?? React.Fragment;
-                            const ChildPage = child.element;
-                            return (
-                              <Route
-                                key={index}
-                                path={child.path}
-                                element={
-                                  <ChildLayout>
-                                    <ChildPage />
-                                  </ChildLayout>
-                                }
-                              />
-                            );
-                          })}
-                        </Route>
-                      );
-                    }
-
-                    return (
-                      <Route
-                        key={index}
-                        path={route.path}
-                        element={
-                          <>
-                            <Layout>
-                              <Page />
-                            </Layout>
-                          </>
+                  {/* Protected routes */}
+                  <Route element={<ProtectedRoute />}>
+                    <Route element={<MainLayout />}>
+                      {publicRoutes.map((route, index) => {
+                        const Layout = route?.layout ?? React.Fragment;
+                        const Page = route.element;
+                        if (route.children) {
+                          return (
+                            <Route
+                              key={index}
+                              path={route.path}
+                              element={
+                                <Layout>
+                                  <Page />
+                                </Layout>
+                              }
+                            >
+                              {route.children.map((child, index) => {
+                                const ChildLayout =
+                                  child?.layout ?? React.Fragment;
+                                const ChildPage = child.element;
+                                return (
+                                  <Route
+                                    key={index}
+                                    path={child.path}
+                                    element={
+                                      <ChildLayout>
+                                        <ChildPage />
+                                      </ChildLayout>
+                                    }
+                                  />
+                                );
+                              })}
+                            </Route>
+                          );
                         }
-                      />
-                    );
-                  })}
-                </Routes>
+                        return (
+                          <Route
+                            key={index}
+                            path={route.path}
+                            element={
+                              <Layout>
+                                <Page />
+                              </Layout>
+                            }
+                          />
+                        );
+                      })}
+                    </Route>
 
-                {/* Admin Routes */}
-                <Routes element={<AdminRoutes />}>
-                  {adminRoutes.map((route, index) => {
-                    const Layout = route?.layout ?? React.Fragment;
-                    const Page = route.element;
-                    // Nếu route có children thì render children
-                    if (route.children) {
-                      return (
-                        <Route
-                          path={route.path}
-                          element={
-                            <Layout>
-                              <Page />
-                            </Layout>
-                          }
-                        >
-                          {route.children.map((child, index) => {
-                            const ChildLayout = child?.layout ?? React.Fragment;
-                            const ChildPage = child.element;
-                            return (
-                              <Route
-                                key={index}
-                                path={child.path}
-                                element={
-                                  <ChildLayout>
-                                    <ChildPage />
-                                  </ChildLayout>
-                                }
-                              />
-                            );
-                          })}
-                        </Route>
-                      );
-                    }
-
-                    return (
-                      <Route
-                        key={index}
-                        path={route.path}
-                        element={
-                          <>
-                            <Layout>
-                              <Page />
-                            </Layout>
-                          </>
+                    {/* Admin Routes */}
+                    <Route element={<AdminRoutes />}>
+                      {adminRoutes.map((route, index) => {
+                        const Layout = route?.layout ?? React.Fragment;
+                        const Page = route.element;
+                        if (route.children) {
+                          return (
+                            <Route
+                              key={index}
+                              path={route.path}
+                              element={
+                                <Layout>
+                                  <Page />
+                                </Layout>
+                              }
+                            >
+                              {route.children.map((child, index) => {
+                                const ChildLayout =
+                                  child?.layout ?? React.Fragment;
+                                const ChildPage = child.element;
+                                return (
+                                  <Route
+                                    key={index}
+                                    path={child.path}
+                                    element={
+                                      <ChildLayout>
+                                        <ChildPage />
+                                      </ChildLayout>
+                                    }
+                                  />
+                                );
+                              })}
+                            </Route>
+                          );
                         }
-                      />
-                    );
-                  })}
+                        return (
+                          <Route
+                            key={index}
+                            path={route.path}
+                            element={
+                              <Layout>
+                                <Page />
+                              </Layout>
+                            }
+                          />
+                        );
+                      })}
+                    </Route>
+                  </Route>
                 </Routes>
-              </motion.div>
+              </Suspense>
             </BrowserRouter>
           </ConfigProvider>
         </QueryClientProvider>
@@ -209,3 +222,4 @@ function App() {
 }
 
 export default App;
+

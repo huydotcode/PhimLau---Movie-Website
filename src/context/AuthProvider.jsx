@@ -30,7 +30,18 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     // Kiểm tra trạng thái xác thực người dùng
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setLoading(true); // Bắt đầu load
+
+
       if (currentUser) {
+        // Kiểm tra localStorage trước
+        const cachedUser = localStorage.getItem(`user_${currentUser.uid}`);
+        if (cachedUser) {
+          setUser(JSON.parse(cachedUser));
+          setLoading(false);
+          return;
+        }
+
         // Query từ firebase
         const userDocRef = doc(db, "users", currentUser.uid);
 
@@ -47,8 +58,22 @@ export const AuthProvider = ({ children }) => {
                 role: userData.role,
                 createdAt: userData.createdAt,
               });
+
+              localStorage.setItem(
+                `user_${currentUser.uid}`,
+                JSON.stringify({
+                  displayName: userData.displayName,
+                  email: userData.email,
+                  phoneNumber: userData.phoneNumber,
+                  photoURL: userData.photoURL,
+                  uid: currentUser.uid,
+                  role: userData.role,
+                  createdAt: userData.createdAt,
+                }),
+              )
             } else {
               setUser(null);
+              localStorage.removeItem(`user_${currentUser.uid}`);
             }
           });
         }
@@ -70,6 +95,10 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       );
+
+      console.log({
+        userCredential,
+      });
 
       if (userCredential) {
         const { uid, displayName, email, photoURL, phoneNumber } =
@@ -93,6 +122,20 @@ export const AuthProvider = ({ children }) => {
             createdAt: userData.createdAt,
             role: userData.role,
           });
+
+          // Lưu thông tin người dùng vào localStorage
+          localStorage.setItem(
+            `user_${uid}`,
+            JSON.stringify({
+              uid,
+              displayName: displayName || userData.displayName,
+              email,
+              photoURL: photoURL || userData.photoURL,
+              phoneNumber: phoneNumber || userData.phoneNumber,
+              createdAt: userData.createdAt,
+              role: userData.role,
+            }),
+          );
         } else {
           setUser({
             uid,
@@ -101,9 +144,22 @@ export const AuthProvider = ({ children }) => {
             photoURL,
             phoneNumber,
           });
+          // Lưu thông tin người dùng vào localStorage
+          localStorage.setItem(
+            `user_${uid}`,
+            JSON.stringify({
+              uid,
+              displayName,
+              email,
+              photoURL,
+              phoneNumber,
+            }),
+          );
+
         }
       }
     } catch (error) {
+      console.log("Error logging in: ", error);
       throw new Error("Đăng nhập thất bại!");
     }
   };
@@ -185,6 +241,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await signOut(auth);
       setUser(null); // Đặt lại state user về null sau khi đăng xuất
+      localStorage.removeItem(`user_${user.uid}`); // Xóa thông tin người dùng khỏi localStorage
       toast("Đăng xuất thành công!");
     } catch (error) {
       console.error("Error signing out: ", error);
@@ -208,6 +265,9 @@ export const AuthProvider = ({ children }) => {
       if (userDoc.exists()) {
         // Nếu người dùng đã tồn tại, không cần tạo mới
         console.log("User already exists in Firestore:", userDoc.data());
+
+
+
       } else {
         // Nếu người dùng chưa tồn tại, tạo mới
         console.log("Creating new user in Firestore");
@@ -228,6 +288,9 @@ export const AuthProvider = ({ children }) => {
           },
         );
       }
+
+
+
     } catch (error) {
       console.error("Error signing in with Google: ", error);
       toast.error("Đăng nhập bằng Google thất bại");
@@ -248,6 +311,14 @@ export const AuthProvider = ({ children }) => {
       toast.error("Không thể gửi email đặt lại mật khẩu!");
     }
   };
+
+  useEffect(() => {
+    console.log("User state changed:", user);
+  }, [user]);
+
+  useEffect(() => {
+    console.log("Loading state changed:", loading);
+  }, [loading]);
 
   return (
     <AuthContext.Provider

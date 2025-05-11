@@ -1,85 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Button from "./ui/Button";
-import { useNavigate } from "react-router";
 import { useTopNewMovies } from "../hooks/useMovies";
-import Loading from "./Loading";
+import Button from "./ui/Button";
 
-/*
-  {
-    "tmdb": {
-      "type": "movie",
-      "id": "157336",
-      "season": null,
-      "vote_average": 8.44,
-      "vote_count": 35297
-    },
-    "imdb": {
-      "id": "tt0816692"
-    },
-    "created": {
-      "time": "2022-03-17T12:22:00.363Z"
-    },
-    "modified": {
-      "time": "2024-10-06T11:46:33.000Z"
-    },
-    "_id": "623327e83c735a9a446e003c",
-    "name": "Hố Đen Tử Thần",
-    "origin_name": "Interstellar",
-    "content": "<p>Tương lai của Trái đất đã bị thủng bởi thảm họa, nạn đói và hạn hán. Chỉ có một cách để đảm bảo sự tồn tại của nhân loại: Du lịch giữa các vì sao. Một wormhole mới được phát hiện ở xa tầm xa của hệ mặt trời của chúng ta cho phép một nhóm phi hành gia đi nơi không có người đàn ông nào đi trước đó, một hành tinh có thể có môi trường phù hợp để duy trì cuộc sống của con người.</p>",
-    "type": "single",
-    "status": "completed",
-    "thumb_url": "ho-den-tu-than-thumb.jpg",
-    "is_copyright": false,
-    "trailer_url": "",
-    "time": "Đang cập nhật",
-    "episode_current": "Full",
-    "episode_total": "1",
-    "quality": "HD",
-    "lang": "Vietsub",
-    "notify": "",
-    "showtimes": "",
-    "slug": "ho-den-tu-than",
-    "year": 2014,
-    "view": 442,
-    "actor": [""],
-    "director": [""],
-    "category": [
-      {
-        "id": "620a2282e0fc277084dfd435",
-        "name": "Viễn Tưởng",
-        "slug": "vien-tuong"
-      },
-      {
-        "id": "620a229be0fc277084dfd4dd",
-        "name": "Khoa Học",
-        "slug": "khoa-hoc"
-      }
-    ],
-    "country": [
-      {
-        "id": "620a231fe0fc277084dfd7ce",
-        "name": "Âu Mỹ",
-        "slug": "au-my"
-      },
-      {
-        "id": "620a2370e0fc277084dfd91e",
-        "name": "Anh",
-        "slug": "anh"
-      },
-      {
-        "id": "620a2381e0fc277084dfd9c6",
-        "name": "Canada",
-        "slug": "canada"
-      }
-    ],
-    "chieurap": false,
-    "poster_url": "ho-den-tu-than-poster.jpg",
-    "sub_docquyen": false
-  },
-  */
-const Banner = () => {
+const Banner = ({
+  className = "",
+  hasInfo = true,
+  hasSwiperThumbnail = true,
+  infoPosition = "left",
+}) => {
   const swiperRef = useRef();
   const navigate = useNavigate();
 
@@ -91,9 +22,13 @@ const Banner = () => {
     navigate(`/xem-phim/${movie.slug}`);
   };
 
+
+  const positionClass = infoPosition === "left" ? "w-3/4 lg:w-2/5 top-1/2 -translate-y-1/2 left-0" : infoPosition === "right" ? "right-0" : infoPosition === "bottom" ? "bottom-4 right-4 opacity-60 w-3/4 text-right hidden xl:block" : "top-0";
+  const isBottom = infoPosition === "bottom";
+
   return (
     <>
-      <div className="@container relative w-screen h-[90vh] overflow-hidden">
+      <div className={`@container relative w-full h-[90vh] overflow-hidden ${className}`}>
         <Swiper
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           slidesPerView={1}
@@ -125,55 +60,58 @@ const Banner = () => {
                   ></div>
 
                   {/* Thông tin phim bên trái */}
-                  <div className="relative z-10 flex flex-col justify-center pl-10 text-white w-3/4 lg:w-2/5 gap-2">
-                    <h1 className="text-3xl md:text-5xl font-bold mb-4">
+                  {hasInfo && <div className={`absolute z-10 flex flex-col justify-center pl-10 text-white gap-2 ${positionClass}`}>
+                    <h1 className={`text-3xl md:text-5xl font-bold mb-4 ${isBottom && "w-full"}`}>
                       {movie?.name}
                     </h1>
-                    <div className="flex gap-2 mb-3 @max-xl:hidden">
-                      <span className="bg-white text-black px-2 py-1 text-sm rounded opacity-70">
-                        IMDB: {movie?.tmdb.vote_average.toFixed(1)}
-                      </span>
-                      <span className="bg-[rgba(0,0,0,0.5)]  px-2 py-1 text-sm rounded">
-                        {movie?.category.map((cat) => cat.name).join(", ")}
-                      </span>
-                      <span className="bg-[rgba(0,0,0,0.5)]  px-2 py-1 text-sm rounded">
-                        {movie?.country
-                          .map((country) => country.name)
-                          .join(", ")}
-                      </span>
-                    </div>
-                    <div
-                      className="text-justify line-clamp-5 w-full"
-                      dangerouslySetInnerHTML={{
-                        __html: movie?.content
-                          .concat(movie?.content)
-                          .concat(movie?.content),
-                      }}
-                    />
-                    <div className="mt-5 flex gap-4 items-center">
-                      <Button
-                        className="bg-primary text-white px-6 py-2 rounded-3xl h-12 font-semibold uppercase"
-                        onClick={() => handleClickMovie(movie)}
-                      >
-                        Xem ngay
-                      </Button>
-                      <Button
-                        className="border text-xs border-white px-4 py-2 rounded-full h-10"
-                        onClick={() => {
-                          navigate(`/phim/${movie.slug}`);
+                    {!isBottom && <>
+                      <div className={`flex gap-2 mb-3 @max-xl:hidden`}>
+                        <span className="bg-white text-black px-2 py-1 text-sm rounded opacity-70">
+                          IMDB: {movie?.tmdb.vote_average.toFixed(1)}
+                        </span>
+                        <span className={`bg-[rgba(0,0,0,0.5)] px-2 py-1 text-sm rounded ${isBottom && "text-ellipsis max-w-[100px] whitespace-nowrap overflow-hidden"}`}>
+                          {movie?.category.map((cat) => cat.name).join(", ")}
+                        </span>
+                        <span className="bg-[rgba(0,0,0,0.5)]  px-2 py-1 text-sm rounded">
+                          {movie?.country
+                            .map((country) => country.name)
+                            .join(", ")}
+                        </span>
+                      </div>
+                      <div
+                        className="text-justify line-clamp-5 w-full"
+                        dangerouslySetInnerHTML={{
+                          __html: movie?.content
+                            .concat(movie?.content)
+                            .concat(movie?.content),
                         }}
-                      >
-                        Chi tiết
-                      </Button>
-                    </div>
-                  </div>
+                      />
+
+                      <div className="mt-5 flex gap-4 items-center">
+                        <Button
+                          className="bg-primary text-white px-6 py-2 rounded-3xl h-12 font-semibold uppercase"
+                          onClick={() => handleClickMovie(movie)}
+                        >
+                          Xem ngay
+                        </Button>
+                        <Button
+                          className="border text-xs border-white px-4 py-2 rounded-full h-10"
+                          onClick={() => {
+                            navigate(`/phim/${movie.slug}`);
+                          }}
+                        >
+                          Chi tiết
+                        </Button>
+                      </div>
+                    </>}
+                  </div>}
                 </div>
               </SwiperSlide>
             ))}
         </Swiper>
 
         {/* Slider thumbnail bên dưới phải */}
-        <div className="absolute bottom-5 right-5 hidden md:flex md:w-3/4 xl:w-3/5 max-h-[130px]">
+        {hasSwiperThumbnail && <div className="absolute bottom-5 right-5 hidden md:flex md:w-3/4 xl:w-3/5 max-h-[130px]">
           <Swiper slidesPerView={10} spaceBetween={10}>
             {bannerMovies &&
               bannerMovies.map((movie, index) => (
@@ -191,7 +129,7 @@ const Banner = () => {
                 </SwiperSlide>
               ))}
           </Swiper>
-        </div>
+        </div>}
       </div>
     </>
   );

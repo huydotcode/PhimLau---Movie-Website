@@ -398,6 +398,7 @@ const UserList = () => {
                         >
                           <option value="user">Người dùng</option>
                           <option value="admin">Admin</option>
+                          <option value="demo">Demo</option>
                         </select>
                       </div>
                     </td>

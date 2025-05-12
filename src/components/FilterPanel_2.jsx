@@ -1,12 +1,66 @@
 import { useEffect, useState } from "react";
-import { useAllCountries } from "../hooks/useCountry";
-import { useAllCategories } from "../hooks/useCategory";
 import { useNavigate } from "react-router";
 import { moviesSort } from "../data/movies_sort";
 import { moviesType } from "../data/movies_type";
+import { useAllCategories } from "../hooks/useCategory";
+import { useAllCountries } from "../hooks/useCountry";
+
+// Constants
+const MOVIE_YEARS = ["2025", "2024", "2023", "2022", "2021", "2020", "Cũ hơn"];
+const MOVIE_LANGUAGES = ["Vietsub", "Thuyết Minh"];
+const DEFAULT_FILTERS = {
+  type: [],
+  country: [],
+  category: [],
+  year: [],
+  lang: [],
+  sort: "Mới nhất",
+};
+
+// Reusable Components
+const FilterSection = ({ title, items, selected, onChange, onClear, isSort = false }) => (
+  useEffect(() => {
+    console.log("selected",);
+  }, [selected]),
+
+  <div className="flex items-start mb-3">
+    <h3 className="text-white font-semibold mb-1 min-w-[120px]">{title}:</h3>
+    <div className="flex flex-wrap gap-2">
+      {items.map((item) => (
+        <button
+          key={item.id || item.slug || item}
+          className={`px-4 ${isSort
+            ? selected === item.slug
+              ? "text-yellow-500"
+              : "text-white"
+            : selected.includes(item.slug)
+              ? "text-yellow-500"
+              : "text-white"
+            }`}
+          onClick={() => {
+            console.log(isSort ? item.slug || item : item.slug || item);
+            onChange(isSort ? item.slug || item : item.slug || item)
+          }}
+        >
+          {item.name || item}
+        </button>
+      ))}
+      {!isSort && (
+        <button
+          className="bg-gray-500 rounded-full px-4 text-secondary"
+          onClick={onClear}
+        >
+          Xóa
+        </button>
+      )}
+    </div>
+  </div >
+);
+
 
 const FilterPanel_2 = ({
   filters,
+  showFilters,
   searchTerm = "",
   setShowFilters,
   handleApplyFilters,
@@ -19,260 +73,143 @@ const FilterPanel_2 = ({
   const { data: categories } = useAllCategories({ enable: true });
   const navigate = useNavigate();
 
+  // Handle filter changes
   const handleFilterChange = (key, value) => {
-    if (key === "sort") {
-      setCurrentFilters((prev) => ({
-        ...prev,
-        [key]: value,
-      }));
-    } else {
-      setCurrentFilters((prev) => ({
-        ...prev,
-        [key]: prev[key].includes(value)
-          ? prev[key].filter((item) => item !== value)
-          : [...prev[key], value],
-      }));
-    }
+    console.log("Filter changed: ", key, value);
+    setCurrentFilters((prev) => ({
+      ...prev,
+      [key]: key === "sort" ? value : prev[key].includes(value)
+        ? prev[key].filter((item) => item !== value)
+        : [...prev[key], value],
+    }));
   };
 
-  const handleClearFilter = (key) => {
+  // Clear specific filter
+  const clearFilter = (key) => {
     setCurrentFilters((prev) => ({
       ...prev,
       [key]: key === "sort" ? "Mới nhất" : [],
     }));
   };
 
-  const handleClearAllFilters = () => {
-    setCurrentFilters({
-      type: [],
-      country: [],
-      category: [],
-      year: [],
-      lang: [],
-      sort: "Mới nhất",
-    });
+  // Clear all filters
+  const clearAllFilters = () => {
+    setCurrentFilters(DEFAULT_FILTERS);
   };
 
-  useEffect(() => {
-    console.log("FILTERPANEL_2: ", {
-      currentFilters,
-    });
-  }, [currentFilters]);
-
-  const handleFilter = () => {
+  // Apply filters and update URL
+  const applyFilters = () => {
     handleApplyFilters(currentFilters);
-    const params = new URLSearchParams();
-    console.log({ currentFilters });
-    params.set("q", searchTerm);
-    Object.keys(currentFilters).forEach((key) => {
-      if (
-        Array.isArray(currentFilters[key]) &&
-        currentFilters[key].length > 0
-      ) {
-        params.set(key, currentFilters[key].join(","));
-      } else if (key === "sort") {
-        params.set(key, currentFilters[key]);
+    const params = new URLSearchParams({ q: searchTerm });
+
+    Object.entries(currentFilters).forEach(([key, value]) => {
+      if (Array.isArray(value) && value.length > 0) {
+        params.set(key, value.join(","));
+      } else if (key === "sort" && value) {
+        params.set(key, value);
       }
     });
-    navigate(`?${params.toString()}`);
 
+    navigate(`?${params.toString()}`);
     setShowFilters(false);
   };
 
   return (
-    <div className="mb-6 p-4 bg-background rounded-md">
-      <div className="gap-4">
-        {/* Quốc gia */}
-        {hasCountryFilter && (
-          <div className="flex items-start mb-3">
-            <h3 className="text-white font-semibold mb-1 min-w-[120px]">
-              Quốc gia:
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {countries?.map((country) => (
-                <button
-                  key={country.id}
-                  className={`px-4 ${
-                    currentFilters.country.includes(country?.slug)
-                      ? "text-yellow-500"
-                      : "text-white"
-                  }`}
-                  onClick={() => handleFilterChange("country", country?.slug)}
-                >
-                  {country?.name}
-                </button>
-              ))}
-              <button
-                className="bg-gray-500 rounded-full px-4 text-secondary"
-                onClick={() => handleClearFilter("country")}
-              >
-                Xóa
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Thể loại */}
-        {hasCategoryFilter && (
-          <div className="flex items-start mb-3">
-            <h3 className="text-white font-semibold mb-1 min-w-[120px]">
-              Thể loại:
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {categories?.map((category) => (
-                <button
-                  key={category.id}
-                  className={`px-4 ${
-                    currentFilters.category.includes(category?.slug)
-                      ? "text-yellow-500"
-                      : "text-white"
-                  }`}
-                  onClick={() => handleFilterChange("category", category?.slug)}
-                >
-                  {category?.name}
-                </button>
-              ))}
-              <button
-                className="bg-gray-500 rounded-full px-4 text-secondary"
-                onClick={() => handleClearFilter("category")}
-              >
-                Xóa
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Năm */}
-        <div className="flex items-start mb-3">
-          <h3 className="text-white font-semibold mb-1 min-w-[120px]">Năm:</h3>
-          <div className="flex flex-wrap gap-2">
-            {["2025", "2024", "2023", "2022", "2021", "2020", "Cũ hơn"].map(
-              (year) => (
-                <button
-                  key={year}
-                  className={`px-4 rounded-md ${
-                    currentFilters.year.includes(year)
-                      ? "text-yellow-500"
-                      : "text-white"
-                  }`}
-                  onClick={() => handleFilterChange("year", year)}
-                >
-                  {year}
-                </button>
-              ),
-            )}
-            <button
-              className="bg-gray-500 rounded-full px-4 text-secondary"
-              onClick={() => handleClearFilter("year")}
-            >
-              Xóa
-            </button>
-          </div>
-        </div>
-
-        {/* Ngôn ngữ */}
-        <div className="flex items-start mb-3">
-          <h3 className="text-white font-semibold mb-1 min-w-[120px]">
-            Ngôn ngữ:
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {["Vietsub", "Thuyết Minh"].map((lang) => (
-              <button
-                key={lang}
-                className={`px-4 ${
-                  currentFilters.lang.includes(lang)
-                    ? "text-yellow-500"
-                    : "text-white"
-                }`}
-                onClick={() => handleFilterChange("lang", lang)}
-              >
-                {lang}
-              </button>
-            ))}
-            <button
-              className="bg-gray-500 rounded-full px-4 text-secondary"
-              onClick={() => handleClearFilter("lang")}
-            >
-              Xóa
-            </button>
-          </div>
-        </div>
-
-        {/* Loại phim */}
-        {hasTypeFilter && (
-          <div className="flex items-start mb-3">
-            <h3 className="text-white font-semibold mb-1 min-w-[120px]">
-              Loại phim:
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {moviesType.map((type) => (
-                <button
-                  key={type.slug}
-                  className={`px-4 ${
-                    currentFilters.type.includes(type.slug)
-                      ? "text-yellow-500"
-                      : "text-white"
-                  }`}
-                  onClick={() => handleFilterChange("type", type.slug)}
-                >
-                  {type.name}
-                </button>
-              ))}
-              <button
-                className="bg-gray-500 rounded-full px-4 text-secondary"
-                onClick={() => handleClearFilter("type")}
-              >
-                Xóa
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Sắp xếp */}
-        <div className="flex items-start mb-3">
-          <h3 className="text-white font-semibold mb-1 min-w-[120px]">
-            Sắp xếp:
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {moviesSort.map((sort) => (
-              <button
-                key={sort.slug}
-                className={`px-4 ${
-                  currentFilters.sort === sort.slug
-                    ? "text-yellow-500"
-                    : "text-white"
-                }`}
-                onClick={() => handleFilterChange("sort", sort.slug)}
-              >
-                {sort.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="flex gap-4 mt-4">
+    <>
+      <div className="mb-1">
         <button
-          className="px-4 py-2 bg-yellow-500 text-black rounded-md"
-          onClick={handleFilter}
+          className={`flex items-center gap-2 bg-background transition-all duration-300 text-white px-4 py-2 rounded-md ${showFilters ? "bg-background" : "bg-secondary"
+            }`}
+          onClick={() => setShowFilters(!showFilters)}
         >
-          Lọc kết quả
-        </button>
-        <button
-          className="px-4 py-2 bg-red-500 text-white rounded-md"
-          onClick={handleClearAllFilters}
-        >
-          Xóa tất cả
-        </button>
-        <button
-          className="px-4 py-2 bg-gray-700 text-white rounded-md"
-          onClick={() => setShowFilters(false)}
-        >
-          Đóng
+          <span>🔍</span> Bộ lọc
         </button>
       </div>
-    </div>
+
+      <div
+        className={`w-full mb-4 bg-background rounded-xl bg-opacity-80 z-50 transition-all overflow-y-auto duration-300 ${showFilters ? "p-4 max-h-[80vh] md:max-h-[600px]" : "max-h-0"
+          }`}
+      >
+        <div className="space-y-4">
+          {hasCountryFilter && (
+            <FilterSection
+              title="Quốc gia"
+              items={countries || []}
+              selected={currentFilters.country}
+              onChange={(value) => handleFilterChange("country", value)}
+              onClear={() => clearFilter("country")}
+            />
+          )}
+
+          {hasCategoryFilter && (
+            <FilterSection
+              title="Thể loại"
+              items={categories || []}
+              selected={currentFilters.category}
+              onChange={(value) => handleFilterChange("category", value)}
+              onClear={() => clearFilter("category")}
+            />
+          )}
+
+          <FilterSection
+            title="Năm"
+            items={MOVIE_YEARS}
+            selected={currentFilters.year}
+            onChange={(value) => handleFilterChange("year", value)}
+            onClear={() => clearFilter("year")}
+          />
+
+          <FilterSection
+            title="Ngôn ngữ"
+            items={MOVIE_LANGUAGES}
+            selected={currentFilters.lang}
+            onChange={(value) => handleFilterChange("lang", value)}
+            onClear={() => clearFilter("lang")}
+          />
+
+          {hasTypeFilter && (
+            <FilterSection
+              title="Loại phim"
+              items={moviesType} // Giả định moviesType được định nghĩa ở ngoài
+              selected={currentFilters.type}
+              onChange={(value) => handleFilterChange("type", value)}
+              onClear={() => clearFilter("type")}
+            />
+          )}
+
+          <FilterSection
+            title="Sắp xếp"
+            items={moviesSort} // Giả định moviesSort được định nghĩa ở ngoài
+            selected={currentFilters.sort}
+            onChange={(value) => handleFilterChange("sort", value)}
+            isSort
+          />
+        </div>
+
+        <div className="flex gap-4 mt-4">
+          <button
+            className="px-4 py-2 bg-primary text-white rounded-md"
+            onClick={applyFilters}
+          >
+            Lọc kết quả
+          </button>
+          <button
+            className="px-4 py-2 bg-secondary text-white rounded-md"
+            onClick={clearAllFilters}
+          >
+            Xóa tất cả
+          </button>
+          <button
+            className="px-4 py-2 bg-secondary text-white rounded-md"
+            onClick={() => setShowFilters(false)}
+          >
+            Đóng
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
+
 
 export default FilterPanel_2;

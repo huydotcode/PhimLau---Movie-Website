@@ -16,6 +16,7 @@ import {
 import mongoose from "mongoose";
 import { db } from "../app/firebase";
 import { signOut } from "firebase/auth";
+import { moviesSort } from "../data/movies_sort";
 
 // Lấy phim theo slug thông tin phim
 export const getMovieBySlug = async (slug) => {
@@ -412,19 +413,22 @@ export const searchMovies = async ({
       }
     }
 
+    /*
+    {
+    id: 3,
+    name: "Lượt xem",
+    slug: "view",
+    sort_field: "view",
+    sort_order: "desc",
+  },
+    */
+
     // Sort
-    if ((filters.sort && filters.sort === "IMDB") || filters.sort === "imdb") {
-      console.log("filters.sort imdb: ", filters.sort);
-      constraints.push(orderBy("tmdb.vote_average", "desc"));
-    } else if (filters.sort === "Lượt xem" || filters.sort === "view") {
-      console.log("filters.sort view: ", filters.sort);
-      constraints.push(orderBy("view", "desc"));
-    } else if (filters.sort === "Mới nhất" || filters.sort === "newest") {
-      console.log("filters.sort new : ", filters.sort);
-      constraints.push(orderBy("year", "desc"));
-    } else {
-      console.log("filters.sort default: ", filters.sort);
-      constraints.push(orderBy("year", "desc"));
+    if (filters?.sort) {
+      const sort =
+        moviesSort.find((sort) => sort.slug === filters.sort) || moviesSort[0];
+
+      constraints.push(orderBy(sort.sort_field, sort.sort_order));
     }
 
     let q = null;

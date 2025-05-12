@@ -23,7 +23,7 @@ const Banner = ({
   };
 
 
-  const positionClass = infoPosition === "left" ? "w-3/4 lg:w-2/5 top-1/2 -translate-y-1/2 left-0" : infoPosition === "right" ? "right-0" : infoPosition === "bottom" ? "bottom-4 right-4 opacity-60 w-3/4 text-right hidden xl:block" : "top-0";
+  const positionClass = infoPosition === "left" ? "w-3/4 lg:w-2/5 top-1/2 -translate-y-1/2 left-0" : infoPosition === "right" ? "right-0" : infoPosition === "bottom" ? "bottom-4 right-4 opacity-60 w-3/4 text-right" : "top-0";
   const isBottom = infoPosition === "bottom";
 
   return (
@@ -60,11 +60,11 @@ const Banner = ({
                   ></div>
 
                   {/* Thông tin phim bên trái */}
-                  {hasInfo && <div className={`absolute z-10 flex flex-col justify-center pl-10 text-white gap-2 ${positionClass}`}>
-                    <h1 className={`text-3xl md:text-5xl font-bold mb-4 ${isBottom && "w-full"}`}>
+                  <div className={`absolute z-10 flex flex-col justify-center pl-10 text-white gap-2 ${positionClass}`}>
+                    <h1 className={`font-bold mb-4 ${isBottom ? "text-md w-full" : "text-3xl md:text-5xl"}`}>
                       {movie?.name}
                     </h1>
-                    {!isBottom && <>
+                    {hasInfo && !isBottom && <>
                       <div className={`flex gap-2 mb-3 @max-xl:hidden`}>
                         <span className="bg-white text-black px-2 py-1 text-sm rounded opacity-70">
                           IMDB: {movie?.tmdb.vote_average.toFixed(1)}
@@ -104,7 +104,7 @@ const Banner = ({
                         </Button>
                       </div>
                     </>}
-                  </div>}
+                  </div>
                 </div>
               </SwiperSlide>
             ))}

@@ -1,10 +1,10 @@
 import { Pagination } from "antd";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { useSearchMovies } from "../hooks/useSearchMovie";
 import FilterPanel_2 from "./FilterPanel_2";
 import MovieList from "./MovieList";
-import { useNavigate } from "react-router";
 
 const MovieListPage = ({
   title,
@@ -70,28 +70,17 @@ const MovieListPage = ({
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-4">{title}</h1>
 
-      {/* Nút hiển thị bộ lọc */}
-      <div className="mb-6">
-        <button
-          className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-md"
-          onClick={() => setShowFilters(!showFilters)}
-        >
-          <span>🔍</span> Bộ lọc
-        </button>
-      </div>
+      <FilterPanel_2
+        showFilters={showFilters}
+        filters={filters}
+        searchTerm={searchTerm}
+        handleApplyFilters={handleApplyFilters}
+        setShowFilters={setShowFilters}
+        hasTypeFilter={hasTypeFilter}
+        hasCategoryFilter={hasCategoryFilter}
+        hasCountryFilter={hasCountryFilter}
+      />
 
-      {/* Bộ lọc */}
-      {showFilters && (
-        <FilterPanel_2
-          filters={filters}
-          searchTerm={searchTerm}
-          handleApplyFilters={handleApplyFilters}
-          setShowFilters={setShowFilters}
-          hasTypeFilter={hasTypeFilter}
-          hasCategoryFilter={hasCategoryFilter}
-          hasCountryFilter={hasCountryFilter}
-        />
-      )}
 
       {/* Danh sách phim */}
       <MovieList
